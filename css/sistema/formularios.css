@@ -1,0 +1,17 @@
+.tab_index  .sidebar{
+	display: block;
+}
+ul li:hover {
+	/* Transition for hovers */
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.5s ease;
+	margin-left: -10px;
+	padding-left: 20px;
+}
+ul li a:hover{
+	font-weight: bold;
+
+}
+
