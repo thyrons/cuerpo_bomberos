@@ -15,13 +15,15 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap/bootstrap.css" rel="stylesheet">
-    <link href="css/jquery/jquery-impromptu.css" rel="stylesheet">
+    <link href="css/jquery/alertify.core.css" rel="stylesheet">
+    <link href="css/jquery/alertify.default.css" rel="stylesheet">
+    <!--<link href="css/jquery/alertify.bootstrap.css" rel="stylesheet">-->
     <!-- Custom styles for this template -->
     <link href="css/sistema/login.css" rel="stylesheet">
     
     <script type="text/javascript" src="js/jquery/jquery.js"></script>
-    <script type="text/javascript" src="js/jquery/jquery-impromptu.js"></script>
     <script type="text/javascript" src="js/bootstrap/bootstrap.js"></script>
+    <script type="text/javascript" src="js/jquery/alertify.js"></script>
     <script type="text/javascript" src="js/sistema/login.js"></script>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->

@@ -20,17 +20,28 @@ function comprobar(valores){
 		url: "servidor/login/login_usuario.php",			
 	    success: function(data) {	
 	    	if(data==1){
-	    		alert("Mensaje del servidor","Bienvenido");
-	    		location.href='html/index.php';
+	    		alertify.confirm("<b>Datos Correctos. Desea Ingresar?</b>", function(e){
+	    			if(e){
+	    				location.href='html/index.php';	
+	    			}else{
+	    				alertify.error('Ingreso Cancelado');	
+	    				limpiar();
+	    			}
+  				});
 	    	}
 	    	else{
 	    		if(data==2){
-	    			alert("Mensaje del servidor","Usuario o clave incorrectas vuelva a ingresar");
+	    			alertify.alert("<b>Usuario o clave incorrectas vuelva a ingresar</b>", function () {
+						alertify.error('Vuelva a ingresar los datos');	
+						limpiar();	
+					});
+
 	    		}else{
 	    			if(data==3){
-		    			alert("Mensaje del servidor","Complete todos los campos para poder continuar");
+	    				alertify.alert("<b>Complete todos los campos para poder continuar</b>", function () {});
+
 	    			}else{
-	    				alert("Intente nuevamente","Error.. al momento de enviar datos");
+	    				alertify.alert("<b>Error.. al momento de enviar datos</b>", function () {});
 	    			}
 	    		}
 	    	}
@@ -42,24 +53,6 @@ function limpiar(){
 	$("#txt_loginPass").val("");
 	$("#txt_loginUsuario").focus();
 }
-var oAlert = alert;
-function alert(title,texto){
-	try{
-		$.prompt(texto, {
-	       	title: title,
-    	   	buttons: { "Aceptar": true},
-    	   	submit:function(e){
-    	   		limpiar();
-    	   	},
-    	   	close:function(e){
-    	   		limpiar();	
-    	   	}
-    	});
-	}catch (e){
-		oAlert(texto);
-	}
-}
 
-        
    
 

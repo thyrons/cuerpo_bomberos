@@ -1,17 +1,56 @@
-.tab_index  .sidebar{
+.sidebar{
 	display: block;
 }
 ul li:hover {
 	/* Transition for hovers */
-	-webkit-transition: all 0.3s ease;
-	-moz-transition: all 0.3s ease;
-	-o-transition: all 0.3s ease;
-	transition: all 0.5s ease;
-	margin-left: -10px;
-	padding-left: 20px;
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
+	margin-left: -20px;
+	padding-left: 30px;
 }
-ul li a:hover{
+.tab_index .nav > li > a:hover, .tab_index .nav > li > a:focus{
 	font-weight: bold;
-
+	text-decoration: none;
+  	background-color: rgba(150,150,150,1);
+  	color: #fff;
+  	font-size: 16px;
 }
-
+.tab_index ul li {
+	font-weight: bold;
+}
+.form-styles
+{
+    margin-top: 10px;
+    padding: 0;
+}
+.form-styles div{
+	font-size: 12px;
+}
+.form-styles div label{
+	text-align: left !important;
+}
+.panel-footer.form-footer {
+	font-size: 12px;
+}
+.form-footer div {
+	margin-top: 10px;
+	padding: 5px;
+	display: inline-block;
+}
+.ui-grid{ 
+	width:100% !important; 
+}
+#modalBusquedas .ui-widget{
+	font-size: 12px;
+}
+.negrilla{
+	font-weight: bold;
+	color: #000;
+}
+@media (max-width: 768px) {
+	.panel-footer.form-footer {
+		text-align: center;
+	}	
+}
