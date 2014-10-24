@@ -19,11 +19,20 @@
 				$repetidos = 'false';
 			}
 		}else{
-			$sql = "select ".$campo." from ".$tabla. " where ".$campo." = '".$valor."' and ".$id_campo." not in ('$id') ";
-			if(pg_num_rows(pg_query( $conexion, $sql ))){
-				$repetidos = 'true';
+			if( $tipo == "m" ){
+				$sql = "select ".$campo." from ".$tabla. " where ".$campo." = '".$valor."' and ".$id_campo." not in ('$id') ";
+				if(pg_num_rows(pg_query( $conexion, $sql ))){
+					$repetidos = 'true';
+				}else{
+					$repetidos = 'false';
+				}
 			}else{
-				$repetidos = 'false';
+				$sql = "select ".$campo." from ".$tabla. " where ".$campo." = '".$valor."' and ".$id_campo." = ('$id') ";
+				if(pg_num_rows(pg_query( $conexion, $sql ))){
+					$repetidos = 'true';
+				}else{
+					$repetidos = 'false';
+				}	
 			}
 		}
 		return $repetidos;
@@ -58,4 +67,5 @@
 		}
 
 	}
+	
 ?>

@@ -159,10 +159,24 @@ function datos_usuarios(valores,tipo,p){
 				limpiar_form(p);	
 	    	}else{
 	    		if( data == 1 ){
-	    			alertify.error('Este servicio ya existe. Ingrese otro');	
-	    			limpiar_form(p);		
+	    			alertify.error('Este nombre de usaurio ya existe. Ingrese otro');	
+	    			$("#nick_usuario").val("");	
+	    			$("#nick_usuario").focus();
 	    		}else{
-	    			
+	    			if( data == 2 ){
+	    				alertify.error('Error al enviar los datos. Ingrese nuevamente');	
+	    				limpiar_form(p);
+	    			}else{
+	    				if( data == 3 ){
+	    					alertify.error('Este nro de cédula  ya existe. Ingrese otro');	
+	    					$("#ci_usuario").val("");	
+	    					$("#ci_usuario").focus();
+	    				}else{
+	    					alertify.error('La clave de admin es incorrecta. Ingrese  nuevamente');	
+	    					$("#clave_admin").val("");	
+	    					$("#clave_admin").focus();
+	    				}
+	    			}	
 	    		}
 	    	}
 
@@ -233,7 +247,7 @@ function modal(e){
 			buscar_tasaServicios("600");	
 		}else{
 			if(form == "usuarios"){
-				buscar_tasaServicios("600");	
+				buscar_usuarios("600");	
 			}	
 		}	
 	}
