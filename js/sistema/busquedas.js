@@ -196,3 +196,67 @@ function buscar_usuarios(width){
     jQuery("#tabla_busquedas").jqGrid('hideCol', "id_clave");
     jQuery("#tabla_busquedas").jqGrid('hideCol', "nombre_clave");
 }
+function buscar_propietarios(width){
+    jQuery("#tabla_busquedas").jqGrid({
+        datatype: "xml",
+        url: '../servidor/propietarios/xml_propietarios.php',        
+        colNames: ['ID','RUC','NOMBRES','DIRECCIÓN','TÉLEFONO','CELULAR'],
+        colModel:[      
+            {name:'id_propietario',index:'id_propietario',frozen:true,align:'left',search:false},
+            {name:'ruc_propietario',index:'ruc_propietario',frozen : true,align:'left',search:true},
+            {name:'nombre_propietario',index:'nombre_propietario',frozen : true,align:'left',search:true},
+            {name:'direccion_propietario',index:'direccion_propietario',frozen : true,align:'left',search:true},
+            {name:'telefono_propietario',index:'telefono_propietario',frozen : true,align:'left',search:true},
+            {name:'celular_propietario',index:'celular_propietario',frozen : true,align:'left',search:true},
+        ],          
+        rowNum: 10,
+        autowidth: true, 
+        width: '100%', 
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],
+        pager: jQuery('#pager'),        
+        sortname: 'id_propietario',
+        sortordezr: 'asc',
+        caption: 'LISTA DE PROPIETARIOS',
+        viewrecords: true,            
+        ondblClickRow: function(rowid) {     
+            var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');         
+            jQuery("#tabla_busquedas").jqGrid('GridToForm',gsr,"#form_propietarios");  
+            $('#modalBusquedas').modal('hide');
+            comprobarCamposRequired("form_propietarios");  
+            $("#btn_guardarPropietarios").text("");
+            $("#btn_guardarPropietarios").append("<span class='glyphicon glyphicon-log-in'></span> Modificar");     
+            
+        }
+    }).jqGrid('navGrid','#pager',{
+            add:false,
+            edit:false,
+            del:false,           
+            refresh:true,
+            search:true,
+            view:false        
+    },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+    },
+    {
+        closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,        
+        multipleSearch: false, overlay: false
+
+    },
+    {
+    },
+    {
+        closeOnEscape: true
+    }
+    ); 
+    //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "id_propietario");
+}

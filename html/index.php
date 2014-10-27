@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../css/jquery/jquery-ui.css">
     <link href="../css/jquery/alertify.core.css" rel="stylesheet">
     <link href="../css/jquery/alertify.default.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="../css/jquery/style.css" type="text/css" media="screen"/>
     <!-- Custom styles for this template -->
      <link href="../css/jqgrid/ui.jqgrid.css" rel="stylesheet">
     <script src="../js/jquery/jquery.js"></script>
@@ -28,6 +28,7 @@
     <script src="../js/sistema/index.js"></script>
     <script src="../js/sistema/busquedas.js"></script>
     <script type="text/javascript" src="../js/jquery/alertify.js"></script>
+    <script type="text/javascript" src="../js/jquery/sliding.form.js"></script>
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -59,12 +60,12 @@
       </div>
     </div>
 
-    <div class="container-fluid tab_index">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 sidebar">
-          <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="#tab_a"  data-toggle="pill">Ingresos</a></li>
-            <li><a href="#tab_b" >Factura Compra</a></li>
+        <div class="col-sm-3 sidebar tab_index">
+          <ul class="nav nav-pills nav-stacked ">
+            <li class="active"><a href="#tab_a"><span class="glyphicon glyphicon-list-alt"></span> Informe General</a></li>
+            <li><a href="#tab_b" ><span class="glyphicon glyphicon-pushpin"></span> Propietarios</a></li>
             <li><a href="#tab_c" ><span class="glyphicon glyphicon-user"></span> Usuarios</a></li>
             <li><a href="#tab_d" ><span class="glyphicon glyphicon-paperclip"></span> Servicios Administrativos </a></li>
             <li><a href="#tab_e" ><span class="glyphicon glyphicon-paperclip"></span> Tasa por Servicio </a></li>
@@ -73,10 +74,14 @@
         <div class="col-sm-9 col-sm-offset-3 sidebar" style="background:#FFF;">
           <div class="tab-content content_index">
             <div class="tab-pane active" id="tab_a">
-            
+            <?php
+            include 'informe_general.php';
+            ?>
             </div>
             <div class="tab-pane" id="tab_b">
-              
+            <?php
+              include 'propietarios.php';
+            ?>  
             </div>
             <div class="tab-pane" id="tab_c">
             <?php

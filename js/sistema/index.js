@@ -16,7 +16,7 @@ function inicio(){
 		$("#"+tab).addClass("active");
 	}
 	/*activar contenido de las listas*/
-	$('a').on('click', function(e){
+	$('.tab_index a').on('click', function(e){
 	  	var href = $(this).attr('href');
 		var tab = href.split('#').pop();
 		$('.tab_index ul li').each(function(){
@@ -51,6 +51,11 @@ function inicio(){
 	$("#btn_limpiarUsuarios").on("click",limpiar_form);
 	$("#btn_buscarUsuarios").on("click",modal);
 	$("#btn_guardarUsuarios").on("click",guardar_usuarios);
+	/*--------------------------------*/
+	/*Ingresos de propietarios*/
+	$("#btn_limpiarPropietarios").on("click",limpiar_form);
+	$("#btn_buscarPropietarios").on("click",modal);
+	$("#btn_guardarPropietarios").on("click",guardar_propietarios);
 	/*--------------------------------*/
 }
 /*Formularios Servicios Administrativos*/
@@ -131,6 +136,7 @@ function datos_TasaServicios(valores,tipo,p){
 		}
 	}); 
 }
+/*----------------------*/
 /*Formularios para usuarios*/
 function guardar_usuarios(){
 	var resp=comprobarCamposRequired("usuarios");
@@ -159,7 +165,7 @@ function datos_usuarios(valores,tipo,p){
 				limpiar_form(p);	
 	    	}else{
 	    		if( data == 1 ){
-	    			alertify.error('Este nombre de usaurio ya existe. Ingrese otro');	
+	    			alertify.error('Este nombre de usuario ya existe. Ingrese otro');	
 	    			$("#nick_usuario").val("");	
 	    			$("#nick_usuario").focus();
 	    		}else{
@@ -183,7 +189,51 @@ function datos_usuarios(valores,tipo,p){
 		}
 	}); 
 }
+/*--------------------------*/
+/*Formularios para propietarios*/
+function guardar_propietarios(){
+	var resp=comprobarCamposRequired("form_propietarios");
+	if(resp==true){
+		$("#form_propietarios").on("submit",function (e){	
+			var valores = $("#form_propietarios").serialize();
+			var texto=($("#btn_guardarPropietarios").text()).trim();	
+			if(texto=="Guardar"){		
+				datos_propietarios(valores,"g",e);
+			}else{
+				datos_propietarios(valores,"m",e);
+			}
+			e.preventDefault();
+    		$(this).unbind("submit")
+		});
+	}
+}
+function datos_propietarios(valores,tipo,p){
+	$.ajax({				
+		type: "POST",
+		data: valores+"&tipo="+tipo,
+		url: "../servidor/propietarios/propietarios.php",			
+	    success: function(data) {	
+	    	if( data == 0 ){
+	    		alertify.primary('Datos Agregados Correctamente');	
+				limpiar_form(p);	
+	    	}else{
+	    		if( data == 1 ){
+	    			alertify.error('Este nro. de Ruc ya existe. Ingrese otro');	
+	    			$("#ruc_propietario").val("");	
+	    			$("#ruc_propietario").focus();
+	    		}else{
+	    			if( data == 2 ){
+	    				alertify.error('Error al enviar los datos. Ingrese nuevamente');	
+	    				limpiar_form(p);
+	    			}
+	    		}
+	    	}
+
+		}
+	}); 
+}
 /*---------------------------------*/
+
 function limpiar_form(e){
 	var form;
 	if(e.type == "click"){
@@ -207,7 +257,12 @@ function limpiar_form(e){
 				$("#btn_guardarUsuarios").text("");
 		    	$("#btn_guardarUsuarios").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
 			}else{
+				if(form == "form_propietarios"){
+					$("#btn_guardarPropietarios").text("");
+					$("#btn_guardarPropietarios").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
+				}else{
 
+				}
 			}	
 		}	
 	}	
@@ -248,6 +303,10 @@ function modal(e){
 		}else{
 			if(form == "usuarios"){
 				buscar_usuarios("600");	
+			}else{
+				if(form == "form_propietarios"){
+					buscar_propietarios("600");	
+				}	
 			}	
 		}	
 	}
