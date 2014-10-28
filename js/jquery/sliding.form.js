@@ -25,8 +25,8 @@ $(function() {
 	/*
 	to avoid problems in IE, focus the first input of the form
 	*/
-	$('#formElem >div').children(':first').find(':input:first').focus();	
-	
+	$('#formElem >div>fieldset').children().children().children().children(':first').find(':input:first').focus();	
+	console.log($('#formElem >div>fieldset').children().children(':first').find(':input:first'))
 	/*
 	show the navigation bar
 	*/
@@ -63,7 +63,7 @@ $(function() {
 				validateSteps();
 			else
 				validateStep(prev);
-			$('#formElem').children(':nth-child('+ parseInt(current) +')').find(':input:first').focus();	
+			$('#formElem').children().children(':nth-child('+ parseInt(current) +')').find(':input:first').focus();	
 		});
         e.preventDefault();
     });
@@ -72,9 +72,9 @@ $(function() {
 	clicking on the tab (on the last input of each fieldset), makes the form
 	slide to the next step
 	*/
-	$('#formElem > div >fieldset').each(function(){
+	$('#formElem > div > fieldset').each(function(){
 		var $fieldset = $(this);
-		$fieldset.children(':last').find(':input').keydown(function(e){
+		$fieldset.children().children().children().children().children().children(':last').find(':input').keydown(function(e){
 			if (e.which == 9){
 				$('#navigation li:nth-child(' + (parseInt(current)+1) + ') a').click();
 				/* force the blur for validation */
@@ -113,10 +113,11 @@ $(function() {
 			
 			if(valueLength == ''){
 				hasError = true;
-				$this.css('background-color','#FFEDEF');
+				//$this.css('background-color','#FFEDEF');
 			}
-			else
-				$this.css('background-color','#FFFFFF');	
+			else{
+				//$this.css('background-color','#FFFFFF');	
+			}
 		});
 		var $link = $('#navigation li:nth-child(' + parseInt(step) + ') a');
 		$link.parent().find('.error,.checked').remove();
