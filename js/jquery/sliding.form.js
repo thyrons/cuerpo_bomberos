@@ -26,7 +26,6 @@ $(function() {
 	to avoid problems in IE, focus the first input of the form
 	*/
 	$('#formElem >div>fieldset').children().children().children().children(':first').find(':input:first').focus();	
-	console.log($('#formElem >div>fieldset').children().children(':first').find(':input:first'))
 	/*
 	show the navigation bar
 	*/
@@ -74,6 +73,7 @@ $(function() {
 	*/
 	$('#formElem > div > fieldset').each(function(){
 		var $fieldset = $(this);
+		console.log($fieldset.children().children().children().children().children().children(':last').find(':input'))
 		$fieldset.children().children().children().children().children().children(':last').find(':input').keydown(function(e){
 			if (e.which == 9){
 				$('#navigation li:nth-child(' + (parseInt(current)+1) + ') a').click();

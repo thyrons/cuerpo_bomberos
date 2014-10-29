@@ -203,8 +203,8 @@
                       <th width="5%">OPER.</th>
                       <th width="5%">NO OPER.</th>
                       <th width="5%">CUMPLE NORMATIVA</th>
-                      <th width="55%">DISPOSICIONES <br> LUGAR A UBICAR LOS EXTINTORES POR ADQUIRIR (SI FALTA ESPACIO EN ANEXOS)</th>
-                      <th width="5%">CANT.</th>
+                      <th width="50%">DISPOSICIONES <br> LUGAR A UBICAR LOS EXTINTORES POR ADQUIRIR (SI FALTA ESPACIO EN ANEXOS)</th>
+                      <th width="10%">CANT.</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -366,7 +366,7 @@
           <fieldset class="step">
             <legend>EQUIPOS Y MEDIOS DE PREVENCIÓN Y SEGURIDAD</legend>
             <div class="container">
-            <div class="form-group col-md-10" >
+            <div class="form-group col-md-10 table-responsive" >
                 <table class="table table-bordered equipos_medios">
                   <thead>
                     <tr>
@@ -648,127 +648,108 @@
                       <td><input type="radio" name="check1" value="opcion_1"> </td>
                       <td><input type="text" class="form-control"></td>
                     </tr>
+                    <tr>
+                      <td style="text-align: left !important">OTROS</td>  
+                      <td colspan="3"><input type="text" class="form-control"></td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
-              <div class="form-group col-md-6" >
-                <table class="table table-bordered equipos_medios">
+              <div class="form-group col-md-5 table-responsive" >
+                <table class="table equipos_medios">
                   <thead>
                     <tr>
-                      <th width="100%" colspan="8">ALMACENAMIENTO</th>  
+                      <th width="85" colspan="5">ALMACENAMIENTO</th>  
+                      <th width="5%">In.</th>  
+                      <th width="5%">Ex.</th>  
+                      <th width="5%">Al.</th>  
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td width="15%">ALMACENAMIENTO GLP</td>  
-                      <td width="10%">CANT./LLENO</td>  
-                      <td width="10%"><input type="text" class="form-control"></td>  
-                      <td width="10%"><label>CANT./VAC </label></td>  
-                      <td width="10%"><input type="text" class="form-control"></td>  
+                      <td width="25%">ALMACENAMIENTO GLP</td>  
+                      <td width="5%">CANT./ LLENO</td>  
+                      <td width="25%"><input type="text" class="form-control"></td>  
+                      <td width="5%"><label>CANT. / VAC </label></td>  
+                      <td width="25%"><input type="text" class="form-control"></td>  
                       <td width="5%"><input type="radio" name="check1" value="opcion_1"></td>
                       <td width="5%"><input type="radio" name="check1" value="opcion_1"></td>
                       <td width="5%"><input type="radio" name="check1" value="opcion_1"></td>
                     </tr>
-                    <tr rowspan="5">
-                      <td width="10%">LIQUIDOS INFLAMABLES</td>  
-                      <td width="10%">TIPO</td>  
-                      <td width="20%"><input type="text" class="form-control"></td>  
-                      <td width="10%"><label>CANT. </label></td>  
-                      <td width="20%"><input type="text" class="form-control"></td>  
-                      <td width="5%">
-                        <input type="radio" name="check1" value="opcion_1"> 
-                      </td>
-                       <td width="5%">
-                        <input type="radio" name="check1" value="opcion_1"> 
-                      </td>
-                       <td width="5%">
-                        <input type="radio" name="check1" value="opcion_1"> 
-                      </td>
+                    <tr>
+                      <td width="25%">LIQUIDOS INFLAMABLES</td>  
+                      <td width="5%">TIPO</td>  
+                      <td width="25%"><input type="text" class="form-control"></td>  
+                      <td width="5%"><label>CANT. </label></td>  
+                      <td width="25%"><input type="text" class="form-control"></td>  
+                      <td width="5%"><input type="radio" name="check1" value="opcion_1"> </td>
+                      <td width="5%"><input type="radio" name="check1" value="opcion_1"> </td>
+                      <td width="5%"><input type="radio" name="check1" value="opcion_1"> </td>
                     </tr>
-                    <tr rowspan="5">
-                      <td width="10%">LIQUIDOS COMBUSTIBLES</td>  
-                      <td width="10%">TIPO</td>  
-                      <td width="20%"><input type="text" class="form-control"></td>  
-                      <td width="10%"><label>CANT. </label></td>  
-                      <td width="20%"><input type="text" class="form-control"></td>  
-                      <td width="5%">
-                        <input type="radio" name="check1" value="opcion_1"> 
-                      </td>
-                      <td width="5%">
-                        <input type="radio" name="check1" value="opcion_1"> 
-                      </td>
-                      <td width="5%">
-                        <input type="radio" name="check1" value="opcion_1"> 
-                      </td>
+                    <tr >
+                      <td width="25%">LIQUIDOS COMBUSTIBLES</td>  
+                      <td width="5%">TIPO</td>  
+                      <td width="25%"><input type="text" class="form-control"></td>  
+                      <td width="5%"><label>CANT. </label></td>  
+                      <td width="25%"><input type="text" class="form-control"></td>  
+                      <td width="5%"><input type="radio" name="check1" value="opcion_1"> </td>
+                      <td width="5%"><input type="radio" name="check1" value="opcion_1"> </td>
+                      <td width="5%"><input type="radio" name="check1" value="opcion_1"> </td>
                     </tr>
-                    <tr rowspan="5">
-                      <td width="10%">SÓLIDOS COMBUSTIBLES</td>  
-                      <td width="10%">TIPO</td>  
-                      <td width="60%" colspan="3"><input type="text" class="form-control"></td>  
-                      <td width="5%">
-                        <input type="radio" name="check1" value="opcion_1"> 
-                      </td>
-                      <td width="5%">
-                        <input type="radio" name="check1" value="opcion_1"> 
-                      </td>
-                      <td width="5%">
-                        <input type="radio" name="check1" value="opcion_1"> 
-                      </td>
+                    <tr >
+                      <td width="25%">SÓLIDOS COMBUSTIBLES</td>  
+                      <td width="5%">TIPO</td>  
+                      <td width="55%" colspan="3"><input type="text" class="form-control"></td>  
+                      <td width="5%"><input type="radio" name="check1" value="opcion_1"> </td>
+                      <td width="5%"><input type="radio" name="check1" value="opcion_1"> </td>
+                      <td width="5%"><input type="radio" name="check1" value="opcion_1"> </td>
                     </tr>
-                   <tr rowspan="5">
-                      <td width="10%">BODEGAJE</td>  
-                      <td width="10%">TIPO MAT.</td>  
-                      <td width="60%" colspan="3"><input type="text" class="form-control"></td>  
-                      <td width="5%">
-                        <input type="radio" name="check1" value="opcion_1"> 
-                      </td>
-                      <td width="5%">
-                        <input type="radio" name="check1" value="opcion_1"> 
-                      </td>
-                      <td width="5%">
-                        <input type="radio" name="check1" value="opcion_1"> 
-                      </td>
+                    <tr >
+                      <td width="25%">BODEGAJE</td>  
+                      <td width="5%">TIPO MAT.</td>  
+                      <td width="55%" colspan="3"><input type="text" class="form-control"></td>  
+                      <td width="5%"><input type="radio" name="check1" value="opcion_1"> </td>
+                      <td width="5%"><input type="radio" name="check1" value="opcion_1"> </td>
+                      <td width="5%"><input type="radio" name="check1" value="opcion_1"> </td>
                     </tr>
-                    <tr rowspan="5">
-                      <td width="10%">ORDEN Y LIMPIEZA</td>  
-                      <td width="70%" colspan="4"><input type="text" class="form-control"></td>  
-                      <td width="5%">
-                        <input type="checkbox" name="check1" value="opcion_1">
-                      </td>
-                      <td width="5%">
-                        <input type="checkbox" name="check1" value="opcion_1">
-                      </td>
-                      <td width="5%">
-                        <input type="checkbox" name="check1" value="opcion_1">
-                      </td>
+                    <tr >
+                      <td width="25%">ORDEN Y LIMPIEZA</td>  
+                      <td width="60%" colspan="4"><input type="text" class="form-control"></td>  
+                      <td width="5%"></td>
+                      <td width="5%"></td>
+                      <td width="5%"><input type="radio" name="check1" value="opcion_1"></td>
                     </tr>
-                   <tr rowspan="5">
-                      <td width="10%">QUÍMICOS</td>  
-                      <td width="10%">CANT./LLENO</td>  
-                      <td width="20%"><input type="text" class="form-control"></td>  
-                      <td width="10%"><label>CANT./VAC </label></td>  
-                      <td width="20%"><input type="text" class="form-control"></td>  
-                      <td width="5%">
-                        <input type="checkbox" name="check1" value="opcion_1">
-                      </td>
-                      <td width="5%">
-                        <input type="checkbox" name="check1" value="opcion_1">
-                      </td>
-                      <td width="5%">
-                        <input type="checkbox" name="check1" value="opcion_1">
-                      </td>
+                    <tr >
+                      <td width="25%">QUÍMICOS</td>  
+                      <td width="5%">CANT./ LLENO</td>  
+                      <td width="25%"><input type="text" class="form-control"></td>  
+                      <td width="5%"><label>CANT./ VAC </label></td>  
+                      <td width="25%"><input type="text" class="form-control"></td>  
+                      <td width="5%"><input type="radio" name="check1" value="opcion_1"></td>
+                      <td width="5%"><input type="radio" name="check1" value="opcion_1"></td>
+                      <td width="5%"><input type="radio" name="check1" value="opcion_1"></td>
                     </tr>
-                    
                   </tbody>
                   </table>
               </div>
             </div>
           </fieldset>  
           <fieldset class="step">
-            <legend>Riesgos de Incendios</legend>
+            <legend>RIESGOS DE INCENDIOS</legend>
             <div class="container">
-              <div class="form-group col-md-10" >
-              </div>
+              <div class="form-group col-md-5">
+                <label class="col-sm-4 control-label" for='razon_social'> RAZÓN SOCIAL</label>
+                <div class="col-sm-8">
+                  <div>
+                    <div>
+                      <div>
+                        <input type="text" class="form-control" id='razon_social1' name="razon_social1" data-toggle="tooltip" data-original-title="Razón social de la empresa"  style="text-transform: uppercase">  
+                      </div>
+                    </div>
+                  </div>
+                  <input type="hidden" class="form-control" id='id_informe' name="id_informe" >  
+                </div>
+              </div>       
             </div>
           </fieldset>  
         </div>
@@ -786,10 +767,10 @@
             <a href="#">Medios de Prevención</a>
         </li>
         <li>
-            <a href="#">Settings</a>
+            <a href="#">Riesgos de Incendios</a>
         </li>
         <li>
-            <a href="#">Confirm</a>
+            <a href="#">Confirmación</a>
         </li>
       </ul>
     </div>
