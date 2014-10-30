@@ -65,6 +65,21 @@ ul li:hover {
 .equipos_medios tbody tr td input[type=text]{
 	height: 30px;
 }
+#tab_informe input,label,select,checkbox,radio{
+	font-size: 12px;
+	height: 32px;
+}
+#tab_informe label{
+	padding-left: 0px;
+	text-align: left;
+}
+#tab_informe input[type=radio]{
+	margin-left: 0px;
+	margin-top: -10px;
+}
+#tab_informe .form-group{
+	margin-bottom: 8px;
+}
 @media (max-width: 768px) {
 	.panel-footer.form-footer {
 		text-align: center;

@@ -11,7 +11,13 @@ function inicio(){
 		    }
 		});
 		$('.content_index div').each(function(){
-			$(this).removeClass("active");
+			if(this.id == "tab_general"){
+				$(this).addClass("active");
+				$(this).parent().parent().children().next().children().removeClass("active");
+				$(this).parent().parent().children().next().children(':first').addClass("active");
+			}else{
+				$(this).removeClass("active");
+			}
 		});
 		$("#"+tab).addClass("active");
 	}
@@ -24,7 +30,13 @@ function inicio(){
 		});
 		$(this).parent().addClass("active");
 		$('.content_index div').each(function(){
-			$(this).removeClass("active");
+			if(this.id == "tab_general"){
+				$(this).addClass("active");
+				$(this).parent().parent().children().next().children().removeClass("active");
+				$(this).parent().parent().children().next().children(':first').addClass("active");
+			}else{
+				$(this).removeClass("active");
+			}
 		});
 		$("#"+tab).addClass("active");
 	});
@@ -57,6 +69,24 @@ function inicio(){
 	$("#btn_buscarPropietarios").on("click",modal);
 	$("#btn_guardarPropietarios").on("click",guardar_propietarios);
 	/*--------------------------------*/
+	/*TABS DEL INFORME*/
+	$('#form_informe > div > div').children().children().children().children(':first').find(':input:first').focus();	
+	$('#navegador a').on('click',function(e){
+		//obtengo el tab que se hizo click 
+		var href_informe = $(this).attr('href');
+		var tab_informe = href_informe.split('#').pop();		
+		var tab_animar = $(this).parent().parent().parent().children().prev().children();
+		for(var i=0; i < tab_animar.length; i++){
+			if(tab_animar[i].id == tab_informe){
+				$("#"+tab_informe).show(1000);
+				$('#form_informe > div > div').children().children().children().children(':first').find(':input:first').focus();	
+			}else{
+				$("#"+tab_animar[i].id).hide();
+			}
+		}
+
+	 });
+	/*------------*/
 }
 /*Formularios Servicios Administrativos*/
 function guardar_serviciosAdministrativos(){
@@ -311,5 +341,4 @@ function modal(e){
 		}	
 	}
 	$("#tabla_busquedas").trigger('reloadGrid');
-
 }
