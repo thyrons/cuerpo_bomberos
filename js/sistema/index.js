@@ -19,7 +19,7 @@ function inicio(){
 				$(this).removeClass("active");
 			}
 		});
-		$("#"+tab).addClass("active");
+		$("#"+tab).addClass("active").find(':input:visible:first').focus();
 	}
 	/*activar contenido de las listas*/
 	$('.tab_index a').on('click', function(e){
@@ -38,7 +38,7 @@ function inicio(){
 				$(this).removeClass("active");
 			}
 		});
-		$("#"+tab).addClass("active");
+		$("#"+tab).addClass("active").find(':input:visible:first').focus();
 	});
 	$("input").on("keyup click",function (e){
 		comprobarCamposRequired(e.currentTarget.form.id)

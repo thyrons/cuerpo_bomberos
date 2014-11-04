@@ -1,162 +1,154 @@
 <form class="form-horizontal " action="" rol="form" id="form_informe" method="post">
-  <div class="col-sm-12" id="tab_informe">
-    <div class="tab-content ">
+  <div class="" id="tab_informe">
+    <div class="tab-content">
       <div id="tab_general" class="tab-pane active cambio">
-        <div class="panel panel-default">
-          <div class="panel-heading">DATOS GENERALES</div>
-          <div class="panel-body form-group">
-            <div class="container ">
-              <div class="form-group col-md-5">
-                <label class="col-sm-3 control-label" for='razon_social'> RAZÓN SOCIAL</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id='razon_social' name="razon_social" data-toggle="tooltip" data-original-title="Razón social de la empresa"  style="text-transform: uppercase">  
-                  <input type="hidden" class="form-control" id='id_informe' name="id_informe" >  
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 col-md-10 col-sm-11 col-xs-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">DATOS GENERALES</div>
+                <div class="panel-body form-group">
+                  <div class="form-group col-md-4">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='razon_social' placeholder="RAZÓN SOCIAL" name="razon_social" data-toggle="tooltip" data-original-title="Razón social de la empresa"  style="text-transform: uppercase">  
+                      <input type="hidden" class="form-control" id='id_informe' name="id_informe" >  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <div class="col-sm-12">
+                      <input type="number" class="form-control" placeholder="ÁREA TOTAL M2" id='area_total' name="area_total" data-toggle="tooltip" data-original-title="Área total en metros cuadrados" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <div class="col-sm-12">
+                      <input type="number" class="form-control" id='area_util' placeholder="ÁREA ÚTIL M2" name="area_util" data-toggle="tooltip" data-original-title="Área útil en metros cuadrados" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                   <div class="form-group col-md-3">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='pe' placeholder="PE" name="pe" data-toggle="tooltip" data-original-title="PE" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='mmr' placeholder="MMR" name="mmr" data-toggle="tooltip" data-original-title="MMR" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='riesgo' placeholder="RIESGO" name="riesgo" data-toggle="tooltip" data-original-title="Tipo de riesgo" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='actividad' placeholder="ACTIVIDAD" name="actividad" data-toggle="tooltip" data-original-title="Tipo de actividad del Negocio" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='nombres_propietario' placeholder="RESP LEGAL" name="nombres_propietario" data-toggle="tooltip" data-original-title="Nombres del responsable legal/Propietario" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='ruc_propietario' placeholder="NRO. RUC" name="ruc_propietario" data-toggle="tooltip" data-original-title="RUC del propietario"  style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='direccion' placeholder="DIRECCIÓN" name="direccion" data-toggle="tooltip" data-original-title="Dirección del Negocio" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='direccion' placeholder="VISIBLE/LEGIBLE" name="direccion" data-toggle="tooltip" data-original-title="Dirección del Negocio" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='ubicacion' placeholder="UBICACIÓN" name="ubicacion" data-toggle="tooltip" data-original-title="Ubicación del Negocio" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='telefono' placeholder="TELÉFONO" name="telefono" data-toggle="tooltip" data-original-title="Teléfono del Negocio" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='solicitud_nro' placeholder="SOLICITUD NRO.:" name="solicitud_nro" data-toggle="tooltip" data-original-title="Nro. de la solicutid"  style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='telefono' placeholder=" NRO. OCUPANTES FIJOS" name="telefono" data-toggle="tooltip" data-original-title="Nro. fijo de ocupantes"  style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='flotantes' placeholder="FLOTANTES" name="flotantes" data-toggle="tooltip" data-original-title="Nro. fijo de ocupantes"  style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='aforo' placeholder="AFORO (ORD 122)" name="aforo" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" placeholder="TIPO DE CONSTRUCCIÓN" id='tipo_contruccion' name="tipo_contruccion" data-toggle="tooltip" data-original-title="Tipo de contrucción" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='techo_cubierta' placeholder="TECHO CUBIERTA" name="techo_cubierta" data-toggle="tooltip" data-original-title="Tipo de contrucción" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-8">
+                    <label class="col-sm-2 control-label"> VENTILACIÓN: </label>
+                    <div class="col-sm-2">
+                      <input type="radio" name="check" id="radioEnLinea1" class="col-sm-2" value="opcion_1"> 
+                      <label class="radio-inline control-label col-sm-10"> NATURAL</label>
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="radio" name="check" id="radioEnLinea2" class="col-sm-2" value="opcion_2"> 
+                      <label class="radio-inline control-label col-sm-10">MECÁNICA</label>
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="radio" name="check" id="radioEnLinea3" class="col-sm-2" value="opcion_3"> 
+                      <label class="radio-inline control-label col-sm-10">FUNCIONAL </label>
+                    </div>
+                    <div class="col-sm-3">
+                      <input type="radio" name="check" id="radioEnLinea4" class="col-sm-1" value="opcion_4">  
+                      <label class="radio-inline control-label col-sm-11">NO FUNCIONAL </label>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-11">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='disposicion' placeholder="DISPOSICIÓN" name="disposicion" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='hora_inicio' placeholder="HORA INICIO" name="hora_inicio" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='hora_final' placeholder="HORA FINAL" name="hora_final" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6"  >
+                    <div class="col-sm-6">
+                      <label class="radio-inline control-label col-sm-7" >INSPECCIÓN</label>
+                      <input type="radio" class="col-sm-1" name="check1" id="radioEnLinea5" value="opcion_1"> 
+                    </div>
+                    <div class="col-sm-6">
+                      <label class="radio-inline control-label col-sm-7">REINSPECCIÓN</label>                
+                      <input type="radio" name="check1" class="col-sm-1" id="radioEnLinea6" value="opcion_2"> 
+                    </div> 
+                  </div>
                 </div>
-              </div>
-              <div class="form-group col-md-5">
-                <label class="col-sm-4 control-label" for='area_total'> ÁREA TOTAL M2</label>
-                <div class="col-sm-7">
-                  <input type="number" class="form-control" id='area_total' name="area_total" data-toggle="tooltip" data-original-title="Área total en metros cuadrados" style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="col-sm-5 control-label" for='area_util'> ÁREA ÚTIL M2</label>
-                <div class="col-sm-6">
-                  <input type="number" class="form-control" id='area_util' name="area_util" data-toggle="tooltip" data-original-title="Área útil en metros cuadrados" style="text-transform: uppercase">  
-                </div>
-              </div>
-               <div class="form-group col-md-7">
-                <label class="col-sm-1 control-label" for='pe'> PE</label>
-                <div class="col-sm-2">
-                  <input type="text" class="form-control" id='pe' name="pe" data-toggle="tooltip" data-original-title="PE" style="text-transform: uppercase">  
-                </div>
-                <label class="col-sm-1 control-label" for='mmr'> MMR</label>
-                <div class="col-sm-2">
-                  <input type="text" class="form-control" id='mmr' name="mmr" data-toggle="tooltip" data-original-title="MMR" style="text-transform: uppercase">  
-                </div>
-                <label class="col-sm-1 control-label" for='riesgo'> RIESGO</label>
-                <div class="col-sm-4">
-                  <input type="text" class="form-control" id='riesgo' name="riesgo" data-toggle="tooltip" data-original-title="Tipo de riesgo" style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-5">
-                <label class="col-sm-3 control-label" for='actividad'> ACTIVIDAD</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id='actividad' name="actividad" data-toggle="tooltip" data-original-title="Tipo de actividad del Negocio" style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-5">
-                <label class="col-sm-3 control-label" for='nombres_propietario'> RESP LEGAL</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id='nombres_propietario' name="nombres_propietario" data-toggle="tooltip" data-original-title="Nombres del responsable legal/Propietario" style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-5">
-                <label class="col-sm-3 control-label" for='ruc_propietario'> RUC</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id='ruc_propietario' name="ruc_propietario" data-toggle="tooltip" data-original-title="RUC del propietario"  style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-5">
-                <label class="col-sm-3 control-label" for='direccion'> DIRECCIÓN</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id='direccion' name="direccion" data-toggle="tooltip" data-original-title="Dirección del Negocio" style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="col-sm-4 control-label" for='direccion'> VISIBLE/LEGIBLE</label>
-                <div class="col-sm-7">
-                  <input type="text" class="form-control" id='direccion' name="direccion" data-toggle="tooltip" data-original-title="Dirección del Negocio" style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="col-sm-3 control-label" for='ubicacion'> UBICACIÓN</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id='ubicacion' name="ubicacion" data-toggle="tooltip" data-original-title="Ubicación del Negocio" style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="col-sm-4 control-label" for='telefono'> TELÉFONO</label>
-                <div class="col-sm-7">
-                  <input type="text" class="form-control" id='telefono' name="telefono" data-toggle="tooltip" data-original-title="Teléfono del Negocio" style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="col-sm-4 control-label" for='solicitud_nro'> SOLICITUD N.:</label>
-                <div class="col-sm-7">
-                  <input type="text" class="form-control" id='solicitud_nro' name="solicitud_nro" data-toggle="tooltip" data-original-title="Nro. de la solicutid"  style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="col-sm-7 control-label" for='telefono'> NRO. OCUPANTES FIJOS</label>
-                <div class="col-sm-4">
-                  <input type="text" class="form-control" id='telefono' name="telefono" data-toggle="tooltip" data-original-title="Nro. fijo de ocupantes"  style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-2">
-                <label class="col-sm-5 control-label" for='flotantes'> FLOTANTES</label>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" id='flotantes' name="flotantes" data-toggle="tooltip" data-original-title="Nro. fijo de ocupantes"  style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="col-sm-5 control-label" for='aforo'> AFORO (ORD 122)</label>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" id='aforo' name="aforo" style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-6">
-                <label class="col-sm-4 control-label" for='tipo_contruccion'> TIPO DE CONSTRUCCIÓN</label>
-                <div class="col-sm-7">
-                  <input type="text" class="form-control" id='tipo_contruccion' name="tipo_contruccion" data-toggle="tooltip" data-original-title="Tipo de contrucción" style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="col-sm-5 control-label" for='techo_cubierta'> TECHO CUBIERTA</label>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" id='techo_cubierta' name="techo_cubierta" data-toggle="tooltip" data-original-title="Tipo de contrucción" style="text-transform: uppercase">  
-                </div>
-              </div>
-               <div class="form-group col-md-6">
-                <label class="col-sm-2 control-label"> VENTILACIÓN: </label>
-                <label class="radio-inline control-label col-sm-2"> 
-                  NATURAL <input type="radio" name="check" id="radioEnLinea1" value="opcion_1"> 
-                </label>
-                <label class="radio-inline control-label col-sm-2">
-                  MECÁNICA <input type="radio" name="check" id="radioEnLinea2" value="opcion_2"> 
-                </label>
-                <label class="radio-inline control-label col-sm-2">
-                  FUNCIONAL <input type="radio" name="check" id="radioEnLinea3" value="opcion_3"> 
-                </label>
-                <label class="radio-inline control-label col-sm-3">
-                  NO FUNCIONAL <input type="radio" name="check" id="radioEnLinea4" value="opcion_4">
-                </label>
-              </div>
-              <div class="form-group col-md-10">
-                <label class="col-sm-2 control-label" for='disposicion'> DISPOSICIÓN</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id='disposicion' name="disposicion" style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="col-sm-5 control-label" for='hora_inicio'> HORA INICIO</label>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" id='hora_inicio' name="hora_inicio" style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="col-sm-5 control-label" for='hora_final'> HORA FINAL</label>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" id='hora_final' name="hora_final" style="text-transform: uppercase">  
-                </div>
-              </div>
-              <div class="form-group col-md-4"  >
-                <label class="radio-inline control-label col-sm-5" > 
-                  INSPECCIÓN <input type="radio" name="check1" id="radioEnLinea5" value="opcion_1"> 
-                </label>
-                <label class="radio-inline control-label col-sm-5">
-                  REINSPECCIÓN <input type="radio" name="check1" id="radioEnLinea6" value="opcion_2"> 
-                </label>                
               </div>
             </div>
           </div>

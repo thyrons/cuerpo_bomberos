@@ -1,5 +1,6 @@
 <?php
     include '../conexion.php';
+    include '../funciones_generales.php';
     $conexion = conectarse();
     $page = $_GET['page']; 
     $limit = $_GET['rows']; 
@@ -10,9 +11,7 @@
     if (!$sidx)
         $sidx = 1;
     $sql = "SELECT COUNT(*) AS count from usuario,claves,tipo_usuario where usuario.id_usuario = claves.id_usuario and usuario.id_tipo_usuario = tipo_usuario.id_tipo_usuario";
-    $result = pg_query( $conexion, $sql );
-    $row = pg_fetch_row($result);
-    $count = $row[0];
+    $count = contador($conexion, $sql);
     if ($count > 0 && $limit > 0) {
         $total_pages = ceil($count / $limit);
     } else {
@@ -60,7 +59,7 @@
         }
         //echo $SQL;
     }	
-	$result = pg_query($SQL);			
+	$result = xml_sql($conexion,$SQL);         		
 	header("Content-type: text/xml;charset=utf-8");
 	$s = "<?xml version='1.0' encoding='utf-8'?>";	
 	$s .= "<rows>";

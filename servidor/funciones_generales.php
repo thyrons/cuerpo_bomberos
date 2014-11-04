@@ -67,5 +67,14 @@
 		}
 
 	}
+	function contador($conexion,$sql){
+		$rs = pg_query( $conexion, $sql );
+	    $row = pg_fetch_row($rs);
+    	return $row[0];
+	}
+	function xml_sql($conexion,$sql){
+		$rs = pg_query( $conexion, $sql );
+    	return $rs;
+	}
 	
 ?>

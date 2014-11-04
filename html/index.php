@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="../assets/ico/favicon.ico">
@@ -72,7 +72,7 @@
           </ul>
         </div><!-- end of container -->
         <div class="col-sm-9 col-sm-offset-3 sidebar" style="background:#FFF;">
-          <div class="tab-content content_index">
+          <div class="tab-content content_index" id="formularios">
             <div class="tab-pane active" id="tab_a">
             <?php
             include 'informe_general.php';
