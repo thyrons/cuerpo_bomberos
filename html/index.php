@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="shortcut icon" href="../images/logo.fw.png">
 
     <title>CUERPO DE BOMBEROS COTACACHI</title>
 
@@ -64,7 +64,8 @@
       <div class="row">
         <div class="col-sm-3 sidebar tab_index">
           <ul class="nav nav-pills nav-stacked ">
-            <li class="active"><a href="#tab_a"><span class="glyphicon glyphicon-list-alt"></span> Informe General</a></li>
+            <li class="active"><a href="#tab_i"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+            <li><a href="#tab_a"><span class="glyphicon glyphicon-list-alt"></span> Informe General</a></li>
             <li><a href="#tab_b" ><span class="glyphicon glyphicon-pushpin"></span> Propietarios</a></li>
             <li><a href="#tab_c" ><span class="glyphicon glyphicon-user"></span> Usuarios</a></li>
             <li><a href="#tab_d" ><span class="glyphicon glyphicon-paperclip"></span> Servicios Administrativos </a></li>
@@ -73,9 +74,14 @@
         </div><!-- end of container -->
         <div class="col-sm-9 col-sm-offset-3 sidebar" style="background:#FFF;">
           <div class="tab-content content_index" id="formularios">
-            <div class="tab-pane active" id="tab_a">
+            <div class="tab-pane" id="tab_a">
             <?php
             include 'informe_general.php';
+            ?>
+            </div>
+            <div class="tab-pane active" id="tab_i">
+            <?php
+            include 'inicio.html';
             ?>
             </div>
             <div class="tab-pane" id="tab_b">
