@@ -158,14 +158,37 @@
       <div id="tab3" class="tab-pane cambio">tab3 content</div>
       <div id="tab4" class="tab-pane cambio">tab4 content</div>
     </div>
-    <ul  class="nav nav-pills" id="navegador">
-      <li class="active"><a href="#tab_general" data-toggle="tab">Datos Generales</a></li>
-      <li><a href="#tab2" data-toggle="tab">Ingreso de Proveedores</a></li>
-      <li><a href="#tab3" data-toggle="tab">Tipos de Usuarios</a></li>
-      <li><a href="#tab4" data-toggle="tab">Cálculo de Precios</a></li>
-    </ul>
-
+    <div class="navegar">
+      <ul  class="devian">
+        <li class="active"><a href="#tab_general" data-toggle="tab">Datos Generales</a></li>
+        <li><a href="#tab2" data-toggle="tab">Ingreso de Proveedores</a></li>
+        <li><a href="#tab3" data-toggle="tab">Tipos de Usuarios</a></li>
+        <li><a href="#tab4" data-toggle="tab">Cálculo de Precios</a></li>
+      </ul>
+    </div>  
   </div>
 </form>
 
+<style type="text/css">  
+  ul.devian {
+    background: #F4F4F4;
+    border: 1px solid #7C7C7C;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  ul.devian li {
+    float: left;
+    width: 20%;
+  }
+  ul.devian li a {
+    border-left: 1px solid #FFF;
+    border-right: 1px solid #7C7C7C;
+    color: #333;
+    display: block;
+    padding: .3em;
+    text-decoration: none;
+  }
+</style>
  
