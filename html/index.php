@@ -40,12 +40,12 @@
   </head>
 
   <body>
-
+       
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">navegacion</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -62,7 +62,7 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 sidebar tab_index">
+        <div class="col-sm-3 sidebar tab_index" style="background: url(../images/bag.fw.png)!important;">          
           <ul class="nav nav-pills nav-stacked ">
             <li class="active"><a href="#tab_i"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
             <li><a href="#tab_a"><span class="glyphicon glyphicon-list-alt"></span> Informe General</a></li>
@@ -71,8 +71,11 @@
             <li><a href="#tab_d" ><span class="glyphicon glyphicon-paperclip"></span> Servicios Administrativos </a></li>
             <li><a href="#tab_e" ><span class="glyphicon glyphicon-paperclip"></span> Tasa por Servicio </a></li>
           </ul>
+          <div class="logo">
+            <img src="../images/logo2.fw.png" >
+          </div>
         </div><!-- end of container -->
-        <div class="col-sm-9 col-sm-offset-3 sidebar" style="background:#FFF;">
+        <div class="col-sm-9 col-sm-offset-3 sidebar" style="background:#2E2D32;">
           <div class="tab-content content_index" id="formularios">
             <div class="tab-pane" id="tab_a">
             <?php
@@ -106,7 +109,7 @@
             </div>
           </div><!-- tab content -->
         </div><!-- end of container -->
-      </div>  
+      </div>        
     </div>
    
     <div class="modal" id="modalBusquedas">
@@ -126,10 +129,10 @@
         </div>
       </div>
     </div>
+    
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
   </body>
 </html>
- 
