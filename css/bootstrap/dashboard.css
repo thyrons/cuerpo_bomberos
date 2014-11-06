@@ -24,6 +24,27 @@ body {
 }
 
 
+ul.devian {
+    background: #880002;    
+    border: 1px solid #7C7C7C;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  ul.devian li {
+    float: left;
+    width: 25%;
+  }
+  ul.devian li a {
+    border-left: 1px solid #FFF;
+    border-right: 1px solid #7C7C7C;
+    color: #FFF;
+    display: block;
+    padding: .3em;
+    text-decoration: none;
+  }
+
 /*
  * Sidebar
  */
