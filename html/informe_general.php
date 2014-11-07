@@ -947,6 +947,9 @@
         </div>
       </div>
     </div>
+    <div>
+      
+    </div>
     <ul  class="devian" id="navegador">
       <li id="t_a" class="active"><a href="#tab_general" data-toggle="tab">Datos Generales</a></li>
       <li id="t_b"><a href="#tab_proteccion_incendios" data-toggle="tab">Equipos de Protección</a></li>
@@ -958,4 +961,3 @@
   </div>
 </form>
 
- 

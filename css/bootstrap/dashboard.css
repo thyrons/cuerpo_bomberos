@@ -49,6 +49,11 @@ ul.devian {
     text-decoration: none;
     background: #880002;    
   }
+  ul.devian li.active a{
+    background: #CCCCCC;
+    color: #000!important;
+  }
+ 
 
 /*
  * Sidebar
