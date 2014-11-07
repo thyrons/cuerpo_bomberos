@@ -35,27 +35,49 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+  <style type="text/css">
+    body{
+      background: url(images/login.fw.png)no-repeat center center fixed;  
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+    .account-wall{
+       background: rgba(255,255,255,0.5); 
 
+       border-radius: 3px;
+    }
+    .login-title{
+      color: #880002!important;
+    }
+
+
+
+
+
+
+  </style>
   <body>
 
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-md-4 col-md-offset-4">
         <div class="account-wall">
-          <h1 class="text-center login-title"><span class="glyphicon glyphicon-fire"></span> INGRESO AL SISTEMA</h1>
+          <h1 class="text-center login-title">ACCESO AL SISTEMA</h1>
           <form class="form-signin" id="form_loginUsuario">
             <div class="input-group ">
               <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
               <input type="text" id="txt_loginUsuario" name="txt_loginUsuario" class="form-control" placeholder="Usuario" required autofocus>
             </div>
             <div class="input-group">
-              <span class ="input-group-addon"><span class="glyphicon glyphicon-floppy-disk"></span></span>
+              <span class ="input-group-addon"><span class="glyphicon glyphicon-qrcode"></span></span>
               <input type ="password" id="txt_loginPass" name="txt_loginPass" class="form-control" placeholder="Contraseña" required>
             </div>
             <div class="form-group">
               <button class="btn btn-primary" id="btn_loginIngreso" type="submit">
               <span class="glyphicon glyphicon-log-in"></span> Ingreso</button>
-              <button class="btn btn-success" type="button" id="btn_loginLimpiar">
+              <button class="btn btn-primary" type="button" id="btn_loginLimpiar">
               <span class="glyphicon glyphicon-refresh"></span> Limpiar</button>
             </div>
             <span class="clearfix"></span>
@@ -63,7 +85,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> 
  <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

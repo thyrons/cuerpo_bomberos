@@ -3875,9 +3875,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-width: 1px 0 0;
 }
 .navbar-brand {
+  
   float: left;
-  padding: 15px 15px;
-  font-size: 18px;
+  padding: 8px 8px;
+  font-size: 20px;
   line-height: 20px;
   height: 50px;
 }
@@ -4995,10 +4996,13 @@ a.list-group-item-danger.active:focus {
   padding: 15px;
 }
 .panel-heading {
+  background: url(../../images/btn3.fw.png)!important;
   padding: 10px 15px;
+  font-size: 17px;
   border-bottom: 1px solid transparent;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
+  color: #000!important;
 }
 .panel-heading > .dropdown .dropdown-toggle {
   color: inherit;

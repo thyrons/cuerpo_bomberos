@@ -6,7 +6,7 @@
           <div class="row">
             <div class="col-lg-10 col-md-10 col-sm-11 col-xs-12">
               <div class="panel panel-default">
-                <div class="panel-heading">DATOS GENERALES</div>
+                <div class="panel-heading"><span class="glyphicon glyphicon-list-alt"> DATOS GENERALES</div>
                 <div class="panel-body form-group">
                   <div class="form-group col-md-4">
                     <div class="col-sm-12">
@@ -947,7 +947,7 @@
         </div>
       </div>
     </div>
-    <ul  class="nav nav-pills" id="navegador">
+    <ul  class="devian" id="navegador">
       <li id="t_a" class="active"><a href="#tab_general" data-toggle="tab">Datos Generales</a></li>
       <li id="t_b"><a href="#tab_proteccion_incendios" data-toggle="tab">Equipos de Protección</a></li>
       <li id="t_c"><a href="#tab_prevencion_seguridad" data-toggle="tab">Equipos de Prevencion</a></li>
