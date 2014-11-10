@@ -83,6 +83,16 @@ function inicio(){
 	$("#btn_buscarPropietarios").on("click",modal);
 	$("#btn_guardarPropietarios").on("click",guardar_propietarios);
 	/*--------------------------------*/
+	/*Ingresos de empresas*/
+	$("#btn_limpiarEmpresas").on("click",limpiar_form);
+	$("#btn_guardarEmpresas").on("click",guardar_empresas);
+	$("#ruc_propie").keyup(function (){
+		autocompletar("ruc_propie","nombres_pro","id_propie","../servidor/empresas/buscar_empresas.php?tipo=0");
+	});
+	$("#nombres_pro").keyup(function (){
+		autocompletar("nombres_pro","ruc_propie","id_propie","../servidor/empresas/buscar_empresas.php?tipo=1");
+	});
+	/*--------------------------------*/
 	/*TABS DEL INFORME*/
 	$('#form_informe > div > div').children().children().children().children(':first').find(':input:first').focus();	
 	$('#navegador a').on('click',function(e){
@@ -95,7 +105,6 @@ function inicio(){
 				$("#"+tab_informe).show( "fold", 100 );
 				$('#form_informe > div > div').children().children().children().children(':first').find(':input:first').focus();	
 				$("#"+tab_informe).find(':input:visible:first').focus();
-
 			}else{
 				$("#"+tab_animar[i].id).hide("fast");
 			}
@@ -317,9 +326,9 @@ function datos_propietarios(valores,tipo,p){
 				limpiar_form(p);	
 	    	}else{
 	    		if( data == 1 ){
-	    			alertify.error('Este nro. de Ruc ya existe. Ingrese otro');	
 	    			$("#ruc_propietario").val("");	
 	    			$("#ruc_propietario").focus();
+	    			alertify.error('Este nro. de Ruc ya existe. Ingrese otro');	
 	    		}else{
 	    			if( data == 2 ){
 	    				alertify.error('Error al enviar los datos. Ingrese nuevamente');	
@@ -328,6 +337,42 @@ function datos_propietarios(valores,tipo,p){
 	    		}
 	    	}
 
+		}
+	}); 
+}
+/*---------------------------------*/
+/*Formularios para empresas*/
+function guardar_empresas(){
+	var resp=comprobarCamposRequired("form_empresas");
+	if(resp==true){
+		$("#form_empresas").on("submit",function (e){	
+			var valores = $("#form_empresas").serialize();
+			var texto=($("#btn_guardarEmpresas").text()).trim();	
+			if(texto=="Guardar"){		
+				datos_empresas(valores,"g",e);
+			}else{
+				datos_empresas(valores,"m",e);
+			}
+			e.preventDefault();
+    		$(this).unbind("submit")
+		});
+	}
+}
+function datos_empresas(valores,tipo,p){
+	$.ajax({				
+		type: "POST",
+		data: valores+"&tipo="+tipo,
+		url: "../servidor/empresas/empresas.php",			
+	    success: function(data) {	
+	    	if( data == 0 ){
+	    		alertify.primary('Datos Agregados Correctamente');	
+				limpiar_form(p);	
+	    	}else{
+	    		if( data == 2 ){
+	    			alertify.error('Error al enviar los datos. Ingrese nuevamente');	
+	    			limpiar_form(p);
+	   			}
+	    	}
 		}
 	}); 
 }
@@ -414,4 +459,48 @@ function modal(e){
 		}	
 	}
 	$("#tabla_busquedas").trigger('reloadGrid');
+}
+/*funcion para autocompleta con el campo a mostar el id oculto y la direccion donde se encuentra*/
+function autocompletar(campo,campoNombre,campoId,direccion){
+	$("#"+campo).autocomplete({
+        source: direccion,
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#"+campoId ).val( ui.item.value );
+	        $( "#"+campo ).val( ui.item.label1 );  
+	        $( "#"+campoNombre ).val( ui.item.label2 );  
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#"+campoId ).val( ui.item.value );
+	        $( "#"+campo ).val( ui.item.label1 );     
+	        $( "#"+campoNombre ).val( ui.item.label2 );   
+	        cargarTabla(ui.item.value);
+	        return false;
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.label1 + "</a>" )
+        .appendTo( ul );
+    };
+}
+/*---------------*/
+/*funcion para cargar la tabla de las empresas*/
+function cargarTabla(idPropietario){
+	$.ajax({        
+        type: "POST",
+        dataType: 'json',
+        data:"id="+idPropietario,
+        url: "../servidor/empresas/cargaEmpresa.php",        
+        success: function(response) {     
+            for (var i = 0; i < response.length; i=i+4) {
+                $("#tablaEmpresas tbody").append( "<tr>" +
+                "<td align=center style=display:none>" + response[i+0] + "</td>" +
+                "<td align=center>" + response[i+1] + "</td>" +             
+                "<td align=center>" + response[i+2] + "</td>" +      
+                "<td align=center>" + response[i+3] + "</td>" +      
+                "<td align=center>" + " <a class='elimina'><img src='../images/cancel.png' onclick='return fn_dar_eliminar(event)'/>"  + "</td>" + "</tr>" );
+            }
+        }                   
+    }); 
 }

@@ -1,6 +1,6 @@
 <form class="form-horizontal " action="" rol="form" id="tasa_servicio" method="post">
   <div class="panel panel-default">
-    <div class="panel-heading"><span class="glyphicon glyphicon-paperclip"></span> <b> TASA POR SERVICIO ADMINISTRATIVO </b></div>
+    <div class="panel-heading"><span class="glyphicon glyphicon-wrench"></span> <b> TASA POR SERVICIO ADMINISTRATIVO </b></div>
     <div class="panel-body form-styles">
       <div class="container">
         <div class="form-group col-md-5">

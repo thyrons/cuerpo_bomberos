@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="../css/jquery/jquery-ui.css">
     <link href="../css/jquery/alertify.core.css" rel="stylesheet">
     <link href="../css/jquery/alertify.default.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/jquery/style.css" type="text/css" media="screen"/>
     <!-- Custom styles for this template -->
      <link href="../css/jqgrid/ui.jqgrid.css" rel="stylesheet">
     <script src="../js/jquery/jquery.js"></script>
@@ -28,7 +27,6 @@
     <script src="../js/sistema/index.js"></script>
     <script src="../js/sistema/busquedas.js"></script>
     <script type="text/javascript" src="../js/jquery/alertify.js"></script>
-    <script type="text/javascript" src="../js/jquery/sliding.form.js"></script>
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -67,9 +65,10 @@
             <li class="active"><a href="#tab_i"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
             <li><a href="#tab_a"><span class="glyphicon glyphicon-list-alt"></span> Informe General</a></li>
             <li><a href="#tab_b" ><span class="glyphicon glyphicon-pushpin"></span> Propietarios</a></li>
-            <li><a href="#tab_c" ><span class="glyphicon glyphicon-user"></span> Usuarios</a></li>
-            <li><a href="#tab_d" ><span class="glyphicon glyphicon-paperclip"></span> Servicios Administrativos </a></li>
-            <li><a href="#tab_e" ><span class="glyphicon glyphicon-paperclip"></span> Tasa por Servicio </a></li>
+            <li><a href="#tab_c" ><span class="glyphicon glyphicon-share"></span> Empresas </a></li>
+            <li><a href="#tab_d" ><span class="glyphicon glyphicon-user"></span> Usuarios</a></li>
+            <li><a href="#tab_e" ><span class="glyphicon glyphicon-paperclip"></span> Servicios Administrativos </a></li>
+            <li><a href="#tab_f" ><span class="glyphicon glyphicon-wrench"></span> Tasa por Servicio </a></li>
           </ul>
           <div class="logo">
             <img src="../images/logo2.fw.png" >
@@ -77,14 +76,14 @@
         </div><!-- end of container -->
         <div class="col-sm-9 col-sm-offset-3 sidebar" style="background:#2E2D32;">
           <div class="tab-content content_index" id="formularios">
-            <div class="tab-pane" id="tab_a">
-            <?php
-            include 'informe_general.php';
-            ?>
-            </div>
             <div class="tab-pane active" id="tab_i">
             <?php
             include 'inicio.html';
+            ?>
+            </div>
+            <div class="tab-pane" id="tab_a">
+            <?php
+            include 'informe_general.php';
             ?>
             </div>
             <div class="tab-pane" id="tab_b">
@@ -94,15 +93,20 @@
             </div>
             <div class="tab-pane" id="tab_c">
             <?php
-              include 'usuarios.php';
+              include 'empresas.php';
             ?>  
             </div>
             <div class="tab-pane" id="tab_d">
             <?php
+              include 'usuarios.php';
+            ?>  
+            </div>
+            <div class="tab-pane" id="tab_e">
+            <?php
               include 'servicios_administrativos.php';
             ?> 
             </div>
-            <div class="tab-pane" id="tab_e">
+            <div class="tab-pane" id="tab_f">
             <?php
              include 'tasa_por_servicio.php';
             ?>
@@ -129,8 +133,6 @@
         </div>
       </div>
     </div>
-    
-
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

@@ -51,7 +51,7 @@
                   </div>
                   <div class="form-group col-md-4">
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id='ruc_propietario' placeholder="NRO. RUC" name="ruc_propietario" data-toggle="tooltip" data-original-title="RUC del propietario"  style="text-transform: uppercase">  
+                      <input type="text" class="form-control" id='ruc_informe' placeholder="NRO. RUC" name="ruc_informe" data-toggle="tooltip" data-original-title="RUC del propietario"  style="text-transform: uppercase">  
                     </div>
                   </div>
                   <div class="form-group col-md-4">

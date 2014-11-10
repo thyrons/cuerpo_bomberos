@@ -65,7 +65,6 @@
 				echo  "<option value='$row[0]'>$row[1]</option>";
 			}
 		}
-
 	}
 	function contador($conexion,$sql){
 		$rs = pg_query( $conexion, $sql );
@@ -76,5 +75,31 @@
 		$rs = pg_query( $conexion, $sql );
     	return $rs;
 	}
-	
+	function busquedas3( $conexion, $sql){
+		$resp =true;
+		$sql = pg_query( $conexion, $sql );
+		if($sql){
+			while ($row = pg_fetch_row($sql)) {
+			    $data[] = array(
+			        'value' => $row[0],
+			        'label1' => $row[1],
+			        'label2' => $row[2]
+			    );
+			}
+			echo $data = json_encode($data);
+		}
+	}
+	function cargaEmpresas($conexion, $sql){
+		$lista = array();
+		$sql=pg_query($sql);   
+		while($row=pg_fetch_row($sql)){							
+			$lista[]=$row[0];															
+			$lista[]=$row[1];															
+			$lista[]=$row[2];															
+			$lista[]=$row[3];		
+			$lista[]=$row[4];															
+		}	
+    	echo $lista=json_encode($lista); 
+	}
+
 ?>

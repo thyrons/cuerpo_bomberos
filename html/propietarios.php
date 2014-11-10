@@ -18,14 +18,14 @@
             </div>
             <div class="form-group col-md-5">
              <label class="col-sm-3 control-label" for='direccion_propietario'> DIRECCIÓN:</label>
-             <div class="col-sm-9">
-               <input type="text" class="form-control" id='direccion_propietario' name="direccion_propietario"  style="text-transform: uppercase">  
+             <div class="col-sm-9 has-error">
+               <input type="text" class="form-control" id='direccion_propietario' name="direccion_propietario" required data-toggle="tooltip" data-original-title="Dirección del local"  pattern="[A-Za-záéíóúÁÉÍÓÚ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
              </div>
             </div>
             <div class="form-group col-md-5">
              <label class="col-sm-3 control-label" for='telefono_propietario'> TELÉFONO:</label>
-             <div class="col-sm-9">
-               <input type="text" class="form-control" id='telefono_propietario' name="telefono_propietario"  style="text-transform: uppercase">  
+             <div class="col-sm-9 has-error">
+               <input type="text" class="form-control" id='telefono_propietario' name="telefono_propietario" required data-toggle="tooltip" data-original-title="Solo números"  pattern="[0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
              </div>
             </div>
             <div class="form-group col-md-5">
@@ -55,5 +55,6 @@
          </div>
        </div>
      </div>
+    
  </form>
 
