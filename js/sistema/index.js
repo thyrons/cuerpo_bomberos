@@ -527,7 +527,7 @@ function cargarTabla(idPropietario){
                 "<td align=center>" + response[i+2] + "</td>" +      
                 "<td align=center>" + response[i+3] + "</td>" +      
                 "<td align=center>" + response[i+4] + "</td>" +      
-                "<td align=center>" + "<img src='../images/"+ response[i+6] +"' />"  + "</td>" + "</tr>" );	
+                "<td align=center>" + "<img style='width:10px;' src='../images/icon/"+ response[i+6] +"' />"  + "</td>" + "</tr>" );	
                 
             }
         }                   
