@@ -98,6 +98,8 @@
 			$lista[]=$row[2];															
 			$lista[]=$row[3];		
 			$lista[]=$row[4];															
+			$lista[]=$row[5];															
+			$lista[]=$row[6];		
 		}	
     	echo $lista=json_encode($lista); 
 	}

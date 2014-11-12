@@ -43,12 +43,12 @@ function inicio(){
 				});		
 				$(this).parent().parent().children().next().children().removeClass("active");
 				$(this).parent().parent().children().next().children(':first').addClass("active");
-
 			}else{
 				$(this).removeClass("active");
 			}
 		});
 		$("#"+tab).addClass("active").find(':input:visible:first').focus();
+		limpiar_form($("#"+tab).addClass("active").children().attr("id"));
 	});
 	$("input").on("keyup click",function (e){
 		comprobarCamposRequired(e.currentTarget.form.id);
@@ -91,6 +91,20 @@ function inicio(){
 	});
 	$("#nombres_pro").keyup(function (){
 		autocompletar("nombres_pro","ruc_propie","id_propie","../servidor/empresas/buscar_empresas.php?tipo=1");
+	});
+	$("#nombres_pro").keyup(function (e){
+		if($("#nombres_pro").val().length == 0){
+			comprobarCamposRequired("form_empresas");		
+			$("#tablaEmpresas tbody").html(" ");	
+			$("#form_empresas input").val("");
+		}	
+	});
+	$("#ruc_propie").keyup(function (e){
+		if($("#ruc_propie").val().length == 0){
+			comprobarCamposRequired("form_empresas");		
+			$("#tablaEmpresas tbody").html(" ");	
+			$("#form_empresas input").val("");
+		}	
 	});
 	/*--------------------------------*/
 	/*TABS DEL INFORME*/
@@ -385,9 +399,15 @@ function limpiar_form(e){
 		comprobarCamposRequired(e.currentTarget.form.id);		
 		form = e.currentTarget.form.id;
 	}else{
-		$("#"+e.target.id+" input").val("");
-		comprobarCamposRequired(e.target.id);		
-		form = e.target.id
+		if(e.type == "submit"){
+			$("#"+e.target.id+" input").val("");
+			comprobarCamposRequired(e.target.id);		
+			form = e.target.id
+		}else{
+			$("#"+e+" input").val("");
+			comprobarCamposRequired(e);		
+			form = e;
+		}
 	}
 	if(form == "form_serviciosAdministrativos"){
 		$("#btn_guardarServicios").text("");
@@ -405,7 +425,13 @@ function limpiar_form(e){
 					$("#btn_guardarPropietarios").text("");
 					$("#btn_guardarPropietarios").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
 				}else{
+					if(form == "form_empresas"){
+						$("#btn_guardarEmpresas").text("");
+						$("#btn_guardarEmpresas").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
+						$("#tablaEmpresas tbody").html(" ");						
+					}else{
 
+					}
 				}
 			}	
 		}	
@@ -487,19 +513,22 @@ function autocompletar(campo,campoNombre,campoId,direccion){
 /*---------------*/
 /*funcion para cargar la tabla de las empresas*/
 function cargarTabla(idPropietario){
+	$("#tablaEmpresas tbody").html(" ");
 	$.ajax({        
         type: "POST",
         dataType: 'json',
         data:"id="+idPropietario,
         url: "../servidor/empresas/cargaEmpresa.php",        
         success: function(response) {     
-            for (var i = 0; i < response.length; i=i+4) {
+            for (var i = 0; i < response.length; i=i+7) {
                 $("#tablaEmpresas tbody").append( "<tr>" +
                 "<td align=center style=display:none>" + response[i+0] + "</td>" +
                 "<td align=center>" + response[i+1] + "</td>" +             
                 "<td align=center>" + response[i+2] + "</td>" +      
                 "<td align=center>" + response[i+3] + "</td>" +      
-                "<td align=center>" + " <a class='elimina'><img src='../images/cancel.png' onclick='return fn_dar_eliminar(event)'/>"  + "</td>" + "</tr>" );
+                "<td align=center>" + response[i+4] + "</td>" +      
+                "<td align=center>" + "<img src='../images/"+ response[i+6] +"' />"  + "</td>" + "</tr>" );	
+                
             }
         }                   
     }); 

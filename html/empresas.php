@@ -8,7 +8,7 @@
           <div class="col-sm-8 has-error">
             <input type="hidden" class="form-control" id='id_propie' name="id_propie" >  
             <input type="hidden" class="form-control" id='id_empresaPropietario' name="id_empresaPropietario" >  
-            <input type="text" class="form-control" id='ruc_propie' name="ruc_propie" data-toggle="tooltip" data-original-title="Digite el RUC del propietario" maxlength="13" required pattern="[0-9]{13}" >   
+            <input type="text" class="form-control" id='ruc_propie' name="ruc_propie" data-toggle="tooltip" data-original-title="Digite el RUC del propietario" maxlength="13" required pattern="[0-9]{13}" autocomplete="off">   
           </div>
         </div>
         <div class="form-group col-md-5">
@@ -62,10 +62,10 @@
               <th width="25%">RAZON SOCIAL</th>
               <th width="25%">ACTIVIDAD</th>
               <th width="25%">REPRESENTANTE LEGAL</th>
-              <th width="10%"></th>
+              <th width="10%">ESTADO</th>
             </thead>
             <tbody>
-              
+              <tr></tr>
             </tbody>
             </table>
           </div>
