@@ -95,14 +95,14 @@ function inicio(){
 	$("#nombres_pro").keyup(function (e){
 		if($("#nombres_pro").val().length == 0){
 			comprobarCamposRequired("form_empresas");		
-			$("#tablaEmpresas tbody").html(" ");	
+			$("#grupo_empresas").html(" ");						
 			$("#form_empresas input").val("");
 		}	
 	});
 	$("#ruc_propie").keyup(function (e){
 		if($("#ruc_propie").val().length == 0){
 			comprobarCamposRequired("form_empresas");		
-			$("#tablaEmpresas tbody").html(" ");	
+			$("#grupo_empresas").html(" ");						
 			$("#form_empresas input").val("");
 		}	
 	});
@@ -394,16 +394,16 @@ function datos_empresas(valores,tipo,p){
 /*function para limpiar el formulario activo y dar focus al primer elemento*/
 function limpiar_form(e){
 	var form;
-	if(e.type == "click"){
+	if(e.type == "click"){///mediante el click del boton
 		$("#"+e.currentTarget.form.id+" input").val("");
 		comprobarCamposRequired(e.currentTarget.form.id);		
 		form = e.currentTarget.form.id;
-	}else{
+	}else{//form por el evento submit
 		if(e.type == "submit"){
 			$("#"+e.target.id+" input").val("");
 			comprobarCamposRequired(e.target.id);		
 			form = e.target.id
-		}else{
+		}else{///id directo del form
 			$("#"+e+" input").val("");
 			comprobarCamposRequired(e);		
 			form = e;
@@ -428,7 +428,7 @@ function limpiar_form(e){
 					if(form == "form_empresas"){
 						$("#btn_guardarEmpresas").text("");
 						$("#btn_guardarEmpresas").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
-						$("#tablaEmpresas tbody").html(" ");						
+						$("#grupo_empresas").html(" ");						
 					}else{
 
 					}
@@ -513,23 +513,80 @@ function autocompletar(campo,campoNombre,campoId,direccion){
 /*---------------*/
 /*funcion para cargar la tabla de las empresas*/
 function cargarTabla(idPropietario){
-	$("#tablaEmpresas tbody").html(" ");
+	$("#grupo_empresas").html(" ");
 	$.ajax({        
         type: "POST",
         dataType: 'json',
-        data:"id="+idPropietario,
+        data:"id="+idPropietario+"&tipo="+"1",
         url: "../servidor/empresas/cargaEmpresa.php",        
         success: function(response) {     
-            for (var i = 0; i < response.length; i=i+7) {
-                $("#tablaEmpresas tbody").append( "<tr>" +
+            for (var i = 0; i < response.length; i=i+2) {
+				$("#grupo_empresas").append("<a href='#"+response[i+0]+"' onclick='cargarEstados(this)'   class='list-group-item list-group-item-success' data-toggle='collapse' data-parent='#lista_empresas'><b>"+response[i+1]+"</b></a><div class='collapse' id='"+response[i+0]+"'><div class='table-responsive'><table class='table table-bordered table-condensed table-hover' id='tabla"+response[i+0]+"'><thead><th style='display:none;'></th><th width='15%'>RUC EMPRESA</th><th width='20%'>RAZON SOCIAL</th><th width='20%'>ACTIVIDAD</th><th width='22%'>REPRESENTANTE LEGAL</th><th width='13%'>FECHA ESTADO</th><th width='10%'>ESTADO</th><th style='display:none;'></th><th style='display:none;'></th></thead><tbody><tr></tr></tbody></table></div><button class='btn btn-warning' onclick='modificaEmpresa(this)' type='button'><span class='glyphicon glyphicon-edit'></span> Modificar Empresa</button><br><br>");            	
+            }
+        }                   
+    }); 
+}
+/*------------------*/
+/*funcion para cargar la tabla de las empresas con sus estados*/
+function cargarEstados(e){
+	var hr =$(e).attr("href");
+	var hr = hr.split('#').pop();
+	hre = "tabla"+hr;
+	$("#"+hre+" tbody").html(" ");
+	$.ajax({        
+        type: "POST",
+        dataType: 'json',
+        data:"id="+$("#id_propie").val()+"&tipo="+"2"+"&id_e="+hr,
+        url: "../servidor/empresas/cargaEmpresa.php",        
+        success: function(response) {     
+            for (var i = 0; i < response.length; i=i+9) {
+				$("#"+hre+" tbody").append( "<tr>" +
                 "<td align=center style=display:none>" + response[i+0] + "</td>" +
                 "<td align=center>" + response[i+1] + "</td>" +             
                 "<td align=center>" + response[i+2] + "</td>" +      
                 "<td align=center>" + response[i+3] + "</td>" +      
                 "<td align=center>" + response[i+4] + "</td>" +      
-                "<td align=center>" + "<img style='width:10px;' src='../images/icon/"+ response[i+6] +"' />"  + "</td>" + "</tr>" );	
-                
+                "<td align=center>" + response[i+5] + "</td>" + 
+                "<td align=center>" + "<img style='width:10px;' src='../images/icon/"+ response[i+6] +"' />"  + "</td>" + 
+                "<td align=center style=display:none>" + response[i+7] + "</td>" +
+                "<td align=center style=display:none>" + response[i+8] + "</td>" +"</tr>" );	
             }
         }                   
     }); 
+}
+/*-----------*/
+/*funcion para enviar los datos a la empresa y poder modificar*/
+function modificaEmpresa(e){
+	var id_empresaM = $(e).parent().attr("id");
+	var tablaM = "tabla"+id_empresaM;
+	$("#"+tablaM+" tbody tr").each(function (index){
+		$(this).children("td").each(function (index) {                               
+			switch (index) {                                            
+            	case 2:
+                	$("#razon_socialEmpresa").val($(this).text());                                       
+                break;      	                                                                                                                    
+                case 1:
+                	$("#ruc_empresa").val($(this).text());                
+                break;    
+                case 3:
+                	$("#actividad_empresa").val($(this).text());                
+                break;    
+                case 4:
+                	$("#representante_empresa").val($(this).text());                
+                break;    
+                case 7:
+                	$("#direccion_empresa").val($(this).text());                
+                break;      	                                                                                                                                    	                                                                                                                    
+                case 8:
+                	$("#telefono_empresa").val($(this).text());
+                break;          	                                                                                                                                    	                                                                                                                    
+            }        
+		});
+	});
+	$("#id_empresaPropietario").val(id_empresaM);
+	$("#"+id_empresaM).removeClass('in');
+	comprobarCamposRequired("form_empresas");  
+    $("#btn_guardarEmpresas").text("");
+    $("#btn_guardarEmpresas").append("<span class='glyphicon glyphicon-log-in'></span> Modificar");     
+
 }

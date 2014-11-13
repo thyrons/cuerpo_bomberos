@@ -81,6 +81,9 @@ ul li:hover {
 #tab_informe .form-group{
 	margin-bottom: 8px;
 }
+#lista_empresas table thead th{
+	text-align: center;
+}
 .ui-widget-content{
 	z-index: 9999999999 !important;
 }

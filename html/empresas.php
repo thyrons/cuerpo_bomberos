@@ -54,20 +54,10 @@
           </div>
         </div>
         <div class="form-group col-md-10">
-          <div class="table-responsive">
-            <table class="table table-bordered table-condensed" id="tablaEmpresas">
-            <thead>
-              <th style="display:none;"></th>
-              <th width="15%">RUC EMPRESA</th>
-              <th width="25%">RAZON SOCIAL</th>
-              <th width="25%">ACTIVIDAD</th>
-              <th width="25%">REPRESENTANTE LEGAL</th>
-              <th width="10%">ESTADO</th>
-            </thead>
-            <tbody>
-              <tr></tr>
-            </tbody>
-            </table>
+          <div id="lista_empresas">
+            <div class="list-group panel" id="grupo_empresas">
+              
+            </div>
           </div>
         </div>                
       </div>
