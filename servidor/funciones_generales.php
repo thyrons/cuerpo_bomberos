@@ -95,11 +95,23 @@
 		while($row=pg_fetch_row($sql)){							
 			$lista[]=$row[0];															
 			$lista[]=$row[1];															
-			$lista[]=$row[2];															
-			$lista[]=$row[3];		
-			$lista[]=$row[4];															
 		}	
     	echo $lista=json_encode($lista); 
 	}
-
+	function cargaEmpresasEstados($conexion, $sql){
+			$lista = array();
+			$sql=pg_query($sql);   
+			while($row=pg_fetch_row($sql)){							
+				$lista[]=$row[0];															
+				$lista[]=$row[1];															
+				$lista[]=$row[2];	
+				$lista[]=$row[3];	
+				$lista[]=$row[4];	
+				$lista[]=$row[5];	
+				$lista[]=$row[6];	
+				$lista[]=$row[9];	
+				$lista[]=$row[10];	
+			}	
+	    	echo $lista=json_encode($lista); 
+		}
 ?>
