@@ -3660,16 +3660,17 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
-  color: #ffffff;
+  color: #ffffff!important;
   background:url(../../images/btn2.fw.png);
+
 }
 .nav-pills > li:hover{
-  color: #ffffff;
+  color: #000;
   background:url(../../images/btn3.fw.png);
 }
 .nav-pills > li a:hover{
-  color: #ffffff;
-  background:url(../../images/btn4.fw.png);
+  color: #880002!important;
+  background:url(../../images/btn6.fw.png);
 }
 .nav-stacked > li {
   float: none;

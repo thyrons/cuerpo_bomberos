@@ -85,16 +85,32 @@ ul li:hover {
 	text-align: center;
 }
 .ui-widget-content{
-	z-index: 9999999999 !important;	
-	background: rgba(255,255,255)!important;
-	color: #000000
+	z-index: 9999999999 !important;		
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;	
+	
 }
-.ui-widget-content li{
+.ui-menu .ui-state-focus,
+.ui-menu .ui-state-active {
+	margin: -1px;	
+	background:rgba(255,255,255,0.1)!important;
 	color: red!important;
+	border-top: none!important;
+	border-bottom: none!important;
 }
+
+
+
 @media (max-width: 768px) {
 	.panel-footer.form-footer {
 		text-align: center;
 	}	
 }
 
+.ui-autocomplete {
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: default;	
+	background:#9B2C2E !important;
+}

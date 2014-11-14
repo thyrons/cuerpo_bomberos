@@ -205,6 +205,7 @@
 	left: 0;
 	cursor: default;
 }
+
 .ui-button {
 	display: inline-block;
 	position: relative;
@@ -551,6 +552,7 @@ button.ui-button::-moz-focus-inner {
 	cursor: pointer;
 	min-height: 0; /* support: IE7 */
 	/* support: IE10, see #8844 */
+	color: red!important;
 	list-style-image: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
 }
 .ui-menu .ui-menu-divider {
@@ -563,6 +565,7 @@ button.ui-button::-moz-focus-inner {
 .ui-menu .ui-state-focus,
 .ui-menu .ui-state-active {
 	margin: -1px;
+
 }
 
 /* icon support */

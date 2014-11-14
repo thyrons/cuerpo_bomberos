@@ -41,17 +41,22 @@ ul.devian {
   }
   ul.devian li a {
     border-radius: 4px;
-    border-left: 1px solid #FFF;
-    border-right: 1px solid #7C7C7C;
+    border-bottom: 11px;
+    border-top: 11px;
     color: #FFF;
     display: block;
-    padding: .3em;
+    padding: 1px;
     text-decoration: none;
-    background: #880002;    
+    background: #880002;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
   ul.devian li.active a{
-    background: #CCCCCC;
+    opacity: 0.8;
+    background: url(../../images/btn4.fw.png);
     color: #000!important;
+    font-weight:bold;
   }
  
 

@@ -76,19 +76,7 @@
         <span class="glyphicon glyphicon-edit"></span> Limpiar</button>
       </div>   
       <style type="text/css">
-      .au{
-        float: right;
-        font-size: 18px;
-      }
-      .au a{
-        text-decoration: none;
-        font-size: 20px!important
-      }
-      .au span:hover{
-        color:red!important;
-        cursor: pointer;
-        ;
-      }
+
       </style>  
       <div class="au">
         <a href="#modal3" class="glyphicon glyphicon-hand-up ">Info..Ayuda</a> 
@@ -100,8 +88,9 @@
 <div id="modal3" class="modalmask">
   <div class="modalbox resize">
     <a href="#close" title="Close" class="close">X</a>
-      Informacion<br/>
-       <img src="../images/icon/h.fw.png" width="100%">
+      Informacion
+      <br/>
+       <img src="../images/icon/h.fw.png">
   </div>
 </div>
   
