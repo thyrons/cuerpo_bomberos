@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="../css/jquery/jquery-ui.css">
     <link href="../css/jquery/alertify.core.css" rel="stylesheet">
     <link href="../css/jquery/alertify.default.css" rel="stylesheet">
+
+       
     <!-- Custom styles for this template -->
      <link href="../css/jqgrid/ui.jqgrid.css" rel="stylesheet">
     <script src="../js/jquery/jquery.js"></script>
@@ -27,6 +29,10 @@
     <script src="../js/sistema/index.js"></script>
     <script src="../js/sistema/busquedas.js"></script>
     <script type="text/javascript" src="../js/jquery/alertify.js"></script>
+
+    
+
+
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
