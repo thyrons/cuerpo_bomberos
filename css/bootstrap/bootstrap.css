@@ -14,35 +14,6 @@ html {
 body {
   margin: 100;
 }
-
-aside,
-details,
-figcaption,
-figure,
-
-header,
-hgroup,
-main,
-nav,
-section,
-summary {
-  display: block;
-}
-audio,
-canvas,
-progress,
-video {
-  display: inline-block;
-  vertical-align: baseline;
-}
-audio:not([controls]) {
-  display: none;
-  height: 0;
-}
-[hidden],
-template {
-  display: none;
-}
 a {
   background: transparent;
 }
@@ -5631,7 +5602,7 @@ button.close {
 .popover > .arrow,
 .popover > .arrow:after {
   position: absolute;
-  display: block;
+  
   width: 0;
   height: 0;
   border-color: transparent;
@@ -6347,4 +6318,69 @@ button.close {
 }
 .panel-primary .panel-title {
   color: #fff;
+}
+
+
+/*!
+ * Empresa
+ Modal salida estructura no bloqueante */
+.modalmask {
+  position: fixed;
+  font-family: Arial, sans-serif;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 99999;
+  opacity:0;
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  pointer-events: none;
+}
+.modalmask:target {
+  opacity:1;
+  pointer-events: auto;
+}
+.modalbox{
+  width: 450px;  
+  height: 400px!important;
+  position: relative;
+  padding: 5px 20px 13px 20px;
+  background: #fff;
+  border-radius:3px;
+  -webkit-transition: all 500ms ease-in;
+  -moz-transition: all 500ms ease-in;
+  transition: all 500ms ease-in;
+  
+}
+.resize {
+  margin: 5% auto;
+  width:0;
+  height:0;
+
+}
+.modalmask:target .resize{
+  width:400px;
+  height:300px;
+}
+.close {
+  background: #000000!important;
+  color: #FFFFFF;
+  line-height: 25px;
+  position: absolute;
+  right: 10px;
+  text-align: center;
+  top: 1px;
+  width: 24px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius:3px;
+  font-size:16px;
+}
+
+.close:hover { 
+  background: #FAAC58; 
+  color:#222;
 }

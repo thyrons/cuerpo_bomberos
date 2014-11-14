@@ -77,115 +77,31 @@
       </div>   
       <style type="text/css">
       .au{
-        float: right; 
+        float: right;
+        font-size: 18px;
+      }
+      .au a{
+        text-decoration: none;
+        font-size: 20px!important
       }
       .au span:hover{
         color:red!important;
+        cursor: pointer;
+        ;
       }
       </style>  
       <div class="au">
-        <a href="#modal3" class="glyphicon glyphicon-hand-up btn">Info..Ayuda</a>       
+        <a href="#modal3" class="glyphicon glyphicon-hand-up ">Info..Ayuda</a> 
+
       </div>
   </div>
     </div>    
 </form>
-
-<style type="text/css">
-
-
-.modalmask {
-  position: fixed;
-  font-family: Arial, sans-serif;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(0,0,0,0.8);
-  z-index: 99999;
-  opacity:0;
-  -webkit-transition: opacity 400ms ease-in;
-  -moz-transition: opacity 400ms ease-in;
-  transition: opacity 400ms ease-in;
-  pointer-events: none;
-}
-.modalmask:target {
-  opacity:1;
-  pointer-events: auto;
-}
-.modalbox{
-  width: 450px;  
-  height: 300px!important;
-  position: relative;
-  padding: 5px 20px 13px 20px;
-  background: #fff;
-  border-radius:3px;
-  -webkit-transition: all 500ms ease-in;
-  -moz-transition: all 500ms ease-in;
-  transition: all 500ms ease-in;
-  
-}
-.resize {
-  margin: 5% auto;
-  width:0;
-  height:0;
-
-}
-.modalmask:target .resize{
-  width:400px;
-  height:200px;
-}
-.close {
-  background: #000000!important;
-  color: #FFFFFF;
-  line-height: 25px;
-  position: absolute;
-  right: 10px;
-  text-align: center;
-  top: 1px;
-  width: 24px;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius:3px;
-  font-size:16px;
-}
-
-.close:hover { 
-  background: #FAAC58; 
-  color:#222;
-}
-
-
-
-
-</style>
-<a href="#modal3">REDIMENSIONAR</a>
-  
-    <div id="modal3" class="modalmask">
-    <div class="modalbox resize">
-      <a href="#close" title="Close" class="close">X</a>
-
-          Informacíon
-          <hr/>
-          <img src="../images/icon/1.png" width="6%">
-          Permite visualizar los datos registrados<br/>
-          <img src="../images/icon/2.png" width="6%">
-          Permite visualizar el informe realizado<br/>
-          <img src="../images/icon/3.png" width="8%">
-          Permite visualizar el informe realizado y APROBADO<br/>
-          <img src="../images/icon/4.png" width="8%">
-          Permite visualizar el informe realizado pero NEGADO
-          <div class="row">
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img data-src="../images/icon/3.png" alt="...">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
-    </div>
+<div id="modal3" class="modalmask">
+  <div class="modalbox resize">
+    <a href="#close" title="Close" class="close">X</a>
+      Informacion<br/>
+       <img src="../images/icon/h.fw.png" width="100%">
   </div>
 </div>
-    </div>
-  </div>
   
