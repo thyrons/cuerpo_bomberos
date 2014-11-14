@@ -4967,13 +4967,13 @@ a.list-group-item-danger.active:focus {
   padding: 15px;
 }
 .panel-heading {
-  background: url(../../images/btn3.fw.png)!important;
+  background: url(../../images/btn8.fw.png)!important;
   padding: 10px 15px;
   font-size: 17px;
   border-bottom: 1px solid transparent;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
-  color: #000!important;
+  color: #FFFFFF!important;
 }
 .panel-heading > .dropdown .dropdown-toggle {
   color: inherit;
@@ -6384,3 +6384,17 @@ button.close {
   background: #FAAC58; 
   color:#222;
 }
+
+.au{
+    float: right;
+    font-size: 18px;
+  }
+  .au a{
+    text-decoration: none;
+    font-size: 20px!important
+  }
+  .au span:hover{
+    color:red!important;
+    cursor: pointer;
+    ;
+  }
