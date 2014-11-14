@@ -87,10 +87,11 @@ function inicio(){
 	$("#btn_limpiarEmpresas").on("click",limpiar_form);
 	$("#btn_guardarEmpresas").on("click",guardar_empresas);
 	$("#ruc_propie").keyup(function (){
-		autocompletar("ruc_propie","nombres_pro","id_propie","../servidor/empresas/buscar_empresas.php?tipo=0");
+		autocompletar("ruc_propie","nombres_pro","id_propie","../servidor/empresas/buscar_empresas.php?tipo=0","ruc_empresa","representante_empresa","form_empresas");
+
 	});
 	$("#nombres_pro").keyup(function (){
-		autocompletar("nombres_pro","ruc_propie","id_propie","../servidor/empresas/buscar_empresas.php?tipo=1");
+		autocompletar("nombres_pro","ruc_propie","id_propie","../servidor/empresas/buscar_empresas.php?tipo=1","ruc_empresa","representante_empresa","form_empresas");
 	});
 	$("#nombres_pro").keyup(function (e){
 		if($("#nombres_pro").val().length == 0){
@@ -167,8 +168,10 @@ function inicio(){
 		 		}
 		 	}
 		})
-	});
-	/*------------*/
+	});	
+	$("#btn_limpiarPropietarios").on("click",limpiar_form);
+	$("#btn_buscarPropietarios").on("click",modal);
+	$("#btn_guardarInforme").on("click",guardar_Informe);
 }
 /* function para poder dar el comportamiento de un grupo de radiobutton a un grupo de checkbox */
 function checkbox(){
@@ -391,52 +394,93 @@ function datos_empresas(valores,tipo,p){
 	}); 
 }
 /*---------------------------------*/
+/*procesos informe*/
+function guardar_Informe(){		
+	$("#form_informe").on("submit",function (e){	
+		var valores = $("#form_informe").serialize();
+		console.log(valores)
+		var texto=($("#btn_guardarInforme").text()).trim();	
+		if(texto=="Guardar"){		
+			data_informe(valores,"g",e);
+		}else{
+			data_informe(valores,"m",e);
+		}
+		e.preventDefault();
+    	$(this).unbind("submit")
+	});
+}
+function data_informe(valores,tipo,p){
+	$.ajax({				
+		type: "POST",
+		data: valores+"&tipo="+tipo,
+		url: "../servidor/serviciosAdministrativos/serviciosAdministrativos.php",			
+	    success: function(data) {	
+	    	if( data == 0 ){
+	    		alertify.primary('Datos Agregados Correctamente');	
+				limpiar_form(p);	
+				$("#select_servicio").load("../servidor/serviciosAdministrativos/carga_servicio.php");
+	    	}else{
+	    		if( data == 1 ){
+	    			alertify.error('Este servicio ya existe. Ingrese otro');	
+	    			limpiar_form(p);		
+	    		}else{
+	    			
+	    		}
+	    	}
+
+		}
+	}); 
+}
+/*------------*/
 /*function para limpiar el formulario activo y dar focus al primer elemento*/
 function limpiar_form(e){
-	var form;
-	if(e.type == "click"){///mediante el click del boton
-		$("#"+e.currentTarget.form.id+" input").val("");
-		comprobarCamposRequired(e.currentTarget.form.id);		
-		form = e.currentTarget.form.id;
-	}else{//form por el evento submit
-		if(e.type == "submit"){
-			$("#"+e.target.id+" input").val("");
-			comprobarCamposRequired(e.target.id);		
-			form = e.target.id
-		}else{///id directo del form
-			$("#"+e+" input").val("");
-			comprobarCamposRequired(e);		
-			form = e;
+	if(e != undefined)
+	{
+		var form;
+		if(e.type == "click"){///mediante el click del boton
+			$("#"+e.currentTarget.form.id+" input").val("");
+			comprobarCamposRequired(e.currentTarget.form.id);		
+			form = e.currentTarget.form.id;
+		}else{//form por el evento submit
+			if(e.type == "submit"){
+				$("#"+e.target.id+" input").val("");
+				comprobarCamposRequired(e.target.id);		
+				form = e.target.id
+			}else{///id directo del form
+				$("#"+e+" input").val("");
+				comprobarCamposRequired(e);		
+				form = e;
+			}
 		}
-	}
-	if(form == "form_serviciosAdministrativos"){
-		$("#btn_guardarServicios").text("");
-    	$("#btn_guardarServicios").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
-	}else{
-		if(form == "tasa_servicio"){
-			$("#btn_guardarTasaServicios").text("");
-	    	$("#btn_guardarTasaServicios").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
+		if(form == "form_serviciosAdministrativos"){
+			$("#btn_guardarServicios").text("");
+	    	$("#btn_guardarServicios").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
 		}else{
-			if(form == "usuarios"){
-				$("#btn_guardarUsuarios").text("");
-		    	$("#btn_guardarUsuarios").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
+			if(form == "tasa_servicio"){
+				$("#btn_guardarTasaServicios").text("");
+		    	$("#btn_guardarTasaServicios").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
 			}else{
-				if(form == "form_propietarios"){
-					$("#btn_guardarPropietarios").text("");
-					$("#btn_guardarPropietarios").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
+				if(form == "usuarios"){
+					$("#btn_guardarUsuarios").text("");
+			    	$("#btn_guardarUsuarios").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
 				}else{
-					if(form == "form_empresas"){
-						$("#btn_guardarEmpresas").text("");
-						$("#btn_guardarEmpresas").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
-						$("#grupo_empresas").html(" ");						
+					if(form == "form_propietarios"){
+						$("#btn_guardarPropietarios").text("");
+						$("#btn_guardarPropietarios").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
 					}else{
+						if(form == "form_empresas"){
+							$("#btn_guardarEmpresas").text("");
+							$("#btn_guardarEmpresas").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
+							$("#grupo_empresas").html(" ");						
+						}else{
 
+						}
 					}
-				}
+				}	
 			}	
 		}	
-	}	
-	$("input:text:visible:first").focus();
+		$("input:text:visible:first").focus();
+	}
 }
 /*------------*/
 /*functio que nos comprueba los campos requeidos de cada form que tenga el atributo required y nos marca la clase como error usando bootstrap3*/
@@ -487,7 +531,7 @@ function modal(e){
 	$("#tabla_busquedas").trigger('reloadGrid');
 }
 /*funcion para autocompleta con el campo a mostar el id oculto y la direccion donde se encuentra*/
-function autocompletar(campo,campoNombre,campoId,direccion){
+function autocompletar(campo,campoNombre,campoId,direccion,campoCopia,campoCopia1,form){
 	$("#"+campo).autocomplete({
         source: direccion,
         minLength:1,
@@ -501,6 +545,9 @@ function autocompletar(campo,campoNombre,campoId,direccion){
 	        $( "#"+campoId ).val( ui.item.value );
 	        $( "#"+campo ).val( ui.item.label1 );     
 	        $( "#"+campoNombre ).val( ui.item.label2 );   
+	        $( "#"+campoCopia ).val( ui.item.label1 );     
+	        $( "#"+campoCopia1 ).val( ui.item.label2 );   
+	        comprobarCamposRequired(form);		
 	        cargarTabla(ui.item.value);
 	        return false;
         }     

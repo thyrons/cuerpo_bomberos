@@ -10,13 +10,12 @@
                 <div class="panel-body form-group">
                   <div class="form-group col-md-4">
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id='razon_social' placeholder="RAZÓN SOCIAL" name="razon_social" data-toggle="tooltip" data-original-title="Razón social de la empresa"  style="text-transform: uppercase">  
-                      <input type="hidden" class="form-control" id='id_informe' name="id_informe" >  
+                      <input type="text" class="form-control" id='ruc_informe' placeholder="NRO. RUC" name="ruc_informe" data-toggle="tooltip" data-original-title="RUC del propietario"  style="text-transform: uppercase">  
                     </div>
                   </div>
                   <div class="form-group col-md-4">
                     <div class="col-sm-12">
-                      <input type="number" class="form-control" placeholder="ÁREA TOTAL M2" id='area_total' name="area_total" data-toggle="tooltip" data-original-title="Área total en metros cuadrados" style="text-transform: uppercase">  
+                      <input type="text" class="form-control" id='nombres_propietario' placeholder="RESP LEGAL" name="nombres_propietario" data-toggle="tooltip" data-original-title="Nombres del responsable legal/Propietario" style="text-transform: uppercase">  
                     </div>
                   </div>
                   <div class="form-group col-md-4">
@@ -46,12 +45,13 @@
                   </div>
                   <div class="form-group col-md-4">
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id='nombres_propietario' placeholder="RESP LEGAL" name="nombres_propietario" data-toggle="tooltip" data-original-title="Nombres del responsable legal/Propietario" style="text-transform: uppercase">  
+                      <input type="number" class="form-control" placeholder="ÁREA TOTAL M2" id='area_total' name="area_total" data-toggle="tooltip" data-original-title="Área total en metros cuadrados" style="text-transform: uppercase">  
                     </div>
                   </div>
                   <div class="form-group col-md-4">
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id='ruc_informe' placeholder="NRO. RUC" name="ruc_informe" data-toggle="tooltip" data-original-title="RUC del propietario"  style="text-transform: uppercase">  
+                      <input type="text" class="form-control" id='razon_social' placeholder="RAZÓN SOCIAL" name="razon_social" data-toggle="tooltip" data-original-title="Razón social de la empresa"  style="text-transform: uppercase">  
+                      <input type="hidden" class="form-control" id='id_informe' name="id_informe" >  
                     </div>
                   </div>
                   <div class="form-group col-md-4">
@@ -107,19 +107,19 @@
                   <div class="form-group col-md-8">
                     <label class="col-sm-2 control-label"> VENTILACIÓN: </label>
                     <div class="col-sm-2">
-                      <input type="radio" name="radio_ventilacion" id="radioEnLinea1" class="col-sm-2" value="opcion_1"> 
+                      <input type="radio" name="radio_ventilacion" id="radioEnLinea1" class="col-sm-2" value="natural"> 
                       <label class="radio-inline control-label col-sm-10" for="radioEnLinea1"> NATURAL</label>
                     </div>
                     <div class="col-sm-2">
-                      <input type="radio" name="radio_ventilacion" id="radioEnLinea2" class="col-sm-2" value="opcion_2"> 
+                      <input type="radio" name="radio_ventilacion" id="radioEnLinea2" class="col-sm-2" value="mecanica"> 
                       <label class="radio-inline control-label col-sm-10" for="radioEnLinea2">MECÁNICA</label>
                     </div>
                     <div class="col-sm-2">
-                      <input type="radio" name="radio_ventilacion" id="radioEnLinea3" class="col-sm-2" value="opcion_3"> 
+                      <input type="radio" name="radio_ventilacion" id="radioEnLinea3" class="col-sm-2" value="funcional"> 
                       <label class="radio-inline control-label col-sm-10" for="radioEnLinea3">FUNCIONAL </label>
                     </div>
                     <div class="col-sm-3">
-                      <input type="radio" name="radio_ventilacion" id="radioEnLinea4" class="col-sm-1" value="opcion_4">  
+                      <input type="radio" name="radio_ventilacion" id="radioEnLinea4" class="col-sm-1" value="no funcional">  
                       <label class="radio-inline control-label col-sm-11" for="radioEnLinea4">NO FUNCIONAL </label>
                     </div>
                   </div>
@@ -135,17 +135,17 @@
                   </div>
                   <div class="form-group col-md-3">
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id='hora_final' placeholder="HORA FINAL" name="hora_final" style="text-transform: uppercase">  
+                      <input type="time" class="form-control" id='hora_final' placeholder="HORA FINAL" name="hora_final" style="text-transform: uppercase">  
                     </div>
                   </div>
-                  <div class="form-group col-md-6" id="check_val1"  >
+                  <div class="form-group col-md-6" id="tipo_inspeccion"  >
                     <div class="col-sm-6">
                       <label class="radio-inline control-label col-sm-7" for="radioEnLinea5" >INSPECCIÓN</label>
-                      <input type="checkbox" class="col-sm-1" name="check1" id="radioEnLinea5" value="opcion_1"> 
+                      <input type="checkbox" class="col-sm-1" name="check_inspeccion" id="radioEnLinea5" value="inspeccion"> 
                     </div>
                     <div class="col-sm-6">
                       <label class="radio-inline control-label col-sm-7" for="radioEnLinea6">REINSPECCIÓN</label>                
-                      <input type="checkbox" name="check1" class="col-sm-1" id="radioEnLinea6" value="opcion_2"> 
+                      <input type="checkbox" name="check_inspeccion" class="col-sm-1" id="radioEnLinea6" value="reinspeccion"> 
                     </div> 
                   </div>
                 </div>
@@ -938,6 +938,12 @@
                         <label class="radio-inline control-label col-sm-5" for="radioPermiso2"> NO</label>
                         <input type="checkbox" name="radioPermiso" id="radioPermiso2" class="col-sm-1" value="opcion_1"> 
                       </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <div class="col-sm-12">
+                      <button class="btn btn-primary" id="btn_guardarInforme" type="submit">  
+                      <span class="glyphicon glyphicon-log-in"></span> Guardar</button>
                     </div>
                   </div>
                 </div>
