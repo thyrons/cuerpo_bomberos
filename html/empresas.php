@@ -84,11 +84,7 @@
       }
       </style>  
       <div class="au">
-    
-        <span class="glyphicon glyphicon-hand-up btn" data-toggle="tooltip" data-placement="top" title="Tooltipe encuentras en esta vidaleft" >
-          Info..Ayuda
-        </span>
-       
+        <a href="#modal3" class="glyphicon glyphicon-hand-up btn">Info..Ayuda</a>       
       </div>
   </div>
     </div>    
@@ -117,7 +113,8 @@
   pointer-events: auto;
 }
 .modalbox{
-  width: 400px;
+  width: 450px;  
+  height: 300px!important;
   position: relative;
   padding: 5px 20px 13px 20px;
   background: #fff;
@@ -127,42 +124,22 @@
   transition: all 500ms ease-in;
   
 }
-
-.movedown {
-  margin: 0 auto;
-}
-.rotate {
-  margin: 10% auto;
-  -webkit-transform: scale(-5,-5); 
-  transform: scale(-5,-5);
-}
 .resize {
-  margin: 10% auto;
+  margin: 5% auto;
   width:0;
   height:0;
 
 }
-.modalmask:target .movedown{    
-  margin:10% auto;
-}
-.modalmask:target .rotate{    
-  transform: rotate(360deg) scale(1,1);
-    -webkit-transform: rotate(360deg) scale(1,1);
-}
-
 .modalmask:target .resize{
   width:400px;
   height:200px;
 }
-
-
-
 .close {
-  background: #606061;
+  background: #000000!important;
   color: #FFFFFF;
   line-height: 25px;
   position: absolute;
-  right: 1px;
+  right: 10px;
   text-align: center;
   top: 1px;
   width: 24px;
@@ -177,35 +154,7 @@
   color:#222;
 }
 
-ul{
-  width:500px;
-  margin:20% auto;
-  list-style:none;
-}
-ul li{
 
-  float:left;
-  margin-right:35px;
-
-}
-ul li a{
-  font-family: Arial, sans-serif;
-  font-size:16px;
-  text-decoration:none;
-  background:#222;
-  padding:20px;
-  color:#fff;
-  font-weight:bold;
-  border-radius:3px;
-  -webkit-transition: all 200ms ease-in;
-  -moz-transition: all 200ms ease-in;
-  transition: all 200ms ease-in;
-}
-ul li a:hover{
-  background:#FAAC58;
-  color:#222;
-
-}
 
 
 </style>
@@ -214,9 +163,29 @@ ul li a:hover{
     <div id="modal3" class="modalmask">
     <div class="modalbox resize">
       <a href="#close" title="Close" class="close">X</a>
-      
 
-
+          Informacíon
+          <hr/>
+          <img src="../images/icon/1.png" width="6%">
+          Permite visualizar los datos registrados<br/>
+          <img src="../images/icon/2.png" width="6%">
+          Permite visualizar el informe realizado<br/>
+          <img src="../images/icon/3.png" width="8%">
+          Permite visualizar el informe realizado y APROBADO<br/>
+          <img src="../images/icon/4.png" width="8%">
+          Permite visualizar el informe realizado pero NEGADO
+          <div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img data-src="../images/icon/3.png" alt="...">
+      <div class="caption">
+        <h3>Thumbnail label</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
   
