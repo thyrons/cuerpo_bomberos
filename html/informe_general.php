@@ -10,7 +10,8 @@
                 <div class="panel-body form-group">
                   <div class="form-group col-md-4">
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id='ruc_informe' placeholder="NRO. RUC" name="ruc_informe" data-toggle="tooltip" data-original-title="RUC del propietario"  style="text-transform: uppercase">  
+                      <input type="hidden" class="form-control" id='id_informe_empresa' name="id_informe_empresa">  
+                      <input type="text" class="form-control" id='ruc_informe' placeholder="NRO. RUC" name="ruc_informe" data-toggle="tooltip" data-original-title="RUC de la empresa"  style="text-transform: uppercase">  
                     </div>
                   </div>
                   <div class="form-group col-md-4">
@@ -45,13 +46,12 @@
                   </div>
                   <div class="form-group col-md-4">
                     <div class="col-sm-12">
-                      <input type="number" class="form-control" placeholder="ÁREA TOTAL M2" id='area_total' name="area_total" data-toggle="tooltip" data-original-title="Área total en metros cuadrados" style="text-transform: uppercase">  
+                      <input type="text" class="form-control" id='razon_social' placeholder="RAZÓN SOCIAL" name="razon_social" data-toggle="tooltip" data-original-title="Razón social de la empresa"  style="text-transform: uppercase">  
                     </div>
                   </div>
                   <div class="form-group col-md-4">
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id='razon_social' placeholder="RAZÓN SOCIAL" name="razon_social" data-toggle="tooltip" data-original-title="Razón social de la empresa"  style="text-transform: uppercase">  
-                      <input type="hidden" class="form-control" id='id_informe' name="id_informe" >  
+                      <input type="number" class="form-control" placeholder="ÁREA TOTAL M2" id='area_total' name="area_total" data-toggle="tooltip" data-original-title="Área total en metros cuadrados" style="text-transform: uppercase">  
                     </div>
                   </div>
                   <div class="form-group col-md-4">
@@ -130,7 +130,7 @@
                   </div>
                   <div class="form-group col-md-3">
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id='hora_inicio' placeholder="HORA INICIO" name="hora_inicio" style="text-transform: uppercase">  
+                      <input type="time" class="form-control" id='hora_inicio' placeholder="HORA INICIO" name="hora_inicio" style="text-transform: uppercase">  
                     </div>
                   </div>
                   <div class="form-group col-md-3">

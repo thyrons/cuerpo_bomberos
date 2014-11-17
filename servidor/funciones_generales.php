@@ -111,6 +111,8 @@
 				$lista[]=$row[6];	
 				$lista[]=$row[9];	
 				$lista[]=$row[10];	
+				$lista[]=$row[11];	
+				$lista[]=$row[12];	
 			}	
 	    	echo $lista=json_encode($lista); 
 		}

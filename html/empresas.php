@@ -4,11 +4,11 @@
     <div class="panel-body form-styles">
       <div class="container">
         <div class="form-group col-md-5">
-          <label class="col-sm-4 control-label" for='ruc_propie'> RUC PROPIETARIO</label>
+          <label class="col-sm-4 control-label" for='ruc_propie'> RUC/CI PROPIETARIO</label>
           <div class="col-sm-8 has-error">
             <input type="hidden" class="form-control" id='id_propie' name="id_propie" >  
             <input type="hidden" class="form-control" id='id_empresaPropietario' name="id_empresaPropietario" >  
-            <input type="text" class="form-control" id='ruc_propie' name="ruc_propie" data-toggle="tooltip" data-original-title="Digite el RUC del propietario" maxlength="13" required pattern="[0-9]{13}" autocomplete="off">   
+            <input type="text" class="form-control" id='ruc_propie' name="ruc_propie" data-toggle="tooltip" data-original-title="Digite el RUC/CI del propietario" maxlength="10" required pattern="[0-9]{10,13}" autocomplete="off">   
           </div>
         </div>
         <div class="form-group col-md-5">
@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="form-group col-md-5">
-          <label class="col-sm-4 control-label" for='ruc_empresa'> RUC EMPRESA</label>
+          <label class="col-sm-4 control-label" for='ruc_empresa'> RUC/CI EMPRESA</label>
           <div class="col-sm-8 has-error">
             <input type="text" class="form-control" id='ruc_empresa' name="ruc_empresa" data-toggle="tooltip" data-original-title="RUC de la empresa" required pattern="[0-9 ]{13}" minlength="13" maxlength="13" style="text-transform: uppercase">   
           </div>
@@ -43,14 +43,26 @@
         </div>
         <div class="form-group col-md-5">
           <label class="col-sm-4 control-label" for='representante_empresa'> REPRESENTANTE LEGAL</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" id='representante_empresa' name="representante_empresa" data-toggle="tooltip" data-original-title="Representante legal de la empresa" pattern="[A-Za-záéíóúÁÉÍÓÚ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">   
+          <div class="col-sm-8 has-error">
+            <input type="text" class="form-control" id='representante_empresa' name="representante_empresa" required data-toggle="tooltip" data-original-title="Representante legal de la empresa" pattern="[A-Za-záéíóúÁÉÍÓÚ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">   
           </div>
         </div>
         <div class="form-group col-md-5">
           <label class="col-sm-4 control-label" for='telefono_empresa'> TELÉFONO</label>
           <div class="col-sm-8">
             <input type="text" class="form-control" id='telefono_empresa' name="telefono_empresa"  style="text-transform: uppercase">   
+          </div>
+        </div>
+        <div class="form-group col-md-5">
+          <label class="col-sm-4 control-label" for='parroquia_empresa'> PARROQUIA</label>
+          <div class="col-sm-8 has-error">
+            <input type="text" class="form-control" id='parroquia_empresa' name="parroquia_empresa"  required  data-toggle="tooltip" data-original-title="Parroquia donde se encuentre  el negocio" pattern="[A-Za-záéíóúÁÉÍÓÚ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">   
+          </div>
+        </div>
+        <div class="form-group col-md-5">
+          <label class="col-sm-4 control-label" for='capital_giro'> CAPITAL EN GRIO</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id='capital_giro' name="capital_giro"  style="text-transform: uppercase" value="0.00">   
           </div>
         </div>
         <div class="form-group col-md-10">

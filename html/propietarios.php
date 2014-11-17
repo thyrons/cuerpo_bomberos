@@ -4,10 +4,10 @@
        <div class="panel-body form-styles">
          <div class="container">
             <div class="form-group col-md-5">
-              <label class="col-sm-3 control-label" for='ruc_propietario'> RUC:</label>
+              <label class="col-sm-3 control-label" for='ruc_propietario'> RUC/CI:</label>
               <div class="col-sm-9 has-error">
                 <input type="hidden" class="form-control" id='id_propietario' name="id_propietario" >  
-                <input type="text" class="form-control" id='ruc_propietario' name="ruc_propietario" data-toggle="tooltip" data-original-title="Solo Números. Máximo 13 carácteres" required pattern="[0-9 ]{13,13}" minlength="13" style="text-transform: uppercase">  
+                <input type="text" class="form-control" id='ruc_propietario' name="ruc_propietario" data-toggle="tooltip" data-original-title="Solo Números. Mínimo 10 carácteres" required pattern="[0-9 ]{10,13}" minlength="10" style="text-transform: uppercase">  
               </div>
             </div>
             <div class="form-group col-md-5">
