@@ -98,7 +98,9 @@ ul li:hover {
 	border-top: none!important;
 	border-bottom: none!important;
 }
-
+.ocultar{
+	display: none;
+}
 
 
 @media (max-width: 768px) {

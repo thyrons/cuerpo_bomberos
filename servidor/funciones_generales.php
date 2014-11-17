@@ -99,21 +99,40 @@
     	echo $lista=json_encode($lista); 
 	}
 	function cargaEmpresasEstados($conexion, $sql){
-			$lista = array();
-			$sql=pg_query($sql);   
-			while($row=pg_fetch_row($sql)){							
-				$lista[]=$row[0];															
-				$lista[]=$row[1];															
-				$lista[]=$row[2];	
-				$lista[]=$row[3];	
-				$lista[]=$row[4];	
-				$lista[]=$row[5];	
-				$lista[]=$row[6];	
-				$lista[]=$row[9];	
-				$lista[]=$row[10];	
-				$lista[]=$row[11];	
-				$lista[]=$row[12];	
-			}	
-	    	echo $lista=json_encode($lista); 
+		$lista = array();
+		$sql=pg_query($sql);   
+		while($row=pg_fetch_row($sql)){							
+			$lista[]=$row[0];															
+			$lista[]=$row[1];															
+			$lista[]=$row[2];	
+			$lista[]=$row[3];	
+			$lista[]=$row[4];	
+			$lista[]=$row[5];	
+			$lista[]=$row[6];	
+			$lista[]=$row[9];	
+			$lista[]=$row[10];	
+			$lista[]=$row[11];	
+			$lista[]=$row[12];	
+		}	
+    	echo $lista=json_encode($lista); 
+	}
+	function busquedas_informe($conexion, $sql){
+		$resp =true;
+		$sql = pg_query( $conexion, $sql );
+		if($sql){
+			while ($row = pg_fetch_row($sql)) {
+			    $data[] = array(
+			        'value' => $row[0],
+			        'label1' => $row[1],
+			        'label2' => $row[2],
+			        'label3' => $row[3],
+			        'label4' => $row[4],
+			        'label5' => $row[5],
+			        'label6' => $row[6],
+			        'label7' => $row[7],
+			    );
+			}
+			echo $data = json_encode($data);
 		}
+	}
 ?>

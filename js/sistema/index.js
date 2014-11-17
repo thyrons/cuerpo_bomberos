@@ -56,10 +56,36 @@ function inicio(){
 	$("input").tooltip({
        placement : 'bottom'
 	});
+	/*--------------*/
+	/*funcion solu numeros*/
+	$(".soloNumeros").keydown(function(event){
+	    if((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode == 9) || (event.keyCode == 116) || (event.keyCode == 8)) {
+	        return true;
+	    }else{
+	    	return false;
+	    }
+	});
+	/*-------------*/
 	/*validaciones de check como radio*/
-	$("#check_val1 input").on("click",checkbox);
-	$("#check_val2 input:checkbox").on("click",checkbox);
-	$("#check_val3 input:checkbox").on("click",checkbox);
+	$("#tipo_inspeccion input:checkbox").on("click",checkbox);
+	$("#extintores input:checkbox").on("click",checkbox);
+	
+	$("input[name='check_incendio_1']").on("click",checkboxTabla);
+	$("input[name='check_incendio_2']").on("click",checkboxTabla);
+	$("input[name='check_incendio_3']").on("click",checkboxTabla);
+	$("input[name='check_incendio_4']").on("click",checkboxTabla);
+	$("input[name='check_incendio_5']").on("click",checkboxTabla);
+	$("input[name='check_incendio_6']").on("click",checkboxTabla);
+	$("input[name='check_incendio_7']").on("click",checkboxTabla);
+	$("input[name='check_incendio_8']").on("click",checkboxTabla);
+	$("input[name='check_incendio_9']").on("click",checkboxTabla);
+	$("input[name='check_incendio_10']").on("click",checkboxTabla);
+	$("input[name='check_incendio_11']").on("click",checkboxTabla);
+	$("input[name='check_incendio_12']").on("click",checkboxTabla);
+	$("input[name='check_incendio_13']").on("click",checkboxTabla);
+	$("input[name='check_incendio_14']").on("click",checkboxTabla);
+	$("input[name='check_incendio_15']").on("click",checkboxTabla);
+	$("input[name='check_incendio_16']").on("click",checkboxTabla);
 	/*--------------------------------*/
 	/*Servicios Administrativos*/
 	$("#btn_guardarServicios").on("click",guardar_serviciosAdministrativos);
@@ -170,7 +196,16 @@ function inicio(){
 		})
 	});	
 	$("#ruc_informe").keyup(function (){
-		autocompletarEmpresa("ruc_informe","nombres_propietario","id_informe_empresa","actividad","direccion","razon_social","telefono","ubicacion","../servidor/empresas/cargaEmpresa.php?tipo=0");
+		autocompletarEmpresa("ruc_informe","nombres_propietario","id_empresa","actividad","direccion","razon_social","telefono","ubicacion","../servidor/informe/cargaEmpresa.php?tipo=0","tab_general");
+	});
+	$("#nombres_propietario").keyup(function (){
+		autocompletarEmpresa("nombres_propietario","ruc_informe","id_empresa","actividad","direccion","razon_social","telefono","ubicacion","../servidor/informe/cargaEmpresa.php?tipo=1","tab_general");
+	});
+	$("#actividad").keyup(function (){
+		autocompletarEmpresa("actividad","ruc_informe","nombres_propietario","id_empresa","direccion","razon_social","telefono","ubicacion","../servidor/informe/cargaEmpresa.php?tipo=2","tab_general");
+	});
+	$("#razon_social").keyup(function (){
+		autocompletarEmpresa("razon_social","ruc_informe","nombres_propietario","id_empresa","actividad","direccion","telefono","ubicacion","../servidor/informe/cargaEmpresa.php?tipo=3","tab_general");
 	});
 	$("#btn_limpiarPropietarios").on("click",limpiar_form);
 	$("#btn_buscarPropietarios").on("click",modal);
@@ -178,10 +213,27 @@ function inicio(){
 }
 /* function para poder dar el comportamiento de un grupo de radiobutton a un grupo de checkbox */
 function checkbox(){
-	var ck = $(this).parent().parent().find(':input');
+	var ck = $(this).parent().parent().find(':input');	
+	console.log(ck)
 	ck.each(function (){
 		$(this).removeAttr("checked");
 	});
+	var id = this.id;
+	$("#"+id).prop('checked',true);
+}
+function checkboxTabla(){
+	var name = $(this).attr("name");
+	var ck = $(this).parent().parent().find(":input[name='"+name+"']");
+	ck.each(function (){
+		$(this).removeAttr("checked");
+	});
+	var id = this.id;
+	$("#"+id).prop('checked',true);
+}
+function checkboxTabla(){
+	var name = $(this).attr("name");
+	var ck = $(this).parent().parent().find(":input[name='"+name+"']");
+	///poner y quitar atributo al siguite y anterior
 	var id = this.id;
 	$("#"+id).prop('checked',true);
 }
@@ -401,8 +453,9 @@ function datos_empresas(valores,tipo,p){
 function guardar_Informe(){		
 	$("#form_informe").on("submit",function (e){	
 		var valores = $("#form_informe").serialize();
-		console.log(valores)
 		var texto=($("#btn_guardarInforme").text()).trim();	
+		serializarTabla("tabla_incendios");
+		serializarTabla("tabla_prevencion");
 		if(texto=="Guardar"){		
 			data_informe(valores,"g",e);
 		}else{
@@ -416,15 +469,13 @@ function data_informe(valores,tipo,p){
 	$.ajax({				
 		type: "POST",
 		data: valores+"&tipo="+tipo,
-		url: "../servidor/serviciosAdministrativos/serviciosAdministrativos.php",			
+		url: "../servidor/informe/informe_general.php",			
 	    success: function(data) {	
 	    	if( data == 0 ){
 	    		alertify.primary('Datos Agregados Correctamente');	
-				limpiar_form(p);	
-				$("#select_servicio").load("../servidor/serviciosAdministrativos/carga_servicio.php");
+				//limpiar_form(p);	
 	    	}else{
-	    		if( data == 1 ){
-	    			alertify.error('Este servicio ya existe. Ingrese otro');	
+	    		if( data == 1 ){	    			
 	    			limpiar_form(p);		
 	    		}else{
 	    			
@@ -561,6 +612,41 @@ function autocompletar(campo,campoNombre,campoId,direccion,campoCopia,campoCopia
     };
 }
 /*---------------*/
+/*funcion para autocompleta con el campo a mostar el id oculto y la direccion donde se encuentra*/
+function autocompletarEmpresa(campo,campoNombre,campoId,actividad,direccion,razon_social,telefono,ubicacion,form,tab){
+	$("#"+campo).autocomplete({
+        source: form,
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#"+campoId ).val( ui.item.label2 );
+	        $( "#"+campo ).val( ui.item.value );  
+	        $( "#"+campoNombre ).val( ui.item.label1 );  
+	        $( "#"+actividad ).val( ui.item.label3 );  
+	        $( "#"+direccion ).val( ui.item.label4 );  
+	        $( "#"+razon_social ).val( ui.item.label5 );  
+	        $( "#"+telefono ).val( ui.item.label6 );  
+			$( "#"+ubicacion ).val( ui.item.label7 );  
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#"+campoId ).val( ui.item.label2 );
+	        $( "#"+campo ).val( ui.item.value );  
+	        $( "#"+campoNombre ).val( ui.item.label1 );  
+	        $( "#"+actividad ).val( ui.item.label3 );  
+	        $( "#"+direccion ).val( ui.item.label4 );  
+	        $( "#"+razon_social ).val( ui.item.label5 );  
+	        $( "#"+telefono ).val( ui.item.label6 );  
+			$( "#"+ubicacion ).val( ui.item.label7 );  
+			$("#"+tab).find(':input:visible:first').focus();
+	        return false;
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.value + "</a>" )
+        .appendTo( ul );
+    };
+}
+/*---------------*/
 /*funcion para cargar la tabla de las empresas*/
 function cargarTabla(idPropietario){
 	$("#grupo_empresas").html(" ");
@@ -646,5 +732,18 @@ function modificaEmpresa(e){
 	comprobarCamposRequired("form_empresas");  
     $("#btn_guardarEmpresas").text("");
     $("#btn_guardarEmpresas").append("<span class='glyphicon glyphicon-log-in'></span> Modificar");     
-
 }
+/*-------------*/
+/**/
+function serializarTabla(tabla)
+{
+	var tabla_serialize = new Object();
+	$("#" +tabla+ " > tr").each(function () {
+	  var tablerow = $(this);
+	  $("td input", tablerow).each(function () {
+	    var input = $(this);
+	    tabla_serialize[tablerow.attr("id")][input.attr("name")] = input.val();
+	  });
+	});
+}
+/**/
