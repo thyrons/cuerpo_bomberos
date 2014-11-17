@@ -3669,7 +3669,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   background:url(../../images/btn3.fw.png);
 }
 .nav-pills > li a:hover{
-  color: #880002!important;
+  color: #FFF!important;
   background:url(../../images/btn6.fw.png);
 }
 .nav-stacked > li {
