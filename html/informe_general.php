@@ -411,7 +411,8 @@
                               <input type="text" class="form-control" id="cantP1"  name="cantP1"> 
                             </td>
                             <td>
-                              <input type="checkbox" name="check5" id="checkP_1" name="checkP_1"> 
+                              <input type="checkbox" name="check_prev_1" id="check_CN1" value="SI">
+                              <input type="checkbox" name="check_prev_1" id="check_CN2" value="NO" class="ocultar" checked>                              
                             </td>
                             <td>
                               <input type="text" class="form-control" id="cantPA1" name="cantPA1">
@@ -423,196 +424,209 @@
                               SALIDAS DE EMERGENCIA
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantP2">
+                              <input type="text" class="form-control" id="cantP2"  name="cantP2"> 
                             </td>
                             <td>
-                              <input type="checkbox" name="check6" id="checkP_2"> 
+                              <input type="checkbox" name="check_prev_2" id="check_CN3" value="SI">
+                              <input type="checkbox" name="check_prev_2" id="check_CN4" value="NO" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantPA2">
+                              <input type="text" class="form-control" id="cantPA2" name="cantPA2">
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="lugarP2">
+                              <input type="text" class="form-control" id="lugarP2" name="lugarP2">
                             </td>
                           </tr>
                           <tr>
                             <td>DETECTOR DE GLP</td>
                             <td>
-                              <input type="text" class="form-control" id="cantP3">
+                              <input type="text" class="form-control" id="cantP3"  name="cantP3"> 
                             </td>
                             <td>
-                              <input type="checkbox" name="check7" id="checkP_3"> 
+                              <input type="checkbox" name="check_prev_3" id="check_CN5" value="SI">
+                              <input type="checkbox" name="check_prev_3" id="check_CN6" value="NO" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantPA3"> 
+                              <input type="text" class="form-control" id="cantPA3" name="cantPA3">
                             </td>
                             <td>
-                             <input type="text" class="form-control" id="lugarP2"> 
+                              <input type="text" class="form-control" id="lugarP3" name="lugarP3">
                             </td>
                             <td>
                               PUERTAS DE EMERGENCIA
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantP4">
+                              <input type="text" class="form-control" id="cantP4"  name="cantP4"> 
                             </td>
                             <td>
-                              <input type="checkbox" name="check8" id="checkP_4"> 
+                              <input type="checkbox" name="check_prev_4" id="check_CN7" value="SI">
+                              <input type="checkbox" name="check_prev_4" id="check_CN8" value="NO" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantPA4"> 
+                              <input type="text" class="form-control" id="cantPA4" name="cantPA4">
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="lugarP4"> 
+                              <input type="text" class="form-control" id="lugarP4" name="lugarP4">
                             </td>
                           </tr>
                           <tr>
                             <td>DETECTOR DE HUMO</td>
                             <td>
-                              <input type="text" class="form-control" id="cantP5"> 
+                              <input type="text" class="form-control" id="cantP5"  name="cantP5"> 
                             </td>
                             <td>
-                             <input type="checkbox" name="check8" id="checkP_5">  
+                              <input type="checkbox" name="check_prev_5" id="check_CN9" value="SI">
+                              <input type="checkbox" name="check_prev_5" id="check_CN10" value="NO" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantPA5">
+                              <input type="text" class="form-control" id="cantPA5" name="cantPA5">
                             </td>
                             <td>
-                             <input type="text" class="form-control" id="lugarP5"> 
+                              <input type="text" class="form-control" id="lugarP5" name="lugarP5">
                             </td>
                             <td>
                               LÁMPARAS DE EMERGENCIA
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantP6">  
+                              <input type="text" class="form-control" id="cantP6"  name="cantP6"> 
                             </td>
                             <td>
-                              <input type="checkbox" name="check9" id="checkP_6">  
+                              <input type="checkbox" name="check_prev_6" id="check_CN11" value="SI">
+                              <input type="checkbox" name="check_prev_6" id="check_CN12" value="NO" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantPA6">
+                              <input type="text" class="form-control" id="cantPA6" name="cantPA6">
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="lugarP6"> 
+                              <input type="text" class="form-control" id="lugarP6" name="lugarP6">
                             </td>
                           </tr>
                           <tr>
                             <td>DETECTOR DE LLAMA</td>
                             <td>
-                              <input type="text" class="form-control" id="cantP7">  
+                              <input type="text" class="form-control" id="cantP7"  name="cantP7"> 
                             </td>
                             <td>
-                              <input type="checkbox" name="check10" id="checkP_7">  
+                              <input type="checkbox" name="check_prev_7" id="check_CN13" value="SI">
+                              <input type="checkbox" name="check_prev_7" id="check_CN14" value="NO" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantPA7">
+                              <input type="text" class="form-control" id="cantPA7" name="cantPA7">
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="lugarP7"> 
+                              <input type="text" class="form-control" id="lugarP7" name="lugarP7">
                             </td>
                             <td>
                               ESCALERAS DE EMERGENCIA
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantP8">  
+                              <input type="text" class="form-control" id="cantP8"  name="cantP8"> 
                             </td>
                             <td>
-                              <input type="checkbox" name="check11" id="checkP_8">  
+                              <input type="checkbox" name="check_prev_8" id="check_CN15" value="SI">
+                              <input type="checkbox" name="check_prev_8" id="check_CN16" value="NO" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantPA8">
+                              <input type="text" class="form-control" id="cantPA8" name="cantPA8">
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="lugarP8"> 
+                              <input type="text" class="form-control" id="lugarP8" name="lugarP8">
                             </td>
                           </tr>
                           <tr>
                             <td>ALARMAS VISUALES</td>
                             <td>
-                              <input type="text" class="form-control" id="cantP9">  
+                              <input type="text" class="form-control" id="cantP9"  name="cantP9"> 
                             </td>
                             <td>
-                              <input type="checkbox" name="check12" id="checkP_9">  
+                              <input type="checkbox" name="check_prev_9" id="check_CN17" value="SI">
+                              <input type="checkbox" name="check_prev_9" id="check_CN18" value="NO" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantPA9">
+                              <input type="text" class="form-control" id="cantPA9" name="cantPA9">
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="lugarP9"> 
+                              <input type="text" class="form-control" id="lugarP9" name="lugarP9">
                             </td>
                             <td>
                              SEÑALIZACIÓN 
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantP10">  
+                              <input type="text" class="form-control" id="cantP10"  name="cantP10"> 
                             </td>
                             <td>
-                              <input type="checkbox" name="check13" id="checkP_10">  
+                              <input type="checkbox" name="check_prev_10" id="check_CN19" value="SI">
+                              <input type="checkbox" name="check_prev_10" id="check_CN20" value="NO" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantPA10">
+                              <input type="text" class="form-control" id="cantPA10" name="cantPA10">
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="lugarP10"> 
+                              <input type="text" class="form-control" id="lugarP10" name="lugarP10">
                             </td>
                           </tr>
                           <tr>
                             <td>ALARMAS SONORAS</td>
                             <td>
-                              <input type="text" class="form-control" id="cantP11">  
+                              <input type="text" class="form-control" id="cantP11"  name="cantP11"> 
                             </td>
                             <td>
-                              <input type="checkbox" name="check14" id="checkP_11">  
+                              <input type="checkbox" name="check_prev_11" id="check_CN21" value="SI">
+                              <input type="checkbox" name="check_prev_11" id="check_CN22" value="NO" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantPA11">
+                              <input type="text" class="form-control" id="cantPA11" name="cantPA11">
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="lugarP11"> 
+                              <input type="text" class="form-control" id="lugarP11" name="lugarP11">
                             </td>
                             <td>
                              PULSADORES 
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantP12">  
+                              <input type="text" class="form-control" id="cantP12"  name="cantP12"> 
                             </td>
                             <td>
-                              <input type="checkbox" name="check15" id="checkP_12">  
+                              <input type="checkbox" name="check_prev_12" id="check_CN23" value="SI">
+                              <input type="checkbox" name="check_prev_12" id="check_CN24" value="NO" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantPA12">
+                              <input type="text" class="form-control" id="cantPA12" name="cantPA12">
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="lugarP12"> 
+                              <input type="text" class="form-control" id="lugarP12" name="lugarP12">
                             </td>
                           </tr>
                           <tr>
                             <td>RED HIDRICA</td>
                             <td>
-                              <input type="text" class="form-control" id="cantP13">  
+                              <input type="text" class="form-control" id="cantP13"  name="cantP13"> 
                             </td>
                             <td>
-                              <input type="checkbox" name="check16" id="checkP_13">  
+                              <input type="checkbox" name="check_prev_13" id="check_CN25" value="SI">
+                              <input type="checkbox" name="check_prev_13" id="check_CN26" value="NO" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantPA13">
+                              <input type="text" class="form-control" id="cantPA13" name="cantPA13">
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="lugarP13"> 
+                              <input type="text" class="form-control" id="lugarP13" name="lugarP13">
                             </td>
                             <td>
                              OTROS 
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantP14">  
+                              <input type="text" class="form-control" id="cantP14"  name="cantP14"> 
                             </td>
                             <td>
-                              <input type="checkbox" name="check17" id="checkP_14">  
+                              <input type="checkbox" name="check_prev_14" id="check_CN27" value="SI">
+                              <input type="checkbox" name="check_prev_14" id="check_CN28" value="NO" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="cantPA14">
+                              <input type="text" class="form-control" id="cantPA14" name="cantPA14">
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="lugarP14"> 
+                              <input type="text" class="form-control" id="lugarP14" name="lugarP14">
                             </td>
                           </tr>
                         </tbody>
@@ -634,7 +648,7 @@
                 <div class="panel-body form-group"> 
                   <div class="form-group col-md-6">
                     <div class="table-responsive">
-                      <table class="table table-bordered equipos_medios table-condensed">  
+                      <table class="table table-bordered equipos_medios table-condensed" id="tabla_sistemaE">  
                         <thead>
                           <tr>
                             <th width="57%">SISTEMA ELÉCTRICO</th>
@@ -647,78 +661,84 @@
                           <tr>
                             <td style="text-align: left !important">INSTALACIONES ELÉCTRICAS IMPROVISADAS</td>  
                             <td>
-                              <input type="radio" name="radio_incendio_6" id="radioI_21" >
+                              <input type="checkbox" name="check_riesgo1" id="checkR1" value="SI">                              
                             </td>
                             <td>
-                              <input type="radio" name="radio_incendio_6" id="radioI_22" >
+                              <input type="checkbox" name="check_riesgo1" id="checkR2" value="SI">                              
+                              <input type="checkbox" name="check_riesgo1" id="checkR3" value="SM" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="observacionesR_1">
+                              <input type="text" class="form-control" id="observacionesR_1" name="observacionesR_1">
                             </td>
                           </tr>
                           <tr>
                             <td style="text-align: left !important">INSTALACIONES ELÉCTRICAS DEFECTUOSAS</td> 
                             <td>
-                              <input type="radio" name="radio_incendio_7" id="radioI_23" >
+                              <input type="checkbox" name="check_riesgo2" id="checkR4" value="SI">                              
                             </td>
                             <td>
-                              <input type="radio" name="radio_incendio_7" id="radioI_24" >
+                              <input type="checkbox" name="check_riesgo2" id="checkR5" value="SI">                              
+                              <input type="checkbox" name="check_riesgo2" id="checkR6" value="SM" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="observacionesR_2">
+                              <input type="text" class="form-control" id="observacionesR_2" name="observacionesR_2">
                             </td>
                           </tr>
                           <tr>
                             <td style="text-align: left !important">CAJAS ABIERTAS</td>  
                             <td>
-                              <input type="radio" name="radio_incendio_8" id="radioI_25" >
+                              <input type="checkbox" name="check_riesgo3" id="checkR7" value="SI">                              
                             </td>
                             <td>
-                              <input type="radio" name="radio_incendio_8" id="radioI_26" >
+                              <input type="checkbox" name="check_riesgo3" id="checkR8" value="SI">                              
+                              <input type="checkbox" name="check_riesgo3" id="checkR9" value="SM" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="observacionesR_3">
+                              <input type="text" class="form-control" id="observacionesR_3" name="observacionesR_3">
                             </td>
                           </tr>
                           <tr>
                             <td style="text-align: left !important">CABLES Y BRAKERS ADECUADOS</td>  
                             <td>
-                              <input type="radio" name="radio_incendio_9" id="radioI_27" >
+                              <input type="checkbox" name="check_riesgo4" id="checkR10" value="SI">                              
                             </td>
                             <td>
-                              <input type="radio" name="radio_incendio_9" id="radioI_28" >
+                              <input type="checkbox" name="check_riesgo4" id="checkR11" value="SI">                              
+                              <input type="checkbox" name="check_riesgo4" id="checkR12" value="SM" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="observacionesR_4">
+                              <input type="text" class="form-control" id="observacionesR_4" name="observacionesR_4">
                             </td>
                           </tr>
                           <tr>
                             <td style="text-align: left !important">EQUIPO ELÉCTRICO CONECTADO A TIERRA</td>  
                             <td>
-                              <input type="radio" name="radio_incendio_10" id="radioI_29" >
+                              <input type="checkbox" name="check_riesgo5" id="checkR13" value="SI">                              
                             </td>
                             <td>
-                              <input type="radio" name="radio_incendio_10" id="radioI_30" >
+                              <input type="checkbox" name="check_riesgo5" id="checkR14" value="SI">                              
+                              <input type="checkbox" name="check_riesgo5" id="checkR15" value="SM" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="observacionesR_5">
+                              <input type="text" class="form-control" id="observacionesR_5" name="observacionesR_5">
                             </td>
                           </tr>
                           <tr>
                             <td style="text-align: left !important">POSEE SISTERNA ANTICHISPA</td>  
                             <td>
-                              <input type="radio" name="radio_incendio_11" id="radioI_31" >
+                              <input type="checkbox" name="check_riesgo6" id="checkR16" value="SI">                              
                             </td>
                             <td>
-                              <input type="radio" name="radio_incendio_11" id="radioI_32" >
+                              <input type="checkbox" name="check_riesgo6" id="checkR17" value="SI">                              
+                              <input type="checkbox" name="check_riesgo6" id="checkR18" value="SM" class="ocultar" checked>                              
                             </td>
                             <td>
-                              <input type="text" class="form-control" id="observacionesR_6">
+                              <input type="text" class="form-control" id="observacionesR_6" name="observacionesR_6">
                             </td>
                           </tr>
                           <tr>
                             <td style="text-align: left !important">OTROS</td>  
-                            <td colspan="3"><input type="text" class="form-control"></td>
+                            <td colspan="3"><input type="text" class="form-control" id="observacionesR_7" name="observacionesR_7"></td>
                           </tr>
                         </tbody>
                       </table>
@@ -726,7 +746,7 @@
                   </div>
                   <div class="form-group col-md-6">
                     <div class="table-responsive">
-                      <table class="table table-bordered equipos_medios table-condensed">  
+                      <table class="table table-bordered equipos_medios table-condensed" id="tabla_almacenamiento">  
                         <thead>
                           <tr>
                             <th width="85" colspan="5">ALMACENAMIENTO</th>  
@@ -740,138 +760,146 @@
                             <td width="25%">ALMACENAMIENTO GLP</td>  
                             <td width="5%">CANT./ LLENO</td>  
                             <td width="25%">
-                              <input type="text" class="form-control" id="almacenamiento1">
+                              <input type="text" class="form-control" id="almacenamiento1" name="almacenamiento1">
                             </td>  
                             <td width="5%">CANT. / VAC </td>  
                             <td width="25%">
-                              <input type="text" class="form-control" id="almacenamiento2">
+                              <input type="text" class="form-control" id="almacenamiento2" name="almacenamiento2">
                             </td>  
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento1" id="radioI33">
+                              <input type="checkbox" name="check_alma1" id="checkAl1" value="In">                                                            
                             </td>
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento1" id="radioI34">
+                              <input type="checkbox" name="check_alma1" id="checkAl2" value="Ex">                                                            
                             </td>
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento1" id="radioI35">
+                              <input type="checkbox" name="check_alma1" id="checkAl3" value="Al">                                                            
+                              <input type="checkbox" name="check_alma1" id="checkAl4" value="Sm" class="ocultar" checked>                                                            
                             </td>
                           </tr>
                           <tr>
                             <td width="25%">LIQUIDOS INFLAMABLES</td>  
                             <td width="5%">TIPO</td>  
                             <td width="25%">
-                              <input type="text" class="form-control" id="almacenamiento3" >
+                              <input type="text" class="form-control" id="almacenamiento3" name="almacenamiento3" >
                             </td>  
                             <td width="5%">CANT. </td>  
                             <td width="25%">
-                            <input type="text" class="form-control" id="almacenamiento4">
+                            <input type="text" class="form-control" id="almacenamiento4" name="almacenamiento4">
                             </td>  
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento2" id="radioI34">
+                              <input type="checkbox" name="check_alma2" id="checkAl5" value="In">                                                            
                             </td>
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento2" id="radioI35">
+                              <input type="checkbox" name="check_alma2" id="checkAl6" value="Ex">                                                            
                             </td>
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento2" id="radioI36">
+                              <input type="checkbox" name="check_alma2" id="checkAl7" value="Al">                                                            
+                              <input type="checkbox" name="check_alma2" id="checkAl8" value="Sm" class="ocultar" checked>                                                            
                             </td>
                           </tr>
                           <tr >
                             <td width="25%">LIQUIDOS COMBUSTIBLES</td>  
                             <td width="5%">TIPO</td>  
                             <td width="25%">
-                              <input type="text" class="form-control" id="almacenamiento5">
+                              <input type="text" class="form-control" id="almacenamiento5" name="almacenamiento5">
                             </td>  
                             <td width="5%">CANT.</td>  
                             <td width="25%">
-                            <input type="text" class="form-control" id="almacenamiento6">
+                            <input type="text" class="form-control" id="almacenamiento6" name="almacenamiento6">
                             </td>  
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento3" id="radioI37">
+                              <input type="checkbox" name="check_alma3" id="checkAl9" value="In">                                                            
                             </td>
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento3" id="radioI38">
+                              <input type="checkbox" name="check_alma3" id="checkAl10" value="Ex">                                                            
                             </td>
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento3" id="radioI39">
+                              <input type="checkbox" name="check_alma3" id="checkAl11" value="Al">                                                            
+                              <input type="checkbox" name="check_alma3" id="checkAl12" value="Sm" class="ocultar" checked>                                                            
                             </td>
                           </tr>
                           <tr >
                             <td width="25%">SÓLIDOS COMBUSTIBLES</td>  
                             <td width="5%">TIPO</td>  
                             <td width="55%" colspan="3">
-                              <input type="text" class="form-control" id="almacenamiento7">
+                              <input type="text" class="form-control" id="almacenamiento7" name="almacenamiento7">
                             </td>  
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento4" id="radioI40">
+                              <input type="checkbox" name="check_alma4" id="checkAl13" value="In">                                                            
                             </td>
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento4" id="radioI41">
+                              <input type="checkbox" name="check_alma4" id="checkAl14" value="Ex">                                                            
                             </td>
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento4" id="radioI42">
+                              <input type="checkbox" name="check_alma4" id="checkAl15" value="Al">                                                            
+                              <input type="checkbox" name="check_alma4" id="checkAl16" value="Sm" class="ocultar" checked>                                                            
                             </td>
                           </tr>
                           <tr >
                             <td width="25%">BODEGAJE</td>  
                             <td width="5%">TIPO MAT.</td>  
                             <td width="55%" colspan="3">
-                              <input type="text" class="form-control" id="almacenamiento8">
-                              </td>  
+                              <input type="text" class="form-control" id="almacenamiento8" name="almacenamiento8">
+                            </td>  
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento5" id="radioI43">
+                              <input type="checkbox" name="check_alma5" id="checkAl17" value="In">                                                            
                             </td>
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento5" id="radioI44">
+                              <input type="checkbox" name="check_alma5" id="checkAl18" value="Ex">                                                            
                             </td>
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento5" id="radioI45">
+                              <input type="checkbox" name="check_alma5" id="checkAl19" value="Al">                                                            
+                              <input type="checkbox" name="check_alma5" id="checkAl20" value="Sm" class="ocultar" checked>                                                            
                             </td>
                           </tr>
                           <tr >
                             <td width="25%">ORDEN Y LIMPIEZA</td>  
                             <td width="60%" colspan="4">
-                              <input type="text" class="form-control" id="almacenamiento9">
+                              <input type="text" class="form-control" id="almacenamiento9" name="almacenamiento9">
                             </td>  
                             <td width="5%"></td>
                             <td width="5%"></td>
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento6" id="radioI46">
+                              <input type="checkbox" name="check_alma6" id="checkAl21" value="Al">                                                            
+                              <input type="checkbox" name="check_alma6" id="checkAl22" value="Sm" class="ocultar" checked>                                                            
                             </td>
                           </tr>
                           <tr >
                             <td width="25%">QUÍMICOS</td>  
                             <td width="5%">TIPO</td>  
                             <td width="25%">
-                              <input type="text" class="form-control" id="almacenamiento10">
+                              <input type="text" class="form-control" id="almacenamiento10" name="almacenamiento10">
                             </td>  
                             <td width="5%">CANT. / VAC</td>  
                             <td width="25%">
-                              <input type="text" class="form-control" id="almacenamiento11">
+                              <input type="text" class="form-control" id="almacenamiento11" name="almacenamiento11">
                             </td>  
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento7" id="radioI47">
+                              <input type="checkbox" name="check_alma7" id="checkAl23" value="In">                                                            
                             </td>
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento7" id="radioI48">
+                              <input type="checkbox" name="check_alma7" id="checkAl24" value="Ex">                                                            
                             </td>
                             <td width="5%">
-                              <input type="radio" name="radio_almacenamiento7" id="radioI49">
+                              <input type="checkbox" name="check_alma7" id="checkAl25" value="Al">                                                            
+                              <input type="checkbox" name="check_alma7" id="checkAl26" value="Sm" class="ocultar" checked>                                                            
                             </td>
                           </tr>
                           <tr id="check_val2">
                             <td width="25%">INSTALACIONES ELÉCTRICAS</td>  
                             <td width="60%" colspan="4">
-                              <input type="text" class="form-control" id="almacenamiento12">
+                              <input type="text" class="form-control" id="almacenamiento12" name="almacenamiento12">
                             </td>  
                             <td width="5%">
-                              <input type="checkbox" name="radio_almacenamiento8" id="radioI50">
+                              <input type="checkbox" name="check_alma8" id="checkAl27" value="In">                                                            
                             </td>
                             <td width="5%">
-                              <input type="checkbox" name="radio_almacenamiento8" id="radioI51">
+                              <input type="checkbox" name="check_alma8" id="checkAl28" value="Ex">                                                            
                             </td>
                             <td width="5%">
-                              <input type="checkbox" name="radio_almacenamiento8" id="radioI52">
+                              <input type="checkbox" name="check_alma8" id="checkAl29" value="Al">                                                            
+                              <input type="checkbox" name="check_alma8" id="checkAl30" value="Sm" class="ocultar" checked>                                                            
                             </td>
                           </tr>
                         </tbody>
@@ -937,12 +965,13 @@
                       <label class="col-sm-12 control-label"> ANEXO</label>
                     </div>
                     <div class="col-sm-5">
-                      <label class="radio-inline control-label col-sm-10" for="radioAnexo1"> SI</label>
-                      <input type="radio" name="radioAnexo" id="radioAnexo1" class="col-sm-2" value="opcion_1"> 
+                      <label class="radio-inline control-label col-sm-10" for="check_an1"> SI</label>
+                      <input type="checkbox" name="check_anexo" id="check_an1" value="SI">
                     </div>
                     <div class="col-sm-5">
-                      <label class="radio-inline control-label col-sm-10" for="radioAnexo2"> NO</label>
-                      <input type="radio" name="radioAnexo" id="radioAnexo2" class="col-sm-2" value="opcion_1"> 
+                      <label class="radio-inline control-label col-sm-10" for="check_an2"> NO</label>
+                      <input type="checkbox" name="check_anexo" id="check_an2" value="NO">                                                            
+                      <input type="checkbox" name="check_anexo" id="check_an3" value="SM" class="ocultar" checked>                                                            
                     </div>
                   </div>
                   <div class="form-group col-md-4">
@@ -956,13 +985,30 @@
                     </div>
                     <div id="check_val3">
                       <div class="col-sm-3">
-                        <label class="radio-inline control-label col-sm-5" for="radioPermiso1"> SI</label>
-                        <input type="checkbox" name="radioPermiso" id="radioPermiso1" class="col-sm-1" value="opcion_1"> 
+                        <label class="radio-inline control-label col-sm-5" for="check_per1"> SI</label>
+                        <input type="checkbox" name="check_permiso" id="check_per1" value="SI">                                                            
                       </div>
                       <div class="col-sm-3">
-                        <label class="radio-inline control-label col-sm-5" for="radioPermiso2"> NO</label>
-                        <input type="checkbox" name="radioPermiso" id="radioPermiso2" class="col-sm-1" value="opcion_1"> 
+                        <label class="radio-inline control-label col-sm-5" for="check_per2"> NO</label>
+                        <input type="checkbox" name="check_permiso" id="check_per2" value="NO" checked>                                                            
                       </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-9">
+                    <div class="col-sm-5">
+                      <label class="col-sm-12 control-label"> TASA SERVICIO ADMINISTRATIVO</label>
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="text" class="form-control" id='id_inputTasa' name="id_inputTasa" />
+                    </div>
+                    <div class="col-sm-5">                      
+                      <input type="text" class="form-control" id='input_tasa' name="input_tasa" style="text-transform: uppercase" />
+                    </div>
+                  </div>
+                   <div class="form-group col-md-3">                    
+                    <div class="col-sm-12">
+                      <select class="form-control" id='select_valor' name="select_valor" style="text-transform: uppercase">
+                      </select>  
                     </div>
                   </div>
                   <div class="form-group col-md-4">

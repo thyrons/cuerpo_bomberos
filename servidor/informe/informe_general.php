@@ -19,6 +19,22 @@
 		}else{
 			$data = 2; /// error al guardar
 		}
+		$sql ="insert into informe_prevencion values ('$id','$id','".strtoupper($_POST['cantP1'])."','".strtoupper($_POST['check_prev_1'])."','".strtoupper($_POST['cantPA1'])."','".strtoupper($_POST['lugarP1'])."','".strtoupper($_POST['cantP2'])."','".strtoupper($_POST['check_prev_2'])."','".strtoupper($_POST['cantPA2'])."','".strtoupper($_POST['lugarP2'])."','".strtoupper($_POST['cantP3'])."','".strtoupper($_POST['check_prev_3'])."','".strtoupper($_POST['cantPA3'])."','".strtoupper($_POST['lugarP3'])."','".strtoupper($_POST['cantP4'])."','".strtoupper($_POST['check_prev_4'])."','".strtoupper($_POST['cantPA4'])."','".strtoupper($_POST['lugarP4'])."','".strtoupper($_POST['cantP5'])."','".strtoupper($_POST['check_prev_5'])."','".strtoupper($_POST['cantPA5'])."','".strtoupper($_POST['lugarP5'])."','".strtoupper($_POST['cantP6'])."','".strtoupper($_POST['check_prev_6'])."','".strtoupper($_POST['cantPA6'])."','".strtoupper($_POST['lugarP6'])."','".strtoupper($_POST['cantP7'])."','".strtoupper($_POST['check_prev_7'])."','".strtoupper($_POST['cantPA7'])."','".strtoupper($_POST['lugarP7'])."','".strtoupper($_POST['cantP8'])."','".strtoupper($_POST['check_prev_8'])."','".strtoupper($_POST['cantPA8'])."','".strtoupper($_POST['lugarP8'])."','".strtoupper($_POST['cantP9'])."','".strtoupper($_POST['check_prev_9'])."','".strtoupper($_POST['cantPA9'])."','".strtoupper($_POST['lugarP9'])."','".strtoupper($_POST['cantP10'])."','".strtoupper($_POST['check_prev_10'])."','".strtoupper($_POST['cantPA10'])."','".strtoupper($_POST['lugarP10'])."','".strtoupper($_POST['cantP11'])."','".strtoupper($_POST['check_prev_11'])."','".strtoupper($_POST['cantPA11'])."','".strtoupper($_POST['lugarP11'])."','".strtoupper($_POST['cantP12'])."','".strtoupper($_POST['check_prev_12'])."','".strtoupper($_POST['cantPA12'])."','".strtoupper($_POST['lugarP12'])."','".strtoupper($_POST['cantP13'])."','".strtoupper($_POST['check_prev_13'])."','".strtoupper($_POST['cantPA13'])."','".strtoupper($_POST['lugarP13'])."','".strtoupper($_POST['cantP14'])."','".strtoupper($_POST['check_prev_14'])."','".strtoupper($_POST['cantPA14'])."','".strtoupper($_POST['lugarP14'])."')";
+		$guardar = guardarSql($conexion,$sql);
+		if( $guardar == 'true'){
+			$data = 0; ////datos guardados
+		}else{
+			$data = 2; /// error al guardar
+		}
+		$sql ="insert into informe_incendios values ('$id','$id','".strtoupper($_POST['check_riesgo1'])."','".strtoupper($_POST['observacionesR_1'])."','".strtoupper($_POST['check_riesgo2'])."','".strtoupper($_POST['observacionesR_2'])."','".strtoupper($_POST['check_riesgo3'])."','".strtoupper($_POST['observacionesR_3'])."','".strtoupper($_POST['check_riesgo4'])."','".strtoupper($_POST['observacionesR_4'])."','".strtoupper($_POST['check_riesgo5'])."','".strtoupper($_POST['observacionesR_5'])."','".strtoupper($_POST['check_riesgo6'])."','".strtoupper($_POST['observacionesR_6'])."','".strtoupper($_POST['observacionesR_7'])."','".strtoupper($_POST['almacenamiento1'])."','".strtoupper($_POST['almacenamiento2'])."','$_POST[check_alma1]','".strtoupper($_POST['almacenamiento3'])."','".strtoupper($_POST['almacenamiento4'])."','$_POST[check_alma2]','".strtoupper($_POST['almacenamiento5'])."','".strtoupper($_POST['almacenamiento6'])."','$_POST[check_alma3]','".strtoupper($_POST['almacenamiento7'])."','$_POST[check_alma4]','".strtoupper($_POST['almacenamiento8'])."','$_POST[check_alma5]','".strtoupper($_POST['almacenamiento9'])."','$_POST[check_alma6]','".strtoupper($_POST['almacenamiento10'])."','".strtoupper($_POST['almacenamiento11'])."','$_POST[check_alma7]','".strtoupper($_POST['almacenamiento12'])."','$_POST[check_alma8]')";
+		$guardar = guardarSql($conexion,$sql);
+		if( $guardar == 'true'){
+			$data = 0; ////datos guardados
+		}else{
+			$data = 2; /// error al guardar
+		}
+		
+
 	}else{
 		
 	}

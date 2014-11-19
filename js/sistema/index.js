@@ -86,6 +86,26 @@ function inicio(){
 	$("input[name='check_incendio_14']").on("click",checkboxTabla);
 	$("input[name='check_incendio_15']").on("click",checkboxTabla);
 	$("input[name='check_incendio_16']").on("click",checkboxTabla);
+	$("input[name='check_incendio_17']").on("click",checkboxTabla);
+	$("input[name='check_incendio_18']").on("click",checkboxTabla);
+	$("input[name='check_incendio_19']").on("click",checkboxTabla);
+	$("input[name='check_incendio_20']").on("click",checkboxTabla);
+	$("input[name='check_riesgo1']").on("click",checkboxTabla);
+	$("input[name='check_riesgo2']").on("click",checkboxTabla);
+	$("input[name='check_riesgo3']").on("click",checkboxTabla);
+	$("input[name='check_riesgo4']").on("click",checkboxTabla);
+	$("input[name='check_riesgo5']").on("click",checkboxTabla);
+	$("input[name='check_riesgo6']").on("click",checkboxTabla);
+	$("input[name='check_alma1']").on("click",checkboxTabla);
+	$("input[name='check_alma2']").on("click",checkboxTabla);
+	$("input[name='check_alma3']").on("click",checkboxTabla);
+	$("input[name='check_alma4']").on("click",checkboxTabla);
+	$("input[name='check_alma5']").on("click",checkboxTabla);
+	$("input[name='check_alma6']").on("click",checkboxTabla);
+	$("input[name='check_alma7']").on("click",checkboxTabla);
+	$("input[name='check_alma8']").on("click",checkboxTabla);
+	$("input[name='check_anexo']").on("click",checkboxTabla);
+	$("input[name='check_permiso']").on("click",checkboxTabla);
 	/*--------------------------------*/
 	/*Servicios Administrativos*/
 	$("#btn_guardarServicios").on("click",guardar_serviciosAdministrativos);
@@ -207,9 +227,36 @@ function inicio(){
 	$("#razon_social").keyup(function (){
 		autocompletarEmpresa("razon_social","ruc_informe","nombres_propietario","id_empresa","actividad","direccion","telefono","ubicacion","../servidor/informe/cargaEmpresa.php?tipo=3","tab_general");
 	});
+	
+	$("#input_tasa").keyup(function (){
+		if($("#input_tasa").val().length == 0){			
+			$("#id_inputTasa").val("");
+			$("#input_tasa").val("");
+			$("#select_valor").find('option').remove();
+		}else{
+			autocompletarTasa("id_inputTasa","input_tasa","../servidor/informe/carga_tasa.php?tipo=0");
+		}			
+	});
+	$("#id_inputTasa").keyup(function (){	
+		if($("#id_inputTasa").val().length == 0){			
+			$("#id_inputTasa").val("");
+			$("#input_tasa").val("");
+			$("#select_valor").find('option').remove();
+		}else{
+			autocompletarTasa("input_tasa","id_inputTasa","../servidor/informe/carga_tasa.php?tipo=1");
+		}
+	});
+	
 	$("#btn_limpiarPropietarios").on("click",limpiar_form);
 	$("#btn_buscarPropietarios").on("click",modal);
 	$("#btn_guardarInforme").on("click",guardar_Informe);
+}
+function llenarSelect(lt,md,bg,sbg){
+	$("#select_valor").find('option').remove();
+	$('#select_valor').append('<option value='+lt+'>$ '+lt+'</option>');
+	$('#select_valor').append('<option value='+md+'>$ '+md+'</option>');
+	$('#select_valor').append('<option value='+bg+'>$ '+bg+'</option>');
+	$('#select_valor').append('<option value='+sbg+'>$ '+sbg+'</option>');	
 }
 /* function para poder dar el comportamiento de un grupo de radiobutton a un grupo de checkbox */
 function checkbox(){
@@ -223,19 +270,17 @@ function checkbox(){
 }
 function checkboxTabla(){
 	var name = $(this).attr("name");
+	var id = $(this).attr("id");
 	var ck = $(this).parent().parent().find(":input[name='"+name+"']");
-	ck.each(function (){
-		$(this).removeAttr("checked");
-	});
-	var id = this.id;
-	$("#"+id).prop('checked',true);
-}
-function checkboxTabla(){
-	var name = $(this).attr("name");
-	var ck = $(this).parent().parent().find(":input[name='"+name+"']");
-	///poner y quitar atributo al siguite y anterior
-	var id = this.id;
-	$("#"+id).prop('checked',true);
+	
+	if($(this).prop('checked')){
+		$("#"+id).prop('checked',true);		
+		ck.not($(this)).each(function (){
+			$(this).removeAttr("checked");
+		});
+	}else{
+		ck.last('checkbox').prop('checked',true);
+	}
 }
 /*-----------*/
 /*Formularios Servicios Administrativos*/
@@ -303,7 +348,7 @@ function datos_TasaServicios(valores,tipo,p){
 	    success: function(data) {	
 	    	if( data == 0 ){
 	    		alertify.primary('Datos Agregados Correctamente');	
-				limpiar_form(p);	
+				limpiar_form(p);					
 	    	}else{
 	    		if( data == 1 ){
 	    			alertify.error('Este servicio ya existe. Ingrese otro');	
@@ -450,20 +495,18 @@ function datos_empresas(valores,tipo,p){
 }
 /*---------------------------------*/
 /*procesos informe*/
-function guardar_Informe(){		
-	$("#form_informe").on("submit",function (e){	
-		var valores = $("#form_informe").serialize();
-		var texto=($("#btn_guardarInforme").text()).trim();	
-		serializarTabla("tabla_incendios");
-		serializarTabla("tabla_prevencion");
-		if(texto=="Guardar"){		
-			data_informe(valores,"g",e);
-		}else{
-			data_informe(valores,"m",e);
-		}
-		e.preventDefault();
-    	$(this).unbind("submit")
-	});
+function guardar_Informe(){			
+	var valores = $("#form_informe").serialize();
+	var texto=($("#btn_guardarInforme").text()).trim();	
+	serializarTabla("tabla_incendios");
+	serializarTabla("tabla_prevencion");
+	serializarTabla("tabla_sistemaE");
+	serializarTabla("tabla_almacenamiento");
+	if(texto=="Guardar"){		
+		data_informe(valores,"g",e);
+	}else{
+		data_informe(valores,"m",e);
+	}		
 }
 function data_informe(valores,tipo,p){
 	$.ajax({				
@@ -643,6 +686,29 @@ function autocompletarEmpresa(campo,campoNombre,campoId,actividad,direccion,razo
         }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
         return $( "<li>" )
         .append( "<a>"+ item.value + "</a>" )
+        .appendTo( ul );
+    };
+}
+/*---------------*/
+/*funcion para autocompleta con el campo a mostar el id oculto y la direccion donde se encuentra*/
+function autocompletarTasa(campo,campo1,direccion){
+	$("#"+campo1).autocomplete({
+        source: direccion,
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#"+campo ).val( ui.item.label1 );
+	        $( "#"+campo1 ).val( ui.item.label2 );  	        
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#"+campo ).val( ui.item.label1 );
+	        $( "#"+campo1 ).val( ui.item.label2 );
+	        llenarSelect(ui.item.label4,ui.item.label5,ui.item.label6,ui.item.label7);
+	        return false;
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.label2 + "</a>" )
         .appendTo( ul );
     };
 }

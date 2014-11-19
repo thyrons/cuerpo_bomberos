@@ -3,7 +3,7 @@
 	include '../funciones_generales.php';
 	$data;
 	$conexion = conectarse();
-	$id = id_tabla($conexion,"tasa_servicio","id_tasa_servicio");
+	$id = id_tablaMil($conexion,"tasa_servicio","id_tasa_servicio",$_POST['select_servicio']);
 	if($_POST['tipo'] == "g"){
 		$sql ="insert into tasa_servicio values ('$id','$_POST[little]','$_POST[medium]','$_POST[big]','$_POST[sbig]','$_POST[select_servicio]','".strtoupper($_POST['nombre_tasa'])."')";
 		$repetidos = repetidos($conexion,"nombre_tasa",strtoupper($_POST["nombre_tasa"]),"tasa_servicio","g","","");	

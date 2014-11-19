@@ -9,6 +9,22 @@
 	    $cont++;
 	    return $cont;
 	}
+	function id_tablaMil($conexion,$tabla,$id,$idMil){		
+		$cont=	($idMil * 1000);
+		$idM = ($idMil * 1000);
+		$sql="select max($id) from $tabla where id_servicio ='$idMil'";
+		//echo $sql;
+		$rs = pg_query( $conexion, $sql );
+	    while($row=pg_fetch_row($rs)){
+	    	if($row[0] != ""){
+	    		$cont = $row[0];
+	    	}else{
+	    		$cont = $idM;
+	    	}
+	    }
+	    $cont++;
+	    return $cont;
+	}
 	function repetidos($conexion,$campo,$valor,$tabla,$tipo,$id,$id_campo){
 		$repetidos = 'true';
 		if( $tipo == "g" ){
@@ -62,8 +78,27 @@
 		$sql = pg_query( $conexion, $sql );
 		if($sql){
 			while($row = pg_fetch_row( $sql )){
-				echo  "<option value='$row[0]'>$row[1]</option>";
+				echo  "<option value='$row[0]'> $row[0] - $row[1]</option>";
 			}
+		}
+	}
+	function carga_tasa($conexion,$sql){
+		$resp =true;
+		$sql = pg_query( $conexion, $sql );
+		if($sql){
+			while ($row = pg_fetch_row($sql)) {
+			    $data[] = array(
+			        'value' => $row[0],
+			        'label1' => $row[1],
+			        'label2' => $row[2],
+			        'label3' => $row[3],
+			        'label4' => $row[4],
+			        'label5' => $row[5],
+			        'label6' => $row[6],			        
+			        'label7' => $row[7],			        
+			    );
+			}
+			echo $data = json_encode($data);
 		}
 	}
 	function contador($conexion,$sql){

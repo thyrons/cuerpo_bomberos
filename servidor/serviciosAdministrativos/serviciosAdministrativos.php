@@ -3,7 +3,7 @@
 	include '../funciones_generales.php';
 	$data;
 	$conexion = conectarse();
-	$id = id_tabla($conexion,"servicios_administrativos","id_servicio");
+	$id = id_tabla($conexion,"servicios_administrativos","id_servicio");	
 	if($_POST['tipo'] == "g"){
 		$sql ="insert into servicios_administrativos values ('$id','".strtoupper($_POST['nombre_servicio'])."','1')";
 		$repetidos = repetidos($conexion,"nombre_servicio",strtoupper($_POST["nombre_servicio"]),"servicios_administrativos","g","","");	
