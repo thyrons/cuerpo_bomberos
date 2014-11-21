@@ -4,8 +4,8 @@
 	$data;
 	$conexion = conectarse();
 	$id = id_tabla($conexion,"informe_general","id_informe_general");
-	if($_POST['tipo'] == "g"){
-		$sql ="insert into informe_general values ('$id','".strtoupper($_POST['id_empresa'])."','".strtoupper($_POST['area_total'])."','".strtoupper($_POST['area_util'])."','".strtoupper($_POST['pe'])."','".strtoupper($_POST['mmr'])."','".strtoupper($_POST['riesgo'])."','".strtoupper($_POST['visible'])."','".strtoupper($_POST['ubicacion'])."','".strtoupper($_POST['solicitud_nro'])."','".strtoupper($_POST['ocupantes_fijos'])."','".strtoupper($_POST['flotantes'])."','".strtoupper($_POST['aforo'])."','".strtoupper($_POST['tipo_construccion'])."','".strtoupper($_POST['radio_ventilacion'])."','".strtoupper($_POST['disposicion'])."','".strtoupper($_POST['hora_inicio'])."','".strtoupper($_POST['hora_final'])."','".strtoupper($_POST['check_inspeccion'])."','".strtoupper($_POST['techo_cubierta'])."','".strtoupper($_POST['nro_registro'])."')";
+	if($_GET['tipo'] == "g"){
+		$sql ="insert into informe_general values ('$id','".strtoupper($_POST['id_empresa'])."','".strtoupper($_POST['area_total'])."','".strtoupper($_POST['area_util'])."','".strtoupper($_POST['pe'])."','".strtoupper($_POST['mmr'])."','".strtoupper($_POST['riesgo'])."','".strtoupper($_POST['visible'])."','".strtoupper($_POST['ubicacion'])."','".strtoupper($_POST['solicitud_nro'])."','".strtoupper($_POST['ocupantes_fijos'])."','".strtoupper($_POST['flotantes'])."','".strtoupper($_POST['aforo'])."','".strtoupper($_POST['tipo_construccion'])."','".strtoupper($_POST['radio_ventilacion'])."','".strtoupper($_POST['disposicion'])."','".strtoupper($_POST['hora_inicio'])."','".strtoupper($_POST['hora_final'])."','".strtoupper($_POST['check_inspeccion'])."','".strtoupper($_POST['techo_cubierta'])."','".strtoupper($_POST['nro_registro'])."','".strtoupper($_POST['id_inputTasa'])."','".strtoupper($_POST['select_valor'])."')";
 		$guardar = guardarSql($conexion,$sql);
 		if( $guardar == 'true'){
 			$data = 0; ////datos guardados
@@ -33,7 +33,23 @@
 		}else{
 			$data = 2; /// error al guardar
 		}
-		
+		$sql ="insert into informe_confirmar values ('$id','$id','".strtoupper($_POST['disposiciones_finales'])."','".strtoupper($_POST['observaciones_finales'])."','".strtoupper($_POST['resolucion'])."','".strtoupper($_POST['para_extender_permiso'])."','".strtoupper($_POST['plazo'])."','".strtoupper($_POST['check_anexo'])."','".strtoupper($_POST['check_permiso'])."')";
+		$guardar = guardarSql($conexion,$sql);
+		if( $guardar == 'true'){
+			$data = 0; ////datos guardados
+		}else{
+			$data = 2; /// error al guardar
+		}
+		///////////////valores imagen//////////
+		$extension = explode(".", $_FILES["archivo"]["name"]);
+
+		$extension = end($extension);
+		$type = $_FILES["archivo"]["type"];
+		$tmp_name = $_FILES["archivo"]["tmp_name"];
+		$size = $_FILES["archivo"]["size"];
+		$nombre = basename($_FILES["archivo"]["name"], "." . $extension);		
+		$foto = $id . '.' . $extension;
+		move_uploaded_file($_FILES["archivo"]["tmp_name"], "../../fotos/" . $foto);
 
 	}else{
 		

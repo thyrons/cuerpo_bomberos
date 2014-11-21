@@ -932,8 +932,7 @@
                       <label class="col-sm-12 control-label" for='observaciones_finales'> OBSERVACIONES</label>
                     </div>
                     <div class="col-sm-10">
-                      <textarea class="form-control" id='observaciones_finales' name="observaciones_finales" data-toggle="tooltip" data-original-title="Observaciones del informe" style="text-transform: uppercase"> 
-                      </textarea> 
+                      <textarea class="form-control" id='observaciones_finales' name="observaciones_finales" data-toggle="tooltip" data-original-title="Observaciones del informe" style="text-transform: uppercase"></textarea> 
                     </div>
                   </div>
                   <div class="form-group col-md-12">
@@ -952,45 +951,58 @@
                       <input type="text" class="form-control" id='para_extender_permiso' name="para_extender_permiso" data-toggle="tooltip" data-original-title="Documentos que toca presentar para dar el permiso" style="text-transform: uppercase">  
                     </div>
                   </div>
-                  <div class="form-group col-md-4">
-                    <div class="col-sm-2">
-                      <label class="col-sm-12 control-label" for='plazo'> PLAZO</label>
-                    </div>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id='plazo' name="plazo" data-toggle="tooltip" data-original-title="Plazo" style="text-transform: uppercase">  
-                    </div>
-                  </div>
-                  <div class="form-group col-md-4">
-                    <div class="col-sm-2">
-                      <label class="col-sm-12 control-label"> ANEXO</label>
-                    </div>
-                    <div class="col-sm-5">
-                      <label class="radio-inline control-label col-sm-10" for="check_an1"> SI</label>
-                      <input type="checkbox" name="check_anexo" id="check_an1" value="SI">
-                    </div>
-                    <div class="col-sm-5">
-                      <label class="radio-inline control-label col-sm-10" for="check_an2"> NO</label>
-                      <input type="checkbox" name="check_anexo" id="check_an2" value="NO">                                                            
-                      <input type="checkbox" name="check_anexo" id="check_an3" value="SM" class="ocultar" checked>                                                            
-                    </div>
-                  </div>
-                  <div class="form-group col-md-4">
-                    <div class="col-sm-12">
-                      <input type="text" class="form-control" id='nro_registro' placeholder="NRO. DE REGISTRO" name="nro_registro" data-toggle="tooltip" data-original-title="Nro del documento" style="text-transform: uppercase">  
-                    </div>
-                  </div>
-                  <div class="form-group col-md-12">
-                    <div class="col-sm-6">
-                      <label class="col-sm-12 control-label"> SE OTORGA PERMISO DE FUNCIONAMIENTO</label>
-                    </div>
-                    <div id="check_val3">
-                      <div class="col-sm-3">
-                        <label class="radio-inline control-label col-sm-5" for="check_per1"> SI</label>
-                        <input type="checkbox" name="check_permiso" id="check_per1" value="SI">                                                            
-                      </div>
-                      <div class="col-sm-3">
-                        <label class="radio-inline control-label col-sm-5" for="check_per2"> NO</label>
-                        <input type="checkbox" name="check_permiso" id="check_per2" value="NO" checked>                                                            
+                  <div class="form-group col-sm-12">
+                    <div class="row">
+                      <div class="col-sm-12">                        
+                        <div class="row">
+                          <div class="col-md-9">
+                            <div class="col-md-6">                                                              
+                              <label class="col-sm-2 control-label" for='plazo'> PLAZO</label>                            
+                              <div class="col-sm-10">
+                                <input type="text" class="form-control" id='plazo' name="plazo" data-toggle="tooltip" data-original-title="Plazo" style="text-transform: uppercase">  
+                              </div>                              
+                            </div>
+                            <div class="col-md-6">                                                              
+                              <div class="col-sm-2">
+                                <label class="col-sm-12 control-label"> ANEXO</label>
+                              </div>
+                              <div class="col-sm-5">
+                                <label class="radio-inline control-label col-sm-10" for="check_an1"> SI</label>
+                                <input type="checkbox" name="check_anexo" id="check_an1" value="SI">
+                              </div>
+                              <div class="col-sm-5">
+                                <label class="radio-inline control-label col-sm-10" for="check_an2"> NO</label>
+                                <input type="checkbox" name="check_anexo" id="check_an2" value="NO">                                                            
+                                <input type="checkbox" name="check_anexo" id="check_an3" value="SM" class="ocultar" checked>                                                            
+                              </div>                          
+                            </div>
+                            <div class="col-md-12">                                                              
+                              <label class="col-sm-3 control-label" for='plazo'> NRO. REGISTRO</label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control" id='nro_registro' placeholder="NRO. DE REGISTRO" name="nro_registro" data-toggle="tooltip" data-original-title="Nro del documento" style="text-transform: uppercase">  
+                              </div>                              
+                            </div>
+                            <div class="col-sm-12">                              
+                              <label class="col-sm-7 control-label"> SE OTORGA PERMISO DE FUNCIONAMIENTO</label>                              
+                              <div id="check_val3">
+                                <div class="col-sm-2">
+                                  <label class="radio-inline control-label col-sm-5" for="check_per1"> SI</label>
+                                  <input type="checkbox" name="check_permiso" id="check_per1" value="SI">                                                            
+                                </div>
+                                <div class="col-sm-3">
+                                  <label class="radio-inline control-label col-sm-5" for="check_per2"> NO</label>
+                                  <input type="checkbox" name="check_permiso" id="check_per2" value="NO" checked>                                                            
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-12">
+                              <input type="file" class="form-control" name="archivo" id="archivo" placeholder="NRO. DE REGISTRO" data-toggle="tooltip" data-original-title="Nro del documento" style="text-transform: uppercase" onchange='Test.UpdatePreview(this)' accept="image/*">  
+                            </div>                                                
+                          </div>
+                          <div class="col-sm-3" >                                                        
+                              <img src="" class="form-control" style="height:150px;width:100%;margin-left:-15px;" id="foto" name="foto">
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

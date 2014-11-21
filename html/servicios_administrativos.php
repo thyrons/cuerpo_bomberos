@@ -1,4 +1,4 @@
-<form class="form-horizontal " action="" rol="form" id="form_serviciosAdministrativos" method="post">
+<form class="form-horizontal " action="" rol="form" id="form_serviciosAdministrativos" method="post" enctype="multipart/form-data">
    <div class="panel panel-default">
      <div class="panel-heading"><span class="glyphicon glyphicon-paperclip"></span> <b> Servicios Administrativos </b></div>
        <div class="panel-body form-styles">

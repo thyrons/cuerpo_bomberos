@@ -1,5 +1,48 @@
 $(document).on("ready",inicio);
+/*para cargar la imange*/
+$(function(){
+    Test = {
+        UpdatePreview: function(obj){
+            // if IE < 10 doesn't support FileReader
+            if(!window.FileReader){
+            // don't know how to proceed to assign src to image tag
+            } else {
+                var reader = new FileReader();
+                var target = null;
+             
+                reader.onload = function(e) {
+                    target =  e.target || e.srcElement;
+                    $("#foto").prop("src", target.result);
+                };
+                reader.readAsDataURL(obj.files[0]);
+            }
+        }
+    };
+});
+/*------------*/
 function inicio(){
+	/*----para la imagen----*/
+	function getDoc(frame) {
+    	var doc = null;     
+     	
+     	try {
+        	if (frame.contentWindow) {
+            	doc = frame.contentWindow.document;
+         	}
+     	} catch(err) {
+    }
+    if (doc) { 
+         return doc;
+    }
+    try { 
+         doc = frame.contentDocument ? frame.contentDocument : frame.document;
+    } catch(err) {
+       
+         doc = frame.document;
+    }
+    return doc;
+ 	}
+ 	/*------------*/
 	var tab = window.location.hash.substring(1); //obtengo el url del navegador
 	if(tab){
 		$('.tab_index ul li').each(function(){
@@ -495,37 +538,87 @@ function datos_empresas(valores,tipo,p){
 }
 /*---------------------------------*/
 /*procesos informe*/
-function guardar_Informe(){			
-	var valores = $("#form_informe").serialize();
-	var texto=($("#btn_guardarInforme").text()).trim();	
-	serializarTabla("tabla_incendios");
-	serializarTabla("tabla_prevencion");
-	serializarTabla("tabla_sistemaE");
-	serializarTabla("tabla_almacenamiento");
-	if(texto=="Guardar"){		
-		data_informe(valores,"g",e);
-	}else{
-		data_informe(valores,"m",e);
-	}		
+function guardar_Informe(){	
+	$("#form_informe").on("submit",function (e){		
+		var texto=($("#btn_guardarEmpresas").text()).trim();	
+		var formObj = $(this);		
+		if(window.FormData !== undefined) {	
+		    var formData = new FormData(this); 
+		    if($("#ruc_informe").val() != "" && $("#id_empresa").val("") != "" && $("#nombres_propietario").val()!= ""){
+		    	if($("#nro_registro").val() != ""){
+					if($("#id_inputTasa").val() != "" && $("#input_tasa").val() != ""){
+						alertify.confirm("<b>Llene todos los campos de antes de continuar. Desea Continuar?</b>", function(e){
+		    			if(e){		    					
+	    					serializarTabla("tabla_incendios");
+							serializarTabla("tabla_prevencion");
+							serializarTabla("tabla_sistemaE");
+							serializarTabla("tabla_almacenamiento");
+							if(texto=="Guardar"){		
+								data_informe(formData,"g",e)  		    		    
+							}else{
+								data_informe(formData,"m",e)  		    		    
+							}
+							}else{
+			    				alertify.error('Operación Cancelada');		    				
+			    			}
+		  				});
+					}else{
+						alertify.alert("Seleccione un valor de Tasa por servicio administrativo",function (e){										
+						$("#id_inputTasa").focus();
+						});	
+					}		
+				}else{
+					alertify.alert("Ingrese el número correspondiente al registro",function (e){										
+						$("#nro_registro").focus();
+					});
+				}					
+			}else{
+				alertify.alert("Ingrese un número de RUC/CI o nombre de Propietario válido",function (e){						
+					$("#tab_confirmacion").hide("fast");	
+					$("#tab_general").show("fast");			
+					$("#ruc_informe").focus();
+				});
+			}		    
+		    e.preventDefault();
+		}else{
+		    var  iframeId = "unique" + (new Date().getTime());
+		    var iframe = $('<iframe src="javascript:false;" name="'+iframeId+'" />');
+		    iframe.hide();
+		    formObj.attr("target",iframeId);
+		    iframe.appendTo("body");
+		    iframe.load(function(e) {
+		        var doc = getDoc(iframe[0]);
+		        var docRoot = doc.body ? doc.body : doc.documentElement;
+		        var data = docRoot.innerHTML;
+		    });			
+		}		
+	});				
+			
 }
-function data_informe(valores,tipo,p){
-	$.ajax({				
-		type: "POST",
-		data: valores+"&tipo="+tipo,
-		url: "../servidor/informe/informe_general.php",			
-	    success: function(data) {	
-	    	if( data == 0 ){
-	    		alertify.primary('Datos Agregados Correctamente');	
-				//limpiar_form(p);	
-	    	}else{
-	    		if( data == 1 ){	    			
-	    			limpiar_form(p);		
-	    		}else{
-	    			
-	    		}
-	    	}
-
-		}
+function data_informe(formData,tipo,p){
+	$.ajax({
+	    url: "../servidor/informe/informe_general.php?tipo="+tipo,	
+	    type: "POST",
+	    data:  formData,
+	    mimeType:"multipart/form-data",
+	    contentType: false,
+	    cache: false,
+	    processData:false,
+	    success: function(data, textStatus, jqXHR)
+	    {
+	        var res=data;
+	        if(res == 0){
+	            alertify.alert("Datos Guardados Correctamente",function(){
+	            	location.reload();
+	               
+	            });
+	        } else{
+	            alertify.alert("Error..... Datos no Guardados");
+	        }
+	    },
+	    error: function(jqXHR, textStatus, errorThrown) 
+	    {
+	    } 	        
 	}); 
 }
 /*------------*/
@@ -568,6 +661,7 @@ function limpiar_form(e){
 						if(form == "form_empresas"){
 							$("#btn_guardarEmpresas").text("");
 							$("#btn_guardarEmpresas").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
+							$("#capital_giro").val("0.00");
 							$("#grupo_empresas").html(" ");						
 						}else{
 
@@ -801,8 +895,7 @@ function modificaEmpresa(e){
 }
 /*-------------*/
 /**/
-function serializarTabla(tabla)
-{
+function serializarTabla(tabla){
 	var tabla_serialize = new Object();
 	$("#" +tabla+ " > tr").each(function () {
 	  var tablerow = $(this);
