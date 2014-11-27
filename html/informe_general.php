@@ -9,10 +9,10 @@
                 <div class="panel-heading"><span class="glyphicon glyphicon-list-alt"> DATOS GENERALES</div>
                 <div class="panel-body form-group">
                   <div class="form-group col-md-4">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12">                      
+                      <input type="text" class="form-control" id='ruc_informe' placeholder="NRO. RUC" name="ruc_informe" data-toggle="tooltip" data-original-title="RUC de la empresa"  style="text-transform: uppercase">  
                       <input type="hidden" class="form-control" id='id_empresa' name="id_empresa">  
                       <input type="hidden" class="form-control" id='id_informe_empresa' name="id_informe_empresa">  
-                      <input type="text" class="form-control" id='ruc_informe' placeholder="NRO. RUC" name="ruc_informe" data-toggle="tooltip" data-original-title="RUC de la empresa"  style="text-transform: uppercase">  
                     </div>
                   </div>
                   <div class="form-group col-md-4">
@@ -62,7 +62,7 @@
                   </div>
                   <div class="form-group col-md-4">
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id='visible' placeholder="VISIBLE/LEGIBLE" name="visible" data-toggle="tooltip" data-original-title="Dirección del Negocio" style="text-transform: uppercase">  
+                      <input type="text" class="form-control" id='visible' placeholder="VISIBLE/LEGIBLE" name="visible" style="text-transform: uppercase">  
                     </div>
                   </div>
                   <div class="form-group col-md-4">
@@ -108,19 +108,19 @@
                   <div class="form-group col-md-8">
                     <label class="col-sm-2 control-label"> VENTILACIÓN: </label>
                     <div class="col-sm-2">
-                      <input type="radio" name="radio_ventilacion" id="radioEnLinea1" class="col-sm-2" value="natural" checked> 
+                      <input type="radio" name="radio_ventilacion" id="radioEnLinea1" class="col-sm-2" value="NATURAL" checked> 
                       <label class="radio-inline control-label col-sm-10" for="radioEnLinea1"> NATURAL</label>
                     </div>
                     <div class="col-sm-2">
-                      <input type="radio" name="radio_ventilacion" id="radioEnLinea2" class="col-sm-2" value="mecanica"> 
+                      <input type="radio" name="radio_ventilacion" id="radioEnLinea2" class="col-sm-2" value="MECÁNICA"> 
                       <label class="radio-inline control-label col-sm-10" for="radioEnLinea2">MECÁNICA</label>
                     </div>
                     <div class="col-sm-2">
-                      <input type="radio" name="radio_ventilacion" id="radioEnLinea3" class="col-sm-2" value="funcional"> 
+                      <input type="radio" name="radio_ventilacion" id="radioEnLinea3" class="col-sm-2" value="FUNCIONAL"> 
                       <label class="radio-inline control-label col-sm-10" for="radioEnLinea3">FUNCIONAL </label>
                     </div>
                     <div class="col-sm-3">
-                      <input type="radio" name="radio_ventilacion" id="radioEnLinea4" class="col-sm-1" value="no funcional">  
+                      <input type="radio" name="radio_ventilacion" id="radioEnLinea4" class="col-sm-1" value="NO FUNCIONAL">  
                       <label class="radio-inline control-label col-sm-11" for="radioEnLinea4">NO FUNCIONAL </label>
                     </div>
                   </div>
@@ -129,12 +129,17 @@
                       <input type="text" class="form-control" id='disposicion' placeholder="DISPOSICIÓN" name="disposicion" style="text-transform: uppercase">  
                     </div>
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-2">
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id='fecha_general' placeholder="FECHA" name="fecha_general" style="text-transform: uppercase">  
+                    </div>
+                  </div>
+                  <div class="form-group col-md-2">
                     <div class="col-sm-12">
                       <input type="time" class="form-control" id='hora_inicio' placeholder="HORA INICIO" name="hora_inicio" style="text-transform: uppercase">  
                     </div>
                   </div>
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-2">
                     <div class="col-sm-12">
                       <input type="time" class="form-control" id='hora_final' placeholder="HORA FINAL" name="hora_final" style="text-transform: uppercase">  
                     </div>
@@ -142,11 +147,11 @@
                   <div class="form-group col-md-6" id="tipo_inspeccion"  >
                     <div class="col-sm-6">
                       <label class="radio-inline control-label col-sm-7" for="check_inspeccion" >INSPECCIÓN</label>
-                      <input type="checkbox" class="col-sm-1" name="check_inspeccion" id="check_inspeccion" value="inspeccion" checked> 
+                      <input type="checkbox" class="col-sm-1" name="check_inspeccion" id="check_inspeccion" value="INSPECCION" checked> 
                     </div>
                     <div class="col-sm-6">
                       <label class="radio-inline control-label col-sm-7" for="check_reinsperccion">REINSPECCIÓN</label>                
-                      <input type="checkbox" name="check_inspeccion" class="col-sm-1" id="check_reinsperccion" value="reinspeccion"> 
+                      <input type="checkbox" name="check_inspeccion" class="col-sm-1" id="check_reinsperccion" value="REINSPECCION"> 
                     </div> 
                   </div>
                 </div>
@@ -664,7 +669,7 @@
                               <input type="checkbox" name="check_riesgo1" id="checkR1" value="SI">                              
                             </td>
                             <td>
-                              <input type="checkbox" name="check_riesgo1" id="checkR2" value="SI">                              
+                              <input type="checkbox" name="check_riesgo1" id="checkR2" value="NO">                              
                               <input type="checkbox" name="check_riesgo1" id="checkR3" value="SM" class="ocultar" checked>                              
                             </td>
                             <td>
@@ -677,7 +682,7 @@
                               <input type="checkbox" name="check_riesgo2" id="checkR4" value="SI">                              
                             </td>
                             <td>
-                              <input type="checkbox" name="check_riesgo2" id="checkR5" value="SI">                              
+                              <input type="checkbox" name="check_riesgo2" id="checkR5" value="NO">                              
                               <input type="checkbox" name="check_riesgo2" id="checkR6" value="SM" class="ocultar" checked>                              
                             </td>
                             <td>
@@ -690,7 +695,7 @@
                               <input type="checkbox" name="check_riesgo3" id="checkR7" value="SI">                              
                             </td>
                             <td>
-                              <input type="checkbox" name="check_riesgo3" id="checkR8" value="SI">                              
+                              <input type="checkbox" name="check_riesgo3" id="checkR8" value="NO">                              
                               <input type="checkbox" name="check_riesgo3" id="checkR9" value="SM" class="ocultar" checked>                              
                             </td>
                             <td>
@@ -703,7 +708,7 @@
                               <input type="checkbox" name="check_riesgo4" id="checkR10" value="SI">                              
                             </td>
                             <td>
-                              <input type="checkbox" name="check_riesgo4" id="checkR11" value="SI">                              
+                              <input type="checkbox" name="check_riesgo4" id="checkR11" value="NO">                              
                               <input type="checkbox" name="check_riesgo4" id="checkR12" value="SM" class="ocultar" checked>                              
                             </td>
                             <td>
@@ -716,7 +721,7 @@
                               <input type="checkbox" name="check_riesgo5" id="checkR13" value="SI">                              
                             </td>
                             <td>
-                              <input type="checkbox" name="check_riesgo5" id="checkR14" value="SI">                              
+                              <input type="checkbox" name="check_riesgo5" id="checkR14" value="NO">                              
                               <input type="checkbox" name="check_riesgo5" id="checkR15" value="SM" class="ocultar" checked>                              
                             </td>
                             <td>
@@ -729,7 +734,7 @@
                               <input type="checkbox" name="check_riesgo6" id="checkR16" value="SI">                              
                             </td>
                             <td>
-                              <input type="checkbox" name="check_riesgo6" id="checkR17" value="SI">                              
+                              <input type="checkbox" name="check_riesgo6" id="checkR17" value="NO">                              
                               <input type="checkbox" name="check_riesgo6" id="checkR18" value="SM" class="ocultar" checked>                              
                             </td>
                             <td>
@@ -767,14 +772,14 @@
                               <input type="text" class="form-control" id="almacenamiento2" name="almacenamiento2">
                             </td>  
                             <td width="5%">
-                              <input type="checkbox" name="check_alma1" id="checkAl1" value="In">                                                            
+                              <input type="checkbox" name="check_alma1" id="checkAl1" value="IN">                                                            
                             </td>
                             <td width="5%">
-                              <input type="checkbox" name="check_alma1" id="checkAl2" value="Ex">                                                            
+                              <input type="checkbox" name="check_alma1" id="checkAl2" value="EX">                                                            
                             </td>
                             <td width="5%">
-                              <input type="checkbox" name="check_alma1" id="checkAl3" value="Al">                                                            
-                              <input type="checkbox" name="check_alma1" id="checkAl4" value="Sm" class="ocultar" checked>                                                            
+                              <input type="checkbox" name="check_alma1" id="checkAl3" value="AL">                                                            
+                              <input type="checkbox" name="check_alma1" id="checkAl4" value="SM" class="ocultar" checked>                                                            
                             </td>
                           </tr>
                           <tr>
@@ -788,14 +793,14 @@
                             <input type="text" class="form-control" id="almacenamiento4" name="almacenamiento4">
                             </td>  
                             <td width="5%">
-                              <input type="checkbox" name="check_alma2" id="checkAl5" value="In">                                                            
+                              <input type="checkbox" name="check_alma2" id="checkAl5" value="IN">                                                            
                             </td>
                             <td width="5%">
-                              <input type="checkbox" name="check_alma2" id="checkAl6" value="Ex">                                                            
+                              <input type="checkbox" name="check_alma2" id="checkAl6" value="EX">                                                            
                             </td>
                             <td width="5%">
-                              <input type="checkbox" name="check_alma2" id="checkAl7" value="Al">                                                            
-                              <input type="checkbox" name="check_alma2" id="checkAl8" value="Sm" class="ocultar" checked>                                                            
+                              <input type="checkbox" name="check_alma2" id="checkAl7" value="AL">                                                            
+                              <input type="checkbox" name="check_alma2" id="checkAl8" value="SM" class="ocultar" checked>                                                            
                             </td>
                           </tr>
                           <tr >
@@ -809,14 +814,14 @@
                             <input type="text" class="form-control" id="almacenamiento6" name="almacenamiento6">
                             </td>  
                             <td width="5%">
-                              <input type="checkbox" name="check_alma3" id="checkAl9" value="In">                                                            
+                              <input type="checkbox" name="check_alma3" id="checkAl9" value="IN">                                                            
                             </td>
                             <td width="5%">
-                              <input type="checkbox" name="check_alma3" id="checkAl10" value="Ex">                                                            
+                              <input type="checkbox" name="check_alma3" id="checkAl10" value="EX">                                                            
                             </td>
                             <td width="5%">
-                              <input type="checkbox" name="check_alma3" id="checkAl11" value="Al">                                                            
-                              <input type="checkbox" name="check_alma3" id="checkAl12" value="Sm" class="ocultar" checked>                                                            
+                              <input type="checkbox" name="check_alma3" id="checkAl11" value="AL">                                                            
+                              <input type="checkbox" name="check_alma3" id="checkAl12" value="SM" class="ocultar" checked>                                                            
                             </td>
                           </tr>
                           <tr >
@@ -826,14 +831,14 @@
                               <input type="text" class="form-control" id="almacenamiento7" name="almacenamiento7">
                             </td>  
                             <td width="5%">
-                              <input type="checkbox" name="check_alma4" id="checkAl13" value="In">                                                            
+                              <input type="checkbox" name="check_alma4" id="checkAl13" value="IN">                                                            
                             </td>
                             <td width="5%">
-                              <input type="checkbox" name="check_alma4" id="checkAl14" value="Ex">                                                            
+                              <input type="checkbox" name="check_alma4" id="checkAl14" value="EX">                                                            
                             </td>
                             <td width="5%">
-                              <input type="checkbox" name="check_alma4" id="checkAl15" value="Al">                                                            
-                              <input type="checkbox" name="check_alma4" id="checkAl16" value="Sm" class="ocultar" checked>                                                            
+                              <input type="checkbox" name="check_alma4" id="checkAl15" value="AL">                                                            
+                              <input type="checkbox" name="check_alma4" id="checkAl16" value="SM" class="ocultar" checked>                                                            
                             </td>
                           </tr>
                           <tr >
@@ -843,14 +848,14 @@
                               <input type="text" class="form-control" id="almacenamiento8" name="almacenamiento8">
                             </td>  
                             <td width="5%">
-                              <input type="checkbox" name="check_alma5" id="checkAl17" value="In">                                                            
+                              <input type="checkbox" name="check_alma5" id="checkAl17" value="IN">                                                            
                             </td>
                             <td width="5%">
-                              <input type="checkbox" name="check_alma5" id="checkAl18" value="Ex">                                                            
+                              <input type="checkbox" name="check_alma5" id="checkAl18" value="EX">                                                            
                             </td>
                             <td width="5%">
-                              <input type="checkbox" name="check_alma5" id="checkAl19" value="Al">                                                            
-                              <input type="checkbox" name="check_alma5" id="checkAl20" value="Sm" class="ocultar" checked>                                                            
+                              <input type="checkbox" name="check_alma5" id="checkAl19" value="AL">                                                            
+                              <input type="checkbox" name="check_alma5" id="checkAl20" value="SM" class="ocultar" checked>                                                            
                             </td>
                           </tr>
                           <tr >
@@ -861,8 +866,8 @@
                             <td width="5%"></td>
                             <td width="5%"></td>
                             <td width="5%">
-                              <input type="checkbox" name="check_alma6" id="checkAl21" value="Al">                                                            
-                              <input type="checkbox" name="check_alma6" id="checkAl22" value="Sm" class="ocultar" checked>                                                            
+                              <input type="checkbox" name="check_alma6" id="checkAl21" value="AL">                                                            
+                              <input type="checkbox" name="check_alma6" id="checkAl22" value="SM" class="ocultar" checked>                                                            
                             </td>
                           </tr>
                           <tr >
@@ -876,14 +881,14 @@
                               <input type="text" class="form-control" id="almacenamiento11" name="almacenamiento11">
                             </td>  
                             <td width="5%">
-                              <input type="checkbox" name="check_alma7" id="checkAl23" value="In">                                                            
+                              <input type="checkbox" name="check_alma7" id="checkAl23" value="IN">                                                            
                             </td>
                             <td width="5%">
-                              <input type="checkbox" name="check_alma7" id="checkAl24" value="Ex">                                                            
+                              <input type="checkbox" name="check_alma7" id="checkAl24" value="EX">                                                            
                             </td>
                             <td width="5%">
-                              <input type="checkbox" name="check_alma7" id="checkAl25" value="Al">                                                            
-                              <input type="checkbox" name="check_alma7" id="checkAl26" value="Sm" class="ocultar" checked>                                                            
+                              <input type="checkbox" name="check_alma7" id="checkAl25" value="AL">                                                            
+                              <input type="checkbox" name="check_alma7" id="checkAl26" value="SM" class="ocultar" checked>                                                            
                             </td>
                           </tr>
                           <tr id="check_val2">
@@ -892,14 +897,14 @@
                               <input type="text" class="form-control" id="almacenamiento12" name="almacenamiento12">
                             </td>  
                             <td width="5%">
-                              <input type="checkbox" name="check_alma8" id="checkAl27" value="In">                                                            
+                              <input type="checkbox" name="check_alma8" id="checkAl27" value="IN">                                                            
                             </td>
                             <td width="5%">
-                              <input type="checkbox" name="check_alma8" id="checkAl28" value="Ex">                                                            
+                              <input type="checkbox" name="check_alma8" id="checkAl28" value="EX">                                                            
                             </td>
                             <td width="5%">
-                              <input type="checkbox" name="check_alma8" id="checkAl29" value="Al">                                                            
-                              <input type="checkbox" name="check_alma8" id="checkAl30" value="Sm" class="ocultar" checked>                                                            
+                              <input type="checkbox" name="check_alma8" id="checkAl30" value="SM" class="ocultar" checked>                                                            
+                              <input type="checkbox" name="check_alma8" id="checkAl29" value="AL">                                                                                          
                             </td>
                           </tr>
                         </tbody>
@@ -977,7 +982,7 @@
                               </div>                          
                             </div>
                             <div class="col-md-12">                                                              
-                              <label class="col-sm-3 control-label" for='plazo'> NRO. REGISTRO</label>
+                              <label class="col-sm-3 control-label" for='nro_registro'> NRO. REGISTRO</label>
                               <div class="col-sm-9">
                                   <input type="text" class="form-control" id='nro_registro' placeholder="NRO. DE REGISTRO" name="nro_registro" data-toggle="tooltip" data-original-title="Nro del documento" style="text-transform: uppercase">  
                               </div>                              
@@ -1023,10 +1028,30 @@
                       </select>  
                     </div>
                   </div>
-                  <div class="form-group col-md-4">
-                    <div class="col-sm-12">
-                      <button class="btn btn-primary" id="btn_guardarInforme" type="submit">  
+                  <div class="form-group col-md-12">
+                    <div class="col-sm-2">
+                      <button class="btn btn-primary col-sm-12" id="btn_guardarInforme" type="button">  
                       <span class="glyphicon glyphicon-log-in"></span> Guardar</button>
+                    </div>
+                    <div class="col-sm-2">
+                      <button class="btn btn-primary col-sm-12" id="btn_buscarInforme" type="button">  
+                      <span class="glyphicon glyphicon-search"></span> Buscar</button>
+                    </div>                    
+                    <div class="col-sm-2">
+                      <button class="btn btn-primary col-sm-12" id="btn_atrasInforme" type="button">  
+                      <span class="glyphicon glyphicon-circle-arrow-left"></span> Atras</button>
+                    </div>
+                    <div class="col-sm-2">
+                      <button class="btn btn-primary col-sm-12" id="btn_adelanteInforme" type="button">  
+                      Adelante <span class="glyphicon glyphicon-circle-arrow-right"></span></button>
+                    </div>
+                    <div class="col-sm-2">
+                      <button class="btn btn-primary col-sm-12" id="btn_limpiarInforme" type="button">  
+                      <span class="glyphicon glyphicon-trash"></span> Limpiar</button>
+                    </div>
+                    <div class="col-sm-2">
+                      <button class="btn btn-primary col-sm-12" id="btn_imprimirInforme" type="button">  
+                      <span class="glyphicon glyphicon-print"></span> Imprimir</button>
                     </div>
                   </div>
                 </div>

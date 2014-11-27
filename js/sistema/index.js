@@ -30,17 +30,17 @@ function inicio(){
             	doc = frame.contentWindow.document;
          	}
      	} catch(err) {
-    }
-    if (doc) { 
-         return doc;
-    }
-    try { 
-         doc = frame.contentDocument ? frame.contentDocument : frame.document;
-    } catch(err) {
-       
-         doc = frame.document;
-    }
-    return doc;
+    	}
+	    if (doc) { 
+	         return doc;
+	    }
+	    try { 
+	         doc = frame.contentDocument ? frame.contentDocument : frame.document;
+	    } catch(err) {
+	       
+	         doc = frame.document;
+	    }
+	    return doc;
  	}
  	/*------------*/
 	var tab = window.location.hash.substring(1); //obtengo el url del navegador
@@ -97,7 +97,7 @@ function inicio(){
 		comprobarCamposRequired(e.currentTarget.form.id);
 	});
 	$("input").tooltip({
-       placement : 'bottom'
+       placement : 'rigth'
 	});
 	/*--------------*/
 	/*funcion solu numeros*/
@@ -258,6 +258,9 @@ function inicio(){
 		 	}
 		})
 	});	
+	$('#fecha_general').datepicker({
+        dateFormat: 'yy-mm-dd'
+    }).datepicker('setDate', 'today');
 	$("#ruc_informe").keyup(function (){
 		autocompletarEmpresa("ruc_informe","nombres_propietario","id_empresa","actividad","direccion","razon_social","telefono","ubicacion","../servidor/informe/cargaEmpresa.php?tipo=0","tab_general");
 	});
@@ -290,8 +293,8 @@ function inicio(){
 		}
 	});
 	
-	$("#btn_limpiarPropietarios").on("click",limpiar_form);
-	$("#btn_buscarPropietarios").on("click",modal);
+	$("#btn_limpiarInforme").on("click",limpiar_form);
+	$("#btn_buscarInforme").on("click",modal);
 	$("#btn_guardarInforme").on("click",guardar_Informe);
 }
 function llenarSelect(lt,md,bg,sbg){
@@ -389,7 +392,7 @@ function datos_TasaServicios(valores,tipo,p){
 		data: valores+"&tipo="+tipo,
 		url: "../servidor/tasasServicios/tasasServicios.php",			
 	    success: function(data) {	
-	    	if( data == 0 ){
+	    	if( data == 0 ){	    		
 	    		alertify.primary('Datos Agregados Correctamente');	
 				limpiar_form(p);					
 	    	}else{
@@ -538,62 +541,63 @@ function datos_empresas(valores,tipo,p){
 }
 /*---------------------------------*/
 /*procesos informe*/
-function guardar_Informe(){	
-	$("#form_informe").on("submit",function (e){		
-		var texto=($("#btn_guardarEmpresas").text()).trim();	
-		var formObj = $(this);		
-		if(window.FormData !== undefined) {	
-		    var formData = new FormData(this); 
-		    if($("#ruc_informe").val() != "" && $("#id_empresa").val("") != "" && $("#nombres_propietario").val()!= ""){
-		    	if($("#nro_registro").val() != ""){
-					if($("#id_inputTasa").val() != "" && $("#input_tasa").val() != ""){
-						alertify.confirm("<b>Llene todos los campos de antes de continuar. Desea Continuar?</b>", function(e){
-		    			if(e){		    					
-	    					serializarTabla("tabla_incendios");
-							serializarTabla("tabla_prevencion");
-							serializarTabla("tabla_sistemaE");
-							serializarTabla("tabla_almacenamiento");
-							if(texto=="Guardar"){		
-								data_informe(formData,"g",e)  		    		    
+function guardar_Informe(){		
+	if($("#ruc_informe").val() != "" && $("#id_empresa").val() != "" && $("#nombres_propietario").val()!= ""){    	    	
+    	if($("#nro_registro").val() != ""){    		
+			if($("#id_inputTasa").val() != "" && $("#input_tasa").val() != ""){
+				alertify.confirm("<b>Recuerde Llenar todos los campos <br>Deséa Continuar?</b>", function(e){		    			
+	    			if(e){		    							
+						$("#form_informe").on("submit",function (e){		
+							var texto=($("#btn_guardarInforme").text()).trim();								
+							var formObj = $(this);		
+							if(window.FormData !== undefined) {	
+								var formData = new FormData(this); 		    
+		    					serializarTabla("tabla_incendios");
+								serializarTabla("tabla_prevencion");
+								serializarTabla("tabla_sistemaE");
+								serializarTabla("tabla_almacenamiento");
+								if(texto=="Guardar"){		
+									data_informe(formData,"g",e)  		    		    
+								}else{
+									data_informe(formData,"m",e)  		    		    
+								}
+							e.preventDefault();						
 							}else{
-								data_informe(formData,"m",e)  		    		    
+							    var  iframeId = "unique" + (new Date().getTime());
+							    var iframe = $('<iframe src="javascript:false;" name="'+iframeId+'" />');
+							    iframe.hide();
+							    formObj.attr("target",iframeId);
+							    iframe.appendTo("body");
+							    iframe.load(function(e) {
+							        var doc = getDoc(iframe[0]);
+							        var docRoot = doc.body ? doc.body : doc.documentElement;
+							        var data = docRoot.innerHTML;
+							    });			
 							}
-							}else{
-			    				alertify.error('Operación Cancelada');		    				
-			    			}
-		  				});
-					}else{
-						alertify.alert("Seleccione un valor de Tasa por servicio administrativo",function (e){										
-						$("#id_inputTasa").focus();
-						});	
+						});
+						$("#form_informe").submit();												
+					}else{								
+    					alertify.error('Operación Cancelada');		    						    						    			
 					}		
-				}else{
-					alertify.alert("Ingrese el número correspondiente al registro",function (e){										
-						$("#nro_registro").focus();
-					});
-				}					
-			}else{
-				alertify.alert("Ingrese un número de RUC/CI o nombre de Propietario válido",function (e){						
-					$("#tab_confirmacion").hide("fast");	
-					$("#tab_general").show("fast");			
-					$("#ruc_informe").focus();
 				});
-			}		    
-		    e.preventDefault();
-		}else{
-		    var  iframeId = "unique" + (new Date().getTime());
-		    var iframe = $('<iframe src="javascript:false;" name="'+iframeId+'" />');
-		    iframe.hide();
-		    formObj.attr("target",iframeId);
-		    iframe.appendTo("body");
-		    iframe.load(function(e) {
-		        var doc = getDoc(iframe[0]);
-		        var docRoot = doc.body ? doc.body : doc.documentElement;
-		        var data = docRoot.innerHTML;
-		    });			
-		}		
-	});				
-			
+			}else{				
+				alertify.error("Seleccione un valor de Tasa por servicio administrativo");	
+				$("#id_inputTasa").focus();
+			}
+		}else{			
+			alertify.error("Ingrese el número correspondiente al registro");									
+			$("#tab_confirmacion").show("fast");	
+			$("#tab_general").hide("fast");			
+			$("#nro_registro").focus();
+		}
+	}else{
+		alertify.error("Ingrese un número de RUC/CI o nombre de Propietario")						;
+		$("#tab_confirmacion").hide("fast");	
+		$("#t_e").removeClass("active");		
+		$("#t_a").addClass("active");		
+		$("#tab_general").show("fast");			
+		$("#ruc_informe").focus();
+	}
 }
 function data_informe(formData,tipo,p){
 	$.ajax({
@@ -609,11 +613,12 @@ function data_informe(formData,tipo,p){
 	        var res=data;
 	        if(res == 0){
 	            alertify.alert("Datos Guardados Correctamente",function(){
-	            	location.reload();
+	            location.reload();
 	               
 	            });
 	        } else{
-	            alertify.alert("Error..... Datos no Guardados");
+	            alertify.alert("Error..... Datos no Guardados La Página se recargara");
+	            location.reload();
 	        }
 	    },
 	    error: function(jqXHR, textStatus, errorThrown) 
@@ -664,7 +669,11 @@ function limpiar_form(e){
 							$("#capital_giro").val("0.00");
 							$("#grupo_empresas").html(" ");						
 						}else{
+							if(form == "form_informe"){
+								location.reload();					
+							}else{
 
+							}
 						}
 					}
 				}	
@@ -715,6 +724,10 @@ function modal(e){
 			}else{
 				if(form == "form_propietarios"){
 					buscar_propietarios("600");	
+				}else{
+					if(form == "form_informe"){
+						buscar_informe("600");	
+					}	
 				}	
 			}	
 		}	
@@ -775,6 +788,7 @@ function autocompletarEmpresa(campo,campoNombre,campoId,actividad,direccion,razo
 	        $( "#"+telefono ).val( ui.item.label6 );  
 			$( "#"+ubicacion ).val( ui.item.label7 );  
 			$("#"+tab).find(':input:visible:first').focus();
+			//cargarInforme(ui.item.label2);
 	        return false;
         }     
         }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
@@ -894,7 +908,7 @@ function modificaEmpresa(e){
     $("#btn_guardarEmpresas").append("<span class='glyphicon glyphicon-log-in'></span> Modificar");     
 }
 /*-------------*/
-/**/
+/*function que me permite serializar la tabla para poder enviar los datos en el submit*/
 function serializarTabla(tabla){
 	var tabla_serialize = new Object();
 	$("#" +tabla+ " > tr").each(function () {
@@ -906,3 +920,21 @@ function serializarTabla(tabla){
 	});
 }
 /**/
+function cargarInforme(id){
+	$.ajax({				
+		type: "POST",
+		data: valores+"&tipo="+tipo,
+		url: "../servidor/informe/cargaInforme.php",			
+	    success: function(data) {	
+	    	if( data == 0 ){
+	    		alertify.primary('Datos Agregados Correctamente');	
+				limpiar_form(p);	
+	    	}else{
+	    		if( data == 2 ){
+	    			alertify.error('Error al enviar los datos. Ingrese nuevamente');	
+	    			limpiar_form(p);
+	   			}
+	    	}
+		}
+	}); 
+}

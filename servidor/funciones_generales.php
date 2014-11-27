@@ -73,12 +73,52 @@
 		return $resp;
 
 	}
+	function consulta($conexion,$sql){
+		$resp = 'false';		
+		if(pg_query($conexion, $sql)){
+			$resp = 'true';
+		}else{
+			$resp = 'false';
+		}
+		return $resp;
+	}
 	function cargarSelect($conexion,$sql){
 		$resp =true;
 		$sql = pg_query( $conexion, $sql );
 		if($sql){
 			while($row = pg_fetch_row( $sql )){
 				echo  "<option value='$row[0]'> $row[0] - $row[1]</option>";
+			}
+		}
+	}
+	function carga_tasaB($conexion,$sql,$texto){
+		$resp =true;
+		$sql = pg_query( $conexion, $sql );
+		if($sql){
+			while($row = pg_fetch_row( $sql )){
+				if($row[0] == $texto){
+					echo  "<option value='$row[0]' selected>$ $row[0]</option>";	
+				}else{
+					echo  "<option value='$row[0]'>$ $row[0]</option>";	
+				}
+				if($row[1] == $texto){
+					echo  "<option value='$row[1]' selected>$ $row[1]</option>";	
+				}else{
+					echo  "<option value='$row[1]'>$ $row[1]</option>";	
+				}
+				if($row[2] == $texto){
+					echo  "<option value='$row[2]' selected>$ $row[2]</option>";	
+				}else{
+					echo  "<option value='$row[2]'>$ $row[2]</option>";	
+				}
+				if($row[3] == $texto){
+					echo  "<option value='$row[3]' selected>$ $row[3]</option>";	
+				}else{
+					echo  "<option value='$row[3]'>$ $row[3]</option>";	
+				}
+				
+				
+
 			}
 		}
 	}
