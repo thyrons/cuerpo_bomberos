@@ -1,0 +1,57 @@
+@page {
+	margin-top: 0.5em;
+	margin-left: 1em;
+	margin-bottom: 1em;
+	margin-right: 1em;	
+}
+body{	
+	font:12px Arial, Tahoma, Verdana, Helvetica, sans-serif;
+	background-color:#fff;
+	color:#000;
+	margin:0;
+	padding: 0;	
+	height: 100%;	
+}
+
+#cabecera{
+	border: solid 1px;
+	width: 100%;
+	margin: 0;
+	padding: 0;	
+	height: 110px;
+	display: inline-block;
+}
+#general{
+	border: solid 1px;
+	width: 100%;
+	margin: 0;
+	padding: 0;	
+	height: 140px;	
+}
+#general table{
+	margin-top: -3px;
+	padding: 0px;
+}
+#proteccion{
+	border: solid 1px;
+	width: 100%;
+	margin: 0;
+	padding: 0;	
+	height: 210px;	
+}
+#proteccion table{
+	margin-top: -3px;
+	padding: 0px;
+}
+#cabecera #imagen img{	
+	height: 100px;	
+
+}
+#cabecera #imagen{
+	/*border: solid 1px;*/
+	width: 25%;	
+	height: 100px;
+	text-align: right;	
+	display: inline-block;
+}
+
