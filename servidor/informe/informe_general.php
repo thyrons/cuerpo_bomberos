@@ -4,6 +4,7 @@
 	$data;
 	$conexion = conectarse();
 	$id = id_tabla($conexion,"informe_general","id_informe_general");
+	session_start();
 	///////////////valores imagen//////////
 	$extension = explode(".", $_FILES["archivo"]["name"]);
 	$extension = end($extension);
@@ -41,11 +42,11 @@
 			$data = 2; /// error al guardar
 		}
 		if ($nombre == "") {
-			$sql ="insert into informe_confirmar values ('$id','$id','".strtoupper($_POST['disposiciones_finales'])."','".strtoupper($_POST['observaciones_finales'])."','".strtoupper($_POST['resolucion'])."','".strtoupper($_POST['para_extender_permiso'])."','".strtoupper($_POST['plazo'])."','".strtoupper($_POST['check_anexo'])."','".strtoupper($_POST['check_permiso'])."','')";					
+			$sql ="insert into informe_confirmar values ('$id','$id','".strtoupper($_POST['disposiciones_finales'])."','".strtoupper($_POST['observaciones_finales'])."','".strtoupper($_POST['resolucion'])."','".strtoupper($_POST['para_extender_permiso'])."','".strtoupper($_POST['plazo'])."','".strtoupper($_POST['check_anexo'])."','".strtoupper($_POST['check_permiso'])."','','$_POST[documentos_adjuntos]','$_SESSION[id]')";					
 		}else{
 			$foto = $id . '.' . $extension;
 			move_uploaded_file($_FILES["archivo"]["tmp_name"], "../../fotos/" . $foto);	
-			$sql ="insert into informe_confirmar values ('$id','$id','".strtoupper($_POST['disposiciones_finales'])."','".strtoupper($_POST['observaciones_finales'])."','".strtoupper($_POST['resolucion'])."','".strtoupper($_POST['para_extender_permiso'])."','".strtoupper($_POST['plazo'])."','".strtoupper($_POST['check_anexo'])."','".strtoupper($_POST['check_permiso'])."','$foto')";					
+			$sql ="insert into informe_confirmar values ('$id','$id','".strtoupper($_POST['disposiciones_finales'])."','".strtoupper($_POST['observaciones_finales'])."','".strtoupper($_POST['resolucion'])."','".strtoupper($_POST['para_extender_permiso'])."','".strtoupper($_POST['plazo'])."','".strtoupper($_POST['check_anexo'])."','".strtoupper($_POST['check_permiso'])."','$foto','$_POST[documentos_adjuntos]','$_SESSION[id]')";					
 		}
 		$guardar = guardarSql($conexion,$sql);
 		if( $guardar == 'true'){
@@ -83,11 +84,11 @@
 			$data = 2; /// error al guardar
 		}
 		if ($nombre == "") {			
-			$sql ="update informe_confirmar set disposiciones_finales='".strtoupper($_POST['disposiciones_finales'])."',observaciones_finales='".strtoupper($_POST['observaciones_finales'])."',resolucion='".strtoupper($_POST['resolucion'])."',para_extender='".strtoupper($_POST['para_extender_permiso'])."',plazo='".strtoupper($_POST['plazo'])."',anexo='".strtoupper($_POST['check_anexo'])."',permiso='".strtoupper($_POST['check_permiso'])."' where id_confirmar='$_POST[id_informe_empresa]'";			
+			$sql ="update informe_confirmar set disposiciones_finales='".strtoupper($_POST['disposiciones_finales'])."',observaciones_finales='".strtoupper($_POST['observaciones_finales'])."',resolucion='".strtoupper($_POST['resolucion'])."',para_extender='".strtoupper($_POST['para_extender_permiso'])."',plazo='".strtoupper($_POST['plazo'])."',anexo='".strtoupper($_POST['check_anexo'])."',permiso='".strtoupper($_POST['check_permiso'])."',documentos='$_POST[documentos_adjuntos]' where id_confirmar='$_POST[id_informe_empresa]'";			
 		}else{			
 			$foto = $_POST['id_informe_empresa'] . '.' . $extension;
 			move_uploaded_file($_FILES["archivo"]["tmp_name"], "../../fotos/" . $foto);	
-			$sql ="update informe_confirmar set disposiciones_finales='".strtoupper($_POST['disposiciones_finales'])."',observaciones_finales='".strtoupper($_POST['observaciones_finales'])."',resolucion='".strtoupper($_POST['resolucion'])."',para_extender='".strtoupper($_POST['para_extender_permiso'])."',plazo='".strtoupper($_POST['plazo'])."',anexo='".strtoupper($_POST['check_anexo'])."',permiso='".strtoupper($_POST['check_permiso'])."',foto='$foto' where id_confirmar='$_POST[id_informe_empresa]'";
+			$sql ="update informe_confirmar set disposiciones_finales='".strtoupper($_POST['disposiciones_finales'])."',observaciones_finales='".strtoupper($_POST['observaciones_finales'])."',resolucion='".strtoupper($_POST['resolucion'])."',para_extender='".strtoupper($_POST['para_extender_permiso'])."',plazo='".strtoupper($_POST['plazo'])."',anexo='".strtoupper($_POST['check_anexo'])."',permiso='".strtoupper($_POST['check_permiso'])."',foto='$foto',documentos='$_POST[documentos_adjuntos]' where id_confirmar='$_POST[id_informe_empresa]'";
 		}
 		$guardar = guardarSql($conexion,$sql);
 		if( $guardar == 'true'){

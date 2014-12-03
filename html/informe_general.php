@@ -956,6 +956,14 @@
                       <input type="text" class="form-control" id='para_extender_permiso' name="para_extender_permiso" data-toggle="tooltip" data-original-title="Documentos que toca presentar para dar el permiso" style="text-transform: uppercase">  
                     </div>
                   </div>
+                  <div class="form-group col-md-12">
+                    <div class="col-sm-4">
+                      <label class="col-sm-12 control-label" for='documentos_adjuntos'> DOCUMENTOS QUE SE ADJUNTAN</label>
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" id='documentos_adjuntos' name="documentos_adjuntos" data-toggle="tooltip" data-original-title="Documentos que se adjuntaron al informe" style="text-transform: uppercase">  
+                    </div>
+                  </div>
                   <div class="form-group col-sm-12">
                     <div class="row">
                       <div class="col-sm-12">                        

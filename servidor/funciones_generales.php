@@ -210,4 +210,14 @@
 			echo $data = json_encode($data);
 		}
 	}
+	function reporte ($conexion, $sql)
+	{
+		$sql = pg_query( $conexion, $sql);
+		$sql = pg_fetch_array($sql);
+		return $sql;
+	}
+	function maxCaracter($texto, $cant){		
+		$texto = substr($texto, 0,$cant);
+		return $texto;
+	}
 ?>

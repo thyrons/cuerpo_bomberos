@@ -14,7 +14,7 @@ body{
 }
 
 #cabecera{
-	border: solid 1px;
+	border: solid 0px;
 	width: 100%;
 	margin: 0;
 	padding: 0;	
@@ -42,6 +42,28 @@ body{
 #proteccion table{
 	margin-top: -3px;
 	padding: 0px;
+}
+#prevencion{
+	border: solid 1px;
+	width: 100%;
+	margin: 0;
+	padding: 0;	
+	height: 218px;	
+}
+#prevencion table{
+	margin-top: -3px;
+	padding: 0px;
+}
+#riesgo{
+	border: solid 1px;
+	width: 100%;
+	margin: 0;
+	padding: 0;	
+	height: 400px;		
+}
+#riesgo table{
+	margin-top: -3px;
+	padding: 0px;	
 }
 #cabecera #imagen img{	
 	height: 100px;	

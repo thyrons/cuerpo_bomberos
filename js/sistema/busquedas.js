@@ -279,7 +279,7 @@ function buscar_informe(width){
                     '121','122','123','124','125','126','127','128','129','130',
                     '131','132','133','134','135','136','137','138','139','140',
                     '141','142','143','144','145','146','147','148','149','150',
-                    '151','152','153','154','155','156','157','158'],
+                    '151','152','153','154','155','156','157','158','159'],
                     
         colModel:[      
             {name:'id_informe_empresa',index:'id_informe_empresa',frozen:true,align:'center',search:false,hidden:true},
@@ -442,6 +442,7 @@ function buscar_informe(width){
             {name:'check_anexo',index:'check_anexo',frozen : true,align:'left',search:true,hidden:true},
             {name:'nro_registro',index:'nro_registro',frozen : true,align:'left',search:true,hidden:true},
             {name:'fotos',index:'fotos',frozen : true,align:'left',search:true,hidden:true},                                    
+            {name:'documentos_adjuntos',index:'documentos_adjuntos',frozen : true,align:'left',search:true,hidden:true},                                                
             
         ],          
         rowNum: 10,
