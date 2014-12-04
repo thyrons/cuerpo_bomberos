@@ -1,7 +1,9 @@
 .sidebar{
 	display: block;
 }
-
+ul li:hover {
+padding: 0px!important;
+}
 .tab_index .nav > li > a:hover, .tab_index .nav > li > a:focus{
 	font-weight: bold;
 	text-decoration: none;
