@@ -1,15 +1,7 @@
 .sidebar{
 	display: block;
 }
-ul li:hover {
-	/* Transition for hovers */
-	-webkit-transition: all 1s ease;
-	-moz-transition: all 1s ease;
-	-o-transition: all 1s ease;
-	transition: all 1s ease;
-	margin-left: -20px;
-	padding-left: 30px;
-}
+
 .tab_index .nav > li > a:hover, .tab_index .nav > li > a:focus{
 	font-weight: bold;
 	text-decoration: none;
@@ -86,17 +78,16 @@ ul li:hover {
 }
 .ui-widget-content{
 	z-index: 9999999999 !important;		
-	border-bottom-right-radius: 15px;
-	border-bottom-left-radius: 15px;	
+		
 	
 }
 .ui-menu .ui-state-focus,
 .ui-menu .ui-state-active {
-	margin: -1px;	
-	background:rgba(255,255,255,0.1)!important;
-	color: red!important;
-	border-top: none!important;
-	border-bottom: none!important;
+	margin: -1px;
+	*color: red!important;
+	border:none;
+	
+	
 }
 .ocultar{
 	display: none;
@@ -109,10 +100,60 @@ ul li:hover {
 	}	
 }
 
-.ui-autocomplete {
-	position: absolute;
-	top: 0;
-	left: 0;
-	cursor: default;	
-	background:#9B2C2E !important;
-}
+ 
+        .ui-widget-content
+        {
+            border: 5px solid black;
+            color: #222222;
+            background-color: red!important;
+        }
+        .ui-widget
+        {
+            font-family: Verdana,Arial,sans-serif;
+            font-size: 15px;
+        }
+        .ui-menu
+        {
+            display: block;
+            float: left;
+            list-style: none outside none;
+            margin: 0;
+            padding: 2px;
+        }
+        .ui-autocomplete
+        {	
+        	background: #EEEEEE!important;
+            cursor: default;
+            position: absolute;
+        }
+        .ui-menu .ui-menu-item
+        {
+            clear: left;
+            float: left;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        .ui-menu .ui-menu-item a
+        {
+            display: block;
+            padding: 3px 3px 3px 3px;
+            text-decoration: none;
+            cursor: pointer;
+            
+        }
+        .ui-menu .ui-menu-item a:hover
+        {
+            display: block;
+            
+            text-decoration: none;
+            color: White;
+            cursor: pointer;
+            background: #2E2D32;
+        }
+        .ui-widget-content a
+        {
+            color: #222222;
+        }
+
+
