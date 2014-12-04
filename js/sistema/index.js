@@ -953,7 +953,7 @@ function cargaInforme(id){
 	});		
 }
 function carga(valores){
-console.log(valores)		
+//console.log(valores)		
 	$("#id_informe_empresa").val(valores[0]);		
 	if(valores[1] == "SI"){
 		$("#check_per1").prop('checked', true);
