@@ -462,7 +462,7 @@ function buscar_informe(width){
             var ret = jQuery("#tabla_busquedas").jqGrid('getRowData',gsr);                        
             $("#foto").attr("src","../fotos/"+ret.fotos);
             $("#select_valor").find('option').remove();
-            $("#select_valor").load("../servidor/informe/carga_tasaB.php?texto="+ret['select_valor_i']);
+            $("#select_valor").load("../servidor/informe/carga_tasaB.php?texto="+ret['select_valor_i']+"&ids="+ret['id_inputTasa']);
                        
             $('#modalBusquedas').modal('hide');
             $("#btn_guardarInforme").text("");

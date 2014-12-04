@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (empty($_SESSION['id'])) {
+    header('Location: ../inicio.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -57,7 +63,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../index.php">Cerrar Sesión</a></li>
+            <li><a href="../inicio.php">Cerrar Sesión</a></li>
           </ul>
         </div>
       </div>

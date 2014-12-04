@@ -175,6 +175,9 @@ function inicio(){
 	/*Ingresos de empresas*/
 	$("#btn_limpiarEmpresas").on("click",limpiar_form);
 	$("#btn_guardarEmpresas").on("click",guardar_empresas);
+	$("#btn_imprimirInforme").click(function (){
+		window.open('../reportes/informe_general.php?id='+$("#id_informe_empresa").val(),'_blank');      		
+	});
 	$("#ruc_propie").keyup(function (){
 		autocompletar("ruc_propie","nombres_pro","id_propie","../servidor/empresas/buscar_empresas.php?tipo=0","ruc_empresa","representante_empresa","form_empresas");
 
@@ -788,7 +791,7 @@ function autocompletarEmpresa(campo,campoNombre,campoId,actividad,direccion,razo
 	        $( "#"+telefono ).val( ui.item.label6 );  
 			$( "#"+ubicacion ).val( ui.item.label7 );  
 			$("#"+tab).find(':input:visible:first').focus();
-			//cargarInforme(ui.item.label2);
+			cargarInforme(ui);
 	        return false;
         }     
         }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
@@ -921,20 +924,120 @@ function serializarTabla(tabla){
 }
 /**/
 function cargarInforme(id){
+	var ids = 0;
+	ids = $("#id_empresa").val();	
 	$.ajax({				
 		type: "POST",
-		data: valores+"&tipo="+tipo,
+		data: "id="+ids+"&tipo="+"0",
 		url: "../servidor/informe/cargaInforme.php",			
 	    success: function(data) {	
-	    	if( data == 0 ){
-	    		alertify.primary('Datos Agregados Correctamente');	
-				limpiar_form(p);	
-	    	}else{
-	    		if( data == 2 ){
-	    			alertify.error('Error al enviar los datos. Ingrese nuevamente');	
-	    			limpiar_form(p);
-	   			}
-	    	}
+	    	if(data == 1){
+	    		alertify.alert("<b>Esta empresa ya tiene un registro este año <br>El informe se cargara</b>", function(e){	    			
+					cargaInforme(ids);	    			
+  				});	    		
+	    	}	   		 
 		}
-	}); 
+	});		
 }
+function cargaInforme(id){
+	var ids = 0;
+	ids = $("#id_empresa").val();	
+	$.ajax({				
+		type: "POST",
+		dataType: 'json',
+		data: "id="+ids+"&tipo="+"1",
+		url: "../servidor/informe/cargaInforme.php",			
+	    success: function(data) {		    			        	    	
+	    	carga(data)		    
+		}
+	});		
+}
+function carga(valores){
+console.log(valores)		
+	$("#id_informe_empresa").val(valores[0]);		
+	if(valores[1] == "SI"){
+		$("#check_per1").prop('checked', true);
+		$("#check_per2").prop('checked', false);
+	}else{
+		$("#check_per2").prop('checked', true);
+		$("#check_per1").prop('checked', false);
+	}	
+	$("#select_valor").find('option').remove();
+    $("#select_valor").load("../servidor/informe/carga_tasaB.php?texto="+valores[13]+"&ids="+valores[11]);    
+    $("#id_inputTasa").val(valores[11]);		
+    $("#input_tasa").val(valores[13]);		    
+    $("#area_util").val(valores[14]);		    
+    $("#pe").val(valores[15]);		    
+    $("#mmr").val(valores[16]);		    
+    $("#riesgo").val(valores[17]);		    
+    $("#area_total").val(valores[18]);
+    $("#visible").val(valores[19]);
+    $("#solicitud_nro").val(valores[20]);
+    $("#ocupantes_fijos").val(valores[21]);
+    $("#flotantes").val(valores[22]);
+    $("#aforo").val(valores[23]);    
+    $("#tipo_construccion").val(valores[24]);
+    $("#techo_cubierta").val(valores[25]);
+    /*$(".radio_ventilacion").val(valores[26]);*/
+    if(valores[26] == "NATURAL"){
+		$("#radioEnLinea1").prop('checked', true);
+		$("#radioEnLinea2").prop('checked', false);
+		$("#radioEnLinea3").prop('checked', false);
+		$("#radioEnLinea4").prop('checked', false);
+	}else{
+		if(valores[26] == "MECÁNICA"){
+			$("#radioEnLinea2").prop('checked', true);
+			$("#radioEnLinea1").prop('checked', false);
+			$("#radioEnLinea3").prop('checked', false);
+			$("#radioEnLinea4").prop('checked', false);
+		}else{
+			if(valores[26] == "FUNCIONAL"){
+				$("#radioEnLinea3").prop('checked', true);
+				$("#radioEnLinea2").prop('checked', false);
+				$("#radioEnLinea1").prop('checked', false);
+				$("#radioEnLinea4").prop('checked', false);
+			}else{
+				if(valores[26] == "NO FUNCIONAL"){
+					$("#radioEnLinea4").prop('checked', true);
+					$("#radioEnLinea1").prop('checked', false);
+					$("#radioEnLinea2").prop('checked', false);
+					$("#radioEnLinea3").prop('checked', false);
+				}	
+			}	
+		}
+	}	
+    $("#disposicion").val(valores[27]);
+    $("#fecha_general").val(valores[28]);
+    $("#hora_inicio").val(valores[29]);
+    $("#hora_final").val(valores[30]);
+    /*$("#check_inspeccion").val(valores[31]);*/
+    if(valores[31] == "INSPECCION"){
+		$("#check_inspeccion").prop('checked', true);
+		$("#check_reinsperccion").prop('checked', false);
+	}else{
+		if(valores[31] == "REINSPECCION"){		
+			$("#check_reinsperccion").prop('checked', true);
+			$("#check_inspeccion").prop('checked', false);
+		}
+	}/*DATOS GENERALES*/
+	if(valores[32] == "SI"){
+		$("#check_extintor_si").prop('checked', true);
+		$("#check_extintor_no").prop('checked', false);
+		$("#check_extintor_sm").prop('checked', false);
+	}else{
+		if(valores[32] == "NO"){
+			$("#check_extintor_si").prop('checked', false);
+			$("#check_extintor_no").prop('checked', true);
+			$("#check_extintor_sm").prop('checked', false);
+		}else{
+			$("#check_extintor_si").prop('checked', false);
+			$("#check_extintor_no").prop('checked', false);
+			$("#check_extintor_sm").prop('checked', true);
+		}
+	}	
+	///
+
+
+	alertify.primary("Datos cargados correctamente.....");	   
+}
+

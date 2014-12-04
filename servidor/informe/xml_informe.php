@@ -1,7 +1,7 @@
 <?php
     include '../conexion.php';   
     include '../funciones_generales.php'; 
-    date_default_timezone_set('UTC');
+    date_default_timezone_set('America/Guayaquil');
     $fecha=date("Y");    
     $conexion = conectarse();
     $page = $_GET['page']; 
