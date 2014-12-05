@@ -459,7 +459,7 @@
                 <td style="width:60px;text-align:center;">'.$condicion21.'</td>    
                 <td style="width:60px;text-align:center;">'.$condicion22.'</td>    
                 <td style="width:260px;text-align:left;">'.maxCaracter($sql[43],28).'</td>    
-                <td style="width:30px;text-align:center;">'.maxCaracter($sql[44],28).'</td>    
+                <td style="width:30px;text-align:center;">'.maxCaracter($sql[44],5).'</td>    
             </tr>
             <tr>
                 <td style="width:90px;text-align:center;">CO2</td>    
@@ -471,7 +471,7 @@
                 <td style="width:60px;text-align:center;">'.$condicion28.'</td>    
                 <td style="width:60px;text-align:center;">'.$condicion29.'</td>    
                 <td style="width:260px;text-align:left;">'.maxCaracter($sql[49],28).'</td>    
-                <td style="width:30px;text-align:center;">'.maxCaracter($sql[50],28).'</td>     
+                <td style="width:30px;text-align:center;">'.maxCaracter($sql[50],5).'</td>     
             </tr>
             <tr>
                 <td style="width:90px;text-align:center;">Espuma</td>    
@@ -483,7 +483,7 @@
                 <td style="width:60px;text-align:center;">'.$condicion35.'</td>    
                 <td style="width:60px;text-align:center;">'.$condicion36.'</td>    
                 <td style="width:260px;text-align:left;">'.maxCaracter($sql[55],28).'</td>    
-                <td style="width:30px;text-align:center;">'.maxCaracter($sql[56],28).'</td>    
+                <td style="width:30px;text-align:center;">'.maxCaracter($sql[56],5).'</td>    
             </tr>
             <tr>
                 <td style="width:90px;text-align:center;">Agentes LImpios</td>    
@@ -495,7 +495,7 @@
                 <td style="width:60px;text-align:center;">'.$condicion42.'</td>    
                 <td style="width:60px;text-align:center;">'.$condicion43.'</td>    
                 <td style="width:260px;text-align:left;">'.maxCaracter($sql[61],28).'</td>    
-                <td style="width:30px;text-align:center;">'.maxCaracter($sql[62],28).'</td>    
+                <td style="width:30px;text-align:center;">'.maxCaracter($sql[62],5).'</td>    
             </tr>
             </table>
         </div>

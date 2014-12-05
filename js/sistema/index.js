@@ -1035,9 +1035,598 @@ function carga(valores){
 			$("#check_extintor_sm").prop('checked', true);
 		}
 	}	
-	///
+	if(valores[33] == "5"){
+		$("#checkI_1").prop('checked', true);
+		$("#checkI_2").prop('checked', false);
+		$("#checkI_3").prop('checked', false);
+		$("#checkI_4").prop('checked', false);
+		$("#checkI_5").prop('checked', false);
+	}else{		
+		if(valores[33] == "10"){
+			$("#checkI_1").prop('checked', false);
+			$("#checkI_2").prop('checked', true);
+			$("#checkI_3").prop('checked', false);
+			$("#checkI_4").prop('checked', false);
+			$("#checkI_5").prop('checked', false);
+		}else{
+			if(valores[33] == "20"){
+				$("#checkI_1").prop('checked', false);
+				$("#checkI_2").prop('checked', false);
+				$("#checkI_3").prop('checked', true);
+				$("#checkI_4").prop('checked', false);
+				$("#checkI_5").prop('checked', false);
+			}else{
+				if(valores[33] == "50"){
+					$("#checkI_1").prop('checked', false);
+					$("#checkI_2").prop('checked', false);
+					$("#checkI_3").prop('checked', false);
+					$("#checkI_4").prop('checked', true);
+					$("#checkI_5").prop('checked', false);
+				}
+			}
+		}
+	}
+	if(valores[34] == "SI"){
+		$("#checkI_6").prop('checked', true);
+		$("#checkI_7").prop('checked', false);			
+	}
+	if(valores[35] == "SI"){
+		$("#checkI_8").prop('checked', true);
+		$("#checkI_9").prop('checked', false);			
+	}
+	if(valores[36] == "SI"){
+		$("#checkI_10").prop('checked', true);
+		$("#checkI_11").prop('checked', false);			
+	}
+	$("#disposicionI1").val(valores[37]);
+	$("#cantI1").val(valores[38]);
 
+	if(valores[39] == "5"){
+		$("#checkI_12").prop('checked', true);
+		$("#checkI_13").prop('checked', false);
+		$("#checkI_14").prop('checked', false);
+		$("#checkI_15").prop('checked', false);
+		$("#checkI_16").prop('checked', false);
+	}else{		
+		if(valores[39] == "10"){
+			$("#checkI_12").prop('checked', false);
+			$("#checkI_13").prop('checked', true);
+			$("#checkI_14").prop('checked', false);
+			$("#checkI_15").prop('checked', false);
+			$("#checkI_16").prop('checked', false);
+		}else{
+			if(valores[39] == "20"){
+				$("#checkI_12").prop('checked', false);
+				$("#checkI_13").prop('checked', false);
+				$("#checkI_14").prop('checked', true);
+				$("#checkI_15").prop('checked', false);
+				$("#checkI_16").prop('checked', false);
+			}else{
+				if(valores[39] == "50"){
+					$("#checkI_12").prop('checked', false);
+					$("#checkI_13").prop('checked', false);
+					$("#checkI_14").prop('checked', false);
+					$("#checkI_15").prop('checked', true);
+					$("#checkI_16").prop('checked', false);
+				}
+			}
+		}
+	}
+	if(valores[40] == "SI"){
+		$("#checkI_17").prop('checked', true);
+		$("#checkI_18").prop('checked', false);			
+	}
+	if(valores[41] == "SI"){
+		$("#checkI_19").prop('checked', true);
+		$("#checkI_20").prop('checked', false);			
+	}
+	if(valores[42] == "SI"){
+		$("#checkI_21").prop('checked', true);
+		$("#checkI_22").prop('checked', false);			
+	}
+	$("#disposicionI2").val(valores[43]);
+	$("#cantI2").val(valores[44]);
+	if(valores[45] == "5"){
+		$("#checkI_23").prop('checked', true);
+		$("#checkI_24").prop('checked', false);
+		$("#checkI_25").prop('checked', false);
+		$("#checkI_26").prop('checked', false);
+		$("#checkI_27").prop('checked', false);
+	}else{		
+		if(valores[45] == "10"){
+			$("#checkI_23").prop('checked', false);
+			$("#checkI_24").prop('checked', true);
+			$("#checkI_25").prop('checked', false);
+			$("#checkI_26").prop('checked', false);
+			$("#checkI_27").prop('checked', false);
+		}else{
+			if(valores[45] == "20"){
+				$("#checkI_23").prop('checked', false);
+				$("#checkI_24").prop('checked', false);
+				$("#checkI_25").prop('checked', true);
+				$("#checkI_26").prop('checked', false);
+				$("#checkI_27").prop('checked', false);
+			}else{
+				if(valores[45] == "50"){
+					$("#checkI_23").prop('checked', false);
+					$("#checkI_24").prop('checked', false);
+					$("#checkI_25").prop('checked', false);
+					$("#checkI_26").prop('checked', true);
+					$("#checkI_27").prop('checked', false);
+				}
+			}
+		}
+	}
+	if(valores[46] == "SI"){
+		$("#checkI_28").prop('checked', true);
+		$("#checkI_29").prop('checked', false);			
+	}
+	if(valores[47] == "SI"){
+		$("#checkI_30").prop('checked', true);
+		$("#checkI_31").prop('checked', false);			
+	}
+	if(valores[48] == "SI"){
+		$("#checkI_32").prop('checked', true);
+		$("#checkI_33").prop('checked', false);			
+	}
+	$("#disposicionI3").val(valores[49]);
+	$("#cantI3").val(valores[50]);
+	if(valores[51] == "5"){
+		$("#checkI_34").prop('checked', true);
+		$("#checkI_35").prop('checked', false);
+		$("#checkI_36").prop('checked', false);
+		$("#checkI_37").prop('checked', false);
+		$("#checkI_38").prop('checked', false);
+	}else{		
+		if(valores[51] == "10"){
+			$("#checkI_34").prop('checked', false);
+			$("#checkI_35").prop('checked', true);
+			$("#checkI_36").prop('checked', false);
+			$("#checkI_37").prop('checked', false);
+			$("#checkI_38").prop('checked', false);
+		}else{
+			if(valores[51] == "20"){
+				$("#checkI_34").prop('checked', false);
+				$("#checkI_35").prop('checked', false);
+				$("#checkI_36").prop('checked', true);
+				$("#checkI_37").prop('checked', false);
+				$("#checkI_38").prop('checked', false);
+			}else{
+				if(valores[51] == "50"){
+					$("#checkI_34").prop('checked', false);
+					$("#checkI_35").prop('checked', false);
+					$("#checkI_36").prop('checked', false);
+					$("#checkI_37").prop('checked', true);
+					$("#checkI_38").prop('checked', false);
+				}
+			}
+		}
+	}
+	if(valores[52] == "SI"){
+		$("#checkI_39").prop('checked', true);
+		$("#checkI_40").prop('checked', false);			
+	}
+	if(valores[53] == "SI"){
+		$("#checkI_41").prop('checked', true);
+		$("#checkI_42").prop('checked', false);			
+	}
+	if(valores[54] == "SI"){
+		$("#checkI_43").prop('checked', true);
+		$("#checkI_44").prop('checked', false);			
+	}
+	$("#disposicionI4").val(valores[55]);
+	$("#cantI4").val(valores[56]);
+	if(valores[57] == "5"){
+		$("#checkI_45").prop('checked', true);
+		$("#checkI_46").prop('checked', false);
+		$("#checkI_47").prop('checked', false);
+		$("#checkI_48").prop('checked', false);
+		$("#checkI_49").prop('checked', false);
+	}else{		
+		if(valores[57] == "10"){
+			$("#checkI_45").prop('checked', false);
+			$("#checkI_46").prop('checked', true);
+			$("#checkI_47").prop('checked', false);
+			$("#checkI_48").prop('checked', false);
+			$("#checkI_49").prop('checked', false);
+		}else{
+			if(valores[57] == "20"){
+				$("#checkI_45").prop('checked', false);
+				$("#checkI_46").prop('checked', false);
+				$("#checkI_47").prop('checked', true);
+				$("#checkI_48").prop('checked', false);
+				$("#checkI_49").prop('checked', false);
+			}else{
+				if(valores[57] == "50"){
+					$("#checkI_45").prop('checked', false);
+					$("#checkI_46").prop('checked', false);
+					$("#checkI_47").prop('checked', false);
+					$("#checkI_48").prop('checked', true);
+					$("#checkI_49").prop('checked', false);
+				}
+			}
+		}
+	}
+	if(valores[58] == "SI"){
+		$("#checkI_50").prop('checked', true);
+		$("#checkI_51").prop('checked', false);			
+	}
+	if(valores[59] == "SI"){
+		$("#checkI_52").prop('checked', true);
+		$("#checkI_53").prop('checked', false);			
+	}
+	if(valores[60] == "SI"){
+		$("#checkI_54").prop('checked', true);
+		$("#checkI_55").prop('checked', false);			
+	}
+	$("#disposicionI5").val(valores[61]);
+	$("#cantI5").val(valores[62]);
+	/*proteccion*/
+	$("#cantP1").val(valores[63]);
+	if(valores[64] == "SI"){
+		$("#check_CN1").prop('checked', true);
+		$("#check_CN2").prop('checked', false);			
+	}
+	$("#cantPA1").val(valores[65]);
+	$("#lugarP1").val(valores[66]);
 
-	alertify.primary("Datos cargados correctamente.....");	   
+	$("#cantP2").val(valores[67]);
+	if(valores[68] == "SI"){
+		$("#check_CN3").prop('checked', true);
+		$("#check_CN4").prop('checked', false);			
+	}
+	$("#cantPA2").val(valores[69]);
+	$("#lugarP2").val(valores[70]);
+
+	$("#cantP3").val(valores[71]);
+	if(valores[72] == "SI"){
+		$("#check_CN5").prop('checked', true);
+		$("#check_CN6").prop('checked', false);			
+	}
+	$("#cantPA3").val(valores[73]);
+	$("#lugarP3").val(valores[74]);
+
+	$("#cantP4").val(valores[75]);
+	if(valores[76] == "SI"){
+		$("#check_CN7").prop('checked', true);
+		$("#check_CN8").prop('checked', false);			
+	}
+	$("#cantPA4").val(valores[77]);
+	$("#lugarP4").val(valores[78]);
+
+	$("#cantP5").val(valores[79]);
+	if(valores[80] == "SI"){
+		$("#check_CN9").prop('checked', true);
+		$("#check_CN10").prop('checked', false);			
+	}
+	$("#cantPA5").val(valores[81]);
+	$("#lugarP5").val(valores[82]);
+
+	$("#cantP6").val(valores[83]);
+	if(valores[84] == "SI"){
+		$("#check_CN11").prop('checked', true);
+		$("#check_CN12").prop('checked', false);			
+	}
+	$("#cantPA6").val(valores[85]);
+	$("#lugarP6").val(valores[86]);
+
+	$("#cantP7").val(valores[87]);
+	if(valores[88] == "SI"){
+		$("#check_CN13").prop('checked', true);
+		$("#check_CN14").prop('checked', false);			
+	}
+	$("#cantPA7").val(valores[89]);
+	$("#lugarP7").val(valores[90]);
+
+	$("#cantP8").val(valores[91]);
+	if(valores[92] == "SI"){
+		$("#check_CN15").prop('checked', true);
+		$("#check_CN16").prop('checked', false);			
+	}
+	$("#cantPA8").val(valores[93]);
+	$("#lugarP8").val(valores[94]);
+
+	$("#cantP9").val(valores[95]);
+	if(valores[96] == "SI"){
+		$("#check_CN17").prop('checked', true);
+		$("#check_CN18").prop('checked', false);			
+	}
+	$("#cantPA9").val(valores[97]);
+	$("#lugarP9").val(valores[98]);
+
+	$("#cantP10").val(valores[99]);
+	if(valores[100] == "SI"){
+		$("#check_CN19").prop('checked', true);
+		$("#check_CN20").prop('checked', false);			
+	}
+	$("#cantPA10").val(valores[101]);
+	$("#lugarP10").val(valores[102]);
+
+	$("#cantP11").val(valores[103]);
+	if(valores[104] == "SI"){
+		$("#check_CN21").prop('checked', true);
+		$("#check_CN22").prop('checked', false);			
+	}
+	$("#cantPA11").val(valores[105]);
+	$("#lugarP11").val(valores[106]);
+
+	$("#cantP12").val(valores[107]);
+	if(valores[108] == "SI"){
+		$("#check_CN23").prop('checked', true);
+		$("#check_CN24").prop('checked', false);			
+	}
+	$("#cantPA12").val(valores[109]);
+	$("#lugarP12").val(valores[110]);
+
+	$("#cantP13").val(valores[111]);
+	if(valores[112] == "SI"){
+		$("#check_CN25").prop('checked', true);
+		$("#check_CN26").prop('checked', false);			
+	}
+	$("#cantPA13").val(valores[113]);
+	$("#lugarP13").val(valores[114]);
+
+	$("#cantP14").val(valores[115]);
+	if(valores[116] == "SI"){
+		$("#check_CN27").prop('checked', true);
+		$("#check_CN28").prop('checked', false);			
+	}
+	$("#cantPA14").val(valores[117]);
+	$("#lugarP14").val(valores[118]);
+	/*PREVENCION*/
+	if(valores[119] == "SI"){
+		$("#checkR1").prop('checked', true);
+		$("#checkR2").prop('checked', false);			
+		$("#checkR3").prop('checked', false);			
+	}else{
+		if(valores[119] == "NO"){
+			$("#checkR1").prop('checked', false);
+			$("#checkR2").prop('checked', true);			
+			$("#checkR3").prop('checked', false);			
+		}
+	}
+	$("#observacionesR_1").val(valores[120]);
+	if(valores[121] == "SI"){
+		$("#checkR4").prop('checked', true);
+		$("#checkR5").prop('checked', false);			
+		$("#checkR6").prop('checked', false);			
+	}else{
+		if(valores[121] == "NO"){
+			$("#checkR4").prop('checked', false);
+			$("#checkR5").prop('checked', true);			
+			$("#checkR6").prop('checked', false);			
+		}
+	}
+	$("#observacionesR_2").val(valores[122]);
+	if(valores[123] == "SI"){
+		$("#checkR7").prop('checked', true);
+		$("#checkR8").prop('checked', false);			
+		$("#checkR9").prop('checked', false);			
+	}else{
+		if(valores[123] == "NO"){
+			$("#checkR7").prop('checked', false);
+			$("#checkR8").prop('checked', true);			
+			$("#checkR9").prop('checked', false);			
+		}
+	}
+	$("#observacionesR_3").val(valores[124]);
+	if(valores[125] == "SI"){
+		$("#checkR10").prop('checked', true);
+		$("#checkR11").prop('checked', false);			
+		$("#checkR12").prop('checked', false);			
+	}else{
+		if(valores[125] == "NO"){
+			$("#checkR10").prop('checked', false);
+			$("#checkR11").prop('checked', true);			
+			$("#checkR12").prop('checked', false);			
+		}
+	}
+	$("#observacionesR_4").val(valores[126]);
+	if(valores[127] == "SI"){
+		$("#checkR13").prop('checked', true);
+		$("#checkR14").prop('checked', false);			
+		$("#checkR15").prop('checked', false);			
+	}else{
+		if(valores[127] == "NO"){
+			$("#checkR13").prop('checked', false);
+			$("#checkR14").prop('checked', true);			
+			$("#checkR15").prop('checked', false);			
+		}
+	}
+	$("#observacionesR_5").val(valores[128]);
+	if(valores[129] == "SI"){
+		$("#checkR16").prop('checked', true);
+		$("#checkR17").prop('checked', false);			
+		$("#checkR18").prop('checked', false);			
+	}else{
+		if(valores[129] == "NO"){
+			$("#checkR16").prop('checked', false);
+			$("#checkR17").prop('checked', true);			
+			$("#checkR18").prop('checked', false);			
+		}
+	}
+	$("#observacionesR_6").val(valores[130]);
+	$("#observacionesR_7").val(valores[131]);
+
+	$("#almacenamiento1").val(valores[132]);
+	$("#almacenamiento2").val(valores[133]);
+	if(valores[134] == "IN"){
+		$("#checkAl1").prop('checked', true);
+		$("#checkAl2").prop('checked', false);			
+		$("#checkAl3").prop('checked', false);			
+		$("#checkAl4").prop('checked', false);			
+	}else{
+		if(valores[134] == "EX"){
+			$("#checkAl1").prop('checked', false);
+			$("#checkAl2").prop('checked', true);			
+			$("#checkAl3").prop('checked', false);			
+			$("#checkAl4").prop('checked', false);			
+		}else{
+			if(valores[134] == "AL"){
+				$("#checkAl1").prop('checked', false);
+				$("#checkAl2").prop('checked', false);			
+				$("#checkAl3").prop('checked', true);			
+				$("#checkAl4").prop('checked', false);			
+			}
+		}
+	}
+	$("#almacenamiento3").val(valores[135]);
+	$("#almacenamiento4").val(valores[136]);
+	if(valores[137] == "IN"){
+		$("#checkAl5").prop('checked', true);
+		$("#checkAl6").prop('checked', false);			
+		$("#checkAl7").prop('checked', false);			
+		$("#checkAl8").prop('checked', false);			
+	}else{
+		if(valores[137] == "EX"){
+			$("#checkAl5").prop('checked', false);
+			$("#checkAl6").prop('checked', true);			
+			$("#checkAl7").prop('checked', false);			
+			$("#checkAl8").prop('checked', false);			
+		}else{
+			if(valores[137] == "AL"){
+				$("#checkAl5").prop('checked', false);
+				$("#checkAl6").prop('checked', false);			
+				$("#checkAl7").prop('checked', true);			
+				$("#checkAl8").prop('checked', false);			
+			}
+		}
+	}
+	$("#almacenamiento5").val(valores[138]);
+	$("#almacenamiento6").val(valores[139]);
+	if(valores[140] == "IN"){
+		$("#checkAl9").prop('checked', true);
+		$("#checkAl10").prop('checked', false);			
+		$("#checkAl11").prop('checked', false);			
+		$("#checkAl12").prop('checked', false);			
+	}else{
+		if(valores[140] == "EX"){
+			$("#checkAl9").prop('checked', false);
+			$("#checkAl10").prop('checked', true);			
+			$("#checkAl11").prop('checked', false);			
+			$("#checkAl12").prop('checked', false);			
+		}else{
+			if(valores[140] == "AL"){
+				$("#checkAl9").prop('checked', false);
+				$("#checkAl10").prop('checked', false);			
+				$("#checkAl11").prop('checked', true);			
+				$("#checkAl12").prop('checked', false);			
+			}
+		}
+	}
+	$("#almacenamiento7").val(valores[141]);
+	if(valores[142] == "IN"){
+		$("#checkAl13").prop('checked', true);
+		$("#checkAl14").prop('checked', false);			
+		$("#checkAl15").prop('checked', false);			
+		$("#checkAl16").prop('checked', false);			
+	}else{
+		if(valores[142] == "EX"){
+			$("#checkAl13").prop('checked', false);
+			$("#checkAl14").prop('checked', true);			
+			$("#checkAl15").prop('checked', false);			
+			$("#checkAl16").prop('checked', false);			
+		}else{
+			if(valores[142] == "AL"){
+				$("#checkAl13").prop('checked', false);
+				$("#checkAl14").prop('checked', false);			
+				$("#checkAl15").prop('checked', true);			
+				$("#checkAl16").prop('checked', false);			
+			}
+		}
+	}
+	$("#almacenamiento8").val(valores[143]);
+	if(valores[144] == "IN"){
+		$("#checkAl17").prop('checked', true);
+		$("#checkAl18").prop('checked', false);			
+		$("#checkAl19").prop('checked', false);			
+		$("#checkAl20").prop('checked', false);			
+	}else{
+		if(valores[144] == "EX"){
+			$("#checkAl17").prop('checked', false);
+			$("#checkAl18").prop('checked', true);			
+			$("#checkAl19").prop('checked', false);			
+			$("#checkAl20").prop('checked', false);			
+		}else{
+			if(valores[144] == "AL"){
+				$("#checkAl17").prop('checked', false);
+				$("#checkAl18").prop('checked', false);			
+				$("#checkAl19").prop('checked', true);			
+				$("#checkAl20").prop('checked', false);			
+			}
+		}
+	}
+	$("#almacenamiento9").val(valores[145]);
+	if(valores[146] == "AL"){
+		$("#checkAl21").prop('checked', true);
+		$("#checkAl22").prop('checked', false);					
+	}
+	$("#almacenamiento10").val(valores[147]);
+	$("#almacenamiento11").val(valores[148]);
+	if(valores[149] == "IN"){
+		$("#checkAl23").prop('checked', true);
+		$("#checkAl24").prop('checked', false);			
+		$("#checkAl24").prop('checked', false);			
+		$("#checkAl26").prop('checked', false);			
+	}else{
+		if(valores[149] == "EX"){
+			$("#checkAl23").prop('checked', false);
+			$("#checkAl24").prop('checked', true);			
+			$("#checkAl24").prop('checked', false);			
+			$("#checkAl26").prop('checked', false);			
+		}else{
+			if(valores[149] == "AL"){
+				$("#checkAl23").prop('checked', false);
+				$("#checkAl24").prop('checked', false);			
+				$("#checkAl24").prop('checked', true);			
+				$("#checkAl26").prop('checked', false);			
+			}
+		}
+	}
+	$("#almacenamiento12").val(valores[150]);	
+	if(valores[151] == "IN"){
+		$("#checkAl27").prop('checked', true);
+		$("#checkAl28").prop('checked', false);			
+		$("#checkAl29").prop('checked', false);			
+		$("#checkAl30").prop('checked', false);			
+	}else{
+		if(valores[151] == "EX"){
+			$("#checkAl27").prop('checked', false);
+			$("#checkAl28").prop('checked', true);			
+			$("#checkAl29").prop('checked', false);			
+			$("#checkAl30").prop('checked', false);			
+		}else{
+			if(valores[151] == "AL"){
+				$("#checkAl27").prop('checked', false);
+				$("#checkAl28").prop('checked', false);			
+				$("#checkAl29").prop('checked', true);			
+				$("#checkAl30").prop('checked', false);			
+			}
+		}
+	}	
+	/*incendios*/
+	$("#disposiciones_finales").val(valores[152]);
+	$("#observaciones_finales").val(valores[153]);
+	$("#resolucion").val(valores[154]);
+	$("#para_extender_permiso").val(valores[155]);
+	$("#plazo").val(valores[156]);
+	if(valores[157] == "SI"){
+		$("#check_an1").prop('checked', true);
+		$("#check_an2").prop('checked', false);			
+		$("#check_an3").prop('checked', false);					
+	}else{
+		if(valores[157] == "NO"){
+			$("#check_an1").prop('checked', false);
+			$("#check_an2").prop('checked', true);			
+			$("#check_an3").prop('checked', false);					
+		}
+	}
+	$("#nro_registro").val(valores[158]);
+	$("#foto").attr("src","../fotos/"+valores[159]);	
+	$("#documentos_adjuntos").val(valores[160]);
+
+	$("#btn_guardarInforme").text("");
+    $("#btn_guardarInforme").append("<span class='glyphicon glyphicon-log-in'></span> Modificar");     
+	alertify.primary("Datos cargados correctamente...");	   
 }
 
