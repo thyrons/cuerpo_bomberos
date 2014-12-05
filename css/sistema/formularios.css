@@ -86,7 +86,7 @@ padding: 0px!important;
 .ui-menu .ui-state-focus,
 .ui-menu .ui-state-active {
 	margin: -1px;
-	*color: red!important;
+	
 	border:none;
 	
 	
@@ -107,7 +107,7 @@ padding: 0px!important;
         {
             border: 5px solid black;
             color: #222222;
-            background-color: red!important;
+            
         }
         .ui-widget
         {
