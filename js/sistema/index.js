@@ -547,38 +547,50 @@ function datos_empresas(valores,tipo,p){
 function guardar_Informe(){		
 	if($("#ruc_informe").val() != "" && $("#id_empresa").val() != "" && $("#nombres_propietario").val()!= ""){    	    	
     	if($("#nro_registro").val() != ""){    		
-			if($("#id_inputTasa").val() != "" && $("#input_tasa").val() != ""){
+			if($("#id_inputTasa").val() != "" && $("#input_tasa").val() != ""){				
 				alertify.confirm("<b>Recuerde Llenar todos los campos <br>Deséa Continuar?</b>", function(e){		    			
 	    			if(e){		    							
-						$("#form_informe").on("submit",function (e){		
-							var texto=($("#btn_guardarInforme").text()).trim();								
-							var formObj = $(this);		
-							if(window.FormData !== undefined) {	
-								var formData = new FormData(this); 		    
-		    					serializarTabla("tabla_incendios");
-								serializarTabla("tabla_prevencion");
-								serializarTabla("tabla_sistemaE");
-								serializarTabla("tabla_almacenamiento");
-								if(texto=="Guardar"){		
-									data_informe(formData,"g",e)  		    		    
+	    				alertify.set({ labels: {
+						    ok     : "Guardar e Imprimir",
+						    cancel : "Guardar",				    
+						} });
+						alertify.confirm("<b>Seleccione una opción</b>", function(e){		    			
+		    				var option = 0;
+		    				if(e){	
+		    					option = 0;
+		    				}else{
+		    					option = 1;
+		    				}
+		    				$("#form_informe").on("submit",function (e){		
+								var texto=($("#btn_guardarInforme").text()).trim();								
+								var formObj = $(this);		
+								if(window.FormData !== undefined) {	
+									var formData = new FormData(this); 		    
+			    					serializarTabla("tabla_incendios");
+									serializarTabla("tabla_prevencion");
+									serializarTabla("tabla_sistemaE");
+									serializarTabla("tabla_almacenamiento");
+									if(texto=="Guardar"){		
+										data_informe(formData,"g",e,option)  		    		    
+									}else{
+										data_informe(formData,"m",e,option)  		    		    
+									}
+								e.preventDefault();						
 								}else{
-									data_informe(formData,"m",e)  		    		    
+								    var  iframeId = "unique" + (new Date().getTime());
+								    var iframe = $('<iframe src="javascript:false;" name="'+iframeId+'" />');
+								    iframe.hide();
+								    formObj.attr("target",iframeId);
+								    iframe.appendTo("body");
+							    	iframe.load(function(e) {
+							        	var doc = getDoc(iframe[0]);
+								        var docRoot = doc.body ? doc.body : doc.documentElement;
+								        var data = docRoot.innerHTML;
+								    });			
 								}
-							e.preventDefault();						
-							}else{
-							    var  iframeId = "unique" + (new Date().getTime());
-							    var iframe = $('<iframe src="javascript:false;" name="'+iframeId+'" />');
-							    iframe.hide();
-							    formObj.attr("target",iframeId);
-							    iframe.appendTo("body");
-							    iframe.load(function(e) {
-							        var doc = getDoc(iframe[0]);
-							        var docRoot = doc.body ? doc.body : doc.documentElement;
-							        var data = docRoot.innerHTML;
-							    });			
-							}
-						});
-						$("#form_informe").submit();												
+							});
+							$("#form_informe").submit();	  																								
+		    			});
 					}else{								
     					alertify.error('Operación Cancelada');		    						    						    			
 					}		
@@ -602,7 +614,7 @@ function guardar_Informe(){
 		$("#ruc_informe").focus();
 	}
 }
-function data_informe(formData,tipo,p){
+function data_informe(formData,tipo,p,option){
 	$.ajax({
 	    url: "../servidor/informe/informe_general.php?tipo="+tipo,	
 	    type: "POST",
@@ -613,12 +625,20 @@ function data_informe(formData,tipo,p){
 	    processData:false,
 	    success: function(data, textStatus, jqXHR)
 	    {
+	    	alertify.set({ labels: {
+			    ok     : "Accept",
+			    cancel : "Deny"
+			} });
 	        var res=data;
-	        if(res == 0){
-	            alertify.alert("Datos Guardados Correctamente",function(){
-	            location.reload();
-	               
-	            });
+	        if(res > 0){	        	
+	        	if(option == 0){
+            		window.open('../reportes/informe_general.php?id='+res,'_blank');      		
+            		location.reload();
+            	}else{
+            		location.reload();
+            	}
+	            alertify.alert("Datos Guardados Correctamente");
+            		            	               	            
 	        } else{
 	            alertify.alert("Error..... Datos no Guardados La Página se recargara");
 	            location.reload();
@@ -834,7 +854,7 @@ function cargarTabla(idPropietario){
         url: "../servidor/empresas/cargaEmpresa.php",        
         success: function(response) {     
             for (var i = 0; i < response.length; i=i+2) {
-				$("#grupo_empresas").append("<a href='#"+response[i+0]+"' onclick='cargarEstados(this)'   class='list-group-item list-group-item-success' data-toggle='collapse' data-parent='#lista_empresas'><b>"+response[i+1]+"</b></a><div class='collapse' id='"+response[i+0]+"'><div class='table-responsive'><table class='table table-bordered table-condensed table-hover' id='tabla"+response[i+0]+"'><thead><th style='display:none;'></th><th width='15%'>RUC EMPRESA</th><th width='20%'>RAZON SOCIAL</th><th width='20%'>ACTIVIDAD</th><th width='22%'>REPRESENTANTE LEGAL</th><th width='13%'>FECHA ESTADO</th><th width='10%'>ESTADO</th><th style='display:none;'></th><th style='display:none;'></th><th style='display:none;'></th><th style='display:none;'></th></thead><tbody><tr></tr></tbody></table></div><button class='btn btn-warning' onclick='modificaEmpresa(this)' type='button'><span class='glyphicon glyphicon-edit'></span> Modificar Empresa</button><br><br>");            	
+				$("#grupo_empresas").append("<a href='#"+response[i+0]+"' onclick='cargarEstados(this)'   class='list-group-item list-group-item-success' data-toggle='collapse' data-parent='#lista_empresas'><b>"+response[i+1]+"</b></a><div class='collapse' id='"+response[i+0]+"'><div class='table-responsive'><table class='table table-bordered table-condensed table-hover' id='tabla"+response[i+0]+"'><thead><th style='display:none;'></th><th width='15%'>RUC EMPRESA</th><th width='20%'>RAZON SOCIAL</th><th width='20%'>ACTIVIDAD</th><th width='22%'>REPRESENTANTE LEGAL</th><th width='13%'>FECHA ESTADO</th><th width='10%'>PERMISO</th><th style='display:none;'>idempresa</th><th style='display:none;'>direccion</th><th style='display:none;'>telefono</th><th style='display:none;'>parroquia</th><th style='display:none;'>capital</th></thead><tbody><tr></tr></tbody></table></div><button class='btn btn-warning' onclick='modificaEmpresa(this)' type='button'><span class='glyphicon glyphicon-edit'></span> Modificar Empresa</button><br><br>");            	
             }
         }                   
     }); 
@@ -852,19 +872,20 @@ function cargarEstados(e){
         data:"id="+$("#id_propie").val()+"&tipo="+"2"+"&id_e="+hr,
         url: "../servidor/empresas/cargaEmpresa.php",        
         success: function(response) {     
-            for (var i = 0; i < response.length; i=i+11) {
-				$("#"+hre+" tbody").append( "<tr>" +
+            for (var i = 0; i < response.length; i=i+12) {
+				$("#"+hre+" tbody").append( "<tr ondblclick=imprimirReporte(this)>" +
                 "<td align=center style=display:none>" + response[i+0] + "</td>" +
                 "<td align=center>" + response[i+1] + "</td>" +             
                 "<td align=center>" + response[i+2] + "</td>" +      
                 "<td align=center>" + response[i+3] + "</td>" +      
                 "<td align=center>" + response[i+4] + "</td>" +      
                 "<td align=center>" + response[i+5] + "</td>" + 
-                "<td align=center>" + "<img style='width:10px;' src='../images/icon/"+ response[i+6] +"' />"  + "</td>" + 
+                "<td align=center>" + response[i+6]  + "</td>" + 
                 "<td align=center style=display:none>" + response[i+7] + "</td>" +
                 "<td align=center style=display:none>" + response[i+8] + "</td>" +
                 "<td align=center style=display:none>" + response[i+9] + "</td>" +
-                "<td align=center style=display:none>" + response[i+10] + "</td>" + "</tr>" );	
+                "<td align=center style=display:none>" + response[i+10] + "</td>" +
+                "<td align=center style=display:none>" + response[i+11] + "</td>" + "</tr>" );	
             }
         }                   
     }); 
@@ -876,29 +897,29 @@ function modificaEmpresa(e){
 	var tablaM = "tabla"+id_empresaM;
 	$("#"+tablaM+" tbody tr").each(function (index){
 		$(this).children("td").each(function (index) {                               
-			switch (index) {                                            
-            	case 2:
-                	$("#razon_socialEmpresa").val($(this).text());                                       
-                break;      	                                                                                                                    
-                case 1:
+			switch (index) {                                            				  
+				case 1:
                 	$("#ruc_empresa").val($(this).text());                
                 break;    
+            	case 2:
+                	$("#razon_socialEmpresa").val($(this).text());                                       
+                break;      	                                                                                                                                    
                 case 3:
                 	$("#actividad_empresa").val($(this).text());                
                 break;    
                 case 4:
                 	$("#representante_empresa").val($(this).text());                
                 break;    
-                case 7:
+                case 8:
                 	$("#direccion_empresa").val($(this).text());                
                 break;      	                                                                                                                                    	                                                                                                                    
-                case 8:
+                case 9:
                 	$("#telefono_empresa").val($(this).text());
                 break;   
-                 case 9:
+                 case 10:
                 	$("#parroquia_empresa").val($(this).text());
                 break;   
-                 case 10:
+                 case 11:
                 	$("#capital_giro").val($(this).text());
                 break;          	                                                                                                                                    	                                                                                                                    
             }        
@@ -1628,5 +1649,11 @@ function carga(valores){
 	$("#btn_guardarInforme").text("");
     $("#btn_guardarInforme").append("<span class='glyphicon glyphicon-log-in'></span> Modificar");     
 	alertify.primary("Datos cargados correctamente...");	   
+}
+function imprimirReporte(e){
+	var e =$(e).children()[0];
+	e = $(e)[0].textContent;
+	window.open('../reportes/informe_general.php?id='+e,'_blank');      		
+	
 }
 

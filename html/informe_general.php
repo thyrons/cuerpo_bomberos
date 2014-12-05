@@ -1045,14 +1045,7 @@
                       <button class="btn btn-primary col-sm-12" id="btn_buscarInforme" type="button">  
                       <span class="glyphicon glyphicon-search"></span> Buscar</button>
                     </div>                    
-                    <div class="col-sm-2">
-                      <button class="btn btn-primary col-sm-12" id="btn_atrasInforme" type="button">  
-                      <span class="glyphicon glyphicon-circle-arrow-left"></span> Atras</button>
-                    </div>
-                    <div class="col-sm-2">
-                      <button class="btn btn-primary col-sm-12" id="btn_adelanteInforme" type="button">  
-                      Adelante <span class="glyphicon glyphicon-circle-arrow-right"></span></button>
-                    </div>
+                    
                     <div class="col-sm-2">
                       <button class="btn btn-primary col-sm-12" id="btn_limpiarInforme" type="button">  
                       <span class="glyphicon glyphicon-trash"></span> Limpiar</button>
