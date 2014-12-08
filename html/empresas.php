@@ -87,22 +87,8 @@
         <button class="btn btn-primary" id="btn_limpiarEmpresas" type="button">  
         <span class="glyphicon glyphicon-edit"></span> Limpiar</button>
       </div>   
-      <style type="text/css">
-
-      </style>  
-      <div class="au">
-        <a href="#modal3" class="glyphicon glyphicon-hand-up ">Info..Ayuda</a> 
-
-      </div>
   </div>
     </div>    
 </form>
-<div id="modal3" class="modalmask">
-  <div class="modalbox resize">
-    <a href="#close" title="Close" class="close">X</a>
-      Informacion
-      <br/>
-       <img src="../images/icon/h.fw.png">
-  </div>
-</div>
+
   
