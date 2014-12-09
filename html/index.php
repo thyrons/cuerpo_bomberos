@@ -71,26 +71,17 @@ if (empty($_SESSION['id'])) {
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 sidebar tab_index" style="background: url(../images/bag.fw.png)!important;">          
-          <ul class="nav nav-pills nav-stacked ">
-            <li class="active"><a href="#tab_i"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-            <li><a href="#tab_a"><span class="glyphicon glyphicon-list-alt"></span> Informe General</a></li>
-            <li><a href="#tab_b" ><span class="glyphicon glyphicon-pushpin"></span> Propietarios</a></li>
-            <li><a href="#tab_c" ><span class="glyphicon glyphicon-share"></span> Empresas </a></li>
-            <li><a href="#tab_d" ><span class="glyphicon glyphicon-user"></span> Usuarios</a></li>
-            <li><a href="#tab_e" ><span class="glyphicon glyphicon-paperclip"></span> Servicios Administrativos </a></li>
-            <li><a href="#tab_f" ><span class="glyphicon glyphicon-wrench"></span> Tasa por Servicio </a></li>
-          </ul>
+        <div class="col-sm-3 sidebar tab_index" style="background: url(../images/bag.fw.png)!important;">                    
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                    <span class="glyphicon glyphicon-play"> Opcion 1
+                    <span class="glyphicon glyphicon-tasks"> Datos Generales
                   </a>
                 </h4>
               </div>
-              <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+              <div id="collapseOne" class="panel-collapse collapse active " role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
                   <ul class="nav nav-pills nav-stacked ">
                     <li class="active"><a href="#tab_i"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
@@ -108,20 +99,15 @@ if (empty($_SESSION['id'])) {
               <div class="panel-heading" role="tab" id="headingTwo">
                 <h4 class="panel-title">
                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    <span class="glyphicon glyphicon-play"> Opcion 2
+                    <span class="glyphicon glyphicon-tasks"> Facturación
                   </a>
                 </h4>
               </div>
               <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                 <div class="panel-body">
                   <ul class="nav nav-pills nav-stacked ">
-                    <li class="active"><a href="#tab_i"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-                    <li><a href="#tab_a"><span class="glyphicon glyphicon-list-alt"></span> Informe General</a></li>
-                    <li><a href="#tab_b" ><span class="glyphicon glyphicon-pushpin"></span> Propietarios</a></li>
-                    <li><a href="#tab_c" ><span class="glyphicon glyphicon-share"></span> Empresas </a></li>
-                    <li><a href="#tab_d" ><span class="glyphicon glyphicon-user"></span> Usuarios</a></li>
-                    <li><a href="#tab_e" ><span class="glyphicon glyphicon-paperclip"></span> Servicios Administrativos </a></li>
-                    <li><a href="#tab_f" ><span class="glyphicon glyphicon-wrench"></span> Tasa por Servicio </a></li>
+                    <li class="active"><a href="#tab_j"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
+                    <li><a href="#tab_k"><span class="glyphicon glyphicon-list-alt"></span> Informe General</a></li>                    
                   </ul>
                 </div>
               </div>
@@ -167,6 +153,16 @@ if (empty($_SESSION['id'])) {
             <div class="tab-pane" id="tab_f">
             <?php
              include 'tasa_por_servicio.php';
+            ?>
+            </div>
+            <div class="tab-pane" id="tab_j">
+            <?php
+             include 'tasa_por_servicio.php';
+            ?>
+            </div>
+            <div class="tab-pane" id="tab_k">
+            <?php
+             include 'servicios_administrativos.php';
             ?>
             </div>
           </div><!-- tab content -->

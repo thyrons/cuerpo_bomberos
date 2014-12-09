@@ -7,7 +7,7 @@
           <label class="col-sm-4 control-label" for='ci_usuario'> CI. USUARIO</label>
           <div class="col-sm-8 has-error">
             <input type="hidden" class="form-control" id='id_usuario' name="id_usuario" >  
-            <input type="text" class="form-control" id='ci_usuario' name="ci_usuario" data-toggle="tooltip" data-original-title="Solo Números. CI del usuario" maxlength="10" required pattern="[0-9]{10}" >   
+            <input type="text" class="form-control" id='ci_usuario' name="ci_usuario" data-toggle="tooltip" data-original-title="Solo Números. CI del usuario" maxlength="13" required pattern="[0-9]{10,13}" >   
           </div>
         </div>
         <div class="form-group col-md-5">

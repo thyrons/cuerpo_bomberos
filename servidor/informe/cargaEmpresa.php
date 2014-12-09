@@ -16,6 +16,8 @@
 			}else{
 				if($tipo == "3"){
 					$sql="select nombre_empresa,ruc_empresa,nombre_propietario,id_empresa,actividad_empresa,direccion_empresa,telefono_empresa,parroquia from empresa,propietario where propietario.id_propietario = empresa.id_propietario and nombre_empresa like '$texto%'";	
+				}else{
+					
 				}	
 			}	
 		}

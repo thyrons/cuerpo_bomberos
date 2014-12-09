@@ -47,7 +47,7 @@
                   </div>
                   <div class="form-group col-md-4">
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id='razon_social' placeholder="RAZÓN SOCIAL" name="razon_social" data-toggle="tooltip" data-original-title="Razón social de la empresa"  style="text-transform: uppercase">  
+                      <input type="text" class="form-control" id='razon_social' placeholder="NOMBRE COMERCIAL" name="razon_social" data-toggle="tooltip" data-original-title="Razón social de la empresa"  style="text-transform: uppercase">  
                     </div>
                   </div>
                   <div class="form-group col-md-4">
