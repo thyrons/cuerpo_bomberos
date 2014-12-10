@@ -93,13 +93,8 @@ if (empty($_SESSION['id'])) {
               <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
                   <ul class="nav nav-pills nav-stacked ">
-                    <li class="active"><a href="#tab_i"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-                    <li><a href="#tab_a"><span class="glyphicon glyphicon-list-alt"></span> Informe General</a></li>
-                    <li><a href="#tab_b" ><span class="glyphicon glyphicon-pushpin"></span> Propietarios</a></li>
-                    <li><a href="#tab_c" ><span class="glyphicon glyphicon-share"></span> Empresas </a></li>
-                    <li><a href="#tab_d" ><span class="glyphicon glyphicon-user"></span> Usuarios</a></li>
-                    <li><a href="#tab_e" ><span class="glyphicon glyphicon-paperclip"></span> Servicios Administrativos </a></li>
-                    <li><a href="#tab_f" ><span class="glyphicon glyphicon-wrench"></span> Tasa por Servicio </a></li>
+                    <li class="active"><a href="#tab_i"><span class="glyphicon glyphicon-home"></span> Op1</a></li>
+                    <li><a href="#tab_a"><span class="glyphicon glyphicon-list-alt"></span> Op2</a></li>                    
                   </ul>
                 </div>
               </div>
@@ -107,7 +102,7 @@ if (empty($_SESSION['id'])) {
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingTwo">
                 <h4 class="panel-title">
-                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" >
                     <span class="glyphicon glyphicon-play"> Opcion 2
                   </a>
                 </h4>
@@ -115,13 +110,7 @@ if (empty($_SESSION['id'])) {
               <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                 <div class="panel-body">
                   <ul class="nav nav-pills nav-stacked ">
-                    <li class="active"><a href="#tab_i"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-                    <li><a href="#tab_a"><span class="glyphicon glyphicon-list-alt"></span> Informe General</a></li>
-                    <li><a href="#tab_b" ><span class="glyphicon glyphicon-pushpin"></span> Propietarios</a></li>
-                    <li><a href="#tab_c" ><span class="glyphicon glyphicon-share"></span> Empresas </a></li>
-                    <li><a href="#tab_d" ><span class="glyphicon glyphicon-user"></span> Usuarios</a></li>
-                    <li><a href="#tab_e" ><span class="glyphicon glyphicon-paperclip"></span> Servicios Administrativos </a></li>
-                    <li><a href="#tab_f" ><span class="glyphicon glyphicon-wrench"></span> Tasa por Servicio </a></li>
+                    <li class="active"><a href="#tab_i"><span class="glyphicon glyphicon-home"></span> opc21</a></li>
                   </ul>
                 </div>
               </div>
