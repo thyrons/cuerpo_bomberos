@@ -85,12 +85,12 @@ if (empty($_SESSION['id'])) {
                 <div class="panel-body">
                   <ul class="nav nav-pills nav-stacked ">
                     <li class="active"><a href="#tab_i"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-                    <li><a href="#tab_a"><span class="glyphicon glyphicon-list-alt"></span> Informe General</a></li>
+                    <li><a href="#tab_e" ><span class="glyphicon glyphicon-paperclip"></span> Servicios Administrativos </a></li>
+                    <li><a href="#tab_f" ><span class="glyphicon glyphicon-wrench"></span> Tasa por Servicio </a></li>                    
                     <li><a href="#tab_b" ><span class="glyphicon glyphicon-pushpin"></span> Propietarios</a></li>
                     <li><a href="#tab_c" ><span class="glyphicon glyphicon-share"></span> Empresas </a></li>
-                    <li><a href="#tab_d" ><span class="glyphicon glyphicon-user"></span> Usuarios</a></li>
-                    <li><a href="#tab_e" ><span class="glyphicon glyphicon-paperclip"></span> Servicios Administrativos </a></li>
-                    <li><a href="#tab_f" ><span class="glyphicon glyphicon-wrench"></span> Tasa por Servicio </a></li>
+                    <li><a href="#tab_a"><span class="glyphicon glyphicon-list-alt"></span> Informe General</a></li>                    
+                    <li><a href="#tab_d" ><span class="glyphicon glyphicon-print"></span> Reportes</a></li>                    
                   </ul>
                 </div>
               </div>
@@ -105,13 +105,52 @@ if (empty($_SESSION['id'])) {
               </div>
               <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                 <div class="panel-body">
-                  <ul class="nav nav-pills nav-stacked ">
-                    <li class="active"><a href="#tab_j"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-                    <li><a href="#tab_k"><span class="glyphicon glyphicon-list-alt"></span> Informe General</a></li>                    
+                  <ul class="nav nav-pills nav-stacked ">                    
+                    <li><a href="#tab_j" ><span class="glyphicon glyphicon-list"></span> Ingreso Productos</a></li>                    
+                    <li><a href="#tab_k"><span class="glyphicon glyphicon-list-alt"></span> Ventas/Emisión de Permisos</a></li>                                        
+                    <li><a href="#tab_l" ><span class="glyphicon glyphicon-list"></span> Notas de Crédito</a></li>                    
+                    <li><a href="#tab_m" ><span class="glyphicon glyphicon-print"></span> Reporte Ventas</a></li>                    
                   </ul>
                 </div>
-              </div>
+              </div>              
             </div>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingTres">
+                <h4 class="panel-title">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTres" aria-expanded="false" aria-controls="collapseTres">
+                    <span class="glyphicon glyphicon-tasks"> Gastos/Compras
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseTres" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTres">
+                <div class="panel-body">
+                  <ul class="nav nav-pills nav-stacked ">         
+                    <li><a href="#tab_n" ><span class="glyphicon glyphicon-list-alt"></span> Compras</a></li>                               
+                    <li><a href="#tab_o" ><span class="glyphicon glyphicon-list"></span> Notas de Débito</a></li>                    
+                    <li><a href="#tab_p" ><span class="glyphicon glyphicon-print"></span> Reporte Compras</a></li>                    
+                  </ul>
+                </div>
+              </div>              
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingCuatro">
+                <h4 class="panel-title">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseCuatro" aria-expanded="false" aria-controls="collapseCuatro">
+                    <span class="glyphicon glyphicon-tasks"> Administración
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseCuatro" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCuatro">
+                <div class="panel-body">
+                  <ul class="nav nav-pills nav-stacked ">                    
+                    <li><a href="#tab_q"><span class="glyphicon glyphicon-user"></span> Ingreso Usuarios</a></li>                    
+                    <li><a href="#tab_r" ><span class="glyphicon glyphicon-print"></span> Reportes Generales</a></li>                    
+                  </ul>
+                </div>
+              </div>              
+            </div>
+
+
             
           </div>
           <div class="logo">
@@ -152,19 +191,19 @@ if (empty($_SESSION['id'])) {
             </div>
             <div class="tab-pane" id="tab_f">
             <?php
-             include 'tasa_por_servicio.php';
-            ?>
+              include 'tasa_por_servicio.php';
+            ?> 
             </div>
             <div class="tab-pane" id="tab_j">
             <?php
-             include 'tasa_por_servicio.php';
-            ?>
-            </div>
+              include 'productos.php';
+            ?>   
+            </div>            
             <div class="tab-pane" id="tab_k">
             <?php
-             include 'servicios_administrativos.php';
-            ?>
-            </div>
+              include 'emision_permisos.php';
+            ?>   
+            </div>            
           </div><!-- tab content -->
         </div><!-- end of container -->
       </div>        

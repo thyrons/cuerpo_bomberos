@@ -54,27 +54,36 @@ function inicio(){
 		    		var acor1 =$("#accordion").children();
 					var act1 = acor1.children().next()[0];					
 					var ac1 = $(act1).attr('id');					
-					$("#"+ac1).addClass("collapse in");
-
-		    		var acor2 =$("#accordion").children();
-					var acor2 = acor2.next();
-					var act2 = acor2.children().next()[0];						
-					var ac2 = $(act2).attr('id');
-					$("#"+ac2).removeClass("collapse in");
-					$("#"+ac2).addClass("collapse on");
+					$("#"+ac1).addClass("collapse in");		    		
 		    	}
 		    	else{
-		    		var acor1 =$("#accordion").children();
-					var act1 = acor1.children().next()[0];					
-					var ac1 = $(act1).attr('id');
-					$("#"+ac1).removeClass("collapse in");
-					$("#"+ac1).addClass("collapse on");
-
-		    		var acor2 =$("#accordion").children();
-					var acor2 = acor2.next();
-					var act2 = acor2.children().next()[0];						
-					var ac2 = $(act2).attr('id');
-					$("#"+ac2).addClass("collapse in");
+		    		if(tab == 'tab_j' || tab == 'tab_k' || tab == 'tab_l' || tab == 'tab_m'){
+		    			
+			    		var acor2 =$("#accordion").children();
+						var acor2 = acor2.next();
+						var act2 = acor2.children().next()[0];						
+						var ac2 = $(act2).attr('id');
+						$("#"+ac2).addClass("collapse in");												
+		    		}else{
+		    			if(tab == 'tab_n' || tab == 'tab_o' || tab == 'tab_p'){
+		    				var acor1 =$("#accordion").children();
+							var act1 = acor1.children().next()[2];					
+							var ac1 = $(act1).attr('id');									
+							$("#"+ac1).addClass("collapse in");							
+		    			}else{
+		    				if(tab == 'tab_q' || tab == 'tab_r' ){
+		    					var acor1 =$("#accordion").children();
+								var act1 = acor1.children().next()[3];					
+								var ac1 = $(act1).attr('id');									
+								$("#"+ac1).addClass("collapse in");					
+		    				}else{
+		    					var acor1 =$("#accordion").children();
+								var act1 = acor1.children().next()[0];					
+								var ac1 = $(act1).attr('id');					
+								$("#"+ac1).addClass("collapse in");		    		
+		    				}
+		    			}	
+		    		}		    		
 		    	}
 		    	$(this).addClass("active");	
 		    }
@@ -332,6 +341,24 @@ function inicio(){
 	$("#btn_limpiarInforme").on("click",limpiar_form);
 	$("#btn_buscarInforme").on("click",modal);
 	$("#btn_guardarInforme").on("click",guardar_Informe);
+	/*Ingresos de Productos*/
+	$("#btn_guardarProductos").on("click",guardar_productos);
+	$("#btn_limpiarProductos").on("click",limpiar_form);
+	$("#btn_buscarProductos").on("click",modal);
+	/**/
+	/*Facturas ventas / emision de permisos*/
+	$('#fecha_factura').datepicker({
+        dateFormat: 'yy-mm-dd'
+    }).datepicker('setDate', 'today');
+    $('#fecha_cancelacion').datepicker({
+        dateFormat: 'yy-mm-dd'
+    }).datepicker('setDate', 'today');
+    mostrar("hora_factura");
+	
+	$("#btn_guardarEmision").on("click",guardar_emision);
+	$("#btn_limpiarEmision").on("click",limpiar_form);
+	$("#btn_buscarEmision").on("click",modal);
+	/**/
 }
 function llenarSelect(lt,md,bg,sbg){
 	$("#select_valor").find('option').remove();
@@ -683,6 +710,46 @@ function data_informe(formData,tipo,p,option){
 	}); 
 }
 /*------------*/
+/*Formularios Productos*/
+function guardar_productos(){
+	var resp=comprobarCamposRequired("form_productos");
+	if(resp==true){
+		$("#form_productos").on("submit",function (e){	
+			var valores = $("#form_productos").serialize();
+			var texto=($("#btn_guardarProductos").text()).trim();	
+			if(texto=="Guardar"){		
+				datos_productos(valores,"g",e);
+			}else{
+				datos_productos(valores,"m",e);
+			}
+			e.preventDefault();
+    		$(this).unbind("submit")
+		});
+	}
+}
+function datos_productos(valores,tipo,p){
+	var tp = $("#tipo_iva").val();
+	$.ajax({				
+		type: "POST",
+		data: valores+"&tipo="+tipo+"&tipo_iva="+tp,
+		url: "../servidor/productos/productos.php",			
+	    success: function(data) {	
+	    	if( data == 0 ){	    		
+	    		alertify.primary('Datos Agregados Correctamente');	
+				limpiar_form(p);					
+	    	}else{
+	    		if( data == 1 ){
+	    			alertify.error('Este producto ya existe. Ingrese otro');	
+	    			limpiar_form(p);		
+	    		}else{
+	    			
+	    		}
+	    	}
+
+		}
+	}); 
+}
+/*----------------------*/
 /*function para limpiar el formulario activo y dar focus al primer elemento*/
 function limpiar_form(e){
 	if(e != undefined)
@@ -728,14 +795,32 @@ function limpiar_form(e){
 							if(form == "form_informe"){
 								location.reload();					
 							}else{
-
+								if(form == "form_productos"){
+									$("#btn_guardarProductos").text("");
+									$("#btn_guardarProductos").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
+									$("#stock_producto").val("0");
+									$("#stock_minimoProducto").val("0");
+									$("#stock_maximoProducto").val("0");
+									$("#precio_compraProducto").val("0.00");
+									$("#precio_ventaProducto").val("0.00");
+								}else{
+									if(form == "form_emisionPermisos"){
+										$('#fecha_factura').datepicker({
+									        dateFormat: 'yy-mm-dd'
+									    }).datepicker('setDate', 'today');
+									    $('#fecha_cancelacion').datepicker({
+									        dateFormat: 'yy-mm-dd'
+									    }).datepicker('setDate', 'today');
+									    
+									}
+								}
 							}
 						}
 					}
 				}	
 			}	
 		}	
-		$("input:text:visible:first").focus();
+		$("input:text:visible:first").focus();		
 	}
 }
 /*------------*/
@@ -783,6 +868,14 @@ function modal(e){
 				}else{
 					if(form == "form_informe"){
 						buscar_informe("600");	
+					}else{
+						if(form == "form_productos"){
+							buscar_productos("600");	
+						}else{
+							if(form == "form_emisionPermisos"){
+								buscar_productos("600");	
+							}
+						}
 					}	
 				}	
 			}	
@@ -1819,4 +1912,26 @@ function ci_ruc(campo){
         }    
 	
     }    	    
+}
+
+function mostrar(input) {
+    var Digital = new Date();
+    var hours = Digital.getHours();
+    var minutes = Digital.getMinutes();
+    var seconds = Digital.getSeconds();
+    var dn = "AM";    
+    if (hours > 12) {
+        dn = "PM";
+        hours = hours - 12;
+    }
+    if (hours === 0)
+        hours = 12;
+    if (minutes <= 9)
+        minutes = "0" + minutes;
+    if (seconds <= 9)
+        seconds = "0" + seconds;
+    $("#"+input).val(hours + ":" + minutes + ":" + seconds + " " + dn);
+    var input = input;
+
+    setTimeout("mostrar('"+input+"')", 1000);    
 }

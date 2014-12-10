@@ -499,3 +499,69 @@ function buscar_informe(width){
     );      
     //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
 }
+function buscar_productos(width){
+    jQuery("#tabla_busquedas").jqGrid({
+        datatype: "xml",
+        url: '../servidor/productos/xml_productos.php',        
+        colNames: ['ID','PRODUCTO','IVA %','PRECIO COMPRA','PRECIO VENTA','STOCK','STOCK MÍNIMO','STOCK MÁXIMO','CARATERISTÍCAS'],
+        colModel:[      
+            {name:'id_producto',index:'id_producto',frozen:true,align:'center',search:false},
+            {name:'nombre_producto',index:'nombre_producto',frozen : true,align:'left',search:true},
+            {name:'tipo_iva',index:'tipo_iva',frozen : true,align:'center',search:false},
+            {name:'precio_compraProducto',index:'precio_compraProducto',frozen : true,align:'center',search:false},
+            {name:'precio_ventaProducto',index:'precio_ventaProducto',frozen : true,align:'center',search:false},
+            {name:'stock_producto',index:'stock_producto',frozen : true,align:'center',search:false},
+            {name:'stock_minimoProducto',index:'stock_minimoProducto',frozen : true,align:'center',search:false},
+            {name:'stock_maximoProducto',index:'stock_maximoProducto',frozen : true,align:'center',search:false},
+            {name:'caracteristicas_producto',index:'caracteristicas_producto',frozen : true,align:'center',search:false},
+        ],          
+        rowNum: 10,
+        autowidth: true, 
+        width: '100%', 
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],
+        pager: jQuery('#pager'),        
+        sortname: 'id_producto',
+        sortordezr: 'asc',
+        caption: 'LISTA DE PRODUCTOS',
+        viewrecords: true,            
+        ondblClickRow: function(rowid) {     
+            var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');         
+            jQuery("#tabla_busquedas").jqGrid('GridToForm',gsr,"#form_productos");  
+            $('#modalBusquedas').modal('hide');
+            comprobarCamposRequired("form_productos");  
+            $("#btn_guardarProductos").text("");
+            $("#btn_guardarProductos").append("<span class='glyphicon glyphicon-log-in'></span> Modificar");     
+            
+        }
+    }).jqGrid('navGrid','#pager',{
+            add:false,
+            edit:false,
+            del:false,           
+            refresh:true,
+            search:true,
+            view:false        
+    },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+    },
+    {
+        closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,        
+        multipleSearch: false, overlay: false
+
+    },
+    {
+    },
+    {
+        closeOnEscape: true
+    }
+    ); 
+    //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
+}
