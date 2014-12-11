@@ -319,6 +319,27 @@ function inicio(){
 		autocompletarEmpresa("razon_social","ruc_informe","nombres_propietario","id_empresa","actividad","direccion","telefono","ubicacion","../servidor/informe/cargaEmpresa.php?tipo=3","tab_general");
 	});
 	
+	$("#ruc_informe").keyup(function (){
+		if($("#ruc_informe").val().length == 0){	
+			location.reload();		
+		}
+	});
+	$("#nombres_propietario").keyup(function (){
+		if($("#nombres_propietario").val().length == 0){	
+			location.reload();		
+		}
+	});
+	$("#actividad").keyup(function (){
+		if($("#actividad").val().length == 0){	
+			location.reload();		
+		}
+	});
+	$("#razon_social").keyup(function (){
+		if($("#razon_social").val().length == 0){	
+			location.reload();		
+		}
+	});
+
 	$("#input_tasa").keyup(function (){
 		if($("#input_tasa").val().length == 0){			
 			$("#id_inputTasa").val("");
@@ -354,7 +375,26 @@ function inicio(){
         dateFormat: 'yy-mm-dd'
     }).datepicker('setDate', 'today');
     mostrar("hora_factura");
-	
+	$("#ci_ruc_emision").keyup(function (){	
+		autocompletarPropietario("ci_ruc_emision","nombres_emision","id_emisionPropietario","../servidor/emision_permisos/buscar_propietario.php?tipo=0");
+	});
+	$("#nombres_emision").keyup(function (){	
+		autocompletarPropietario("nombres_emision","ci_ruc_emision","id_emisionPropietario","../servidor/emision_permisos/buscar_propietario.php?tipo=1");	
+	});
+	$("#ci_ruc_emision").keyup(function() {
+		if($("#ci_ruc_emision").val().length == 0  ){			
+			$("#ci_ruc_emision").val("");
+			$("#nombres_emision").val("");	
+			$("#id_emisionPropietario").val("");
+		}
+	});
+	$("#nombres_emision").keyup(function() {
+		if($("#nombres_emision").val().length == 0  ){			
+			$("#ci_ruc_emision").val("");
+			$("#nombres_emision").val("");	
+			$("#id_emisionPropietario").val("");
+		}
+	});	
 	$("#btn_guardarEmision").on("click",guardar_emision);
 	$("#btn_limpiarEmision").on("click",limpiar_form);
 	$("#btn_buscarEmision").on("click",modal);
@@ -811,7 +851,8 @@ function limpiar_form(e){
 									    $('#fecha_cancelacion').datepicker({
 									        dateFormat: 'yy-mm-dd'
 									    }).datepicker('setDate', 'today');
-									    
+									    $("#nro_1").val("001");
+									    $("#nro_2").val("001");									    									    
 									}
 								}
 							}
@@ -820,7 +861,8 @@ function limpiar_form(e){
 				}	
 			}	
 		}	
-		$("input:text:visible:first").focus();		
+		$("#fecha_factura").datepicker("hide")
+		$("input:not([readonly='readonly']):text:visible:first").focus();	
 	}
 }
 /*------------*/
@@ -902,6 +944,28 @@ function autocompletar(campo,campoNombre,campoId,direccion,campoCopia,campoCopia
 	        $( "#"+campoCopia1 ).val( ui.item.label2 );   
 	        comprobarCamposRequired(form);		
 	        cargarTabla(ui.item.value);
+	        return false;
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.label1 + "</a>" )
+        .appendTo( ul );
+    };
+}
+function autocompletarPropietario(campo,campoNombre,campoId,direccion){
+	$("#"+campo).autocomplete({
+        source: direccion,
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#"+campoId ).val( ui.item.value );
+	        $( "#"+campo ).val( ui.item.label1 );  
+	        $( "#"+campoNombre ).val( ui.item.label2 );  
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#"+campoId ).val( ui.item.value );
+	        $( "#"+campo ).val( ui.item.label1 );     
+	        $( "#"+campoNombre ).val( ui.item.label2 );   	        
 	        return false;
         }     
         }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {

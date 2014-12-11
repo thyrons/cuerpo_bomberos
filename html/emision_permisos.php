@@ -6,19 +6,19 @@
         <div class="form-group col-md-3">
           <label class="col-sm-3 control-label" for='fecha_factura'> FECHA</label>
           <div class="col-sm-9">            
-            <input type="text" class="form-control" id='fecha_factura' readonly name="fecha_factura" data-toggle="tooltip" data-original-title="Nombre del Producto" required pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
+            <input type="text" class="form-control" id='fecha_factura' readonly name="fecha_factura" data-toggle="tooltip" data-original-title="Nombre del Producto" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
           </div>
         </div>            
         <div class="form-group col-md-3">
           <label class="col-sm-3 control-label" for='hora_factura'> HORA</label>
           <div class="col-sm-9">            
-            <input type="text" class="form-control" id='hora_factura' readonly name="hora_factura" data-toggle="tooltip" data-original-title="Nombre del Producto" required pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
+            <input type="text" class="form-control" id='hora_factura' readonly name="hora_factura" data-toggle="tooltip" data-original-title="Nombre del Producto" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
           </div>
         </div>            
         <div class="form-group col-md-5">
           <label class="col-sm-3 control-label" for='nombre_producto'> DIGITADOR</label>
           <div class="col-sm-9">            
-            <input type="text" class="form-control" id='nombre_producto' readonly name="nombre_producto" data-toggle="tooltip" data-original-title="Nombre del Producto" required pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
+            <input type="text" class="form-control" id='nombre_producto' readonly name="nombre_producto" data-toggle="tooltip" data-original-title="Nombre del Producto" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
           </div>
         </div>   
         <div class="form-group col-md-7">
@@ -39,6 +39,37 @@
             <input type="text" class="form-control" id='fecha_cancelacion' readonly name="fecha_cancelacion" data-toggle="tooltip" data-original-title="Nombre del Producto" required pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
           </div>
         </div>             
+        <div class="form-group col-md-4">
+          <label class="col-sm-3 control-label" for='ci_ruc_emision'> CÉDULA/RUC</label>
+          <div class="col-sm-9">            
+            <input type="text" id='id_emisionPropietario'  name="id_emisionPropietario">  
+            <input type="text" class="form-control" id='ci_ruc_emision'  name="ci_ruc_emision" data-toggle="tooltip" data-original-title="Nombre del Producto" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
+          </div>
+        </div>   
+        <div class="form-group col-md-7">
+          <label class="col-sm-4 control-label" for='nombres_emision'> NOMBRES COMPLETOS</label>
+          <div class="col-sm-7">            
+            <input type="text" class="form-control" id='nombres_emision'  name="nombres_emision" data-toggle="tooltip" data-original-title="Nombre del Producto" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
+          </div>
+        </div>  
+        <div class="form-group col-md-4 ocultar">
+          <label class="col-sm-3 control-label" for=''> DIRECCIÓN</label>
+          <div class="col-sm-9">            
+            <input type="text" class="form-control" id='' readonly name="" data-toggle="tooltip" data-original-title="Nombre del Producto" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
+          </div>
+        </div>   
+        <div class="form-group col-md-3 ocultar">
+          <label class="col-sm-4 control-label" for=''> TELÉFONO</label>
+          <div class="col-sm-8">            
+            <input type="text" class="form-control" id='' readonly name="" data-toggle="tooltip" data-original-title="Nombre del Producto" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
+          </div>
+        </div>   
+        <div class="form-group col-md-4 ocultar">
+          <label class="col-sm-4 control-label" for=''> EMAIL</label>
+          <div class="col-sm-8">            
+            <input type="text" class="form-control" id='' readonly name="" data-toggle="tooltip" data-original-title="Nombre del Producto" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
+          </div>
+        </div>    
       </div>
     </div>
     <div class="panel-footer form-footer">

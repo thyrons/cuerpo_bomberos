@@ -75,6 +75,9 @@ padding: 0px!important;
 #tab_informe .form-group{
 	margin-bottom: 8px;
 }
+#form_emisionPermisos .form-group{
+    margin-bottom: 5px;
+}
 #lista_empresas table thead th{
 	text-align: center;
 }
