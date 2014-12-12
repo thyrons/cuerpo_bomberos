@@ -395,6 +395,9 @@ function inicio(){
 			$("#id_emisionPropietario").val("");
 		}
 	});	
+	$("#nro_factura_preimpresa").blur(function (){
+		zeros($("#nro_factura_preimpresa").val().length,"nro_factura_preimpresa");
+	})
 	$("#btn_guardarEmision").on("click",guardar_emision);
 	$("#btn_limpiarEmision").on("click",limpiar_form);
 	$("#btn_buscarEmision").on("click",modal);
@@ -1998,4 +2001,12 @@ function mostrar(input) {
     var input = input;
 
     setTimeout("mostrar('"+input+"')", 1000);    
+}
+function zeros(tamaño,input){
+	var zero="";
+	for(var i = tamaño; i < 9; i++){
+		zero = zero + "0"
+	}
+	zero = zero + $("#"+input).val()
+	$("#"+input).val(zero);
 }

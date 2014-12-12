@@ -36,13 +36,13 @@
         <div class="form-group col-md-4">
           <label class="col-sm-5 control-label" for='fecha_cancelacion'> F. CANCELACIÓN</label>
           <div class="col-sm-6  ">            
-            <input type="text" class="form-control" id='fecha_cancelacion' readonly name="fecha_cancelacion" data-toggle="tooltip" data-original-title="Nombre del Producto" required pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
+            <input type="text" class="form-control" id='fecha_cancelacion' readonly name="fecha_cancelacion" data-toggle="tooltip" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
           </div>
         </div>             
         <div class="form-group col-md-4">
           <label class="col-sm-3 control-label" for='ci_ruc_emision'> CÉDULA/RUC</label>
           <div class="col-sm-9">            
-            <input type="text" id='id_emisionPropietario'  name="id_emisionPropietario">  
+            <input type="hidden" id='id_emisionPropietario'  name="id_emisionPropietario">  
             <input type="text" class="form-control" id='ci_ruc_emision'  name="ci_ruc_emision" data-toggle="tooltip" data-original-title="Nombre del Producto" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
           </div>
         </div>   
