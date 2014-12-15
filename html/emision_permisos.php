@@ -69,6 +69,41 @@
           <div class="col-sm-8">            
             <input type="text" class="form-control" id='' readonly name="" data-toggle="tooltip" data-original-title="Nombre del Producto" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
           </div>
+        </div>
+        <div class="form-group col-md-11">          
+          
+        </div>
+        <div class="form-group col-md-11">          
+          <div class="col-sm-2">                        
+            <label class="control-label" for='cod_productoEmision'> CÓDIGO</label>
+          </div>        
+          <div class="col-sm-5">                        
+            <label class="control-label" for='nombre_productoEmision'> PRODUCTO</label>
+          </div>        
+          <div class="col-sm-2">                        
+            <label class="control-label" for='cantidadEmision'> CANTIDAD</label>
+          </div>                    
+          <div class="col-sm-2">                        
+            <label class="control-label" for='precio_ventaEmision'> PRECIO VENTA</label>
+          </div>
+        </div>     
+        <div class="form-group col-md-11">          
+          <div class="col-sm-2">                        
+            <input type="text" class="form-control" id='cod_productoEmision'  name="cod_productoEmision" style="text-transform: uppercase">  
+          </div>        
+          <div class="col-sm-5">                        
+            <input type="text" class="form-control" id='nombre_productoEmision'  name="nombre_productoEmision" style="text-transform: uppercase">  
+          </div>        
+          <div class="col-sm-2">                        
+            <input type="number" class="form-control" id='cantidadEmision'  name="cantidadEmision" style="text-transform: uppercase">  
+          </div>                   
+          <div class="col-sm-2">                        
+            <input type="text" class="form-control" id='precio_ventaEmision'  name="precio_ventaEmision" style="text-transform: uppercase">  
+          </div>
+        </div> 
+        <div class="form-group col-md-10">          
+          <br />          
+          <table id="lista_factura"></table>          
         </div>    
       </div>
     </div>

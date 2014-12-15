@@ -39,6 +39,9 @@ padding: 0px!important;
 #modalBusquedas .ui-widget{
 	font-size: 12px;
 }
+#modalInformes{
+    font-size: 11px;
+}
 .negrilla{
 	font-weight: bold;
 	color: #000;

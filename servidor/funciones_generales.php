@@ -198,7 +198,7 @@
 			$lista[]=$row[11];				
 		}	
     	echo $lista=json_encode($lista); 
-	}
+	}	
 	function cargaEmpresasEstados1($conexion, $sql){
 		$lista = array();
 		$sql=pg_query($sql);   

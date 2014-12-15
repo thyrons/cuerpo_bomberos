@@ -397,7 +397,77 @@ function inicio(){
 	});	
 	$("#nro_factura_preimpresa").blur(function (){
 		zeros($("#nro_factura_preimpresa").val().length,"nro_factura_preimpresa");
-	})
+	});
+	/*tabla factura*/	
+	jQuery("#lista_factura").jqGrid({
+        datatype: "local",
+        colNames: ['', 'ID', 'tipo', 'Cantidad', 'Detalle', 'PVP', 'Total'],
+        colModel: [
+            {name: 'myac', width: 70, fixed: true, sortable: false, resize: false, formatter: 'actions',
+                formatoptions: {keys: false, delbutton: true, editbutton: false}
+            },
+            {name: 'id_producto', index: 'id_producto', editable: false, search: false, hidden: false, editrules: {edithidden: false}, align: 'left',
+                frozen: true, width: 100},
+            {name: 'tipo', index: 'tipo', editable: false, search: false, hidden: false, editrules: {edithidden: false}, align: 'left',
+                frozen: true, width: 200},
+            {name: 'cantidad', index: 'cantidad', editable: true, frozen: true, editrules: {required: true}, align: 'center', width: 100},
+            {name: 'detalle', index: 'detalle', editable: false, frozen: true, editrules: {required: true}, align: 'left', width:500},            
+            {name: 'precio_u', index: 'precio_u', editable: true, search: false, frozen: true, editrules: {required: true}, align: 'center', width: 110, editoptions:{maxlength: 10, size:15}},             
+            {name: 'total', index: 'total', editable: false, search: false, frozen: true, editrules: {required: true}, align: 'center', width: 110},            
+        ],
+        rowNum: 30, 
+        width: null,              
+        height: 150,
+        rownumbers: true,
+        sortable: true,
+        rowList: [10, 20, 30],
+        pager: jQuery('#pager'),
+        sortname: 'id_producto',
+        sortorder: 'asc',
+        viewrecords: true,
+        cellEdit: true,
+        cellsubmit: 'clientArray',
+        shrinkToFit: false,
+        delOptions: {
+            modal: true,
+            jqModal: true,
+            onclickSubmit: function(rp_ge, rowid) {
+                var id = jQuery("#lista_factura").jqGrid('getGridParam', 'selrow');
+                var filas = jQuery("#lista_factura").jqGrid("getRowData");
+                jQuery('#lista_factura').jqGrid('restoreRow', id);
+                var ret = jQuery("#lista_factura").jqGrid('getRowData', id);
+                var rids = $('#lista_factura').jqGrid('getDataIDs');            
+                rp_ge.processing = true;
+                var id_producto = ret.id_producto;
+                var tipo = ret.tipo;
+                var pos1 = 0;
+                var pos2 = 0;                
+                if(tipo == "producto"){
+					jQuery("#lista_factura").jqGrid('delRowData', rowid);                                
+                }else{
+                	for (var i = 0; i < filas.length; i++) {
+	                    var id = filas[i];                                        
+	                    if (id['tipo'] == "informe") {
+	                        pos1 = rids[i];                        	                        
+	                    }else{
+	                        if (id['tipo'] == "tasa") {
+	                            pos2 = rids[i];                            	                            
+	                        }
+	                    }
+                	}  
+                	jQuery("#lista_factura").jqGrid('delRowData', pos1);                                
+                	jQuery("#lista_factura").jqGrid('delRowData', pos2);                                
+                }                     
+                $(".ui-icon-closethick").trigger('click');
+                return true;
+            },
+            processing: true
+        },
+        afterSaveCell : function(rowid,name,val,iRow,iCol) {
+        }
+  	});
+	jQuery("#lista_factura").jqGrid('hideCol', "tipo");    
+	/**/
 	$("#btn_guardarEmision").on("click",guardar_emision);
 	$("#btn_limpiarEmision").on("click",limpiar_form);
 	$("#btn_buscarEmision").on("click",modal);
@@ -968,7 +1038,8 @@ function autocompletarPropietario(campo,campoNombre,campoId,direccion){
 	    select: function( event, ui ) {
 	        $( "#"+campoId ).val( ui.item.value );
 	        $( "#"+campo ).val( ui.item.label1 );     
-	        $( "#"+campoNombre ).val( ui.item.label2 );   	        
+	        $( "#"+campoNombre ).val( ui.item.label2 );   	  
+	        informesGenerales();      
 	        return false;
         }     
         }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
@@ -2009,4 +2080,13 @@ function zeros(tamaño,input){
 	}
 	zero = zero + $("#"+input).val()
 	$("#"+input).val(zero);
+}
+function informesGenerales(){	
+	$("#busquedasModificar").html("");
+	$("#busquedasModificar").append("<table id='tabla_busquedas'></table><div id='pager'></div>");
+	$("#pager").html("");
+	$('#modalBusquedas').modal('show');
+	buscar_informes_propietarios("600");	
+	
+
 }

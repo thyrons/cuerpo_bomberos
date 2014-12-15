@@ -565,3 +565,149 @@ function buscar_productos(width){
     ); 
     //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
 }
+function buscar_informes_propietarios(width){
+    jQuery("#tabla_busquedas").jqGrid({
+        datatype: "xml",
+        url: '../servidor/informe/informes.php?id_prop='+$("#id_emisionPropietario").val(),                
+        colNames: ['id_informe_general','id_empresa','EMPRESA','REPRESENTATE','ACTIVIDAD','RUC','TASA','NOMBRE TASA','VALOR','FEHCA','PERMISO'],
+        colModel:[      
+            {name:'id_informe_general',index:'id_informe_general',frozen:true,align:'center',search:false},
+            {name:'id_empresa',index:'id_empresa',frozen : true,align:'left',search:true},
+            {name:'nombre_empresa',index:'nombre_empresa',frozen : true,align:'center',search:true},
+            {name:'representante_legal',index:'representante_legal',frozen : true,align:'center',search:true},
+            {name:'actividad_empresa',index:'actividad_empresa',frozen : true,align:'center',search:true},
+            {name:'ruc_empresa',index:'ruc_empresa',frozen : true,align:'center',search:true},
+            {name:'id_tasa',index:'id_tasa',frozen : true,align:'center',search:true},
+            {name:'nombre_tasa',index:'nombre_tasa',frozen : true,align:'center',search:true},
+            {name:'valor_tasa',index:'valor_tasa',frozen : true,align:'center',search:true},
+            {name:'fecha_general',index:'fecha_general',frozen : true,align:'center',search:false},
+            {name:'permiso',index:'permiso',frozen : true,align:'center',search:false},            
+        ],          
+        rowNum: 10,
+        autowidth: true, 
+        width: '100%', 
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],        
+        pager: jQuery('#pager'),        
+        sortname: 'id_informe_general',
+        sortordezr: 'asc',
+        caption: 'LISTA DE INFORMES GENERALES',
+        viewrecords: true,            
+        ondblClickRow: function(rowid) {                 
+            var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');                                 
+            var ret = jQuery("#tabla_busquedas").jqGrid('getRowData',gsr);                        
+            var filas = jQuery("#lista_factura").jqGrid("getRowData");
+            var rids = $('#lista_factura').jqGrid('getDataIDs');                        
+            var per = "PERMISO DE FUNCIONAMIENTO AÑO " +ret.fecha_general.substring(0,4);                        
+            if (filas.length === 0) {                
+                var datarow = {
+                    id_producto: "idf"+ret.id_informe_general,//referente al id informe general
+                    tipo: "informe", 
+                    detalle: per, 
+                    cantidad: '1', 
+                    precio_u: "0.00",                     
+                    total: "0.00",                     
+                };
+                su = jQuery("#lista_factura").jqGrid('addRowData', ret.id_informe_general, datarow);
+                var datarow = {
+                    id_producto: "idt"+ret.id_tasa,//refernte al id tasa de servicio
+                    tipo: "tasa", 
+                    detalle: ret.nombre_tasa, 
+                    cantidad: '1', 
+                    precio_u: ret.valor_tasa,                     
+                    total: ret.valor_tasa,                     
+                };
+                su = jQuery("#lista_factura").jqGrid('addRowData', ret.id_tasa, datarow);
+            }else{
+                var repe = 0;
+                var pos1 = 0;
+                var pos2 = 0;                                
+                for (var i = 0; i < filas.length; i++) {
+                    var id = filas[i];                                        
+                    if (id['tipo'] == "informe") {
+                        pos1 = rids[i];                        
+                        repe = 1;
+                    }else{
+                        if (id['tipo'] == "tasa") {
+                            pos2 = rids[i];                            
+                            repe = 1;
+                        }
+                    }
+                }                
+                if(repe == 0){
+                    var datarow = {
+                        id_producto: "idf"+ret.id_informe_general,//referente al id informe general
+                        tipo: "informe", 
+                        detalle: per, 
+                        cantidad: '1', 
+                        precio_u: "0.00",                     
+                        total: "0.00",                     
+                    };
+                    su = jQuery("#lista_factura").jqGrid('addRowData', ret.id_informe_general, datarow);
+                    var datarow = {
+                        id_producto: "idt"+ret.id_tasa,//refernte al id tasa de servicio
+                        tipo: "tasa", 
+                        detalle: ret.nombre_tasa, 
+                        cantidad: '1', 
+                        precio_u: ret.valor_tasa,                     
+                        total: ret.valor_tasa,                     
+                    };
+                    su = jQuery("#lista_factura").jqGrid('addRowData', ret.id_tasa, datarow);
+                }else{                   
+                    var datarow = {
+                        id_producto: "idf"+ret.id_informe_general,//referente al id informe general
+                        tipo: "informe", 
+                        detalle: per, 
+                        cantidad: '1', 
+                        precio_u: "0.00",                     
+                        total: "0.00",                     
+                    };                                        
+                    jQuery("#lista_factura").jqGrid('setRowData', pos1, datarow)
+                    var datarow1 = {
+                        id_producto: "idt"+ret.id_tasa,//refernte al id tasa de servicio
+                        tipo: "tasa", 
+                        detalle: ret.nombre_tasa, 
+                        cantidad: '1', 
+                        precio_u: ret.valor_tasa,                     
+                        total: ret.valor_tasa,                     
+                    };
+                    jQuery("#lista_factura").jqGrid('setRowData', pos2, datarow1);
+
+                }
+            }
+            $('#modalBusquedas').modal('hide');            
+
+        }
+    }).jqGrid('navGrid','#pager',{
+            add:false,
+            edit:false,
+            del:false,           
+            refresh:true,
+            search:true,
+            view:false        
+    },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+    },
+    {
+        closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,        
+        multipleSearch: false, overlay: false
+
+    },
+    {
+    },
+    {
+        closeOnEscape: true
+    }
+    ); 
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "id_informe_general");
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "id_empresa");    
+    //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
+}
