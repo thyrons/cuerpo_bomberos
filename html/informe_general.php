@@ -1,4 +1,4 @@
-<form class="form-horizontal " action="" rol="form" id="form_informe" method="post">
+ <form class="form-horizontal " action="" rol="form" id="form_informe" method="post">
   <div class="" id="tab_informe">
     <div class="tab-content">
       <div id="tab_general" class="tab-pane active cambio">

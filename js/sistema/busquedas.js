@@ -676,6 +676,8 @@ function buscar_informes_propietarios(width){
 
                 }
             }
+            /**/
+            total_factura();
             $('#modalBusquedas').modal('hide');            
 
         }

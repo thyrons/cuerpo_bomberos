@@ -403,7 +403,7 @@ function inicio(){
         datatype: "local",
         colNames: ['', 'ID', 'tipo', 'Cantidad', 'Detalle', 'PVP', 'Total'],
         colModel: [
-            {name: 'myac', width: 70, fixed: true, sortable: false, resize: false, formatter: 'actions',
+            {name: 'myac', width: 40, fixed: true, sortable: false, resize: false, formatter: 'actions',
                 formatoptions: {keys: false, delbutton: true, editbutton: false}
             },
             {name: 'id_producto', index: 'id_producto', editable: false, search: false, hidden: false, editrules: {edithidden: false}, align: 'left',
@@ -411,9 +411,9 @@ function inicio(){
             {name: 'tipo', index: 'tipo', editable: false, search: false, hidden: false, editrules: {edithidden: false}, align: 'left',
                 frozen: true, width: 200},
             {name: 'cantidad', index: 'cantidad', editable: true, frozen: true, editrules: {required: true}, align: 'center', width: 100},
-            {name: 'detalle', index: 'detalle', editable: false, frozen: true, editrules: {required: true}, align: 'left', width:500},            
-            {name: 'precio_u', index: 'precio_u', editable: true, search: false, frozen: true, editrules: {required: true}, align: 'center', width: 110, editoptions:{maxlength: 10, size:15}},             
-            {name: 'total', index: 'total', editable: false, search: false, frozen: true, editrules: {required: true}, align: 'center', width: 110},            
+            {name: 'detalle', index: 'detalle', editable: false, frozen: true, editrules: {required: true}, align: 'left', width:400},            
+            {name: 'precio_u', index: 'precio_u', editable: true, search: false, frozen: true, editrules: {required: true}, align: 'center', width: 120, editoptions:{maxlength: 10, size:15}},             
+            {name: 'total', index: 'total', editable: false, search: false, frozen: true, editrules: {required: true}, align: 'center', width: 120},            
         ],
         rowNum: 30, 
         width: null,              
@@ -456,18 +456,130 @@ function inicio(){
 	                    }
                 	}  
                 	jQuery("#lista_factura").jqGrid('delRowData', pos1);                                
-                	jQuery("#lista_factura").jqGrid('delRowData', pos2);                                
+                	jQuery("#lista_factura").jqGrid('delRowData', pos2);                     	
                 }                     
-                $(".ui-icon-closethick").trigger('click');
+                total_factura();                           
+                $(".ui-icon-closethick").trigger('click');                
                 return true;
             },
-            processing: true
+            processing: true,            
         },
-        afterSaveCell : function(rowid,name,val,iRow,iCol) {
+        afterSaveCell : function(rowid,name,val,iRow,iCol) {           
+            
+            var id = jQuery("#lista_factura").jqGrid('getGridParam', 'selrow');
+            jQuery('#lista_factura').jqGrid('restoreRow', id);
+            var ret = jQuery("#lista_factura").jqGrid('getRowData', id);            
+            if(name == 'cantidad') {
+              	var precio = jQuery("#lista_factura").jqGrid('getCell',rowid,iCol+2);              	
+               	var operacion = (parseFloat(val)* parseFloat(precio)).toFixed(2); 
+               	jQuery("#lista_factura").jqGrid('setRowData',rowid,{total: operacion });                                              
+            }else{
+            	if(name == 'precio_u') {
+	              	var cantidad = jQuery("#lista_factura").jqGrid('getCell',rowid,iCol-2);              		              	
+	               	var operacion = (parseFloat(cantidad)* parseFloat(val)).toFixed(2); 
+	               	jQuery("#lista_factura").jqGrid('setRowData',rowid,{total: operacion });                                              
+	            }
+            }   
+            total_factura();                     
         }
   	});
 	jQuery("#lista_factura").jqGrid('hideCol', "tipo");    
-	/**/
+	jQuery("#lista_factura").jqGrid('hideCol', "id_producto");    
+	/*buscador productos*/
+	$("#nombre_productoEmision").keyup(function (){	
+		autocompletarProducto("id_productoEmision","nombre_productoEmision","cantidadEmision","precio_ventaEmision","../servidor/emision_permisos/buscar_productos.php");	
+	});
+	$("#cantidadEmision").on("change keyup",function (e){
+		if(!$.isNumeric($(this).val())){
+			$(this).val("");			
+		}else{
+			var t = $("#cantidadEmision").val() * $("#precio_ventaEmision").val()
+			t = (parseFloat(t)).toFixed(2);
+			$("#precio_totalEmsiion").val(t)
+		}
+	});
+	$("#precio_ventaEmision").on("keyup",function (e){
+		if(!$.isNumeric($(this).val())){
+			$(this).val("");			
+		}else{
+			var t = $("#cantidadEmision").val() * $("#precio_ventaEmision").val()
+			t = (parseFloat(t)).toFixed(2);
+			$("#precio_totalEmsiion").val(t)
+		}
+	});
+	$("#precio_totalEmsiion").keyup(function(e){
+		var key = window.Event ? e.which : e.keyCode
+		if(key == 9){
+			if($("#nombre_productoEmision").val() == ""){
+				alert("Ingrese un producto antes de continuar");
+				$("#nombre_productoEmision").focus();
+			}else{
+				if($("#cantidadEmision").val() == ""){
+					alert("Ingrese una cantidad antes de continuar");
+					$("#cantidadEmision").focus();
+				}else{
+					if($("#precio_ventaEmision").val() == ""){
+						alert("Ingrese precio antes de continuar");
+						$("#precio_ventaEmision").focus();
+					}else{
+						var filas = jQuery("#lista_factura").jqGrid("getRowData");									            			            
+			            var rids = $('#lista_factura').jqGrid('getDataIDs');                        			            
+			            if (filas.length === 0) {                
+			                var datarow = {
+			                    id_producto: "idp"+$("#id_productoEmision").val(),//referente al id producto
+			                    tipo: "producto", 
+			                    detalle: $("#nombre_productoEmision").val(), 
+			                    cantidad: $("#cantidadEmision").val(), 
+			                    precio_u: $("#precio_ventaEmision").val(),                     
+			                    total: (parseFloat($("#cantidadEmision").val() * $("#precio_ventaEmision").val())).toFixed(2),                     
+			                };
+			                su = jQuery("#lista_factura").jqGrid('addRowData', $("#id_productoEmision").val(), datarow);			                
+			            }else{
+			            	var repe = 0;
+			                var pos1 = 0;			                                                			                
+			                for (var i = 0; i < filas.length; i++) {			                	
+			                    var id = filas[i];                  			                    
+			                    if (id.id_producto == "idp"+$("#id_productoEmision").val()) {
+			                        pos1 = rids[i];                        
+			                        repe = 1;
+			                    }			                
+			                }       			                
+			                if(repe == 0){
+			                   var datarow = {
+				                    id_producto: "idp"+$("#id_productoEmision").val(),//referente al id producto
+				                    tipo: "producto", 
+				                    detalle: $("#nombre_productoEmision").val(), 
+				                    cantidad: $("#cantidadEmision").val(), 
+				                    precio_u: $("#precio_ventaEmision").val(),                     
+				                    total: (parseFloat($("#cantidadEmision").val() * $("#precio_ventaEmision").val())).toFixed(2),                     
+				                };
+				                su = jQuery("#lista_factura").jqGrid('addRowData', $("#id_productoEmision").val(), datarow);			                
+			                }else{                   
+			                   var datarow = {
+			                    id_producto: "idp"+$("#id_productoEmision").val(),//referente al id producto
+				                    tipo: "producto", 
+				                    detalle: $("#nombre_productoEmision").val(), 
+				                    cantidad: $("#cantidadEmision").val(), 
+				                    precio_u: $("#precio_ventaEmision").val(),                     
+				                    total: (parseFloat($("#cantidadEmision").val() * $("#precio_ventaEmision").val())).toFixed(2),                     
+				                };				                
+			                    jQuery("#lista_factura").jqGrid('setRowData', pos1, datarow);								
+			                }
+			            }
+			            $("#id_productoEmision").val("");
+			            $("#nombre_productoEmision").val("");
+			            $("#nombre_productoEmision").focus();
+			            $("#cantidadEmision").val("0");
+			            $("#precio_ventaEmision").val("0.00");
+			            $("#precio_totalEmsiion").val("0.00");
+					}
+				}
+			}
+			total_factura();                           
+		}
+
+	});
+
 	$("#btn_guardarEmision").on("click",guardar_emision);
 	$("#btn_limpiarEmision").on("click",limpiar_form);
 	$("#btn_buscarEmision").on("click",modal);
@@ -863,6 +975,50 @@ function datos_productos(valores,tipo,p){
 	}); 
 }
 /*----------------------*/
+/*formulario emision*/
+function guardar_emision(){
+	var nro = nro_row();	
+	if($("#id_emisionPropietario").val() != ""){
+		if(nro > 0){
+			$("#form_emisionPermisos").on("submit",function (e){	
+				alert("asd")
+				var valores = $("#form_emisionPermisos").serialize();
+				var texto=($("#btn_guardarEmision").text()).trim();	
+				var serializar = serializarJqTabla("lista_factura");
+				if(texto=="Guardar"){		
+					datos_emision(valores,"g",e,serializar);
+				}else{
+					datos_emision(valores,"m",e,serializar);
+				}
+				e.preventDefault();
+	    		$(this).unbind("submit")
+			});
+			$("#form_emisionPermisos").submit();	 
+		}else{
+			alert("Agregue productos para poder continuar");
+			$("#nombre_productoEmision").focus();
+		}
+	}else{
+		alert("Indique un  propietario antes de continuar");
+		$("#ci_ruc_emision").focus();
+	}
+}
+function datos_emision(valores,tipo,p,serializar){	
+	var productosJSON = JSON.stringify(serializar);
+	$.ajax({				
+		type: "POST",
+		data: valores,
+		url: "../servidor/emision_permisos/emision.php?v="+productosJSON,			
+	    success: function(data) {	
+	    	if( data == 0 ){	    		
+	    		alertify.primary('Datos Agregados Correctamente');	
+				
+	    	}
+
+		}
+	});
+}
+/*------------------*/
 /*function para limpiar el formulario activo y dar focus al primer elemento*/
 function limpiar_form(e){
 	if(e != undefined)
@@ -918,14 +1074,11 @@ function limpiar_form(e){
 									$("#precio_ventaProducto").val("0.00");
 								}else{
 									if(form == "form_emisionPermisos"){
-										$('#fecha_factura').datepicker({
-									        dateFormat: 'yy-mm-dd'
-									    }).datepicker('setDate', 'today');
-									    $('#fecha_cancelacion').datepicker({
-									        dateFormat: 'yy-mm-dd'
-									    }).datepicker('setDate', 'today');
-									    $("#nro_1").val("001");
-									    $("#nro_2").val("001");									    									    
+										location.reload();
+									}else{
+										if(form == ""){
+											
+										}
 									}
 								}
 							}
@@ -1108,6 +1261,32 @@ function autocompletarTasa(campo,campo1,direccion){
     };
 }
 /*---------------*/
+/*funcion para autocompletar la parte de producto en la emision con el campo a mostar el id oculto y la direccion donde se encuentra*/
+function autocompletarProducto(campo,campo1,campo2,campo3,direccion){//id nombre cantidad precio venta direccion
+	$("#"+campo1).autocomplete({
+        source: direccion,
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#"+campo ).val( ui.item.label );
+	        $( "#"+campo1 ).val( ui.item.label1 );  	        
+	        $( "#"+campo2 ).val( ui.item.label2 );  	        
+	        $( "#"+campo3 ).val( ui.item.label3 );  	        
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#"+campo ).val( ui.item.label );
+	        $( "#"+campo1 ).val( ui.item.label1 );
+	        $( "#"+campo2 ).val( ui.item.label2 );  	        
+	        $( "#"+campo3 ).val( ui.item.label3 );  	        	        
+	        return false;
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.label1 + "</a>" )
+        .appendTo( ul );
+    };
+}
+/*---------------*/
 /*funcion para cargar la tabla de las empresas*/
 function cargarTabla(idPropietario){
 	$("#grupo_empresas").html(" ");
@@ -1185,15 +1364,35 @@ function modificaEmpresa(e){
 }
 /*-------------*/
 /*function que me permite serializar la tabla para poder enviar los datos en el submit*/
-function serializarTabla(tabla){
+function serializarTabla(tabla){	
 	var tabla_serialize = new Object();
-	$("#" +tabla+ " > tr").each(function () {
+	$("#" +tabla+ " > tr").each(function () {				
+
 	  var tablerow = $(this);
 	  $("td input", tablerow).each(function () {
-	    var input = $(this);
-	    tabla_serialize[tablerow.attr("id")][input.attr("name")] = input.val();
+	    var input = $(this);	    
 	  });
 	});
+}
+function serializarJqTabla(tabla){	
+	var tabla_serialize = new Object();
+	var filas = 0;
+	var columnas = 0;
+	var cont = 0;
+	$("#" +tabla+ " tbody > tr").each(function () {						
+		var tablerow = $(this);		
+		if(cont == 1){
+			$("td", tablerow).each(function () {
+			    var input = $(this).text();	    	    
+			    tabla_serialize[filas,columnas] = input;
+			    columnas++;
+		  	});
+		  	filas = 0;
+		  	columnas++;	
+		}
+		cont = 1;	 	
+	});
+	return tabla_serialize;
 }
 /**/
 function cargarInforme(id){
@@ -2089,4 +2288,22 @@ function informesGenerales(){
 	buscar_informes_propietarios("600");	
 	
 
+}
+function total_factura(){
+	var subtotal = 0;
+	var filas = jQuery("#lista_factura").jqGrid("getRowData");
+	for (var i = 0; i < filas.length; i++) {
+    	var id = filas[i];    
+    	subtotal = subtotal + parseFloat(id.total);	
+    }
+
+    $("#subtotal_emision").val(parseFloat(subtotal).toFixed(2));
+    $("#total_emision").val(parseFloat(subtotal).toFixed(2));
+    
+}
+function nro_row(){		
+	var filas = jQuery("#lista_factura").jqGrid("getRowData");
+	return filas.length;
+	
+    
 }
