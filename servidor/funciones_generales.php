@@ -1,4 +1,67 @@
 <?php
+	function data_text($data, $tipus=1){
+    	if ($data != '' && $tipus == 0 || $tipus == 1){
+    		$setmana = array('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado');
+    		$mes = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+    		if ($tipus == 1){
+    			//ereg('([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})', $data, $data);
+    			ereg('([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})', $data, $data);
+    			$data = mktime(0,0,0,$data[2],$data[3],$data[1]);
+    		}
+    		return $setmana[date('w', $data)].', '.date('d', $data).' '.$mes[date('m',$data)-1].' de '.date('Y', $data);
+    	}
+    	else
+    	{
+    		return 0;
+    	}
+    }
+    function data_text_dia($data, $tipus=1){
+    	if ($data != '' && $tipus == 0 || $tipus == 1){
+    		$setmana = array('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado');
+    		$mes = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+    		if ($tipus == 1){
+    			//ereg('([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})', $data, $data);
+    			ereg('([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})', $data, $data);
+    			$data = mktime(0,0,0,$data[2],$data[3],$data[1]);
+    		}
+    		return date('d', $data);
+    	}
+    	else
+    	{
+    		return 0;
+    	}
+    }
+    function data_text_mes($data, $tipus=1){
+    	if ($data != '' && $tipus == 0 || $tipus == 1){
+    		$setmana = array('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado');
+    		$mes = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+    		if ($tipus == 1){
+    			//ereg('([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})', $data, $data);
+    			ereg('([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})', $data, $data);
+    			$data = mktime(0,0,0,$data[2],$data[3],$data[1]);
+    		}
+    		//return $setmana[date('w', $data)].', '.date('d', $data).' '.$mes[date('m',$data)-1].' de '.date('Y', $data);
+    		return $mes[date('m',$data)-1];
+    	}
+    	else
+    	{
+    		return 0;
+    	}
+    }
+    function data_text_anio($data, $tipus=1){
+    	if ($data != '' && $tipus == 0 || $tipus == 1){    	
+    		if ($tipus == 1){
+    			//ereg('([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})', $data, $data);
+    			ereg('([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})', $data, $data);
+    			$data = mktime(0,0,0,$data[2],$data[3],$data[1]);
+    		}
+    		return date('Y', $data);    		
+    	}
+    	else
+    	{
+    		return 0;
+    	}
+    }
 	function id_tabla($conexion,$tabla,$id){
 		$cont=0;
 		$sql="select max($id) from $tabla";
@@ -25,6 +88,50 @@
 	    $cont++;
 	    return $cont;
 	}
+	function session_activa(){
+		session_start();
+		return $_SESSION['id'];
+	}
+	function atras_no($id_tabla, $tabla, $campo_ordenar,$sesion){
+		$sql = "select ".$id_tabla." from ".$tabla. " where id_usuario = '".$sesion. "' order by ".$campo_ordenar. " desc limit 1";
+		$sql = pg_query($sql);
+		while($row = pg_fetch_row($sql)){
+			return $row[0];			
+		}
+	}
+	function atras($id_tabla, $tabla, $campo_ordenar,$sesion,$id){
+		$sql = "select ".$id_tabla." from ".$tabla." where id_usuario = '".$sesion."' and ".$id_tabla." not in (select ".$id_tabla." from ".$tabla." where id_usuario = '".$sesion."' and ".$id_tabla." >= '$id' order by ".$campo_ordenar." desc) order by ".$campo_ordenar." desc limit '1'";		
+		$sql = pg_query($sql);
+		while($row = pg_fetch_row($sql)){
+			return $row[0];			
+		}
+	}
+	function adelante_no($id_tabla, $tabla, $campo_ordenar,$sesion){
+		$sql = "select ".$id_tabla." from ".$tabla. " where id_usuario = '".$sesion. "' order by ".$campo_ordenar. " desc limit 1";		
+		$sql = pg_query($sql);
+		while($row = pg_fetch_row($sql)){
+			return $row[0];			
+		}
+	}
+	function adelante($id_tabla, $tabla, $campo_ordenar,$sesion,$id){
+		$sql = "select ".$id_tabla." from ".$tabla." where id_usuario = '".$sesion."' and ".$id_tabla." not in (select ".$id_tabla." from ".$tabla." where id_usuario = '".$sesion."' and ".$id_tabla." <= '$id' order by ".$campo_ordenar." asc) order by ".$campo_ordenar." asc limit '1'";		
+		$sql = pg_query($sql);
+		while($row = pg_fetch_row($sql)){
+			return $row[0];			
+		}
+	}
+	function carga_factura($conexion,$sql){		
+		$sql = pg_query($sql);
+		$sql = pg_fetch_row($sql);
+		return $sql;
+	}
+	function carga_facturaDetalles($conexion,$sql){		
+		$sql = pg_query($sql);
+		$sql = pg_fetch_all($sql);
+		
+		return $sql;
+	}
+
 	function repetidos($conexion,$campo,$valor,$tabla,$tipo,$id,$id_campo){
 		$repetidos = 'true';
 		if( $tipo == "g" ){

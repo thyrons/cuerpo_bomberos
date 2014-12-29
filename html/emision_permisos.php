@@ -7,6 +7,7 @@
           <label class="col-sm-3 control-label" for='fecha_factura'> FECHA</label>
           <div class="col-sm-9">            
             <input type="text" class="form-control" id='fecha_factura' readonly name="fecha_factura" data-toggle="tooltip" data-original-title="Nombre del Producto" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
+            <input type="text" id="id_emision" name="id_emision">            
           </div>
         </div>            
         <div class="form-group col-md-3">
@@ -16,9 +17,9 @@
           </div>
         </div>            
         <div class="form-group col-md-5">
-          <label class="col-sm-3 control-label" for='nombre_producto'> DIGITADOR</label>
+          <label class="col-sm-3 control-label" for='nombre_usuario'> DIGITADOR</label>
           <div class="col-sm-9">            
-            <input type="text" class="form-control" id='nombre_producto' readonly name="nombre_producto" data-toggle="tooltip" data-original-title="Nombre del Producto" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
+            <input type="text" class="form-control" id='nombre_usuario' readonly name="nombre_usuario" data-toggle="tooltip" data-original-title="Nombre del Producto" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase" value="<?php echo $_SESSION['usuario'];?>">  
           </div>
         </div>   
         <div class="form-group col-md-7">
@@ -71,7 +72,15 @@
           </div>
         </div>
         <div class="form-group col-md-11">          
-          
+          <div class="col-sm-2">                        
+            <label class="control-label" for='nombre_productoEmision'> FORMA PAGO</label>            
+          </div>        
+            <div class="col-sm-4">            
+              <select id="select_emision" name="select_emision" class="form-control" >
+                  <option value="1">CONTADO</option>
+                  <option value="2">CREDITO</option>
+              </select>
+            </div>
         </div>
         <div class="form-group col-md-11">                    
           <div class="col-sm-5">                        
@@ -149,6 +158,18 @@
       <div>
         <button class="btn btn-primary" id="btn_buscarEmision" type="button" data-toggle="modal" >  
         <span class="glyphicon glyphicon-log-in"></span> Buscar</button>
+      </div>
+       <div>
+        <button class="btn btn-primary" id="btn_atras" type="button">  
+        <span class="glyphicon glyphicon-fast-backward"></span> Atras</button>
+      </div>
+       <div>
+        <button class="btn btn-primary" id="btn_adelante" type="button">  
+        Adelante <span class="glyphicon glyphicon-fast-forward"></span></button>
+      </div>
+      <div>
+        <button class="btn btn-primary" id="btn_imprimirEmision" type="button">  
+        <span class="glyphicon glyphicon-print"></span> Imprimir</button>
       </div>
     </div>
   </div>    

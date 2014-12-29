@@ -609,7 +609,7 @@ function buscar_informes_propietarios(width){
                     precio_u: "0.00",                     
                     total: "0.00",                     
                 };
-                su = jQuery("#lista_factura").jqGrid('addRowData', ret.id_informe_general, datarow);
+                su = jQuery("#lista_factura").jqGrid('addRowData', ret.id_informe_general+"idf", datarow);
                 var datarow = {
                     id_producto: "idt"+ret.id_tasa,//refernte al id tasa de servicio
                     tipo: "tasa", 
@@ -618,7 +618,7 @@ function buscar_informes_propietarios(width){
                     precio_u: ret.valor_tasa,                     
                     total: ret.valor_tasa,                     
                 };
-                su = jQuery("#lista_factura").jqGrid('addRowData', ret.id_tasa, datarow);
+                su = jQuery("#lista_factura").jqGrid('addRowData', ret.id_tasa+"idt", datarow);
             }else{
                 var repe = 0;
                 var pos1 = 0;
@@ -644,7 +644,7 @@ function buscar_informes_propietarios(width){
                         precio_u: "0.00",                     
                         total: "0.00",                     
                     };
-                    su = jQuery("#lista_factura").jqGrid('addRowData', ret.id_informe_general, datarow);
+                    su = jQuery("#lista_factura").jqGrid('addRowData', ret.id_informe_general+"idf", datarow);
                     var datarow = {
                         id_producto: "idt"+ret.id_tasa,//refernte al id tasa de servicio
                         tipo: "tasa", 
@@ -653,7 +653,7 @@ function buscar_informes_propietarios(width){
                         precio_u: ret.valor_tasa,                     
                         total: ret.valor_tasa,                     
                     };
-                    su = jQuery("#lista_factura").jqGrid('addRowData', ret.id_tasa, datarow);
+                    su = jQuery("#lista_factura").jqGrid('addRowData', ret.id_tasa+"idt", datarow);
                 }else{                   
                     var datarow = {
                         id_producto: "idf"+ret.id_informe_general,//referente al id informe general
@@ -677,6 +677,7 @@ function buscar_informes_propietarios(width){
                 }
             }
             /**/
+            //console.log(jQuery('#lista_factura').jqGrid('getRowData'));
             total_factura();
             $('#modalBusquedas').modal('hide');            
 
