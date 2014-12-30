@@ -395,8 +395,23 @@ function inicio(){
 			$("#id_emisionPropietario").val("");
 		}
 	});	
-	$("#nro_factura_preimpresa").blur(function (){
+	$("#nro_factura_preimpresa").blur(function (){		
 		zeros($("#nro_factura_preimpresa").val().length,"nro_factura_preimpresa");
+		$.ajax({				
+			type: "POST",				  
+			data: "id="+$("#nro_factura_preimpresa").val(),		
+			url: "../servidor/emision_permisos/verifica_nro.php",			
+		    success: function(data) {			 
+				if(data != ''){
+					alert("Error este nro. de factura ya existe. Se cargara el nro de factura disponible");
+					$("#nro_factura_preimpresa").val("");				
+					$("#nro_factura_preimpresa").val(data);				
+		    		zeros(data.length,"nro_factura_preimpresa");
+		    		$("#nro_factura_preimpresa").focus();	
+		    		$("#fecha_cancelacion").datepicker("hide")	   			    		
+				}
+			}
+		})
 	});
 	/*tabla factura*/	
 	jQuery("#lista_factura").jqGrid({
@@ -579,6 +594,16 @@ function inicio(){
 		}
 
 	});
+	$("#nro_factura_preimpresa").load(
+		$.ajax({				
+			type: "POST",			
+			url: "../servidor/emision_permisos/nro_factura.php",			
+		    success: function(data) {			 
+				$("#nro_factura_preimpresa").val(data);				
+		    	zeros(data.length,"nro_factura_preimpresa");   			    			    	
+			}
+		})
+	);	
 
 	$("#btn_guardarEmision").on("click",guardar_emision);
 	$("#btn_limpiarEmision").on("click",limpiar_form);
@@ -1164,7 +1189,8 @@ function modal(e){
 							buscar_productos("600");	
 						}else{
 							if(form == "form_emisionPermisos"){
-								buscar_productos("600");	
+								buscar_emision("600");	
+							}else{								
 							}
 						}
 					}	
@@ -2296,7 +2322,7 @@ function mostrar(input) {
     setTimeout("mostrar('"+input+"')", 1000);    
 }
 function zeros(tamaño,input){
-	var zero="";
+	var zero="";	
 	for(var i = tamaño; i < 9; i++){
 		zero = zero + "0"
 	}
@@ -2385,6 +2411,52 @@ function adelante(id,carpeta,archivo){///campo carpeta y el archivo
 	}else{
 		url = "../servidor/"+carpeta+"/"+archivo+"?id="+$("#"+id).val()+"&fn=1";
 	}	
+	$.ajax({				
+		type: "POST",
+		dataType: 'json',		
+		url: url,			
+	    success: function(data) {		    	
+	    	/*detalles de la factura*/    			        	    		    	
+	    	$("#id_emision").val(data.Cabecera[0][0]);
+	    	$("#fecha_factura").val(data.Cabecera[0][1]);
+	    	$("#hora_factura").val(data.Cabecera[0][2]);
+	    	$("#nombre_usuario").val(data.Cabecera[0][3]);
+	    	$("#nro_1").val(data.Cabecera[0][4]);
+	    	$("#nro_2").val(data.Cabecera[0][5]);
+	    	$("#nro_factura_preimpresa").val(data.Cabecera[0][6]);
+	    	$("#fecha_cancelacion").val(data.Cabecera[0][10]);
+	    	$("#id_emisionPropietario").val(data.Cabecera[0][7]);
+	    	$("#ci_ruc_emision").val(data.Cabecera[0][8]);
+	    	$("#nombres_emision").val(data.Cabecera[0][9]);
+	    	$("#select_emision").val(data.Cabecera[0][11]);
+	    	$("#subtotal_emision").val(data.Cabecera[0][12]);
+	    	$("#iva_0Emision").val(data.Cabecera[0][13]);
+	    	$("#iva_12Emision").val(data.Cabecera[0][14]);
+	    	$("#total_emision").val(data.Cabecera[0][15]);
+	    	/*-------------------------*/
+	    	/*detalles de los productos*/
+
+	    	$("#lista_factura").jqGrid("clearGridData",true);
+	    	for(var i = 0; i < data.Detalles[0].length; i++){
+	    		var datarow = {
+	                id_producto: "idp"+$("#id_productoEmision").val(),//referente al id producto
+	                tipo: data.Detalles[0][i]["tipo"], 
+	                detalle: data.Detalles[0][i]["detalle"], 
+	                cantidad: data.Detalles[0][i]["cantidad"], 
+	                precio_u: data.Detalles[0][i]["precio_unitario"], 
+	                total: data.Detalles[0][i]["precio_total"],
+	            };				                
+	            jQuery("#lista_factura").jqGrid('addRowData', $("#id_productoEmision").val()+"idp", datarow);			                				                	    	
+	    	}            
+	    	/*-------------------------*/
+	    	$("#btn_guardarEmision").text("");
+            $("#btn_guardarEmision").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+		}
+	});		
+}
+function cargar_emision(id,carpeta,archivo){
+	var url = '';	
+	url = "../servidor/"+carpeta+"/"+archivo+"?id="+id+"&fn=2";	
 	$.ajax({				
 		type: "POST",
 		dataType: 'json',		

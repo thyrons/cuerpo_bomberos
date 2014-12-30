@@ -714,3 +714,66 @@ function buscar_informes_propietarios(width){
     jQuery("#tabla_busquedas").jqGrid('hideCol', "id_empresa");    
     //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
 }
+function buscar_emision(width){
+    jQuery("#tabla_busquedas").jqGrid({
+        datatype: "xml",
+        url: '../servidor/emision_permisos/xml_emision.php',        
+        colNames: ['ID','FECHA FACTURA','NRO FACTURA','RUC','PROPIETARIO','FECHA_CANCELACION','HORA FACTURA'],
+        colModel:[      
+            {name:'id_emision',index:'id_emision',frozen:true,align:'center',search:false},
+            {name:'fecha',index:'fecha',frozen : true,align:'left',search:false},
+            {name:'nro_factura',index:'nro_factura',frozen : true,align:'center',search:false},
+            {name:'ruc_propietario',index:'ruc_propietario',frozen : true,align:'center',search:true},
+            {name:'nombre_propietario',index:'nombre_propietario',frozen : true,align:'center',search:true},
+            {name:'fecha_cancelacion',index:'fecha_cancelacion',frozen : true,align:'center',search:false},
+            {name:'hora_factura',index:'hora_factura',frozen : true,align:'center',search:false},            
+        ],          
+        rowNum: 10,
+        autowidth: true, 
+        width: '100%', 
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],
+        pager: jQuery('#pager'),        
+        sortname: 'id_emision',
+        sortordezr: 'asc',
+        caption: 'EMISION DE PERMISOS',
+        viewrecords: true,   
+        ondblClickRow: function(rowid) {     
+            var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');                     
+            cargar_emision(gsr,"emision_permisos","secuencia.php");
+            $('#modalBusquedas').modal('hide');            
+            $("#btn_guardarEmision").text("");
+            $("#btn_guardarEmision").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+            
+        }                 
+    }).jqGrid('navGrid','#pager',{
+            add:false,
+            edit:false,
+            del:false,           
+            refresh:true,
+            search:true,
+            view:false        
+    },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+    },
+    {
+        closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,        
+        multipleSearch: false, overlay: false
+
+    },
+    {
+    },
+    {
+        closeOnEscape: true
+    }
+    ); 
+    //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
+}

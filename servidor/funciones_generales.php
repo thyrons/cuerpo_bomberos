@@ -136,6 +136,7 @@
 		$repetidos = 'true';
 		if( $tipo == "g" ){
 			$sql = "select ".$campo." from ".$tabla. " where ".$campo." = '".$valor."'";
+			
 			if(pg_num_rows(pg_query( $conexion, $sql ))){
 				$repetidos = 'true';
 			}else{
