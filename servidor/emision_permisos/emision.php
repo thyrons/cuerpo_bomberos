@@ -28,6 +28,21 @@
 	$id_usuario = session_activa();
 	$sql = "insert into emision_permisos values ('$id','$_POST[fecha_factura]','$_POST[nro_1]','$_POST[nro_2]','$_POST[nro_factura_preimpresa]','$_POST[subtotal_emision]','$_POST[iva_0Emision]','$_POST[iva_12Emision]','$_POST[total_emision]','$_POST[fecha_cancelacion]','$_POST[select_emision]','$_POST[hora_factura]','$id_usuario','$_POST[id_emisionPropietario]')";	
 	$guardar = guardarSql($conexion,$sql);	
+	if($_POST['select_emision'] == '2'){
+		$estado = '0';
+		if($_POST['adelanto_emision'] == $_POST['total_emision']){
+			$estado = '1';
+		}
+		$id_credito = id_tabla($conexion,"c_x_cobrar","id_cxc");	
+		$sql = "insert into c_x_cobrar values ('$id_credito','$id','$_POST[adelanto_emision]','$_POST[fecha_factura]','$_POST[fecha_cancelacion]','$id_usuario','Emisión de Permisos / Ventas','".($_POST['total_emision'] - $_POST['adelanto_emision'])."','$_POST[total_emision]','$estado')";		
+		
+		guardarSql($conexion,$sql);
+		if($_POST['adelanto_emision'] > '0'){
+			$id_detalle = id_tabla($conexion,"detalles_cxc","id_detalle_cxc");				
+			$sql = "insert into detalles_cxc values ('$id_detalle','$id_credito','$_POST[fecha_factura]','$_POST[adelanto_emision]','Abono Inicial','Efectivo')";					
+			guardarSql($conexion,$sql);
+		}				
+	}
 	if( $guardar == 'true'){
 		$data = 0; ////datos guardados		
 		for($i = 0; $i < $contador; $i++){	
@@ -37,7 +52,7 @@
 				$sql = "insert into detalles_emision values ('$id_detalle','INFORME GENERAL','".$separador[1]."','','','".$lista[$inicio + 4]."','".$lista[$inicio + 6]."','".$lista[$inicio + 7]."','$id','".$lista[$inicio + 5]."')";	
 				$guardar = guardarSql($conexion,$sql);		
 				$sql = "update informe_general set estado_informe = '1' where id_informe_general = '".$separador[1]."'";
-				$guardar = modificarSql($conexion,$sql);
+				$guardar = modificarSql($conexion,$sql);				
 			}else{
 				if(substr($lista[$inicio + 2], 0,3) == 'idt'){
 					$separador = explode('idt', $lista[$inicio + 2]);					

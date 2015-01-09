@@ -777,3 +777,80 @@ function buscar_emision(width){
     ); 
     //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
 }
+function buscar_cxc_cliente(width,id){
+    jQuery("#tabla_busquedas").jqGrid({
+        datatype: "xml",
+        url: '../servidor/cxc/xml_cxc.php?id='+id,        
+        colNames: ['ID','id_emision','NRO FACTURA','FECHA','F. CANCELACIÓN','SALDO','TOTAL','TIPO DOCUMENTO','RUC','PROPIETARIO','USUARIO'],
+        colModel:[      
+            {name:'id_cxc',index:'id_cxc',frozen:true,align:'center',search:false},
+            {name:'id_emision_permisos',index:'id_emision_permisos',frozen : true,align:'left',search:false},
+            {name:'nro_factura',index:'nro_factura',frozen : true,align:'center',search:true},
+            {name:'fecha_credito',index:'fecha_credito',frozen : true,align:'center',search:true},
+            {name:'fecha_cancelacion',index:'fecha_cancelacion',frozen : true,align:'center',search:true},
+            {name:'saldo',index:'saldo',frozen : true,align:'center',search:false},
+            {name:'total_factura',index:'total_factura',frozen : true,align:'center',search:false},            
+            {name:'tipo_documento',index:'tipo_documento',frozen : true,align:'center',search:false},            
+            {name:'ruc_propietario',index:'ruc_propietario',frozen : true,align:'center',search:true},            
+            {name:'nombre_propietario',index:'nombre_propietario',frozen : true,align:'center',search:true},            
+            {name:'nombre_usuario',index:'nombre_usuario',frozen : true,align:'center',search:false},            
+        ],          
+        rowNum: 10,
+        autowidth: true, 
+        width: '100%', 
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],
+        pager: jQuery('#pager'),        
+        sortname: 'id_cxc',
+        sortordezr: 'asc',
+        caption: 'CUENTAS POR COBRAR',
+        viewrecords: true,   
+        ondblClickRow: function(rowid) {                 
+            var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');                                 
+            var ret = jQuery("#tabla_busquedas").jqGrid('getRowData',gsr);                        
+            var filas = jQuery("#lista_factura").jqGrid("getRowData");
+            var rids = $('#lista_factura').jqGrid('getDataIDs');                                                                                                     
+            url = "../servidor/cxc/carga_cxc.php?id="+ret.id_cxc; 
+            $.ajax({                
+                type: "POST",                
+                dataType: 'json',       
+                url: url,           
+                success: function(data) {
+                }
+            }); 
+            $('#modalBusquedas').modal('hide');            
+
+        }               
+    }).jqGrid('navGrid','#pager',{
+            add:false,
+            edit:false,
+            del:false,           
+            refresh:true,
+            search:true,
+            view:false        
+    },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+    },
+    {
+        closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,        
+        multipleSearch: false, overlay: false
+
+    },
+    {
+    },
+    {
+        closeOnEscape: true
+    }
+    ); 
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "id_emision_permisos");
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "id_cxc");
+    //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns'); 
+}

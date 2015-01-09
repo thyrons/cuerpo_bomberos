@@ -279,6 +279,20 @@
 			echo $data = json_encode($data);
 		}
 	}
+	function busquedas_cxc( $conexion, $sql){
+		$resp =true;
+		$sql = pg_query( $conexion, $sql );
+		if($sql){
+			while ($row = pg_fetch_row($sql)) {
+			    $data[] = array(
+			        'label1' => $row[0],
+			        'label2' => $row[1],
+			        'label3' => $row[2]
+			    );
+			}
+			echo $data = json_encode($data);
+		}
+	}	
 	function busquedas4( $conexion, $sql){
 		$resp =true;
 		$sql = pg_query( $conexion, $sql );

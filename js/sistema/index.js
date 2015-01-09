@@ -57,7 +57,7 @@ function inicio(){
 					$("#"+ac1).addClass("collapse in");		    		
 		    	}
 		    	else{
-		    		if(tab == 'tab_j' || tab == 'tab_k' || tab == 'tab_l' || tab == 'tab_m'){
+		    		if(tab == 'tab_j' || tab == 'tab_k' || tab == 'tab_l' || tab == 'tab_m' || tab == 'tab_s'){
 		    			
 			    		var acor2 =$("#accordion").children();
 						var acor2 = acor2.next();
@@ -65,16 +65,16 @@ function inicio(){
 						var ac2 = $(act2).attr('id');
 						$("#"+ac2).addClass("collapse in");												
 		    		}else{
-		    			if(tab == 'tab_n' || tab == 'tab_o' || tab == 'tab_p'){
+		    			if(tab == 'tab_n' || tab == 'tab_o' || tab == 'tab_p' ){
 		    				var acor1 =$("#accordion").children();
 							var act1 = acor1.children().next()[2];					
 							var ac1 = $(act1).attr('id');									
 							$("#"+ac1).addClass("collapse in");							
 		    			}else{
 		    				if(tab == 'tab_q' || tab == 'tab_r' ){
-		    					var acor1 =$("#accordion").children();
+		    					var acor1 =$("#accordion").children();		    					
 								var act1 = acor1.children().next()[3];					
-								var ac1 = $(act1).attr('id');									
+								var ac1 = $(act1).attr('id');																	
 								$("#"+ac1).addClass("collapse in");					
 		    				}else{
 		    					var acor1 =$("#accordion").children();
@@ -135,7 +135,7 @@ function inicio(){
        placement : 'rigth'
 	});
 	/*--------------*/
-	/*funcion solu numeros*/
+	/*funcion solo numeros*/
 	$(".soloNumeros").keydown(function(event){
 	    if((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode == 9) || (event.keyCode == 116) || (event.keyCode == 8) || (event.keyCode >= 96 && event.keyCode <= 105) || (event.keyCode == 110) || (event.keyCode == 190)) {
 	        return true;
@@ -201,8 +201,8 @@ function inicio(){
 	$("#btn_limpiarUsuarios").on("click",limpiar_form);
 	$("#btn_buscarUsuarios").on("click",modal);
 	$("#btn_guardarUsuarios").on("click",guardar_usuarios);
-	
-	$("#ci_usuario").keyup(function (){
+
+	$("#ci_usuario").keyup(function (){		
 		ci_ruc("ci_usuario");
 	})
 	/*--------------------------------*/
@@ -413,6 +413,32 @@ function inicio(){
 			}
 		})
 	});
+	$("#select_emision").on("change",function(){
+		if($(this).val() == '2'){
+			if($("#total_emision").val() <= 0){
+				$("#select_emision").val(1);
+				alert("Antes de indicar la forma de pago.. Ingrese datos en la factura");
+			}else{
+				$("#adelanto_emision").removeAttr("readonly");
+				$("#adelanto_emision").val("");
+				$("#adelanto_emision_total").val($("#total_emision").val());
+			}			
+		}else{
+			$("#adelanto_emision").prop("readonly",true);
+			$("#adelanto_emision").val("");
+			$("#adelanto_emision_total").val("");
+		}
+	});
+
+	$("#adelanto_emision").on("keyup",function(){
+		if($("#adelanto_emision").val() <= $("#total_emision").val()){
+			$("#adelanto_emision_total").val($("#total_emision").val()-$("#adelanto_emision").val());
+		}else{
+			alert("El adelanto no debe superar el valor de la factura");
+			$("#adelanto_emision").val("");
+			$("#adelanto_emision_total").val($("#total_emision").val());
+		}		
+	});
 	/*tabla factura*/	
 	jQuery("#lista_factura").jqGrid({
         datatype: "local",
@@ -592,7 +618,6 @@ function inicio(){
 			}
 			total_factura();                           
 		}
-
 	});
 	$("#nro_factura_preimpresa").load(
 		$.ajax({				
@@ -622,6 +647,47 @@ function inicio(){
 		}
 	});		
 	/**/
+	/*procesos de cxc*/	
+	$("#ci_cxc").keyup(function (){			
+		autocompletarCxc("txt_0","ci_cxc","cliente_cxc","0");		
+	});
+	$("#cliente_cxc").keyup(function (){	
+
+		autocompletarCxc("txt_0","cliente_cxc","ci_cxc","1");		
+	});
+	jQuery("#lista_cxc").jqGrid({
+        datatype: "local",
+        colNames: ['tipo','Fecha Pago', 'Forma Pago', 'Detalle', 'Valor'],
+        colModel: [            
+            {name: 'tipo', index: 'tipo', editable: false, search: false, hidden: true, editrules: {edithidden: false}, align: 'left',
+                frozen: true, width: 100},
+            {name: 'fecha_pago', index: 'fecha_pago', editable: false, search: false, hidden: false, editrules: {edithidden: false}, align: 'left',
+                frozen: true, width: 200},
+            {name: 'forma_pago', index: 'forma_pago', editable: true, frozen: true, editrules: {required: true}, align: 'center', width: 200},
+            {name: 'detalle', index: 'detalle', editable: false, frozen: true, editrules: {required: true}, align: 'left', width:340},            
+            {name: 'valor', index: 'valor', editable: true, search: false, frozen: true, editrules: {required: true}, align: 'center', width: 150, editoptions:{maxlength: 10, size:15}},             
+            
+        ],
+        rowNum: 30, 
+        width: null,              
+        height: 150,
+        rownumbers: true,
+        sortable: true,
+        rowList: [10, 20, 30],
+        pager: jQuery('#pager'),
+        sortname: 'tipo',
+        sortorder: 'asc',
+        viewrecords: true,
+        cellEdit: true,
+        cellsubmit: 'clientArray',
+        shrinkToFit: false,           
+  	});
+	$('#fecha_factura_cxc').datepicker({
+        dateFormat: 'yy-mm-dd'
+    }).datepicker('setDate', 'today');
+     mostrar("hora_factura_cxc");
+    cargar_usuario("nombre_usuario_cxc");
+	/*----------*/
 }
 function llenarSelect(lt,md,bg,sbg){
 	$("#select_valor").find('option').remove();
@@ -1158,7 +1224,7 @@ function comprobarCamposRequired(form){
 }
 /*---------*/
 /*function para crear el jqgrid de cada formulario necesario*/
-function modal(e){
+function modal(e){	
 	$("#busquedasModificar").html("");
 	$("#busquedasModificar").append("<table id='tabla_busquedas'></table><div id='pager'></div>");
 	$("#pager").html("");
@@ -1336,6 +1402,40 @@ function autocompletarProducto(campo,campo1,campo2,campo3,direccion){//id nombre
     };
 }
 /*---------------*/
+/*function para buscar las cxc de los clientes*/
+function autocompletarCxc(campo1,campo2,campo3,fn){
+	$("#"+campo2).autocomplete({
+        source: '../servidor/cxc/buscar_cxc.php?fn='+fn,
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#"+campo1 ).val( ui.item.label1 );	                
+	        $( "#"+campo2 ).val( ui.item.label2 );	                
+	        $( "#"+campo3 ).val( ui.item.label3 );	                
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#"+campo1 ).val( ui.item.label1 );	        
+	        $( "#"+campo2 ).val( ui.item.label2 );	        
+	        $( "#"+campo3 ).val( ui.item.label3 );	        	        
+	        carga_cxc(ui.item.label1);
+	        return false;	        
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.label2 + "</a>" )
+        .appendTo( ul );
+    };
+}
+/*------*/
+/*cargar las cxc de los clientes*/
+function carga_cxc(id){
+	$("#busquedasModificar").html("");
+	$("#busquedasModificar").append("<table id='tabla_busquedas'></table><div id='pager'></div>");
+	$("#pager").html("");
+	$('#modalBusquedas').modal('show');
+	buscar_cxc_cliente("600",id);	
+}
+/**/
 /*funcion para cargar la tabla de las empresas*/
 function cargarTabla(idPropietario){
 	$("#grupo_empresas").html(" ");
@@ -2499,4 +2599,13 @@ function cargar_emision(id,carpeta,archivo){
             $("#btn_guardarEmision").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
 		}
 	});		
+}
+function cargar_usuario(id){
+	$.ajax({				
+		type: "POST",				  			
+		url: "../servidor/login/session.php",
+	    success: function(data) {			 
+			$("#"+id).val(data);			
+		}
+	});	
 }

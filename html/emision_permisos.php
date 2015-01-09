@@ -7,7 +7,7 @@
           <label class="col-sm-3 control-label" for='fecha_factura'> FECHA</label>
           <div class="col-sm-9">            
             <input type="text" class="form-control" id='fecha_factura' readonly name="fecha_factura" data-toggle="tooltip" data-original-title="Nombre del Producto" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
-            <input type="text" id="id_emision" name="id_emision">            
+            <input type="hidden" id="id_emision" name="id_emision">            
           </div>
         </div>            
         <div class="form-group col-md-3">
@@ -75,12 +75,18 @@
           <div class="col-sm-2">                        
             <label class="control-label" for='nombre_productoEmision'> FORMA PAGO</label>            
           </div>        
-            <div class="col-sm-4">            
-              <select id="select_emision" name="select_emision" class="form-control" >
-                  <option value="1">CONTADO</option>
-                  <option value="2">CREDITO</option>
-              </select>
-            </div>
+          <div class="col-sm-3">            
+            <select id="select_emision" name="select_emision" class="form-control" >
+                <option value="1">CONTADO</option>
+                <option value="2">CRÉDITO</option>
+            </select>
+          </div>               
+          <div class="col-sm-3">            
+            <input type="text" id="adelanto_emision" class="form-control"  name="adelanto_emision" readonly="" placeholder="Adelanto"  data-toggle="tooltip" data-original-title="Adelanto"/>
+          </div>
+          <div class="col-sm-3">            
+            <input type="text" id="adelanto_emision_total" class="form-control"  name="adelanto_emision_total" readonly="" placeholder="Total Factura" data-toggle="tooltip" data-original-title="Valor total" />
+          </div>
         </div>
         <div class="form-group col-md-11">                    
           <div class="col-sm-5">                        

@@ -73,7 +73,8 @@ if (empty($_SESSION['id'])) {
       <div class="row">
         <div class="col-sm-3 sidebar tab_index" style="background: url(../images/bag.fw.png)!important;">                    
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="panel panel-default">
+            <?php
+            echo '<div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -94,8 +95,8 @@ if (empty($_SESSION['id'])) {
                   </ul>
                 </div>
               </div>
-            </div>
-            <div class="panel panel-default">
+            </div>';            
+            echo '<div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingTwo">
                 <h4 class="panel-title">
                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -107,14 +108,15 @@ if (empty($_SESSION['id'])) {
                 <div class="panel-body">
                   <ul class="nav nav-pills nav-stacked ">                    
                     <li><a href="#tab_j" ><span class="glyphicon glyphicon-list"></span> Ingreso Productos</a></li>                    
-                    <li><a href="#tab_k"><span class="glyphicon glyphicon-list-alt"></span> Ventas/Emisión de Permisos</a></li>                                        
+                    <li><a href="#tab_k"><span class="glyphicon glyphicon-list-alt"></span> Emisión de Permisos</a></li>                                        
                     <li><a href="#tab_l" ><span class="glyphicon glyphicon-list"></span> Notas de Crédito</a></li>                    
+                    <li><a href="#tab_s" ><span class="glyphicon glyphicon-list"></span> Cuentas por cobrar</a></li> 
                     <li><a href="#tab_m" ><span class="glyphicon glyphicon-print"></span> Reporte Ventas</a></li>                    
                   </ul>
                 </div>
               </div>              
-            </div>
-            <div class="panel panel-default">
+            </div>';            
+            echo '<div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingTres">
                 <h4 class="panel-title">
                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTres" aria-expanded="false" aria-controls="collapseTres">
@@ -131,8 +133,8 @@ if (empty($_SESSION['id'])) {
                   </ul>
                 </div>
               </div>              
-            </div>
-            <div class="panel panel-default">
+                </div>';            
+            echo '<div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingCuatro">
                 <h4 class="panel-title">
                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseCuatro" aria-expanded="false" aria-controls="collapseCuatro">
@@ -148,10 +150,8 @@ if (empty($_SESSION['id'])) {
                   </ul>
                 </div>
               </div>              
-            </div>
-
-
-            
+            </div>';
+            ?>            
           </div>
           <div class="logo">
             <img src="../images/logo2.fw.png" >
@@ -180,9 +180,7 @@ if (empty($_SESSION['id'])) {
             ?>  
             </div>
             <div class="tab-pane" id="tab_d">
-            <?php
-              include 'usuarios.php';
-            ?>  
+            
             </div>
             <div class="tab-pane" id="tab_e">
             <?php
@@ -202,6 +200,16 @@ if (empty($_SESSION['id'])) {
             <div class="tab-pane" id="tab_k">
             <?php
               include 'emision_permisos.php';
+            ?>   
+            </div>            
+            <div class="tab-pane" id="tab_q">
+            <?php
+              include 'usuarios.php';
+            ?>   
+            </div>  
+            <div class="tab-pane" id="tab_s">
+            <?php
+              include 'cxc.php';
             ?>   
             </div>            
           </div><!-- tab content -->
