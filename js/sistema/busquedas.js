@@ -806,17 +806,30 @@ function buscar_cxc_cliente(width,id){
         sortordezr: 'asc',
         caption: 'CUENTAS POR COBRAR',
         viewrecords: true,   
-        ondblClickRow: function(rowid) {                 
+        ondblClickRow: function(rowid) {                             
             var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');                                 
             var ret = jQuery("#tabla_busquedas").jqGrid('getRowData',gsr);                        
             var filas = jQuery("#lista_factura").jqGrid("getRowData");
             var rids = $('#lista_factura').jqGrid('getDataIDs');                                                                                                     
             url = "../servidor/cxc/carga_cxc.php?id="+ret.id_cxc; 
+            $("#total_saldo").val(ret.saldo);            
             $.ajax({                
                 type: "POST",                
                 dataType: 'json',       
                 url: url,           
                 success: function(data) {
+                    console.log(data);
+                    var tam = data.length;
+                    for(var i = 0; i < tam; i++){
+                        var datarow = {
+                            tipo:"bd", 
+                            fecha_pago:data[i].fecha_abono, 
+                            forma_pago:data[i].forma_pago, 
+                            detalle:data[i].detalle, 
+                            valor:data[i].valor,
+                        };
+                        su = jQuery("#lista_cxc").jqGrid('addRowData', i, datarow);  
+                    }
                 }
             }); 
             $('#modalBusquedas').modal('hide');            

@@ -73,8 +73,8 @@ if (empty($_SESSION['id'])) {
       <div class="row">
         <div class="col-sm-3 sidebar tab_index" style="background: url(../images/bag.fw.png)!important;">                    
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            <?php
-            echo '<div class="panel panel-default">
+            
+            <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -95,8 +95,8 @@ if (empty($_SESSION['id'])) {
                   </ul>
                 </div>
               </div>
-            </div>';            
-            echo '<div class="panel panel-default">
+            </div>           
+            <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingTwo">
                 <h4 class="panel-title">
                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -115,8 +115,8 @@ if (empty($_SESSION['id'])) {
                   </ul>
                 </div>
               </div>              
-            </div>';            
-            echo '<div class="panel panel-default">
+            </div>            
+            <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingTres">
                 <h4 class="panel-title">
                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTres" aria-expanded="false" aria-controls="collapseTres">
@@ -133,8 +133,8 @@ if (empty($_SESSION['id'])) {
                   </ul>
                 </div>
               </div>              
-                </div>';            
-            echo '<div class="panel panel-default">
+                </div>        
+            <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingCuatro">
                 <h4 class="panel-title">
                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseCuatro" aria-expanded="false" aria-controls="collapseCuatro">
@@ -146,12 +146,13 @@ if (empty($_SESSION['id'])) {
                 <div class="panel-body">
                   <ul class="nav nav-pills nav-stacked ">                    
                     <li><a href="#tab_q"><span class="glyphicon glyphicon-user"></span> Ingreso Usuarios</a></li>                    
+                    <li><a href="#tab_q"><span class="glyphicon glyphicon-list"></span> Respaldo Base datos</a></li>                    
                     <li><a href="#tab_r" ><span class="glyphicon glyphicon-print"></span> Reportes Generales</a></li>                    
                   </ul>
                 </div>
               </div>              
-            </div>';
-            ?>            
+            </div>
+                     
           </div>
           <div class="logo">
             <img src="../images/logo2.fw.png" >

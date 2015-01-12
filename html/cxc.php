@@ -35,9 +35,9 @@
             <input type="text" class="form-control" id='cliente_cxc'  name="cliente_cxc" data-toggle="tooltip" data-original-title="Nombre del cliente" style="text-transform: uppercase" value="">  
           </div>
         </div>   
-        <div class="form-group col-md-6">
-          <label class="col-sm-3 control-label" for='forma_pago'> FORMA DE PAGO</label>
-          <div class="col-sm-7">            
+        <div class="form-group col-md-5">
+          <label class="col-sm-4 control-label" for='forma_pago'> FORMA DE PAGO</label>
+          <div class="col-sm-8">            
             <select class="form-control" id='forma_pago'  name="forma_pago" data-toggle="tooltip" data-original-title="Indique la forma de pago" style="text-transform: uppercase" value="">
             <option value="Efectivo">Efectivo</option>
             <option value="Cheque">Cheque</option>
@@ -45,10 +45,26 @@
             </select>
           </div>
         </div>
+        <div class="form-group col-md-5">
+          <label class="col-sm-4 control-label" for='total_a_pagar'> TOTAL A PAGAR</label>
+          <div class="col-sm-4">            
+            <input type="text" class="form-control" id='total_a_pagar'  name="total_a_pagar" data-toggle="tooltip" data-original-title="Nombre del cliente" style="text-transform: uppercase" value="">  
+          </div>
+          <div class="col-sm-4">            
+            <button class="btn btn-primary" id="btn_agregarCxc" type="button">  
+            <span class="glyphicon glyphicon-list"></span> Agregar Pago</button>    
+          </div>
+        </div>   
         <div class="form-group col-md-10">          
           <br />          
           <table id="lista_cxc"></table>          
         </div>      
+         <div class="form-group col-md-11">
+          <label class="col-sm-9 control-label" for='total_saldo' style="text-align:right !important"> TOTAL SALDO</label>
+          <div class="col-sm-2">            
+            <input type="text" readonly class="form-control" id='total_saldo'  name="total_saldo" data-toggle="tooltip" data-original-title="Nombre del cliente" style="text-transform: uppercase" value="">  
+          </div>
+        </div>   
       </div>
     </div>
     <div class="panel-footer form-footer">

@@ -54,7 +54,7 @@ function inicio(){
 		    		var acor1 =$("#accordion").children();
 					var act1 = acor1.children().next()[0];					
 					var ac1 = $(act1).attr('id');					
-					$("#"+ac1).addClass("collapse in");		    		
+					$("#"+ac1).addClass("collapse in");						
 		    	}
 		    	else{
 		    		if(tab == 'tab_j' || tab == 'tab_k' || tab == 'tab_l' || tab == 'tab_m' || tab == 'tab_s'){
@@ -96,7 +96,7 @@ function inicio(){
 			}else{
 				$(this).removeClass("active");
 			}
-		});
+		});		
 		$("#"+tab).addClass("active").find(':input:visible:first').focus();//hago focus al primer elemento de cada formulario
 	}
 	/*activar contenido de las listas*/
@@ -125,7 +125,7 @@ function inicio(){
 				$(this).removeClass("active");
 			}
 		});
-		$("#"+tab).addClass("active").find(':input:visible:first').focus();
+		$("#"+tab).addClass("active").find(':input:visible:first').filter("readOnly").focus();
 		limpiar_form($("#"+tab).addClass("active").children().attr("id"));
 	});
 	$("input").on("keyup click",function (e){
@@ -652,21 +652,19 @@ function inicio(){
 		autocompletarCxc("txt_0","ci_cxc","cliente_cxc","0");		
 	});
 	$("#cliente_cxc").keyup(function (){	
-
 		autocompletarCxc("txt_0","cliente_cxc","ci_cxc","1");		
 	});
 	jQuery("#lista_cxc").jqGrid({
         datatype: "local",
         colNames: ['tipo','Fecha Pago', 'Forma Pago', 'Detalle', 'Valor'],
         colModel: [            
-            {name: 'tipo', index: 'tipo', editable: false, search: false, hidden: true, editrules: {edithidden: false}, align: 'left',
+            {name: 'tipo', index: 'tipo', editable: false, search: false, hidden: true, editrules: {edithidden: false}, align: 'center',
                 frozen: true, width: 100},
-            {name: 'fecha_pago', index: 'fecha_pago', editable: false, search: false, hidden: false, editrules: {edithidden: false}, align: 'left',
+            {name: 'fecha_pago', index: 'fecha_pago', editable: false, search: false, hidden: false, editrules: {edithidden: false}, align: 'center',
                 frozen: true, width: 200},
             {name: 'forma_pago', index: 'forma_pago', editable: true, frozen: true, editrules: {required: true}, align: 'center', width: 200},
-            {name: 'detalle', index: 'detalle', editable: false, frozen: true, editrules: {required: true}, align: 'left', width:340},            
-            {name: 'valor', index: 'valor', editable: true, search: false, frozen: true, editrules: {required: true}, align: 'center', width: 150, editoptions:{maxlength: 10, size:15}},             
-            
+            {name: 'detalle', index: 'detalle', editable: false, frozen: true, editrules: {required: true}, align: 'center', width:340},            
+            {name: 'valor', index: 'valor', editable: true, search: false, frozen: true, editrules: {required: true}, align: 'center', width: 150, editoptions:{maxlength: 10, size:15}},                         
         ],
         rowNum: 30, 
         width: null,              
@@ -680,13 +678,53 @@ function inicio(){
         viewrecords: true,
         cellEdit: true,
         cellsubmit: 'clientArray',
-        shrinkToFit: false,           
+        shrinkToFit: false,        
   	});
 	$('#fecha_factura_cxc').datepicker({
         dateFormat: 'yy-mm-dd'
     }).datepicker('setDate', 'today');
      mostrar("hora_factura_cxc");
     cargar_usuario("nombre_usuario_cxc");
+    $("#btn_agregarCxc").click(function(){    	
+        var filas = jQuery("#lista_cxc").jqGrid("getRowData");
+        var rids = $('#lista_cxc').jqGrid('getDataIDs');   
+        var repe = 0;
+        var pos = 0;
+        console.log($("#total_a_pagar").val(),$("#total_saldo").val())
+        if(parseFloat($("#total_a_pagar").val()) <= parseFloat($("#total_saldo").val())){
+        	for (var i = 0; i < filas.length; i++) {
+		        var id = filas[i];                                        
+		        if (id['tipo'] == "pago") {
+		            pos = rids[i];                        
+		            repe = 1;
+		        }
+		    }  
+		    if(repe == 0){
+		    	var datarow = {
+		            tipo:"pago", 
+		            fecha_pago:$("#fecha_factura_cxc").val(), 
+		            forma_pago:$("#forma_pago").val(), 
+		            detalle:"Pago factura", 
+		            valor: $("#total_a_pagar").val(),
+		        };
+		        su = jQuery("#lista_cxc").jqGrid('addRowData', "", datarow);  
+		        alertify.primary('El pago a sido agregado correctamente');	
+		        $("#total_saldo").val($("#total_saldo").val() - $("#total_a_pagar").val());
+        		$("#total_a_pagar").val("");         		       		
+        	}else{
+        		var posi = jQuery("#lista_cxc").jqGrid("getRowData","");        		
+		        var total = parseFloat((posi.valor))+parseFloat($("#total_a_pagar").val());	        		        
+		        su = jQuery("#lista_cxc").jqGrid('setCell',"",'valor', total);  
+		        $("#total_saldo").val($("#total_saldo").val() - $("#total_a_pagar").val());
+		        $("#total_a_pagar").val("");
+		        alertify.primary('El pago a sido agregado correctamente');	
+        	}
+        }else{
+        	alertify.error('Errorr.. El valor a pagar supera el saldo');	
+        	$("#total_a_pagar").val("");
+        	$("#total_a_pagar").focus();
+        }                                
+    });
 	/*----------*/
 }
 function llenarSelect(lt,md,bg,sbg){
@@ -753,7 +791,7 @@ function datos_serviciosAdministrativos(valores,tipo,p){
 	    			alertify.error('Este servicio ya existe. Ingrese otro');	
 	    			limpiar_form(p);		
 	    		}else{
-	    			
+	    			alertify.error('Error al momento de enviar los datos.');	
 	    		}
 	    	}
 
@@ -792,7 +830,7 @@ function datos_TasaServicios(valores,tipo,p){
 	    			alertify.error('Este servicio ya existe. Ingrese otro');	
 	    			limpiar_form(p);		
 	    		}else{
-	    			
+	    			alertify.error('Error al momento de enviar los datos.');	
 	    		}
 	    	}
 
@@ -1190,8 +1228,13 @@ function limpiar_form(e){
 									if(form == "form_emisionPermisos"){
 										location.reload();
 									}else{
-										if(form == ""){
-											
+										if(form == "form_emisionCxc"){
+											$("#btn_guardarCxc").text("");
+											$("#btn_guardarCxc").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");
+											cargar_usuario("nombre_usuario_cxc");
+											$('#fecha_factura_cxc').datepicker({
+										        dateFormat: 'yy-mm-dd'
+										    }).datepicker('setDate', 'today');
 										}
 									}
 								}
@@ -1573,8 +1616,7 @@ function cargaInforme(id){
 		}
 	});		
 }
-function carga(valores){
-//console.log(valores)		
+function carga(valores){		
 	$("#id_informe_empresa").val(valores[0]);		
 	if(valores[1] == "SI"){
 		$("#check_per1").prop('checked', true);
@@ -2435,8 +2477,6 @@ function informesGenerales(){
 	$("#pager").html("");
 	$('#modalBusquedas').modal('show');
 	buscar_informes_propietarios("600");	
-	
-
 }
 function total_factura(){
 	var subtotal = 0;
@@ -2600,7 +2640,7 @@ function cargar_emision(id,carpeta,archivo){
 		}
 	});		
 }
-function cargar_usuario(id){
+function cargar_usuario(id){	
 	$.ajax({				
 		type: "POST",				  			
 		url: "../servidor/login/session.php",
