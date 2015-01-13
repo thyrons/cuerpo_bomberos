@@ -813,12 +813,13 @@ function buscar_cxc_cliente(width,id){
             var rids = $('#lista_factura').jqGrid('getDataIDs');                                                                                                     
             url = "../servidor/cxc/carga_cxc.php?id="+ret.id_cxc; 
             $("#total_saldo").val(ret.saldo);            
+            $("#id_cxc").val(ret.id_cxc);            
             $.ajax({                
                 type: "POST",                
                 dataType: 'json',       
                 url: url,           
                 success: function(data) {
-                    console.log(data);
+                    //console.log(data);
                     var tam = data.length;
                     for(var i = 0; i < tam; i++){
                         var datarow = {

@@ -403,7 +403,7 @@ function inicio(){
 			url: "../servidor/emision_permisos/verifica_nro.php",			
 		    success: function(data) {			 
 				if(data != ''){
-					alert("Error este nro. de factura ya existe. Se cargara el nro de factura disponible");
+					alertify.alert("Error este nro. de factura ya existe. Se cargara el nro de factura disponible");
 					$("#nro_factura_preimpresa").val("");				
 					$("#nro_factura_preimpresa").val(data);				
 		    		zeros(data.length,"nro_factura_preimpresa");
@@ -417,7 +417,7 @@ function inicio(){
 		if($(this).val() == '2'){
 			if($("#total_emision").val() <= 0){
 				$("#select_emision").val(1);
-				alert("Antes de indicar la forma de pago.. Ingrese datos en la factura");
+				alertify.alert("Antes de indicar la forma de pago.. Ingrese datos en la factura");
 			}else{
 				$("#adelanto_emision").removeAttr("readonly");
 				$("#adelanto_emision").val("");
@@ -431,10 +431,10 @@ function inicio(){
 	});
 
 	$("#adelanto_emision").on("keyup",function(){
-		if($("#adelanto_emision").val() <= $("#total_emision").val()){
+		if( parseFloat($("#adelanto_emision").val()) <= parseFloat($("#total_emision").val())){
 			$("#adelanto_emision_total").val($("#total_emision").val()-$("#adelanto_emision").val());
 		}else{
-			alert("El adelanto no debe superar el valor de la factura");
+			alertify.alert("El adelanto no debe superar el valor de la factura");
 			$("#adelanto_emision").val("");
 			$("#adelanto_emision_total").val($("#total_emision").val());
 		}		
@@ -551,15 +551,15 @@ function inicio(){
 		var key = window.Event ? e.which : e.keyCode
 		if(key == 9){
 			if($("#nombre_productoEmision").val() == ""){
-				alert("Ingrese un producto antes de continuar");
+				alertify.alert("Ingrese un producto antes de continuar");
 				$("#nombre_productoEmision").focus();
 			}else{
 				if($("#cantidadEmision").val() == ""){
-					alert("Ingrese una cantidad antes de continuar");
+					alertify.alert("Ingrese una cantidad antes de continuar");
 					$("#cantidadEmision").focus();
 				}else{
 					if($("#precio_ventaEmision").val() == ""){
-						alert("Ingrese precio antes de continuar");
+						alertify.alert("Ingrese precio antes de continuar");
 						$("#precio_ventaEmision").focus();
 					}else{						
 						var filas = jQuery("#lista_factura").jqGrid("getRowData");									            			            
@@ -643,7 +643,7 @@ function inicio(){
 		if($("#id_emision").val() != ""){
 			window.open('../reportes/reporte_emsion.php?id='+$("#id_emision").val(),'_blank');      		
 		}else{
-			alert("No se puede imprimir");
+			alertify.alert("No se puede imprimir");
 		}
 	});		
 	/**/
@@ -689,8 +689,7 @@ function inicio(){
         var filas = jQuery("#lista_cxc").jqGrid("getRowData");
         var rids = $('#lista_cxc').jqGrid('getDataIDs');   
         var repe = 0;
-        var pos = 0;
-        console.log($("#total_a_pagar").val(),$("#total_saldo").val())
+        var pos = 0;        
         if(parseFloat($("#total_a_pagar").val()) <= parseFloat($("#total_saldo").val())){
         	for (var i = 0; i < filas.length; i++) {
 		        var id = filas[i];                                        
@@ -724,7 +723,8 @@ function inicio(){
         	$("#total_a_pagar").val("");
         	$("#total_a_pagar").focus();
         }                                
-    });
+    });	
+	$("#btn_guardarCxc").on("click",guardar_cxc);
 	/*----------*/
 }
 function llenarSelect(lt,md,bg,sbg){
@@ -737,7 +737,7 @@ function llenarSelect(lt,md,bg,sbg){
 /* function para poder dar el comportamiento de un grupo de radiobutton a un grupo de checkbox */
 function checkbox(){
 	var ck = $(this).parent().parent().find(':input');	
-	console.log(ck)
+	//console.log(ck)
 	ck.each(function (){
 		$(this).removeAttr("checked");
 	});
@@ -1129,18 +1129,18 @@ function guardar_emision(){
 				if(texto=="Guardar"){		
 					datos_emision(valores,"g",e,serializar);
 				}else{
-					alert("No se puede modifcar los datos de una factura ya impresa");
+					alertify.alert("No se puede modifcar los datos de una factura ya impresa");
 				}
 				e.preventDefault();
 	    		$(this).unbind("submit")
 			});
 			$("#form_emisionPermisos").submit();	 
 		}else{
-			alert("Agregue productos para poder continuar");
+			alertify.alert("Agregue productos para poder continuar");
 			$("#nombre_productoEmision").focus();
 		}
 	}else{
-		alert("Indique un  propietario antes de continuar");
+		alertify.alert("Indique un  propietario antes de continuar");
 		$("#ci_ruc_emision").focus();
 	}
 }
@@ -1163,7 +1163,7 @@ function datos_emision(valores,tipo,p,serializar){
 
 	    	}	
 	    	else{
-	    		alertify.danger("Error al momento de guardar los datos la página se recargara");
+	    		alertify.error("Error al momento de guardar los datos la página se recargara");
 	    		location.reload();
 	    	}
 
@@ -1171,6 +1171,64 @@ function datos_emision(valores,tipo,p,serializar){
 	});
 }
 /*------------------*/
+/*guardar cxc*/
+function guardar_cxc(){
+	var resp=comprobarCamposRequired("form_emisionCxc");		
+	if(resp==true){				
+		$("#form_emisionCxc").on("submit",function (e){	
+			var valores = $("#form_emisionCxc").serialize();
+			var texto=($("#btn_guardarCxc").text()).trim();				
+			var serializar = serializarJqTabla("lista_cxc");
+			if(texto=="Guardar"){		
+				if($("#txt_0").val()!=""){
+					alertify.confirm("<b>Recuerde Llenar todos los campos <br>Deséa Continuar?</b>", function(e){
+						if(e){
+							datos_cxc(valores,"g",e,serializar);
+						}else{
+							alertify.set({ delay: 1000 });
+							alertify.error("Operación cancelada");	   				
+						}
+					});		    			
+	    			
+				}else{
+					alertify.set({ delay: 1000 });
+					alertify.error("Debe seleccionar un cliente antes de continuar");	   	
+				}
+			}else{
+				alertify.error("No se puede modificar");	   
+			}
+			e.preventDefault();
+    		$(this).unbind("submit")
+		});
+	}
+}
+function datos_cxc(valores,tipo,p,serializar){	
+	var productosJSON = JSON.stringify(serializar);
+	$.ajax({				
+		type: "POST",
+		data: valores,
+		url: "../servidor/cxc/cxc.php?v="+productosJSON,			
+	    success: function(data) {		    	
+	    	if( data == 0 ){	    		
+	    		alertify.set({ delay: 1000 });
+	    		alertify.primary('Datos Agregados Correctamente');						    		
+	    		setTimeout(function() {
+				    window.open('../reportes/reporte_cxc.php?id='+$("#id_cxc").val(),'_blank');      		
+				}, 1500);
+				setTimeout(function() {
+				   location.reload();
+				}, 1800);
+	    	}	
+	    	else{
+	    		alertify.error("Error al momento de guardar los datos la página se recargara");	    		
+				setTimeout(function() {
+				   location.reload();
+				}, 1500);	    		
+	    	}
+		}
+	});
+}
+/*---------------*/
 /*function para limpiar el formulario activo y dar focus al primer elemento*/
 function limpiar_form(e){
 	if(e != undefined)

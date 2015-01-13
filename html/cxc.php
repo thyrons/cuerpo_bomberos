@@ -8,6 +8,7 @@
           <div class="col-sm-9">            
             <input type="text" class="form-control" id='fecha_factura_cxc' readonly name="fecha_factura_cxc" data-toggle="tooltip" data-original-title="Fecha actual" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
             <input type="hidden" id="id_emision" name="id_emision">            
+            <input type="hidden" id="id_cxc" name="id_cxc">            
           </div>
         </div>            
         <div class="form-group col-md-3">
@@ -69,7 +70,7 @@
     </div>
     <div class="panel-footer form-footer">
       <div>
-        <button class="btn btn-primary" id="btn_guardarCxc" type="button">  
+        <button class="btn btn-primary" id="btn_guardarCxc" type="submit">  
         <span class="glyphicon glyphicon-log-in"></span> Guardar</button>
       </div>
       <!--<div>

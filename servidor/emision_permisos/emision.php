@@ -39,7 +39,7 @@
 		guardarSql($conexion,$sql);
 		if($_POST['adelanto_emision'] > '0'){
 			$id_detalle = id_tabla($conexion,"detalles_cxc","id_detalle_cxc");				
-			$sql = "insert into detalles_cxc values ('$id_detalle','$id_credito','$_POST[fecha_factura]','$_POST[adelanto_emision]','Abono Inicial','Efectivo')";					
+			$sql = "insert into detalles_cxc values ('$id_detalle','$id_credito','$_POST[fecha_factura]','$_POST[adelanto_emision]','Abono Inicial','Efectivo','$id_usuario')";					
 			guardarSql($conexion,$sql);
 		}				
 	}
