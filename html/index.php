@@ -127,8 +127,7 @@ if (empty($_SESSION['id'])) {
               <div id="collapseTres" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTres">
                 <div class="panel-body">
                   <ul class="nav nav-pills nav-stacked ">         
-                    <li><a href="#tab_n" ><span class="glyphicon glyphicon-list-alt"></span> Compras</a></li>                               
-                    <li><a href="#tab_o" ><span class="glyphicon glyphicon-list"></span> Notas de Débito</a></li>                    
+                    <li><a href="#tab_n" ><span class="glyphicon glyphicon-list-alt"></span> Compras</a></li>                                                   
                     <li><a href="#tab_p" ><span class="glyphicon glyphicon-print"></span> Reporte Compras</a></li>                    
                   </ul>
                 </div>
@@ -212,7 +211,12 @@ if (empty($_SESSION['id'])) {
             <?php
               include 'cxc.php';
             ?>   
-            </div>            
+            </div> 
+            <div class="tab-pane" id="tab_l">
+            <?php
+              include 'nota_credito.php';
+            ?>   
+            </div>           
           </div><!-- tab content -->
         </div><!-- end of container -->
       </div>        

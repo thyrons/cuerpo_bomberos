@@ -726,6 +726,19 @@ function inicio(){
     });	
 	$("#btn_guardarCxc").on("click",guardar_cxc);
 	/*----------*/
+	/*notas credito*/
+	$('#fecha_factura_n_credito').datepicker({
+        dateFormat: 'yy-mm-dd'
+    }).datepicker('setDate', 'today');
+    mostrar("hora_factura_n_credito");
+    cargar_usuario("nombre_usuario_n_credito");
+    $("#ci_n_credito").keyup(function (){			
+		autocompletarCxc("txt_id_cliente_nC","ci_n_credito","cliente_n_credito","0");		
+	});
+	$("#cliente_n_credito").keyup(function (){	
+		autocompletarCxc("txt_id_cliente_nC","cliente_n_credito","ci_n_credito","1");		
+	});
+	/*----------*/
 }
 function llenarSelect(lt,md,bg,sbg){
 	$("#select_valor").find('option').remove();

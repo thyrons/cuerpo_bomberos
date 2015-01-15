@@ -1,6 +1,7 @@
 <?php
 
 try{
+	//$mongo = new Mongo();
 	$mongo = new Mongo();
 	$databases = $mongo->listDBs();
 	echo '<pre>';
@@ -9,5 +10,4 @@ try{
 }catch(MongoConnectionException $e){
 	die($e->getMessage());
 }
-
 ?>
