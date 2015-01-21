@@ -868,3 +868,70 @@ function buscar_cxc_cliente(width,id){
     jQuery("#tabla_busquedas").jqGrid('hideCol', "id_cxc");
     //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns'); 
 }
+function buscar_nxc_cliente(width,id){
+    jQuery("#tabla_busquedas").jqGrid({
+        datatype: "xml",
+        url: '../servidor/notas_credito/xml_nxc.php?id='+id,        
+        colNames: ['ID','nro','nro1','Nro. Factura','Total','Fecha cancelación','id_propietario','RUC','Nombre'],
+        colModel:[      
+            {name:'id_emision',index:'id_emision',frozen:true,align:'center',search:false},
+            {name:'nro',index:'nro',frozen : true,align:'left',search:false},
+            {name:'nro_1',index:'nro_1',frozen : true,align:'center',search:true},
+            {name:'nro_factura',index:'nro_factura',frozen : true,align:'center',search:true},
+            {name:'total',index:'total',frozen : true,align:'center',search:true},
+            {name:'fecha_cancelacion',index:'fecha_cancelacion',frozen : true,align:'center',search:false},            
+            {name:'id_propietario',index:'id_propietario',frozen : true,align:'center',search:false},            
+            {name:'ruc_propietario',index:'ruc_propietario',frozen : true,align:'center',search:false},            
+            {name:'nombre_propietario',index:'nombre_propietario',frozen : true,align:'center',search:false},            
+        ],          
+        rowNum: 10,
+        autowidth: true, 
+        width: '100%', 
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],
+        pager: jQuery('#pager'),        
+        sortname: 'id_emision',
+        sortordezr: 'asc',
+        caption: 'LISTA FACTURAS DE LOS PROPIETARIOS',
+        viewrecords: true,   
+        ondblClickRow: function(rowid) {                             
+            var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');                                 
+            var ret = jQuery("#tabla_busquedas").jqGrid('getRowData',gsr);  
+            $("#id_facturaCredtio").val(ret.id_emision);
+            $('#modalBusquedas').modal('hide');            
+        }               
+    }).jqGrid('navGrid','#pager',{
+            add:false,
+            edit:false,
+            del:false,           
+            refresh:true,
+            search:true,
+            view:false        
+    },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+    },
+    {
+        closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,        
+        multipleSearch: false, overlay: false
+
+    },
+    {
+    },
+    {
+        closeOnEscape: true
+    }
+    ); 
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "id_emision");
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "nro");
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "nro_1");
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "id_propietario");
+    //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns'); 
+}

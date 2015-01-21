@@ -733,11 +733,115 @@ function inicio(){
     mostrar("hora_factura_n_credito");
     cargar_usuario("nombre_usuario_n_credito");
     $("#ci_n_credito").keyup(function (){			
-		autocompletarCxc("txt_id_cliente_nC","ci_n_credito","cliente_n_credito","0");		
+		autocompletarNxc("txt_id_cliente_nC","ci_n_credito","cliente_n_credito","0");		
 	});
 	$("#cliente_n_credito").keyup(function (){	
-		autocompletarCxc("txt_id_cliente_nC","cliente_n_credito","ci_n_credito","1");		
+		autocompletarNxc("txt_id_cliente_nC","cliente_n_credito","ci_n_credito","1");		
 	});
+	jQuery("#lista_nxc").jqGrid({
+        datatype: "local",
+        colNames: ['id_producto','Detalle', 'Cantidad', 'Precio', 'Total'],
+        colModel: [            
+            {name: 'id_producto', index: 'id_producto', editable: false, search: false, hidden: true, editrules: {edithidden: false}, align: 'center',
+                frozen: true, width: 100},
+            {name: 'nombre_producto', index: 'nombre_producto', editable: false, search: false, hidden: false, editrules: {edithidden: false}, align: 'center',
+                frozen: true, width: 590},
+            {name: 'cantidad', index: 'cantidad', editable: true, frozen: true, editrules: {required: true}, align: 'center', width: 100},
+            {name: 'precio', index: 'precio', editable: false, frozen: true, editrules: {required: true}, align: 'center', width:100},            
+            {name: 'total', index: 'total', editable: true, search: false, frozen: true, editrules: {required: true}, align: 'center', width: 100, editoptions:{maxlength: 10, size:15}},                         
+        ],
+        rowNum: 30, 
+        width: null,              
+        height: 150,
+        rownumbers: true,
+        sortable: true,
+        rowList: [10, 20, 30],
+        pager: jQuery('#pager'),
+        sortname: 'tipo',
+        sortorder: 'asc',
+        viewrecords: true,
+        cellEdit: true,
+        cellsubmit: 'clientArray',
+        shrinkToFit: false,        
+  	});
+	$("#nombre_productoCredito").keyup(function(){
+		autocompletarProductoCredito("nombre_productoCredito",$("#id_facturaCredtio").val());		
+	});	
+	$("#cantidadCredito").on("change keyup",function (e){
+		if(!$.isNumeric($(this).val())){
+			$(this).val("");			
+		}else{
+			var t = $("#cantidadCredito").val() * $("#precio_ventaCredito").val()
+			t = (parseFloat(t)).toFixed(2);
+			$("#precio_totalCredito").val(t)
+		}
+	});
+	$("#precio_totalCredito").keyup(function(e){
+		var key = window.Event ? e.which : e.keyCode
+		if(key == 9){
+			if($("#nombre_productoCredito").val() == ""){
+				alertify.alert("Ingrese un producto antes de continuar");
+				$("#nombre_productoCredito").focus();
+			}else{
+				if($("#cantidadCredito").val() == ""){
+					alertify.alert("Ingrese una cantidad antes de continuar");
+					$("#cantidadCredito").focus();
+				}else{					
+					var filas = jQuery("#lista_nxc").jqGrid("getRowData");									            			            
+			        var rids = $('#lista_nxc').jqGrid('getDataIDs');                        			            
+			        if (filas.length === 0) {                			            	
+		                var datarow = {
+		                    id_producto: $("#id_productoCredito").val(),//referente al id producto		                    
+		                    nombre_producto: $("#nombre_productoCredito").val(), 
+		                    cantidad: $("#cantidadCredito").val(), 
+		                    precio: $("#precio_ventaCredito").val(),                     
+		                    total: (parseFloat($("#cantidadCredito").val() * $("#precio_ventaCredito").val())).toFixed(2),                     
+		                };
+		                su = jQuery("#lista_nxc").jqGrid('addRowData', $("#id_productoCredito").val(), datarow);			                
+			        }else{
+		            	var repe = 0;
+		                var pos1 = 0;			                                                			                
+		                for (var i = 0; i < filas.length; i++) {			                	
+		                    var id = filas[i];                  			                    
+		                    if (id.id_producto == $("#id_productoCredito").val()) {
+		                        pos1 = rids[i];                        
+		                        repe = 1;
+		                    }			                
+		                }       			                
+		                if(repe == 0){
+		                	//console.log(jQuery('#lista_nxc').jqGrid('getRowData'));
+		                   var datarow = {
+			                    id_producto: $("#id_productoCredito").val(),//referente al id producto			                    
+			                    nombre_producto: $("#nombre_productoCredito").val(), 
+			                    cantidad: $("#cantidadCredito").val(), 
+			                    precio: $("#precio_ventaCredito").val(),                     
+			                    total: (parseFloat($("#cantidadCredito").val() * $("#precio_ventaCredito").val())).toFixed(2),                     
+			                };				                
+			                jQuery("#lista_nxc").jqGrid('addRowData', $("#id_productoCredito").val(), datarow);			                				                
+		                }else{                   
+		                   var datarow = {
+		                    id_producto: "idp"+$("#id_productoCredito").val(),//referente al id producto			                    
+			                    nombre_producto: $("#nombre_productoCredito").val(), 
+			                    cantidad: $("#cantidadCredito").val(), 
+			                    precio: $("#precio_ventaCredito").val(),                     
+			                    total: (parseFloat($("#cantidadCredito").val() * $("#precio_ventaCredito").val())).toFixed(2),                     
+			                };				                
+		                    jQuery("#lista_nxc").jqGrid('setRowData', pos1, datarow);								
+		                
+			        	}
+					}
+				}		
+			}
+			$("#id_productoCredito").val("");
+            $("#nombre_productoCredito").val("");
+            $("#nombre_productoCredito").focus();
+            $("#cantidadCredito").val("0");
+            $("#precio_ventaCredito").val("0.00");
+            $("#precio_totalCredito").val("0.00");		
+            total_credito();        	
+		}
+	});
+	$("#btn_guardar_n_credito").on("click",guardar_n_credito);
 	/*----------*/
 }
 function llenarSelect(lt,md,bg,sbg){
@@ -1242,6 +1346,64 @@ function datos_cxc(valores,tipo,p,serializar){
 	});
 }
 /*---------------*/
+/*guardar notas credito*/
+function guardar_n_credito(){
+	var resp=comprobarCamposRequired("form_notasCredito");		
+	if(resp==true){				
+		$("#form_notasCredito").on("submit",function (e){	
+			var valores = $("#form_notasCredito").serialize();
+			var texto=($("#btn_guardar_n_credito").text()).trim();				
+			var serializar = serializarJqTabla("lista_nxc");
+			if(texto=="Guardar"){		
+				if($("#txt_id_cliente_nC").val()!=""){
+					alertify.confirm("<b>Recuerde Llenar todos los campos <br>Deséa Continuar?</b>", function(e){
+						if(e){
+							datos_c_credito(valores,"g",e,serializar);
+						}else{
+							alertify.set({ delay: 1000 });
+							alertify.error("Operación cancelada");	   				
+						}
+					});		    			
+	    			
+				}else{
+					alertify.set({ delay: 1000 });
+					alertify.error("Debe seleccionar un propietario antes de continuar");	   	
+				}
+			}else{
+				alertify.error("No se puede modificar");	   
+			}
+			e.preventDefault();
+    		$(this).unbind("submit")
+		});
+	}
+}
+function datos_c_credito(valores,tipo,p,serializar){	
+	var productosJSON = JSON.stringify(serializar);
+	$.ajax({				
+		type: "POST",
+		data: valores,
+		url: "../servidor/notas_credito/notas_credito.php?v="+productosJSON,			
+	    success: function(data) {		    	
+	    	if( data > 0 ){	    		
+	    		alertify.set({ delay: 1000 });
+	    		alertify.primary('Datos Agregados Correctamente');						    		
+	    		setTimeout(function() {
+				    window.open('../reportes/reporte_nota_credito.php?id='+data,'_blank');      		
+				}, 1500);
+				setTimeout(function() {
+				   location.reload();
+				}, 1800);
+	    	}	
+	    	else{
+	    		alertify.error("Error al momento de guardar los datos la página se recargara");	    		
+				setTimeout(function() {
+				   location.reload();
+				}, 1500);	    		
+	    	}
+		}
+	});
+}
+/*----------*/
 /*function para limpiar el formulario activo y dar focus al primer elemento*/
 function limpiar_form(e){
 	if(e != undefined)
@@ -1306,6 +1468,15 @@ function limpiar_form(e){
 											$('#fecha_factura_cxc').datepicker({
 										        dateFormat: 'yy-mm-dd'
 										    }).datepicker('setDate', 'today');
+										}else{
+											if(form == "form_notasCredito"){
+												$("#btn_guardar_n_credito").text("");
+												$("#btn_guardar_n_credito").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");
+												cargar_usuario("nombre_usuario_n_credito");
+												$('#fecha_factura_n_credito').datepicker({
+											        dateFormat: 'yy-mm-dd'
+											    }).datepicker('setDate', 'today');
+											}
 										}
 									}
 								}
@@ -1541,6 +1712,60 @@ function autocompletarCxc(campo1,campo2,campo3,fn){
     };
 }
 /*------*/
+/*function para buscar las emisiones y facturas  que contengan productos*/
+function autocompletarNxc(campo1,campo2,campo3,fn){
+	$("#"+campo2).autocomplete({
+        source: '../servidor/notas_credito/buscar_emision.php?fn='+fn,
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#"+campo1 ).val( ui.item.label1 );	                
+	        $( "#"+campo2 ).val( ui.item.label2 );	                
+	        $( "#"+campo3 ).val( ui.item.label3 );	                
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#"+campo1 ).val( ui.item.label1 );	        
+	        $( "#"+campo2 ).val( ui.item.label2 );	        
+	        $( "#"+campo3 ).val( ui.item.label3 );	        	        
+	        carga_nxc(ui.item.label1);
+	        return false;	        
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.label2 + "</a>" )
+        .appendTo( ul );
+    };
+}
+/*----*/
+/*function para autocompletar solo los productos que existen en la factura seleccionada */
+function autocompletarProductoCredito(campo,id){
+	$("#nombre_productoCredito").autocomplete({
+        source: '../servidor/notas_credito/cargaProductosCredito.php?id='+id,
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#id_productoCredito").val( ui.item.label1 );	                	        
+	        $( "#nombre_productoCredito").val( ui.item.label2 );	                	        
+	        $( "#cantidadCredito").val( ui.item.label3 );	                	        
+	        $( "#precio_ventaCredito").val( ui.item.label4 );	                	        
+	        $( "#precio_totalCredito").val( ui.item.label5 );	  
+	        $("#cantidadCredito").prop("max",ui.item.label3);	        
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#id_productoCredito").val( ui.item.label1 );	        	        	        
+	        $( "#nombre_productoCredito").val( ui.item.label2 );	                	        
+	        $( "#cantidadCredito").val( ui.item.label3 );	                	        
+	        $( "#precio_ventaCredito").val( ui.item.label4 );	                	        
+	        $( "#precio_totalCredito").val( ui.item.label5 );	                	        
+	        return false;	        
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.label2 + "</a>" )
+        .appendTo( ul );
+    };
+}
+/*--------*/
 /*cargar las cxc de los clientes*/
 function carga_cxc(id){
 	$("#busquedasModificar").html("");
@@ -1548,6 +1773,15 @@ function carga_cxc(id){
 	$("#pager").html("");
 	$('#modalBusquedas').modal('show');
 	buscar_cxc_cliente("600",id);	
+}
+/**/
+/*cargar las nxc de los clientes*/
+function carga_nxc(id){
+	$("#busquedasModificar").html("");
+	$("#busquedasModificar").append("<table id='tabla_busquedas'></table><div id='pager'></div>");
+	$("#pager").html("");
+	$('#modalBusquedas').modal('show');
+	buscar_nxc_cliente("600",id);	
 }
 /**/
 /*funcion para cargar la tabla de las empresas*/
@@ -2559,6 +2793,18 @@ function total_factura(){
 
     $("#subtotal_emision").val(parseFloat(subtotal).toFixed(2));
     $("#total_emision").val(parseFloat(subtotal).toFixed(2));
+    
+}
+function total_credito(){
+	var subtotal = 0;
+	var filas = jQuery("#lista_nxc").jqGrid("getRowData");
+	for (var i = 0; i < filas.length; i++) {
+    	var id = filas[i];    
+    	subtotal = subtotal + parseFloat(id.total);	
+    }
+
+    $("#subtotal_credito").val(parseFloat(subtotal).toFixed(2));
+    $("#total_credito").val(parseFloat(subtotal).toFixed(2));
     
 }
 function nro_row(){		
