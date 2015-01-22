@@ -65,7 +65,7 @@
           </div>   
         </div>   
         <div class="form-group col-md-10">          
-          <br />          
+          
           <table id="lista_nxc"></table>          
         </div>
         <div class="form-group col-md-10">

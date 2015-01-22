@@ -935,3 +935,84 @@ function buscar_nxc_cliente(width,id){
     jQuery("#tabla_busquedas").jqGrid('hideCol', "id_propietario");
     //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns'); 
 }
+function buscar_notas_credito(width,id){    
+    jQuery("#tabla_busquedas").jqGrid({
+        datatype: "xml",
+        url: '../servidor/notas_credito/xml_nota_credito.php',        
+        colNames: ['ID','FECHA FACTURA','HORA FACTURA','USUARIO','id_propietario','RUC','PROPIETARIO','SUBTOTAL','IVA0','IVA12','TOTAL'],
+        colModel:[      
+            {name:'id_devolucion_venta',index:'id_devolucion_venta',frozen:true,align:'center',search:false},
+            {name:'fecha_actual',index:'fecha_actual',frozen : true,align:'left',search:false},
+            {name:'hora_actual',index:'hora_actual',frozen : true,align:'center',search:false},
+            {name:'nombre_usuario',index:'nombre_usuario',frozen : true,align:'center',search:true},
+            {name:'id_propietario',index:'id_propietario',frozen : true,align:'center',search:true},
+            {name:'ruc_propietario',index:'ruc_propietario',frozen : true,align:'center',search:false},
+            {name:'nombre_propietario',index:'nombre_propietario',frozen : true,align:'center',search:false},            
+            {name:'subtotal',index:'subtotal',frozen : true,align:'center',search:false},            
+            {name:'iva0',index:'iva0',frozen : true,align:'center',search:false},            
+            {name:'iva12',index:'iva12',frozen : true,align:'center',search:false},            
+            {name:'total',index:'total',frozen : true,align:'center',search:false},            
+        ],          
+        rowNum: 10,
+        autowidth: true, 
+        width: '100%', 
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],
+        pager: jQuery('#pager'),        
+        sortname: 'id_devolucion_venta',
+        sortordezr: 'asc',
+        caption: 'NOTAS DE CRÉDITO',
+        viewrecords: true,   
+        ondblClickRow: function(rowid) {     
+            var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');                     
+            var ret = jQuery("#tabla_busquedas").jqGrid('getRowData',gsr);  
+            $("#id_facturaCredtio").val(ret.id_devolucion_venta);
+            $("#fecha_factura_n_credito").val(ret.fecha_actual);
+            $("#hora_factura_n_credito").val(ret.hora_actual);
+            $("#nombre_usuario_n_credito").val(ret.nombre_usuario);
+            $("#txt_id_cliente_nC").val(ret.id_propietario);
+            $("#ci_n_credito").val(ret.ruc_propietario);
+            $("#cliente_n_credito").val(ret.nombre_propietario);                        
+            $("#subtotal_credito").val(ret.subtotal);            
+            $("#iva_0Credito").val(ret.iva0);            
+            $("#iva_12Credito").val(ret.iva12);            
+            $("#total_credito").val(ret.total);            
+            cargar_nota_credito(ret.id_devolucion_venta);
+            $('#modalBusquedas').modal('hide');            
+            $("#btn_guardar_n_credito").text("");
+            $("#btn_guardar_n_credito").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+            
+        }                 
+    }).jqGrid('navGrid','#pager',{
+            add:false,
+            edit:false,
+            del:false,           
+            refresh:true,
+            search:true,
+            view:false        
+    },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+    },
+    {
+        closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,        
+        multipleSearch: false, overlay: false
+
+    },
+    {
+    },
+    {
+        closeOnEscape: true
+    }
+    ); 
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "id_propietario");
+    //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
+
+}

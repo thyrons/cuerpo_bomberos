@@ -842,6 +842,14 @@ function inicio(){
 		}
 	});
 	$("#btn_guardar_n_credito").on("click",guardar_n_credito);
+	$("#btn_buscar_n_credito").on("click",modal);
+	$("#btn_imprimir_n_credito").on("click",function(){
+		if($("#id_facturaCredtio").val() != ""){
+			window.open('../reportes/reporte_nota_credito.php?id='+$("#id_facturaCredtio").val(),'_blank');      		
+		}else{
+			alertify.alert("No se puede imprimir");
+		}
+	});		
 	/*----------*/
 }
 function llenarSelect(lt,md,bg,sbg){
@@ -1541,7 +1549,10 @@ function modal(e){
 						}else{
 							if(form == "form_emisionPermisos"){
 								buscar_emision("600");	
-							}else{								
+							}else{
+								if(form == "form_notasCredito"){
+									buscar_notas_credito("600");	
+								}								
 							}
 						}
 					}	
@@ -2937,9 +2948,8 @@ function cargar_emision(id,carpeta,archivo){
 	    	$("#iva_12Emision").val(data.Cabecera[0][14]);
 	    	$("#total_emision").val(data.Cabecera[0][15]);
 	    	/*-------------------------*/
-	    	/*detalles de los productos*/
-
-	    	$("#lista_factura").jqGrid("clearGridData",true);
+	    	/*detalles de los productos*/	    	
+	    	$("#lista_factura").jqGrid("clearGridData",true);	    	
 	    	for(var i = 0; i < data.Detalles[0].length; i++){
 	    		var datarow = {
 	                id_producto: "idp"+$("#id_productoEmision").val(),//referente al id producto
@@ -2957,6 +2967,34 @@ function cargar_emision(id,carpeta,archivo){
 		}
 	});		
 }
+function cargar_nota_credito(id){
+	var url = '';	
+	url = "../servidor/notas_credito/cargaEmision.php?id="+id;	
+	$.ajax({				
+		type: "POST",
+		dataType: 'json',		
+		url: url,			
+	    success: function(data) {		    		    	
+	    	/*-------------------------*/
+	    	/*detalles de los productos*/
+	    	$("#lista_nxc").jqGrid("clearGridData",true);	    		    		    	
+	    	for(var i = 0; i < data.length; i++){
+	    		var datarow = {
+	                id_producto: data[i].cod_productos,//referente al id producto	                
+	                nombre_producto: data[i].nombre_producto, 
+	                cantidad: data[i].cantidad, 
+	                precio: data[i].precio_venta, 
+	                total: data[i].total_venta,	                
+	            };				                
+	            jQuery("#lista_nxc").jqGrid('addRowData', data[i].id_producto, datarow);			                				                	    	
+	    	}            
+	    	/*-------------------------*/
+	    	$("#btn_guardar_n_credito").text("");
+            $("#btn_guardar_n_credito").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+		}
+	});		
+}
+
 function cargar_usuario(id){	
 	$.ajax({				
 		type: "POST",				  			
