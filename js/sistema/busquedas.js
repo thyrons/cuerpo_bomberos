@@ -1016,3 +1016,78 @@ function buscar_notas_credito(width,id){
     //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
 
 }
+function buscar_c_x_c(width,id){
+
+    jQuery("#tabla_busquedas").jqGrid({
+        datatype: "xml",
+        url: '../servidor/cxc/xml_cxc_cargar.php',        
+        colNames: ['ID','NRO FACTURA','FECHA_CREDITO','HORA','NOMBRE USUARIO','id_propietario','RUC','NOMBRE','SALDO'],
+        colModel:[      
+            {name:'id_cxc',index:'id_cxc',frozen:true,align:'center',search:false},
+            {name:'nro_factura',index:'nro_factura',frozen : true,align:'left',search:false},
+            {name:'fecha_factura_cxc',index:'fecha_factura_cxc',frozen : true,align:'center',search:false},
+            {name:'hora_cxc',index:'hora_cxc',frozen : true,align:'center',search:false},
+            {name:'nombre_usuario_cxc',index:'nombre_usuario_cxc',frozen : true,align:'center',search:true},
+            {name:'txt_0',index:'txt_0',frozen : true,align:'center',search:true},
+            {name:'ci_cxc',index:'ci_cxc',frozen : true,align:'center',search:false},
+            {name:'cliente_cxc',index:'cliente_cxc',frozen : true,align:'center',search:false},            
+            {name:'total_saldo',index:'total_saldo',frozen : true,align:'center',search:false},                        
+        ],          
+        rowNum: 10,
+        autowidth: true, 
+        width: '100%', 
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],
+        pager: jQuery('#pager'),        
+        sortname: 'id_cxc',
+        sortordezr: 'asc',
+        caption: 'NOTAS DE CRÉDITO',
+        viewrecords: true,   
+        ondblClickRow: function(rowid) {     
+            var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');                     
+            var ret = jQuery("#tabla_busquedas").jqGrid('getRowData',gsr);  
+            $("#id_cxc").val(ret.id_cxc);
+            $("#fecha_factura_cxc").val(ret.fecha_factura_cxc);            
+            $("#nombre_usuario_cxc").val(ret.nombre_usuario_cxc);            
+            $("#txt_0").val(ret.txt_0);            
+            $("#ci_cxc").val(ret.ci_cxc);            
+            $("#cliente_cxc").val(ret.cliente_cxc);            
+            $("#total_saldo").val(ret.total_saldo);            
+            carga_cxc_imprimir(ret.id_cxc);
+            $('#modalBusquedas').modal('hide');            
+            $("#btn_guardarCxc").text("");
+            $("#btn_guardarCxc").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+            
+        }                 
+    }).jqGrid('navGrid','#pager',{
+            add:false,
+            edit:false,
+            del:false,           
+            refresh:true,
+            search:true,
+            view:false        
+    },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+    },
+    {
+        closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,        
+        multipleSearch: false, overlay: false
+
+    },
+    {
+    },
+    {
+        closeOnEscape: true
+    }
+    ); 
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "txt_0");
+    //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
+}

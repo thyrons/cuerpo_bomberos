@@ -1,20 +1,43 @@
-<?php    
-    require_once("../dompdf/dompdf_config.inc.php");         
-    $html = '<html>
-    <div style="margin-top:500px;margin-left:100px;">     
+<?php
+
+    header('Content-Type: text/html; charset=ISO-8859-1'); 
+    require_once('../lib/nusoap.php');
+
+    //Variables
+    $slengua = "C";
+    $scurso = "2011-12";
+    $scoddep = "B142";
+    $scodest = "";
+    
+    //url del webservice que invocaremos
+    $wsdl="https://cvnet.cpd.ua.es/servicioweb/publicos/pub_gestdocente.asmx?wsdl";
+    
+    //instanciando un nuevo objeto cliente para consumir el webservice
+    $client=new nusoap_client($wsdl,'wsdl');
+
+    //pasando parametros de entrada que seran pasados hacia el metodo
+    $param=array('plengua'=>$slengua, 'pcurso' => $scurso, 'pcoddep' => $scoddep, 'pcodest' => $scodest);
+
+    //llamando al metodo y recuperando el array de productos en una variable
+    $resultado = $client->call('wsasidepto', $param);
+   
+    //¿ocurrio error al llamar al web service?
+    if ($client->fault) { // si
+        $error = $client->getError();
+    if ($error) { // Hubo algun error
+            //echo 'Error:' . $error;
+            //echo 'Error2:' . $error->faultactor;
+            //echo 'Error3:' . $error->faultdetail;faultstring
+            echo 'Error:  ' . $client->faultstring;
+        }
         
-    </div>        
-    <div style="margin-top:550px;margin-left:100px;">     
-        Recolección de datos, y capacitación del personal de pasantías para el uso adecuado del sistema
-    </div>        
-    <body>
-    </body>
-    </html>';	
-	$dompdf = new DOMPDF();
-	$html=utf8_decode($html);
-	$dompdf->load_html($html);
-	$dompdf->set_paper("A4","portrait");
-	$dompdf->render();
-	//$dompdf->stream("informeGeneral.pdf");
-	$dompdf->stream('reporte_cxc.pdf',array('Attachment'=>0));
+        die();
+    }
+    
+    //Si es vacio
+    echo "<pre>";
+    print_r($resultado);
+    echo "</pre>";
+ 
+ 
 ?>

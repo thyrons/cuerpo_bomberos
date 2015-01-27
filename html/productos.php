@@ -16,6 +16,7 @@
               <div class="input-group">                
                 <select class="form-control" id='tipo_iva' name="tipo_iva" style="text-transform: uppercase">
                   <option value="0">0</option>                  
+                  <option value="12">12</option>                  
                 </select>  
                 <div class="input-group-addon">%</div>
                </div>

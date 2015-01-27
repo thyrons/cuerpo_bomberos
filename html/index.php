@@ -217,6 +217,11 @@ if (empty($_SESSION['id'])) {
               include 'nota_credito.php';
             ?>   
             </div>           
+            <div class="tab-pane" id="tab_n">
+            <?php
+              include 'factura_compra.php';
+            ?>   
+            </div>           
           </div><!-- tab content -->
         </div><!-- end of container -->
       </div>        
