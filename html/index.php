@@ -145,8 +145,10 @@ if (empty($_SESSION['id'])) {
                 <div class="panel-body">
                   <ul class="nav nav-pills nav-stacked ">                    
                     <li><a href="#tab_q"><span class="glyphicon glyphicon-user"></span> Ingreso Usuarios</a></li>                    
-                    <li><a href="#tab_q"><span class="glyphicon glyphicon-list"></span> Respaldo Base datos</a></li>                    
-                    <li><a href="#tab_r" ><span class="glyphicon glyphicon-print"></span> Reportes Generales</a></li>                    
+                    <li><a href="#" id="respalado_base"><span class="glyphicon glyphicon-list"></span> Respaldo Base datos</a></li>                    
+                    <li><a href="#tab_r" ><span class="glyphicon glyphicon-print"></span> Reportes Generales</a></li>                
+                    <li><a href="#tab_z"><span class="glyphicon glyphicon-book"></span> Subir Información</a></li>                        
+                    <li><a href="#tab_w"><span class="glyphicon glyphicon-filter"></span> Permisos</a></li>                        
                   </ul>
                 </div>
               </div>              
@@ -221,7 +223,17 @@ if (empty($_SESSION['id'])) {
             <?php
               include 'factura_compra.php';
             ?>   
-            </div>           
+            </div>               
+            <div class="tab-pane" id="tab_z">
+            <?php
+              include 'archivosExcel.php';
+            ?>   
+            </div>               
+            <div class="tab-pane" id="tab_w">
+            <?php
+              include 'permisos.php';
+            ?>   
+            </div>               
           </div><!-- tab content -->
         </div><!-- end of container -->
       </div>        

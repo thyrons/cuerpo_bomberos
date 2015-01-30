@@ -43,7 +43,7 @@
         <div class="form-group col-md-4">
           <label class="col-sm-3 control-label" for=' ci_ruc_compra'> CÉDULA/RUC</label>
           <div class="col-sm-9">                        
-            <input type="text" class="form-control" id=' ci_ruc_compra'  autocomplete="OFF" name=" ci_ruc_compra" data-toggle="tooltip" data-original-title="Nombre del Producto" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
+            <input type="text" class="form-control" id='ci_ruc_compra'  autocomplete="OFF" name="ci_ruc_compra" data-toggle="tooltip" data-original-title="Ruc del proveedor" pattern="[0-9 ]{1,}" minlength="1" style="text-transform: uppercase">  
           </div>
         </div>   
         <div class="form-group col-md-7">
@@ -148,11 +148,11 @@
         <span class="glyphicon glyphicon-log-in"></span> Buscar</button>
       </div>
        <div>
-        <button class="btn btn-primary" id="btn_atras" type="button">  
+        <button class="btn btn-primary" id="btn_atrasFC" type="button">  
         <span class="glyphicon glyphicon-fast-backward"></span> Atras</button>
       </div>
        <div>
-        <button class="btn btn-primary" id="btn_adelante" type="button">  
+        <button class="btn btn-primary" id="btn_adelanteFC" type="button">  
         Adelante <span class="glyphicon glyphicon-fast-forward"></span></button>
       </div>
       <div>

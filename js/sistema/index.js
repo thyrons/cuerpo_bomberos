@@ -71,7 +71,7 @@ function inicio(){
 							var ac1 = $(act1).attr('id');									
 							$("#"+ac1).addClass("collapse in");							
 		    			}else{
-		    				if(tab == 'tab_q' || tab == 'tab_r' ){
+		    				if(tab == 'tab_q' || tab == 'tab_r' || tab == 'tab_z' || tab == 'tab_w' ){
 		    					var acor1 =$("#accordion").children();		    					
 								var act1 = acor1.children().next()[3];					
 								var ac1 = $(act1).attr('id');																	
@@ -1035,7 +1035,46 @@ function inicio(){
 	/*----------*/
 	$("#btn_guardarCompra").on("click",guardar_fc);
 	$("#btn_limpiarCompra").on("click",limpiar_form);
+	$("#btn_buscarCompra").on("click",modal);
+	$("#btn_atrasFC").on("click",function(){
+		atras_fc("id_factura_compra","factura_compra","secuencia.php");//campo id la carpeta y el archivo donde esta el proceso
+	});
+	$("#btn_adelanteFC").on("click",function(){
+		adelante_fc("id_factura_compra","factura_compra","secuencia.php");//campo id la carpeta y el archivo donde esta el proceso
+	});
+	$("#btn_imprimirCompra").on("click",function(){
+		if($("#id_factura_compra").val() != ""){
+			window.open('../reportes/reporte_fc.php?id='+$("#id_factura_compra").val(),'_blank');      		
+		}else{
+			alertify.alert("No se puede imprimir");
+		}
+	});		
+	/*---------------*/
+	/*respaldo de la base de datos*/	
+	$("#respalado_base").on("click",function(e){
+		e.preventDefault();		
+		$.ajax({				
+			type: "POST",			
+			url: "../servidor/backup/respaldo.php",			
+		    success: function(data) {	
+		    	if( data == 1 ){
+		    		alertify.primary('Respaldo Exitoso el archivo se encuentra en la carpeta del servidor');											
+		    	}else{
+		    		if( data == 0 ){
+		    			alertify.error('Error... al momento de sacar el resplado de la base. Comuniquese con el administrador');	
+		    			
+		    		}
+		    	}
+
+			}
+		}); 
+	});
+	/*--------*/
+	/*informacion en excel*/	
+	$("#btnGuardarCargar").on("click",guardarCargar)
+	/*---------*/
 }
+///////////funciones del sistema
 function llenarSelect(lt,md,bg,sbg){
 	$("#select_valor").find('option').remove();
 	$('#select_valor').append('<option value='+lt+'>$ '+lt+'</option>');
@@ -1135,7 +1174,7 @@ function datos_TasaServicios(valores,tipo,p){
 	    		alertify.primary('Datos Agregados Correctamente');	
 				limpiar_form(p);					
 	    	}else{
-	    		if( data == 1 ){
+	    		if( data == 1 ){ 
 	    			alertify.error('Este servicio ya existe. Ingrese otro');	
 	    			limpiar_form(p);		
 	    		}else{
@@ -1823,6 +1862,10 @@ function modal(e){
 								}else{
 									if(form == "form_emisionCxc"){
 										buscar_c_x_c("600");	
+									}else{
+										if(form == "form_factura_compra"){
+											buscar_fac_compra("600");	
+										}	
 									}	
 								}
 							}
@@ -3277,6 +3320,152 @@ function adelante(id,carpeta,archivo){///campo carpeta y el archivo
 		}
 	});		
 }
+function atras_fc(id,carpeta,archivo){///campo carpeta y el archivo
+	var url = '';
+	if($("#"+id).val()!=""){
+		url = "../servidor/"+carpeta+"/"+archivo+"?id="+$("#"+id).val()+"&fn=0";
+	}else{
+		url = "../servidor/"+carpeta+"/"+archivo+"?id="+$("#"+id).val()+"&fn=0";
+	}	
+	$.ajax({				
+		type: "POST",
+		dataType: 'json',		
+		url: url,			
+	    success: function(data) {		    	
+	    	/*detalles de la factura*/    			        	    		    	
+	    	$("#id_factura_compra").val(data.Cabecera[0][0]);
+	    	$("#fecha_factura_compra").val(data.Cabecera[0][1]);
+	    	$("#hora_factura_compra").val(data.Cabecera[0][2]);
+	    	$("#nombre_usuario_compra").val(data.Cabecera[0][3]);
+	    	$("#nro_1_compra").val(data.Cabecera[0][4]);
+	    	$("#nro_2_compra").val(data.Cabecera[0][5]);
+	    	$("#nro_factura_preimpresa_compra").val(data.Cabecera[0][6]);
+	    	$("#fecha_cancelacion_compra").val(data.Cabecera[0][7]);	    	
+	    	$("#ci_ruc_compra").val(data.Cabecera[0][8]);
+	    	$("#nombre_compra").val(data.Cabecera[0][9]);
+	    	$("#empresa_compra").val(data.Cabecera[0][10]);
+	    	$("#forma_pago_compra").val(data.Cabecera[0][11]);	    		    	
+	    	$("#subtotal_compra").val(data.Cabecera[0][12]);
+	    	$("#iva_0compra").val(data.Cabecera[0][13]);
+	    	$("#iva_12compra").val(data.Cabecera[0][14]);
+	    	$("#total_compra").val(data.Cabecera[0][15]);
+	    	/*-------------------------*/
+	    	/*detalles de los productos*/
+
+	    	$("#lista_factura_compra").jqGrid("clearGridData",true);
+	    	for(var i = 0; i < data.Detalles[0].length; i++){
+	    		var datarow = {
+	                id_producto: data.Detalles[0][i]["id_producto"],//referente al id producto
+	                tipo: data.Detalles[0][i]["valor_iva"], 	                
+	                cantidad: data.Detalles[0][i]["cantidad"], 
+	                detalle: data.Detalles[0][i]["nombre_producto"], 
+	                precio_u: data.Detalles[0][i]["precio_u"], 
+	                total: data.Detalles[0][i]["precio_total"],	                        
+	            };				                
+	            jQuery("#lista_factura_compra").jqGrid('addRowData',data.Detalles[0][i]["id_producto"] , datarow);			                				                	    	
+	    	}            
+	    	/*-------------------------*/
+	    	$("#btn_guardarCompra").text("");
+            $("#btn_guardarCompra").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+		}
+	});		
+}
+function adelante_fc(id,carpeta,archivo){///campo carpeta y el archivo
+	var url = '';
+	if($("#"+id).val()!=""){
+		url = "../servidor/"+carpeta+"/"+archivo+"?id="+$("#"+id).val()+"&fn=1";
+	}else{
+		url = "../servidor/"+carpeta+"/"+archivo+"?id="+$("#"+id).val()+"&fn=1";
+	}	
+	$.ajax({				
+		type: "POST",
+		dataType: 'json',		
+		url: url,			
+	    success: function(data) {		    	
+	    	/*detalles de la factura*/    			        	    		    	
+	    	$("#id_factura_compra").val(data.Cabecera[0][0]);
+	    	$("#fecha_factura_compra").val(data.Cabecera[0][1]);
+	    	$("#hora_factura_compra").val(data.Cabecera[0][2]);
+	    	$("#nombre_usuario_compra").val(data.Cabecera[0][3]);
+	    	$("#nro_1_compra").val(data.Cabecera[0][4]);
+	    	$("#nro_2_compra").val(data.Cabecera[0][5]);
+	    	$("#nro_factura_preimpresa_compra").val(data.Cabecera[0][6]);
+	    	$("#fecha_cancelacion_compra").val(data.Cabecera[0][7]);	    	
+	    	$("#ci_ruc_compra").val(data.Cabecera[0][8]);
+	    	$("#nombre_compra").val(data.Cabecera[0][9]);
+	    	$("#empresa_compra").val(data.Cabecera[0][10]);
+	    	$("#forma_pago_compra").val(data.Cabecera[0][11]);	    		    	
+	    	$("#subtotal_compra").val(data.Cabecera[0][12]);
+	    	$("#iva_0compra").val(data.Cabecera[0][13]);
+	    	$("#iva_12compra").val(data.Cabecera[0][14]);
+	    	$("#total_compra").val(data.Cabecera[0][15]);
+	    	/*-------------------------*/
+	    	/*detalles de los productos*/
+
+	    	$("#lista_factura_compra").jqGrid("clearGridData",true);
+	    	for(var i = 0; i < data.Detalles[0].length; i++){
+	    		var datarow = {
+	                id_producto: data.Detalles[0][i]["id_producto"],//referente al id producto
+	                tipo: data.Detalles[0][i]["valor_iva"], 	                
+	                cantidad: data.Detalles[0][i]["cantidad"], 
+	                detalle: data.Detalles[0][i]["nombre_producto"], 
+	                precio_u: data.Detalles[0][i]["precio_u"], 
+	                total: data.Detalles[0][i]["precio_total"],	                        
+	            };				                
+	            jQuery("#lista_factura_compra").jqGrid('addRowData',data.Detalles[0][i]["id_producto"] , datarow);			                				                	    	
+	    	}            
+	    	/*-------------------------*/
+	    	$("#btn_guardarCompra").text("");
+            $("#btn_guardarCompra").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+		}
+	});		
+}
+function cargar_fac_compra(id,carpeta,archivo){
+	var url = '';	
+	url = "../servidor/"+carpeta+"/"+archivo+"?id="+id+"&fn=2";	
+	$.ajax({				
+		type: "POST",
+		dataType: 'json',		
+		url: url,			
+	    success: function(data) {		    	
+	    	/*detalles de la factura*/    			        	    		    	
+	    	$("#id_factura_compra").val(data.Cabecera[0][0]);
+	    	$("#fecha_factura_compra").val(data.Cabecera[0][1]);
+	    	$("#hora_factura_compra").val(data.Cabecera[0][2]);
+	    	$("#nombre_usuario_compra").val(data.Cabecera[0][3]);
+	    	$("#nro_1_compra").val(data.Cabecera[0][4]);
+	    	$("#nro_2_compra").val(data.Cabecera[0][5]);
+	    	$("#nro_factura_preimpresa_compra").val(data.Cabecera[0][6]);
+	    	$("#fecha_cancelacion_compra").val(data.Cabecera[0][7]);	    	
+	    	$("#ci_ruc_compra").val(data.Cabecera[0][8]);
+	    	$("#nombre_compra").val(data.Cabecera[0][9]);
+	    	$("#empresa_compra").val(data.Cabecera[0][10]);
+	    	$("#forma_pago_compra").val(data.Cabecera[0][11]);	    		    	
+	    	$("#subtotal_compra").val(data.Cabecera[0][12]);
+	    	$("#iva_0compra").val(data.Cabecera[0][13]);
+	    	$("#iva_12compra").val(data.Cabecera[0][14]);
+	    	$("#total_compra").val(data.Cabecera[0][15]);
+	    	/*-------------------------*/
+	    	/*detalles de los productos*/	    	
+	    	$("#lista_factura_compra").jqGrid("clearGridData",true);
+	    	for(var i = 0; i < data.Detalles[0].length; i++){
+	    		var datarow = {
+	                id_producto: data.Detalles[0][i]["id_producto"],//referente al id producto
+	                tipo: data.Detalles[0][i]["valor_iva"], 	                
+	                cantidad: data.Detalles[0][i]["cantidad"], 
+	                detalle: data.Detalles[0][i]["nombre_producto"], 
+	                precio_u: data.Detalles[0][i]["precio_u"], 
+	                total: data.Detalles[0][i]["precio_total"],	                        
+	            };				                
+	            jQuery("#lista_factura_compra").jqGrid('addRowData',data.Detalles[0][i]["id_producto"] , datarow);			                				                	    	
+	    	}            
+	    	/*-------------------------*/
+	    	$("#btn_guardarCompra").text("");
+            $("#btn_guardarCompra").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+		}
+	});		
+}
+
 function cargar_emision(id,carpeta,archivo){
 	var url = '';	
 	url = "../servidor/"+carpeta+"/"+archivo+"?id="+id+"&fn=2";	
@@ -3358,4 +3547,96 @@ function cargar_usuario(id){
 			$("#"+id).val(data);			
 		}
 	});	
+}
+function guardarCargar(){
+    $("#tabla_excel tbody").empty(); 
+    $("#form_archivosExcel").submit(function(e) {
+        var formObj = $(this);
+        var formURL = formObj.attr("action");
+        if(window.FormData !== undefined) {	
+            var formData = new FormData(this);   
+            formURL=formURL;        	
+            $.ajax({
+                url: "../servidor/excel/guardarExcel.php",
+                type: "POST",
+                data:  formData,
+                mimeType:"multipart/form-data",
+                dataType: 'json',
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(data, textStatus, jqXHR)
+                {
+                    var res=data;
+                    if(res != ""){
+                        alertify.success("Cargando Datos.....");
+                        cargarTablaExcel(data);
+                    }
+                    else{
+                        alertify.alert("Error..... Al cargar los registros");
+                        cargarTablaExcel(data);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) 
+                {
+                } 	        
+            });
+            e.preventDefault();
+            $(this).unbind("submit");
+        } else {
+            var  iframeId = "unique" + (new Date().getTime());
+            var iframe = $('<iframe src="javascript:false;" name="'+iframeId+'" />');
+            iframe.hide();
+            formObj.attr("target",iframeId);
+            iframe.appendTo("body");
+            iframe.load(function(e)
+            {
+                var doc = getDoc(iframe[0]);
+                var docRoot = doc.body ? doc.body : doc.documentElement;
+                var data = docRoot.innerHTML;
+            });
+        }
+    });
+}
+function cargarTablaExcel(data){	
+    for(var i=0;i<data.length;i+=3){    	        
+		vector = new Array();
+	    vector[0]=data[i];
+	    vector[1]=data[i+1];
+	    vector[2]=data[i+2];        
+	    guardar_datos_excel(vector);        	        	                
+    }    
+}
+function guardar_datos_excel(vector){
+    $.ajax({
+        type: "POST",
+        url: "../servidor/excel/guardar_propietario_excel.php",
+        data: "var="+vector[0]+"&var1="+vector[1]+"&var2="+vector[2],
+        success: function(data) {
+            var val = data;
+            if (val == 1) {
+                $("#tabla_excel tbody").append( "<tr>" +
+                    "<td align=center>" + vector[0] + "</td>" +
+                    "<td align=center>" + vector[1] + "</td>" +	            
+                    "<td align=center>" + 'Guardado Correctamente' + "</td>" +            
+                    "<td align=center>" + " <a class='elimina'><img src='../images/valid.png'/>"  + "</td>" + "</tr>" );
+            }
+            
+            if (val == 2) {
+                $("#tabla_excel tbody").append( "<tr>" +
+                    "<td align=center>" + vector[0] + "</td>" +
+                    "<td align=center>" + vector[1] + "</td>" +	            
+                    "<td align=center>" + 'Propietario Repetido' + "</td>" +            
+                    "<td align=center>" + " <a class='elimina'><img src='../images/invalid.png' />"  + "</td>" + "</tr>" );
+            }
+            
+            if (val == 3) {
+                $("#tabla_excel tbody").append( "<tr>" +
+                    "<td align=center>" + vector[0] + "</td>" +
+                    "<td align=center>" + vector[1] + "</td>" +	            
+                    "<td align=center>" + 'Sintaxis incorrecta' + "</td>" +            
+                    "<td align=center>" + " <a class='elimina'><img src='../images/delete.png' />"  + "</td>" + "</tr>" );
+            }
+        }
+    });
 }

@@ -1091,3 +1091,70 @@ function buscar_c_x_c(width,id){
     jQuery("#tabla_busquedas").jqGrid('hideCol', "txt_0");
     //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
 }
+function buscar_fac_compra(width,id){    
+    jQuery("#tabla_busquedas").jqGrid({
+        datatype: "xml",
+        url: '../servidor/factura_compra/xml_fc.php',        
+        colNames: ['ID','FECHA FACTURA','NRO FACTURA','RUC','PROVEEDOR','FECHA_CANCELACION','HORA FACTURA','EMPRESA','id_forma_pago','FORMA PAGO','RESPONSABLE'],
+        colModel:[      
+            {name:'id_factura_compra',index:'id_factura_compra',frozen:true,align:'center',search:false},
+            {name:'fecha_factura_compra',index:'fecha_factura_compra',frozen : true,align:'left',search:false},
+            {name:'nro_factura_preimpresa_compra',index:'nro_factura_preimpresa_compra',frozen : true,align:'center',search:false},
+            {name:'ci_ruc_compra',index:'ci_ruc_compra',frozen : true,align:'center',search:true},
+            {name:'nombre_compra',index:'nombre_compra',frozen : true,align:'center',search:true},
+            {name:'fecha_cancelacion_compra',index:'fecha_cancelacion_compra',frozen : true,align:'center',search:false},
+            {name:'hora_factura_compra',index:'hora_factura_compra',frozen : true,align:'center',search:false},            
+            {name:'nombre_empresa',index:'nombre_empresa',frozen : true,align:'center',search:false},            
+            {name:'select_emision',index:'select_emision',frozen : true,align:'center',search:false},            
+            {name:'forma_pago',index:'forma_pago',frozen : true,align:'center',search:false},                        
+            {name:'nombre_usuario_compra',index:'nombre_usuario_compra',frozen : true,align:'center',search:false},                        
+        ],          
+        rowNum: 10,
+        autowidth: true, 
+        width: '100%', 
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],
+        pager: jQuery('#pager'),        
+        sortname: 'id_fc',
+        sortordezr: 'asc',
+        caption: 'FACTURAS COMPRA',
+        viewrecords: true,   
+        ondblClickRow: function(rowid) {     
+            var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');                     
+            cargar_fac_compra(gsr,"factura_compra","secuencia.php");
+            $('#modalBusquedas').modal('hide');            
+            $("#btn_guardarCompra").text("");
+            $("#btn_guardarCompra").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+            
+        }                 
+    }).jqGrid('navGrid','#pager',{
+            add:false,
+            edit:false,
+            del:false,           
+            refresh:true,
+            search:true,
+            view:false        
+    },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+    },
+    {
+        closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,        
+        multipleSearch: false, overlay: false
+
+    },
+    {
+    },
+    {
+        closeOnEscape: true
+    }
+    ); 
+    //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
+}
