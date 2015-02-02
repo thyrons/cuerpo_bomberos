@@ -1,4 +1,67 @@
 <?php
+	function data_text($data, $tipus=1){
+    	if ($data != '' && $tipus == 0 || $tipus == 1){
+    		$setmana = array('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado');
+    		$mes = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+    		if ($tipus == 1){
+    			//ereg('([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})', $data, $data);
+    			ereg('([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})', $data, $data);
+    			$data = mktime(0,0,0,$data[2],$data[3],$data[1]);
+    		}
+    		return $setmana[date('w', $data)].', '.date('d', $data).' '.$mes[date('m',$data)-1].' de '.date('Y', $data);
+    	}
+    	else
+    	{
+    		return 0;
+    	}
+    }
+    function data_text_dia($data, $tipus=1){
+    	if ($data != '' && $tipus == 0 || $tipus == 1){
+    		$setmana = array('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado');
+    		$mes = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+    		if ($tipus == 1){
+    			//ereg('([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})', $data, $data);
+    			ereg('([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})', $data, $data);
+    			$data = mktime(0,0,0,$data[2],$data[3],$data[1]);
+    		}
+    		return date('d', $data);
+    	}
+    	else
+    	{
+    		return 0;
+    	}
+    }
+    function data_text_mes($data, $tipus=1){
+    	if ($data != '' && $tipus == 0 || $tipus == 1){
+    		$setmana = array('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado');
+    		$mes = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+    		if ($tipus == 1){
+    			//ereg('([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})', $data, $data);
+    			ereg('([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})', $data, $data);
+    			$data = mktime(0,0,0,$data[2],$data[3],$data[1]);
+    		}
+    		//return $setmana[date('w', $data)].', '.date('d', $data).' '.$mes[date('m',$data)-1].' de '.date('Y', $data);
+    		return $mes[date('m',$data)-1];
+    	}
+    	else
+    	{
+    		return 0;
+    	}
+    }
+    function data_text_anio($data, $tipus=1){
+    	if ($data != '' && $tipus == 0 || $tipus == 1){    	
+    		if ($tipus == 1){
+    			//ereg('([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})', $data, $data);
+    			ereg('([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})', $data, $data);
+    			$data = mktime(0,0,0,$data[2],$data[3],$data[1]);
+    		}
+    		return date('Y', $data);    		
+    	}
+    	else
+    	{
+    		return 0;
+    	}
+    }
 	function id_tabla($conexion,$tabla,$id){
 		$cont=0;
 		$sql="select max($id) from $tabla";
@@ -25,10 +88,55 @@
 	    $cont++;
 	    return $cont;
 	}
+	function session_activa(){
+		session_start();
+		return $_SESSION['id'];
+	}
+	function atras_no($id_tabla, $tabla, $campo_ordenar,$sesion){
+		$sql = "select ".$id_tabla." from ".$tabla. " where id_usuario = '".$sesion. "' order by ".$campo_ordenar. " desc limit 1";
+		$sql = pg_query($sql);
+		while($row = pg_fetch_row($sql)){
+			return $row[0];			
+		}
+	}
+	function atras($id_tabla, $tabla, $campo_ordenar,$sesion,$id){
+		$sql = "select ".$id_tabla." from ".$tabla." where id_usuario = '".$sesion."' and ".$id_tabla." not in (select ".$id_tabla." from ".$tabla." where id_usuario = '".$sesion."' and ".$id_tabla." >= '$id' order by ".$campo_ordenar." desc) order by ".$campo_ordenar." desc limit '1'";		
+		$sql = pg_query($sql);
+		while($row = pg_fetch_row($sql)){
+			return $row[0];			
+		}
+	}
+	function adelante_no($id_tabla, $tabla, $campo_ordenar,$sesion){
+		$sql = "select ".$id_tabla." from ".$tabla. " where id_usuario = '".$sesion. "' order by ".$campo_ordenar. " desc limit 1";		
+		$sql = pg_query($sql);
+		while($row = pg_fetch_row($sql)){
+			return $row[0];			
+		}
+	}
+	function adelante($id_tabla, $tabla, $campo_ordenar,$sesion,$id){
+		$sql = "select ".$id_tabla." from ".$tabla." where id_usuario = '".$sesion."' and ".$id_tabla." not in (select ".$id_tabla." from ".$tabla." where id_usuario = '".$sesion."' and ".$id_tabla." <= '$id' order by ".$campo_ordenar." asc) order by ".$campo_ordenar." asc limit '1'";		
+		$sql = pg_query($sql);
+		while($row = pg_fetch_row($sql)){
+			return $row[0];			
+		}
+	}
+	function carga_factura($conexion,$sql){		
+		$sql = pg_query($sql);
+		$sql = pg_fetch_row($sql);
+		return $sql;
+	}
+	function carga_facturaDetalles($conexion,$sql){		
+		$sql = pg_query($sql);
+		$sql = pg_fetch_all($sql);
+		
+		return $sql;
+	}
+
 	function repetidos($conexion,$campo,$valor,$tabla,$tipo,$id,$id_campo){
 		$repetidos = 'true';
 		if( $tipo == "g" ){
 			$sql = "select ".$campo." from ".$tabla. " where ".$campo." = '".$valor."'";
+			
 			if(pg_num_rows(pg_query( $conexion, $sql ))){
 				$repetidos = 'true';
 			}else{
@@ -171,6 +279,68 @@
 			echo $data = json_encode($data);
 		}
 	}
+	function busquedas_cxc( $conexion, $sql){
+		$resp =true;
+		$sql = pg_query( $conexion, $sql );
+		if($sql){
+			while ($row = pg_fetch_row($sql)) {
+			    $data[] = array(
+			        'label1' => $row[0],
+			        'label2' => $row[1],
+			        'label3' => $row[2]
+			    );
+			}
+			echo $data = json_encode($data);
+		}
+	}	
+	function busquedas_nxc ($conexion, $sql){
+		$resp =true;
+		$sql = pg_query( $conexion, $sql );
+		if($sql){
+			while ($row = pg_fetch_row($sql)) {
+			    $data[] = array(
+			        'label1' => $row[0],
+			        'label2' => $row[1],
+			        'label3' => $row[2],
+			        'label4' => $row[3],
+			        'label5' => $row[4],
+			    );
+			}
+			echo $data = json_encode($data);
+		}
+	}
+	function busquedas4( $conexion, $sql){
+		$resp =true;
+		$sql = pg_query( $conexion, $sql );
+		if($sql){
+			while ($row = pg_fetch_row($sql)) {
+			    $data[] = array(
+			        'label' => $row[0],
+			        'label1' => $row[1],
+			        'label2' => $row[2],
+			        'label3' => $row[3]
+			    );
+			}
+			echo $data = json_encode($data);
+		}
+	}
+	function busquedas5( $conexion, $sql){
+		$resp =true;
+		$sql = pg_query( $conexion, $sql );
+		if($sql){
+			while ($row = pg_fetch_row($sql)) {
+			    $data[] = array(
+			        'label' => $row[0],
+			        'label1' => $row[1],
+			        'label2' => $row[2],
+			        'label3' => $row[3],
+			        'label4' => $row[4],
+			    );
+			}
+			echo $data = json_encode($data);
+		}
+	}
+
 	function cargaEmpresas($conexion, $sql){
 		$lista = array();
 		$sql=pg_query($sql);   
@@ -198,7 +368,7 @@
 			$lista[]=$row[11];				
 		}	
     	echo $lista=json_encode($lista); 
-	}
+	}	
 	function cargaEmpresasEstados1($conexion, $sql){
 		$lista = array();
 		$sql=pg_query($sql);   

@@ -43,7 +43,8 @@
         <div class="form-group col-md-5">
           <label class="col-sm-4 control-label" for='id_tipo_usuario'> TIPO USUARIO</label>
           <div class="col-sm-8">
-            <select class="form-control" id='id_tipo_usuario' name="id_tipo_usuario" >  </select> 
+            <select class="form-control" id='id_tipo_usuario' name="id_tipo_usuario" >             
+            </select> 
           </div>
         </div>
         <div class="form-group col-md-5">
@@ -63,8 +64,7 @@
           <div class="col-sm-8 has-error">
             <input type="password" class="form-control" id='clave_admin' name="clave_admin" data-toggle="tooltip" data-original-title="Ingrese aquí la clave del administrador para poder realizar las acciones necesarias" required pattern="[A-Za-záéíóúÁÉÍÓÚ0-9 ]{1,}" minlength="1" >   
           </div>
-        </div>
-        
+        </div>        
       </div>
     </div>
     <div class="panel-footer form-footer">

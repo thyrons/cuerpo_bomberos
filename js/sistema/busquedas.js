@@ -565,3 +565,596 @@ function buscar_productos(width){
     ); 
     //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
 }
+function buscar_informes_propietarios(width){
+    jQuery("#tabla_busquedas").jqGrid({
+        datatype: "xml",
+        url: '../servidor/informe/informes.php?id_prop='+$("#id_emisionPropietario").val(),                
+        colNames: ['id_informe_general','id_empresa','EMPRESA','REPRESENTATE','ACTIVIDAD','RUC','TASA','NOMBRE TASA','VALOR','FEHCA','PERMISO'],
+        colModel:[      
+            {name:'id_informe_general',index:'id_informe_general',frozen:true,align:'center',search:false},
+            {name:'id_empresa',index:'id_empresa',frozen : true,align:'left',search:true},
+            {name:'nombre_empresa',index:'nombre_empresa',frozen : true,align:'center',search:true},
+            {name:'representante_legal',index:'representante_legal',frozen : true,align:'center',search:true},
+            {name:'actividad_empresa',index:'actividad_empresa',frozen : true,align:'center',search:true},
+            {name:'ruc_empresa',index:'ruc_empresa',frozen : true,align:'center',search:true},
+            {name:'id_tasa',index:'id_tasa',frozen : true,align:'center',search:true},
+            {name:'nombre_tasa',index:'nombre_tasa',frozen : true,align:'center',search:true},
+            {name:'valor_tasa',index:'valor_tasa',frozen : true,align:'center',search:true},
+            {name:'fecha_general',index:'fecha_general',frozen : true,align:'center',search:false},
+            {name:'permiso',index:'permiso',frozen : true,align:'center',search:false},            
+        ],          
+        rowNum: 10,
+        autowidth: true, 
+        width: '100%', 
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],        
+        pager: jQuery('#pager'),        
+        sortname: 'id_informe_general',
+        sortordezr: 'asc',
+        caption: 'LISTA DE INFORMES GENERALES',
+        viewrecords: true,            
+        ondblClickRow: function(rowid) {                 
+            var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');                                 
+            var ret = jQuery("#tabla_busquedas").jqGrid('getRowData',gsr);                        
+            var filas = jQuery("#lista_factura").jqGrid("getRowData");
+            var rids = $('#lista_factura').jqGrid('getDataIDs');                        
+            var per = "PERMISO DE FUNCIONAMIENTO AÑO " +ret.fecha_general.substring(0,4);                        
+            if (filas.length === 0) {                
+                var datarow = {
+                    id_producto: "idf"+ret.id_informe_general,//referente al id informe general
+                    tipo: "informe", 
+                    detalle: per, 
+                    cantidad: '1', 
+                    precio_u: "0.00",                     
+                    total: "0.00",                     
+                };
+                su = jQuery("#lista_factura").jqGrid('addRowData', ret.id_informe_general+"idf", datarow);
+                var datarow = {
+                    id_producto: "idt"+ret.id_tasa,//refernte al id tasa de servicio
+                    tipo: "tasa", 
+                    detalle: ret.nombre_tasa, 
+                    cantidad: '1', 
+                    precio_u: ret.valor_tasa,                     
+                    total: ret.valor_tasa,                     
+                };
+                su = jQuery("#lista_factura").jqGrid('addRowData', ret.id_tasa+"idt", datarow);
+            }else{
+                var repe = 0;
+                var pos1 = 0;
+                var pos2 = 0;                                
+                for (var i = 0; i < filas.length; i++) {
+                    var id = filas[i];                                        
+                    if (id['tipo'] == "informe") {
+                        pos1 = rids[i];                        
+                        repe = 1;
+                    }else{
+                        if (id['tipo'] == "tasa") {
+                            pos2 = rids[i];                            
+                            repe = 1;
+                        }
+                    }
+                }                
+                if(repe == 0){
+                    var datarow = {
+                        id_producto: "idf"+ret.id_informe_general,//referente al id informe general
+                        tipo: "informe", 
+                        detalle: per, 
+                        cantidad: '1', 
+                        precio_u: "0.00",                     
+                        total: "0.00",                     
+                    };
+                    su = jQuery("#lista_factura").jqGrid('addRowData', ret.id_informe_general+"idf", datarow);
+                    var datarow = {
+                        id_producto: "idt"+ret.id_tasa,//refernte al id tasa de servicio
+                        tipo: "tasa", 
+                        detalle: ret.nombre_tasa, 
+                        cantidad: '1', 
+                        precio_u: ret.valor_tasa,                     
+                        total: ret.valor_tasa,                     
+                    };
+                    su = jQuery("#lista_factura").jqGrid('addRowData', ret.id_tasa+"idt", datarow);
+                }else{                   
+                    var datarow = {
+                        id_producto: "idf"+ret.id_informe_general,//referente al id informe general
+                        tipo: "informe", 
+                        detalle: per, 
+                        cantidad: '1', 
+                        precio_u: "0.00",                     
+                        total: "0.00",                     
+                    };                                        
+                    jQuery("#lista_factura").jqGrid('setRowData', pos1, datarow)
+                    var datarow1 = {
+                        id_producto: "idt"+ret.id_tasa,//refernte al id tasa de servicio
+                        tipo: "tasa", 
+                        detalle: ret.nombre_tasa, 
+                        cantidad: '1', 
+                        precio_u: ret.valor_tasa,                     
+                        total: ret.valor_tasa,                     
+                    };
+                    jQuery("#lista_factura").jqGrid('setRowData', pos2, datarow1);
+
+                }
+            }
+            /**/
+            //console.log(jQuery('#lista_factura').jqGrid('getRowData'));
+            total_factura();
+            $('#modalBusquedas').modal('hide');            
+
+        }
+    }).jqGrid('navGrid','#pager',{
+            add:false,
+            edit:false,
+            del:false,           
+            refresh:true,
+            search:true,
+            view:false        
+    },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+    },
+    {
+        closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,        
+        multipleSearch: false, overlay: false
+
+    },
+    {
+    },
+    {
+        closeOnEscape: true
+    }
+    ); 
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "id_informe_general");
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "id_empresa");    
+    //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
+}
+function buscar_emision(width){
+    jQuery("#tabla_busquedas").jqGrid({
+        datatype: "xml",
+        url: '../servidor/emision_permisos/xml_emision.php',        
+        colNames: ['ID','FECHA FACTURA','NRO FACTURA','RUC','PROPIETARIO','FECHA_CANCELACION','HORA FACTURA'],
+        colModel:[      
+            {name:'id_emision',index:'id_emision',frozen:true,align:'center',search:false},
+            {name:'fecha',index:'fecha',frozen : true,align:'left',search:false},
+            {name:'nro_factura',index:'nro_factura',frozen : true,align:'center',search:false},
+            {name:'ruc_propietario',index:'ruc_propietario',frozen : true,align:'center',search:true},
+            {name:'nombre_propietario',index:'nombre_propietario',frozen : true,align:'center',search:true},
+            {name:'fecha_cancelacion',index:'fecha_cancelacion',frozen : true,align:'center',search:false},
+            {name:'hora_factura',index:'hora_factura',frozen : true,align:'center',search:false},            
+        ],          
+        rowNum: 10,
+        autowidth: true, 
+        width: '100%', 
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],
+        pager: jQuery('#pager'),        
+        sortname: 'id_emision',
+        sortordezr: 'asc',
+        caption: 'EMISION DE PERMISOS',
+        viewrecords: true,   
+        ondblClickRow: function(rowid) {     
+            var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');                     
+            cargar_emision(gsr,"emision_permisos","secuencia.php");
+            $('#modalBusquedas').modal('hide');            
+            $("#btn_guardarEmision").text("");
+            $("#btn_guardarEmision").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+            
+        }                 
+    }).jqGrid('navGrid','#pager',{
+            add:false,
+            edit:false,
+            del:false,           
+            refresh:true,
+            search:true,
+            view:false        
+    },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+    },
+    {
+        closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,        
+        multipleSearch: false, overlay: false
+
+    },
+    {
+    },
+    {
+        closeOnEscape: true
+    }
+    ); 
+    //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
+}
+function buscar_cxc_cliente(width,id){
+    jQuery("#tabla_busquedas").jqGrid({
+        datatype: "xml",
+        url: '../servidor/cxc/xml_cxc.php?id='+id,        
+        colNames: ['ID','id_emision','NRO FACTURA','FECHA','F. CANCELACIÓN','SALDO','TOTAL','TIPO DOCUMENTO','RUC','PROPIETARIO','USUARIO'],
+        colModel:[      
+            {name:'id_cxc',index:'id_cxc',frozen:true,align:'center',search:false},
+            {name:'id_emision_permisos',index:'id_emision_permisos',frozen : true,align:'left',search:false},
+            {name:'nro_factura',index:'nro_factura',frozen : true,align:'center',search:true},
+            {name:'fecha_credito',index:'fecha_credito',frozen : true,align:'center',search:true},
+            {name:'fecha_cancelacion',index:'fecha_cancelacion',frozen : true,align:'center',search:true},
+            {name:'saldo',index:'saldo',frozen : true,align:'center',search:false},
+            {name:'total_factura',index:'total_factura',frozen : true,align:'center',search:false},            
+            {name:'tipo_documento',index:'tipo_documento',frozen : true,align:'center',search:false},            
+            {name:'ruc_propietario',index:'ruc_propietario',frozen : true,align:'center',search:true},            
+            {name:'nombre_propietario',index:'nombre_propietario',frozen : true,align:'center',search:true},            
+            {name:'nombre_usuario',index:'nombre_usuario',frozen : true,align:'center',search:false},            
+        ],          
+        rowNum: 10,
+        autowidth: true, 
+        width: '100%', 
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],
+        pager: jQuery('#pager'),        
+        sortname: 'id_cxc',
+        sortordezr: 'asc',
+        caption: 'CUENTAS POR COBRAR',
+        viewrecords: true,   
+        ondblClickRow: function(rowid) {                             
+            var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');                                 
+            var ret = jQuery("#tabla_busquedas").jqGrid('getRowData',gsr);                        
+            var filas = jQuery("#lista_factura").jqGrid("getRowData");
+            var rids = $('#lista_factura').jqGrid('getDataIDs');                                                                                                     
+            url = "../servidor/cxc/carga_cxc.php?id="+ret.id_cxc; 
+            $("#total_saldo").val(ret.saldo);            
+            $("#id_cxc").val(ret.id_cxc);            
+            $.ajax({                
+                type: "POST",                
+                dataType: 'json',       
+                url: url,           
+                success: function(data) {
+                    //console.log(data);
+                    var tam = data.length;
+                    for(var i = 0; i < tam; i++){
+                        var datarow = {
+                            tipo:"bd", 
+                            fecha_pago:data[i].fecha_abono, 
+                            forma_pago:data[i].forma_pago, 
+                            detalle:data[i].detalle, 
+                            valor:data[i].valor,
+                        };
+                        su = jQuery("#lista_cxc").jqGrid('addRowData', i, datarow);  
+                    }
+                }
+            }); 
+            $('#modalBusquedas').modal('hide');            
+
+        }               
+    }).jqGrid('navGrid','#pager',{
+            add:false,
+            edit:false,
+            del:false,           
+            refresh:true,
+            search:true,
+            view:false        
+    },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+    },
+    {
+        closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,        
+        multipleSearch: false, overlay: false
+
+    },
+    {
+    },
+    {
+        closeOnEscape: true
+    }
+    ); 
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "id_emision_permisos");
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "id_cxc");
+    //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns'); 
+}
+function buscar_nxc_cliente(width,id){
+    jQuery("#tabla_busquedas").jqGrid({
+        datatype: "xml",
+        url: '../servidor/notas_credito/xml_nxc.php?id='+id,        
+        colNames: ['ID','nro','nro1','Nro. Factura','Total','Fecha cancelación','id_propietario','RUC','Nombre'],
+        colModel:[      
+            {name:'id_emision',index:'id_emision',frozen:true,align:'center',search:false},
+            {name:'nro',index:'nro',frozen : true,align:'left',search:false},
+            {name:'nro_1',index:'nro_1',frozen : true,align:'center',search:true},
+            {name:'nro_factura',index:'nro_factura',frozen : true,align:'center',search:true},
+            {name:'total',index:'total',frozen : true,align:'center',search:true},
+            {name:'fecha_cancelacion',index:'fecha_cancelacion',frozen : true,align:'center',search:false},            
+            {name:'id_propietario',index:'id_propietario',frozen : true,align:'center',search:false},            
+            {name:'ruc_propietario',index:'ruc_propietario',frozen : true,align:'center',search:false},            
+            {name:'nombre_propietario',index:'nombre_propietario',frozen : true,align:'center',search:false},            
+        ],          
+        rowNum: 10,
+        autowidth: true, 
+        width: '100%', 
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],
+        pager: jQuery('#pager'),        
+        sortname: 'id_emision',
+        sortordezr: 'asc',
+        caption: 'LISTA FACTURAS DE LOS PROPIETARIOS',
+        viewrecords: true,   
+        ondblClickRow: function(rowid) {                             
+            var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');                                 
+            var ret = jQuery("#tabla_busquedas").jqGrid('getRowData',gsr);  
+            $("#id_facturaCredtio").val(ret.id_emision);
+            $('#modalBusquedas').modal('hide');            
+        }               
+    }).jqGrid('navGrid','#pager',{
+            add:false,
+            edit:false,
+            del:false,           
+            refresh:true,
+            search:true,
+            view:false        
+    },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+    },
+    {
+        closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,        
+        multipleSearch: false, overlay: false
+
+    },
+    {
+    },
+    {
+        closeOnEscape: true
+    }
+    ); 
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "id_emision");
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "nro");
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "nro_1");
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "id_propietario");
+    //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns'); 
+}
+function buscar_notas_credito(width,id){    
+    jQuery("#tabla_busquedas").jqGrid({
+        datatype: "xml",
+        url: '../servidor/notas_credito/xml_nota_credito.php',        
+        colNames: ['ID','FECHA FACTURA','HORA FACTURA','USUARIO','id_propietario','RUC','PROPIETARIO','SUBTOTAL','IVA0','IVA12','TOTAL'],
+        colModel:[      
+            {name:'id_devolucion_venta',index:'id_devolucion_venta',frozen:true,align:'center',search:false},
+            {name:'fecha_actual',index:'fecha_actual',frozen : true,align:'left',search:false},
+            {name:'hora_actual',index:'hora_actual',frozen : true,align:'center',search:false},
+            {name:'nombre_usuario',index:'nombre_usuario',frozen : true,align:'center',search:true},
+            {name:'id_propietario',index:'id_propietario',frozen : true,align:'center',search:true},
+            {name:'ruc_propietario',index:'ruc_propietario',frozen : true,align:'center',search:false},
+            {name:'nombre_propietario',index:'nombre_propietario',frozen : true,align:'center',search:false},            
+            {name:'subtotal',index:'subtotal',frozen : true,align:'center',search:false},            
+            {name:'iva0',index:'iva0',frozen : true,align:'center',search:false},            
+            {name:'iva12',index:'iva12',frozen : true,align:'center',search:false},            
+            {name:'total',index:'total',frozen : true,align:'center',search:false},            
+        ],          
+        rowNum: 10,
+        autowidth: true, 
+        width: '100%', 
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],
+        pager: jQuery('#pager'),        
+        sortname: 'id_devolucion_venta',
+        sortordezr: 'asc',
+        caption: 'NOTAS DE CRÉDITO',
+        viewrecords: true,   
+        ondblClickRow: function(rowid) {     
+            var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');                     
+            var ret = jQuery("#tabla_busquedas").jqGrid('getRowData',gsr);  
+            $("#id_facturaCredtio").val(ret.id_devolucion_venta);
+            $("#fecha_factura_n_credito").val(ret.fecha_actual);
+            $("#hora_factura_n_credito").val(ret.hora_actual);
+            $("#nombre_usuario_n_credito").val(ret.nombre_usuario);
+            $("#txt_id_cliente_nC").val(ret.id_propietario);
+            $("#ci_n_credito").val(ret.ruc_propietario);
+            $("#cliente_n_credito").val(ret.nombre_propietario);                        
+            $("#subtotal_credito").val(ret.subtotal);            
+            $("#iva_0Credito").val(ret.iva0);            
+            $("#iva_12Credito").val(ret.iva12);            
+            $("#total_credito").val(ret.total);            
+            cargar_nota_credito(ret.id_devolucion_venta);
+            $('#modalBusquedas').modal('hide');            
+            $("#btn_guardar_n_credito").text("");
+            $("#btn_guardar_n_credito").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+            
+        }                 
+    }).jqGrid('navGrid','#pager',{
+            add:false,
+            edit:false,
+            del:false,           
+            refresh:true,
+            search:true,
+            view:false        
+    },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+    },
+    {
+        closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,        
+        multipleSearch: false, overlay: false
+
+    },
+    {
+    },
+    {
+        closeOnEscape: true
+    }
+    ); 
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "id_propietario");
+    //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
+
+}
+function buscar_c_x_c(width,id){
+
+    jQuery("#tabla_busquedas").jqGrid({
+        datatype: "xml",
+        url: '../servidor/cxc/xml_cxc_cargar.php',        
+        colNames: ['ID','NRO FACTURA','FECHA_CREDITO','HORA','NOMBRE USUARIO','id_propietario','RUC','NOMBRE','SALDO'],
+        colModel:[      
+            {name:'id_cxc',index:'id_cxc',frozen:true,align:'center',search:false},
+            {name:'nro_factura',index:'nro_factura',frozen : true,align:'left',search:false},
+            {name:'fecha_factura_cxc',index:'fecha_factura_cxc',frozen : true,align:'center',search:false},
+            {name:'hora_cxc',index:'hora_cxc',frozen : true,align:'center',search:false},
+            {name:'nombre_usuario_cxc',index:'nombre_usuario_cxc',frozen : true,align:'center',search:true},
+            {name:'txt_0',index:'txt_0',frozen : true,align:'center',search:true},
+            {name:'ci_cxc',index:'ci_cxc',frozen : true,align:'center',search:false},
+            {name:'cliente_cxc',index:'cliente_cxc',frozen : true,align:'center',search:false},            
+            {name:'total_saldo',index:'total_saldo',frozen : true,align:'center',search:false},                        
+        ],          
+        rowNum: 10,
+        autowidth: true, 
+        width: '100%', 
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],
+        pager: jQuery('#pager'),        
+        sortname: 'id_cxc',
+        sortordezr: 'asc',
+        caption: 'NOTAS DE CRÉDITO',
+        viewrecords: true,   
+        ondblClickRow: function(rowid) {     
+            var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');                     
+            var ret = jQuery("#tabla_busquedas").jqGrid('getRowData',gsr);  
+            $("#id_cxc").val(ret.id_cxc);
+            $("#fecha_factura_cxc").val(ret.fecha_factura_cxc);            
+            $("#nombre_usuario_cxc").val(ret.nombre_usuario_cxc);            
+            $("#txt_0").val(ret.txt_0);            
+            $("#ci_cxc").val(ret.ci_cxc);            
+            $("#cliente_cxc").val(ret.cliente_cxc);            
+            $("#total_saldo").val(ret.total_saldo);            
+            carga_cxc_imprimir(ret.id_cxc);
+            $('#modalBusquedas').modal('hide');            
+            $("#btn_guardarCxc").text("");
+            $("#btn_guardarCxc").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+            
+        }                 
+    }).jqGrid('navGrid','#pager',{
+            add:false,
+            edit:false,
+            del:false,           
+            refresh:true,
+            search:true,
+            view:false        
+    },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+    },
+    {
+        closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,        
+        multipleSearch: false, overlay: false
+
+    },
+    {
+    },
+    {
+        closeOnEscape: true
+    }
+    ); 
+    jQuery("#tabla_busquedas").jqGrid('hideCol', "txt_0");
+    //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
+}
+function buscar_fac_compra(width,id){    
+    jQuery("#tabla_busquedas").jqGrid({
+        datatype: "xml",
+        url: '../servidor/factura_compra/xml_fc.php',        
+        colNames: ['ID','FECHA FACTURA','NRO FACTURA','RUC','PROVEEDOR','FECHA_CANCELACION','HORA FACTURA','EMPRESA','id_forma_pago','FORMA PAGO','RESPONSABLE'],
+        colModel:[      
+            {name:'id_factura_compra',index:'id_factura_compra',frozen:true,align:'center',search:false},
+            {name:'fecha_factura_compra',index:'fecha_factura_compra',frozen : true,align:'left',search:false},
+            {name:'nro_factura_preimpresa_compra',index:'nro_factura_preimpresa_compra',frozen : true,align:'center',search:false},
+            {name:'ci_ruc_compra',index:'ci_ruc_compra',frozen : true,align:'center',search:true},
+            {name:'nombre_compra',index:'nombre_compra',frozen : true,align:'center',search:true},
+            {name:'fecha_cancelacion_compra',index:'fecha_cancelacion_compra',frozen : true,align:'center',search:false},
+            {name:'hora_factura_compra',index:'hora_factura_compra',frozen : true,align:'center',search:false},            
+            {name:'nombre_empresa',index:'nombre_empresa',frozen : true,align:'center',search:false},            
+            {name:'select_emision',index:'select_emision',frozen : true,align:'center',search:false},            
+            {name:'forma_pago',index:'forma_pago',frozen : true,align:'center',search:false},                        
+            {name:'nombre_usuario_compra',index:'nombre_usuario_compra',frozen : true,align:'center',search:false},                        
+        ],          
+        rowNum: 10,
+        autowidth: true, 
+        width: '100%', 
+        shrinkToFit: false,
+        height:200,
+        rowList: [10,20,30],
+        pager: jQuery('#pager'),        
+        sortname: 'id_fc',
+        sortordezr: 'asc',
+        caption: 'FACTURAS COMPRA',
+        viewrecords: true,   
+        ondblClickRow: function(rowid) {     
+            var gsr = jQuery("#tabla_busquedas").jqGrid('getGridParam','selrow');                     
+            cargar_fac_compra(gsr,"factura_compra","secuencia.php");
+            $('#modalBusquedas').modal('hide');            
+            $("#btn_guardarCompra").text("");
+            $("#btn_guardarCompra").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+            
+        }                 
+    }).jqGrid('navGrid','#pager',{
+            add:false,
+            edit:false,
+            del:false,           
+            refresh:true,
+            search:true,
+            view:false        
+    },
+    {
+        recreateForm: true, closeAfterEdit: true, checkOnUpdate: true, reloadAfterSubmit: true, closeOnEscape: true
+    },
+    {
+        reloadAfterSubmit: true, closeAfterAdd: true, checkOnUpdate: true, closeOnEscape: true,
+    },
+    {
+        closeOnEscape: true
+    },
+    {
+        closeOnEscape: true,        
+        multipleSearch: false, overlay: false
+
+    },
+    {
+    },
+    {
+        closeOnEscape: true
+    }
+    ); 
+    //jQuery("#tabla_busquedas").jqGrid('setFrozenColumns');
+}

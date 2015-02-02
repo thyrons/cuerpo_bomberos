@@ -73,6 +73,7 @@ if (empty($_SESSION['id'])) {
       <div class="row">
         <div class="col-sm-3 sidebar tab_index" style="background: url(../images/bag.fw.png)!important;">                    
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">
@@ -99,7 +100,7 @@ if (empty($_SESSION['id'])) {
                   </ul>
                 </div>
               </div>
-            </div>
+            </div>           
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingTwo">
                 <h4 class="panel-title">
@@ -121,14 +122,15 @@ if (empty($_SESSION['id'])) {
 =======
                   <ul class="nav nav-pills nav-stacked ">                    
                     <li><a href="#tab_j" ><span class="glyphicon glyphicon-list"></span> Ingreso Productos</a></li>                    
-                    <li><a href="#tab_k"><span class="glyphicon glyphicon-list-alt"></span> Ventas/Emisión de Permisos</a></li>                                        
+                    <li><a href="#tab_k"><span class="glyphicon glyphicon-list-alt"></span> Emisión de Permisos</a></li>                                        
                     <li><a href="#tab_l" ><span class="glyphicon glyphicon-list"></span> Notas de Crédito</a></li>                    
+                    <li><a href="#tab_s" ><span class="glyphicon glyphicon-list"></span> Cuentas por cobrar</a></li> 
                     <li><a href="#tab_m" ><span class="glyphicon glyphicon-print"></span> Reporte Ventas</a></li>                    
 >>>>>>> origin/master
                   </ul>
                 </div>
               </div>              
-            </div>
+            </div>            
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingTres">
                 <h4 class="panel-title">
@@ -140,13 +142,12 @@ if (empty($_SESSION['id'])) {
               <div id="collapseTres" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTres">
                 <div class="panel-body">
                   <ul class="nav nav-pills nav-stacked ">         
-                    <li><a href="#tab_n" ><span class="glyphicon glyphicon-list-alt"></span> Compras</a></li>                               
-                    <li><a href="#tab_o" ><span class="glyphicon glyphicon-list"></span> Notas de Débito</a></li>                    
+                    <li><a href="#tab_n" ><span class="glyphicon glyphicon-list-alt"></span> Compras</a></li>                                                   
                     <li><a href="#tab_p" ><span class="glyphicon glyphicon-print"></span> Reporte Compras</a></li>                    
                   </ul>
                 </div>
               </div>              
-            </div>
+                </div>        
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingCuatro">
                 <h4 class="panel-title">
@@ -159,14 +160,15 @@ if (empty($_SESSION['id'])) {
                 <div class="panel-body">
                   <ul class="nav nav-pills nav-stacked ">                    
                     <li><a href="#tab_q"><span class="glyphicon glyphicon-user"></span> Ingreso Usuarios</a></li>                    
-                    <li><a href="#tab_r" ><span class="glyphicon glyphicon-print"></span> Reportes Generales</a></li>                    
+                    <li><a href="#" id="respalado_base"><span class="glyphicon glyphicon-list"></span> Respaldo Base datos</a></li>                    
+                    <li><a href="#tab_r" ><span class="glyphicon glyphicon-print"></span> Reportes Generales</a></li>                
+                    <li><a href="#tab_z"><span class="glyphicon glyphicon-book"></span> Subir Información</a></li>                        
+                    <li><a href="#tab_w"><span class="glyphicon glyphicon-filter"></span> Permisos</a></li>                        
                   </ul>
                 </div>
               </div>              
             </div>
-
-
-            
+                     
           </div>
           <div class="logo">
             <img src="../images/logo2.fw.png" >
@@ -195,9 +197,7 @@ if (empty($_SESSION['id'])) {
             ?>  
             </div>
             <div class="tab-pane" id="tab_d">
-            <?php
-              include 'usuarios.php';
-            ?>  
+            
             </div>
             <div class="tab-pane" id="tab_e">
             <?php
@@ -219,6 +219,36 @@ if (empty($_SESSION['id'])) {
               include 'emision_permisos.php';
             ?>   
             </div>            
+            <div class="tab-pane" id="tab_q">
+            <?php
+              include 'usuarios.php';
+            ?>   
+            </div>  
+            <div class="tab-pane" id="tab_s">
+            <?php
+              include 'cxc.php';
+            ?>   
+            </div> 
+            <div class="tab-pane" id="tab_l">
+            <?php
+              include 'nota_credito.php';
+            ?>   
+            </div>           
+            <div class="tab-pane" id="tab_n">
+            <?php
+              include 'factura_compra.php';
+            ?>   
+            </div>               
+            <div class="tab-pane" id="tab_z">
+            <?php
+              include 'archivosExcel.php';
+            ?>   
+            </div>               
+            <div class="tab-pane" id="tab_w">
+            <?php
+              include 'permisos.php';
+            ?>   
+            </div>               
           </div><!-- tab content -->
         </div><!-- end of container -->
       </div>        
@@ -240,7 +270,7 @@ if (empty($_SESSION['id'])) {
           </div>
         </div>
       </div>
-    </div>
+    </div>    
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

@@ -39,6 +39,9 @@ padding: 0px!important;
 #modalBusquedas .ui-widget{
 	font-size: 12px;
 }
+#modalInformes{
+    font-size: 11px;
+}
 .negrilla{
 	font-weight: bold;
 	color: #000;
@@ -75,6 +78,9 @@ padding: 0px!important;
 #tab_informe .form-group{
 	margin-bottom: 8px;
 }
+#form_emisionPermisos .form-group{
+    margin-bottom: 5px;
+}
 #lista_empresas table thead th{
 	text-align: center;
 }
@@ -94,7 +100,6 @@ padding: 0px!important;
 .ocultar{
 	display: none;
 }
-
 
 @media (max-width: 768px) {
 	.panel-footer.form-footer {

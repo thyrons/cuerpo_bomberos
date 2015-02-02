@@ -16,6 +16,8 @@
 			session_start();
 			$_SESSION['id']=$id;
 			$_SESSION['usuario']=$_POST['txt_loginUsuario'];
+			$sql = "select id_tipo_usuario from usuario where id_usuario='$id'";
+			
 			$sql = "update usuario set fecha_usuario='$fecha' where id_usuario='$id'";
 			if($rs = pg_query( $conexion, $sql )){
 				$data = 1;

@@ -54,10 +54,10 @@ function inicio(){
 		    		var acor1 =$("#accordion").children();
 					var act1 = acor1.children().next()[0];					
 					var ac1 = $(act1).attr('id');					
-					$("#"+ac1).addClass("collapse in");		    		
+					$("#"+ac1).addClass("collapse in");						
 		    	}
 		    	else{
-		    		if(tab == 'tab_j' || tab == 'tab_k' || tab == 'tab_l' || tab == 'tab_m'){
+		    		if(tab == 'tab_j' || tab == 'tab_k' || tab == 'tab_l' || tab == 'tab_m' || tab == 'tab_s'){
 		    			
 			    		var acor2 =$("#accordion").children();
 						var acor2 = acor2.next();
@@ -65,16 +65,16 @@ function inicio(){
 						var ac2 = $(act2).attr('id');
 						$("#"+ac2).addClass("collapse in");												
 		    		}else{
-		    			if(tab == 'tab_n' || tab == 'tab_o' || tab == 'tab_p'){
+		    			if(tab == 'tab_n' || tab == 'tab_o' || tab == 'tab_p' ){
 		    				var acor1 =$("#accordion").children();
 							var act1 = acor1.children().next()[2];					
 							var ac1 = $(act1).attr('id');									
 							$("#"+ac1).addClass("collapse in");							
 		    			}else{
-		    				if(tab == 'tab_q' || tab == 'tab_r' ){
-		    					var acor1 =$("#accordion").children();
+		    				if(tab == 'tab_q' || tab == 'tab_r' || tab == 'tab_z' || tab == 'tab_w' ){
+		    					var acor1 =$("#accordion").children();		    					
 								var act1 = acor1.children().next()[3];					
-								var ac1 = $(act1).attr('id');									
+								var ac1 = $(act1).attr('id');																	
 								$("#"+ac1).addClass("collapse in");					
 		    				}else{
 		    					var acor1 =$("#accordion").children();
@@ -96,7 +96,7 @@ function inicio(){
 			}else{
 				$(this).removeClass("active");
 			}
-		});
+		});		
 		$("#"+tab).addClass("active").find(':input:visible:first').focus();//hago focus al primer elemento de cada formulario
 	}
 	/*activar contenido de las listas*/
@@ -125,7 +125,7 @@ function inicio(){
 				$(this).removeClass("active");
 			}
 		});
-		$("#"+tab).addClass("active").find(':input:visible:first').focus();
+		$("#"+tab).addClass("active").find(':input:visible:first').filter("readOnly").focus();
 		limpiar_form($("#"+tab).addClass("active").children().attr("id"));
 	});
 	$("input").on("keyup click",function (e){
@@ -135,7 +135,7 @@ function inicio(){
        placement : 'rigth'
 	});
 	/*--------------*/
-	/*funcion solu numeros*/
+	/*funcion solo numeros*/
 	$(".soloNumeros").keydown(function(event){
 	    if((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode == 9) || (event.keyCode == 116) || (event.keyCode == 8) || (event.keyCode >= 96 && event.keyCode <= 105) || (event.keyCode == 110) || (event.keyCode == 190)) {
 	        return true;
@@ -201,8 +201,8 @@ function inicio(){
 	$("#btn_limpiarUsuarios").on("click",limpiar_form);
 	$("#btn_buscarUsuarios").on("click",modal);
 	$("#btn_guardarUsuarios").on("click",guardar_usuarios);
-	
-	$("#ci_usuario").keyup(function (){
+
+	$("#ci_usuario").keyup(function (){		
 		ci_ruc("ci_usuario");
 	})
 	/*--------------------------------*/
@@ -319,6 +319,27 @@ function inicio(){
 		autocompletarEmpresa("razon_social","ruc_informe","nombres_propietario","id_empresa","actividad","direccion","telefono","ubicacion","../servidor/informe/cargaEmpresa.php?tipo=3","tab_general");
 	});
 	
+	$("#ruc_informe").keyup(function (){
+		if($("#ruc_informe").val().length == 0){	
+			location.reload();		
+		}
+	});
+	$("#nombres_propietario").keyup(function (){
+		if($("#nombres_propietario").val().length == 0){	
+			location.reload();		
+		}
+	});
+	$("#actividad").keyup(function (){
+		if($("#actividad").val().length == 0){	
+			location.reload();		
+		}
+	});
+	$("#razon_social").keyup(function (){
+		if($("#razon_social").val().length == 0){	
+			location.reload();		
+		}
+	});
+
 	$("#input_tasa").keyup(function (){
 		if($("#input_tasa").val().length == 0){			
 			$("#id_inputTasa").val("");
@@ -354,12 +375,706 @@ function inicio(){
         dateFormat: 'yy-mm-dd'
     }).datepicker('setDate', 'today');
     mostrar("hora_factura");
-	
+	$("#ci_ruc_emision").keyup(function (){	
+		autocompletarPropietario("ci_ruc_emision","nombres_emision","id_emisionPropietario","../servidor/emision_permisos/buscar_propietario.php?tipo=0");
+	});
+	$("#nombres_emision").keyup(function (){	
+		autocompletarPropietario("nombres_emision","ci_ruc_emision","id_emisionPropietario","../servidor/emision_permisos/buscar_propietario.php?tipo=1");	
+	});
+	$("#ci_ruc_emision").keyup(function() {
+		if($("#ci_ruc_emision").val().length == 0  ){			
+			$("#ci_ruc_emision").val("");
+			$("#nombres_emision").val("");	
+			$("#id_emisionPropietario").val("");
+		}
+	});
+	$("#nombres_emision").keyup(function() {
+		if($("#nombres_emision").val().length == 0  ){			
+			$("#ci_ruc_emision").val("");
+			$("#nombres_emision").val("");	
+			$("#id_emisionPropietario").val("");
+		}
+	});	
+	$("#nro_factura_preimpresa").blur(function (){		
+		zeros($("#nro_factura_preimpresa").val().length,"nro_factura_preimpresa");
+		$.ajax({				
+			type: "POST",				  
+			data: "id="+$("#nro_factura_preimpresa").val(),		
+			url: "../servidor/emision_permisos/verifica_nro.php",			
+		    success: function(data) {			 
+				if(data != ''){
+					alertify.alert("Error este nro. de factura ya existe. Se cargara el nro de factura disponible");
+					$("#nro_factura_preimpresa").val("");				
+					$("#nro_factura_preimpresa").val(data);				
+		    		zeros(data.length,"nro_factura_preimpresa");
+		    		$("#nro_factura_preimpresa").focus();	
+		    		$("#fecha_cancelacion").datepicker("hide")	   			    		
+				}
+			}
+		})
+	});
+	$("#select_emision").on("change",function(){
+		if($(this).val() == '2'){
+			if($("#total_emision").val() <= 0){
+				$("#select_emision").val(1);
+				alertify.alert("Antes de indicar la forma de pago.. Ingrese datos en la factura");
+			}else{
+				$("#adelanto_emision").removeAttr("readonly");
+				$("#adelanto_emision").val("");
+				$("#adelanto_emision_total").val($("#total_emision").val());
+			}			
+		}else{
+			$("#adelanto_emision").prop("readonly",true);
+			$("#adelanto_emision").val("");
+			$("#adelanto_emision_total").val("");
+		}
+	});
+
+	$("#adelanto_emision").on("keyup",function(){
+		if( parseFloat($("#adelanto_emision").val()) <= parseFloat($("#total_emision").val())){
+			$("#adelanto_emision_total").val($("#total_emision").val()-$("#adelanto_emision").val());
+		}else{
+			alertify.alert("El adelanto no debe superar el valor de la factura");
+			$("#adelanto_emision").val("");
+			$("#adelanto_emision_total").val($("#total_emision").val());
+		}		
+	});
+	/*tabla factura*/	
+	jQuery("#lista_factura").jqGrid({
+        datatype: "local",
+        colNames: ['', 'ID', 'tipo', 'Cantidad', 'Detalle', 'PVP', 'Total'],
+        colModel: [
+            {name: 'myac', width: 40, fixed: true, sortable: false, resize: false, formatter: 'actions',
+                formatoptions: {keys: false, delbutton: true, editbutton: false}
+            },
+            {name: 'id_producto', index: 'id_producto', editable: false, search: false, hidden: false, editrules: {edithidden: false}, align: 'left',
+                frozen: true, width: 100},
+            {name: 'tipo', index: 'tipo', editable: false, search: false, hidden: false, editrules: {edithidden: false}, align: 'left',
+                frozen: true, width: 200},
+            {name: 'cantidad', index: 'cantidad', editable: true, frozen: true, editrules: {required: true}, align: 'center', width: 100},
+            {name: 'detalle', index: 'detalle', editable: false, frozen: true, editrules: {required: true}, align: 'left', width:400},            
+            {name: 'precio_u', index: 'precio_u', editable: true, search: false, frozen: true, editrules: {required: true}, align: 'center', width: 120, editoptions:{maxlength: 10, size:15}},             
+            {name: 'total', index: 'total', editable: false, search: false, frozen: true, editrules: {required: true}, align: 'center', width: 120},            
+        ],
+        rowNum: 30, 
+        width: null,              
+        height: 150,
+        rownumbers: true,
+        sortable: true,
+        rowList: [10, 20, 30],
+        pager: jQuery('#pager'),
+        sortname: 'id_producto',
+        sortorder: 'asc',
+        viewrecords: true,
+        cellEdit: true,
+        cellsubmit: 'clientArray',
+        shrinkToFit: false,
+        delOptions: {
+            modal: true,
+            jqModal: true,
+            onclickSubmit: function(rp_ge, rowid) {
+                var id = jQuery("#lista_factura").jqGrid('getGridParam', 'selrow');
+                var filas = jQuery("#lista_factura").jqGrid("getRowData");
+                jQuery('#lista_factura').jqGrid('restoreRow', id);
+                var ret = jQuery("#lista_factura").jqGrid('getRowData', id);
+                var rids = $('#lista_factura').jqGrid('getDataIDs');            
+                rp_ge.processing = true;
+                var id_producto = ret.id_producto;
+                var tipo = ret.tipo;
+                var pos1 = 0;
+                var pos2 = 0;                
+                if(tipo == "producto"){
+					jQuery("#lista_factura").jqGrid('delRowData', rowid);                                
+                }else{
+                	for (var i = 0; i < filas.length; i++) {
+	                    var id = filas[i];                                        
+	                    if (id['tipo'] == "informe") {
+	                        pos1 = rids[i];                        	                        
+	                    }else{
+	                        if (id['tipo'] == "tasa") {
+	                            pos2 = rids[i];                            	                            
+	                        }
+	                    }
+                	}  
+                	jQuery("#lista_factura").jqGrid('delRowData', pos1);                                
+                	jQuery("#lista_factura").jqGrid('delRowData', pos2);                     	
+                }                     
+                total_factura();                           
+                $(".ui-icon-closethick").trigger('click');                
+                return true;
+            },
+            processing: true,            
+        },
+        afterSaveCell : function(rowid,name,val,iRow,iCol) {           	
+        	//console.log(jQuery('#lista_factura').jqGrid('getRowData'));                    
+            var id = jQuery("#lista_factura").jqGrid('getGridParam', 'selrow');                                                
+            var ret = jQuery("#lista_factura").jqGrid('getRowData', id);                        
+            if(name == 'cantidad') {
+              	var precio = jQuery("#lista_factura").jqGrid('getCell',rowid,iCol+2);              	
+               	var operacion = (parseFloat(val)* parseFloat(precio)).toFixed(2); 
+               	jQuery("#lista_factura").jqGrid('setRowData',rowid,{total: operacion });                                              
+            }else{
+            	if(name == 'precio_u') {
+	              	var cantidad = jQuery("#lista_factura").jqGrid('getCell',rowid,iCol-2);              		              		               	
+	               	var operacion = (parseFloat(cantidad)* parseFloat(val)).toFixed(2); 
+	               	jQuery("#lista_factura").jqGrid('setRowData',rowid,{total: operacion });                                              
+	            }
+            }   
+            total_factura();                     
+        }
+  	});
+	jQuery("#lista_factura").jqGrid('hideCol', "tipo");    
+	jQuery("#lista_factura").jqGrid('hideCol', "id_producto");    
+	/*buscador productos*/
+	$("#nombre_productoEmision").keyup(function (){	
+		autocompletarProducto("id_productoEmision","nombre_productoEmision","cantidadEmision","precio_ventaEmision","../servidor/emision_permisos/buscar_productos.php");	
+	});
+	$("#cantidadEmision").on("change keyup",function (e){
+		if(!$.isNumeric($(this).val())){
+			$(this).val("");			
+		}else{
+			var t = $("#cantidadEmision").val() * $("#precio_ventaEmision").val()
+			t = (parseFloat(t)).toFixed(2);
+			$("#precio_totalEmsiion").val(t)
+		}
+	});
+	$("#precio_ventaEmision").on("keyup",function (e){
+		if(!$.isNumeric($(this).val())){
+			$(this).val("");			
+		}else{
+			var t = $("#cantidadEmision").val() * $("#precio_ventaEmision").val()
+			t = (parseFloat(t)).toFixed(2);
+			$("#precio_totalEmsiion").val(t)
+		}
+	});
+	$("#precio_totalEmsiion").keyup(function(e){
+		var key = window.Event ? e.which : e.keyCode
+		if(key == 9){
+			if($("#nombre_productoEmision").val() == ""){
+				alertify.alert("Ingrese un producto antes de continuar");
+				$("#nombre_productoEmision").focus();
+			}else{
+				if($("#cantidadEmision").val() == ""){
+					alertify.alert("Ingrese una cantidad antes de continuar");
+					$("#cantidadEmision").focus();
+				}else{
+					if($("#precio_ventaEmision").val() == ""){
+						alertify.alert("Ingrese precio antes de continuar");
+						$("#precio_ventaEmision").focus();
+					}else{						
+						var filas = jQuery("#lista_factura").jqGrid("getRowData");									            			            
+			            var rids = $('#lista_factura').jqGrid('getDataIDs');                        			            
+			            if (filas.length === 0) {                			            	
+			                var datarow = {
+			                    id_producto: "idp"+$("#id_productoEmision").val(),//referente al id producto
+			                    tipo: "producto", 
+			                    detalle: $("#nombre_productoEmision").val(), 
+			                    cantidad: $("#cantidadEmision").val(), 
+			                    precio_u: $("#precio_ventaEmision").val(),                     
+			                    total: (parseFloat($("#cantidadEmision").val() * $("#precio_ventaEmision").val())).toFixed(2),                     
+			                };
+			                su = jQuery("#lista_factura").jqGrid('addRowData', $("#id_productoEmision").val()+"idp", datarow);			                
+			            }else{
+			            	var repe = 0;
+			                var pos1 = 0;			                                                			                
+			                for (var i = 0; i < filas.length; i++) {			                	
+			                    var id = filas[i];                  			                    
+			                    if (id.id_producto == "idp"+$("#id_productoEmision").val()) {
+			                        pos1 = rids[i];                        
+			                        repe = 1;
+			                    }			                
+			                }       			                
+			                if(repe == 0){
+			                	//console.log(jQuery('#lista_factura').jqGrid('getRowData'));
+			                   var datarow = {
+				                    id_producto: "idp"+$("#id_productoEmision").val(),//referente al id producto
+				                    tipo: "producto", 
+				                    detalle: $("#nombre_productoEmision").val(), 
+				                    cantidad: $("#cantidadEmision").val(), 
+				                    precio_u: $("#precio_ventaEmision").val(),                     
+				                    total: (parseFloat($("#cantidadEmision").val() * $("#precio_ventaEmision").val())).toFixed(2),                     
+				                };				                
+				                jQuery("#lista_factura").jqGrid('addRowData', $("#id_productoEmision").val()+"idp", datarow);			                				                
+			                }else{                   
+			                   var datarow = {
+			                    id_producto: "idp"+$("#id_productoEmision").val(),//referente al id producto
+				                    tipo: "producto", 
+				                    detalle: $("#nombre_productoEmision").val(), 
+				                    cantidad: $("#cantidadEmision").val(), 
+				                    precio_u: $("#precio_ventaEmision").val(),                     
+				                    total: (parseFloat($("#cantidadEmision").val() * $("#precio_ventaEmision").val())).toFixed(2),                     
+				                };				                
+			                    jQuery("#lista_factura").jqGrid('setRowData', pos1, datarow);								
+			                }
+			            }
+			            $("#id_productoEmision").val("");
+			            $("#nombre_productoEmision").val("");
+			            $("#nombre_productoEmision").focus();
+			            $("#cantidadEmision").val("0");
+			            $("#precio_ventaEmision").val("0.00");
+			            $("#precio_totalEmsiion").val("0.00");
+					}
+				}
+			}
+			total_factura();                           
+		}
+	});
+	$("#nro_factura_preimpresa").load(
+		$.ajax({				
+			type: "POST",			
+			url: "../servidor/emision_permisos/nro_factura.php",			
+		    success: function(data) {			 
+				$("#nro_factura_preimpresa").val(data);				
+		    	zeros(data.length,"nro_factura_preimpresa");   			    			    	
+			}
+		})
+	);	
+
 	$("#btn_guardarEmision").on("click",guardar_emision);
 	$("#btn_limpiarEmision").on("click",limpiar_form);
 	$("#btn_buscarEmision").on("click",modal);
+	$("#btn_atras").on("click",function(){
+		atras("id_emision","emision_permisos","secuencia.php");//campo id la carpeta y el archivo donde esta el proceso
+	});
+	$("#btn_adelante").on("click",function(){
+		adelante("id_emision","emision_permisos","secuencia.php");//campo id la carpeta y el archivo donde esta el proceso
+	});
+	$("#btn_imprimirEmision").on("click",function(){
+		if($("#id_emision").val() != ""){
+			window.open('../reportes/reporte_emsion.php?id='+$("#id_emision").val(),'_blank');      		
+		}else{
+			alertify.alert("No se puede imprimir");
+		}
+	});		
 	/**/
+	/*procesos de cxc*/	
+	$("#ci_cxc").keyup(function (){			
+		autocompletarCxc("txt_0","ci_cxc","cliente_cxc","0");		
+	});
+	$("#cliente_cxc").keyup(function (){	
+		autocompletarCxc("txt_0","cliente_cxc","ci_cxc","1");		
+	});
+	jQuery("#lista_cxc").jqGrid({
+        datatype: "local",
+        colNames: ['tipo','Fecha Pago', 'Forma Pago', 'Detalle', 'Valor'],
+        colModel: [            
+            {name: 'tipo', index: 'tipo', editable: false, search: false, hidden: true, editrules: {edithidden: false}, align: 'center',
+                frozen: true, width: 100},
+            {name: 'fecha_pago', index: 'fecha_pago', editable: false, search: false, hidden: false, editrules: {edithidden: false}, align: 'center',
+                frozen: true, width: 200},
+            {name: 'forma_pago', index: 'forma_pago', editable: true, frozen: true, editrules: {required: true}, align: 'center', width: 200},
+            {name: 'detalle', index: 'detalle', editable: false, frozen: true, editrules: {required: true}, align: 'center', width:340},            
+            {name: 'valor', index: 'valor', editable: true, search: false, frozen: true, editrules: {required: true}, align: 'center', width: 150, editoptions:{maxlength: 10, size:15}},                         
+        ],
+        rowNum: 30, 
+        width: null,              
+        height: 150,
+        rownumbers: true,
+        sortable: true,
+        rowList: [10, 20, 30],
+        pager: jQuery('#pager'),
+        sortname: 'tipo',
+        sortorder: 'asc',
+        viewrecords: true,
+        cellEdit: true,
+        cellsubmit: 'clientArray',
+        shrinkToFit: false,        
+  	});
+	$('#fecha_factura_cxc').datepicker({
+        dateFormat: 'yy-mm-dd'
+    }).datepicker('setDate', 'today');
+     mostrar("hora_factura_cxc");
+    cargar_usuario("nombre_usuario_cxc");
+    $("#btn_agregarCxc").click(function(){    	
+        var filas = jQuery("#lista_cxc").jqGrid("getRowData");
+        var rids = $('#lista_cxc').jqGrid('getDataIDs');   
+        var repe = 0;
+        var pos = 0;        
+        if(parseFloat($("#total_a_pagar").val()) <= parseFloat($("#total_saldo").val())){
+        	for (var i = 0; i < filas.length; i++) {
+		        var id = filas[i];                                        
+		        if (id['tipo'] == "pago") {
+		            pos = rids[i];                        
+		            repe = 1;
+		        }
+		    }  
+		    if(repe == 0){
+		    	var datarow = {
+		            tipo:"pago", 
+		            fecha_pago:$("#fecha_factura_cxc").val(), 
+		            forma_pago:$("#forma_pago").val(), 
+		            detalle:"Pago factura", 
+		            valor: $("#total_a_pagar").val(),
+		        };
+		        su = jQuery("#lista_cxc").jqGrid('addRowData', "", datarow);  
+		        alertify.primary('El pago a sido agregado correctamente');	
+		        $("#total_saldo").val($("#total_saldo").val() - $("#total_a_pagar").val());
+        		$("#total_a_pagar").val("");         		       		
+        	}else{
+        		var posi = jQuery("#lista_cxc").jqGrid("getRowData","");        		
+		        var total = parseFloat((posi.valor))+parseFloat($("#total_a_pagar").val());	        		        
+		        su = jQuery("#lista_cxc").jqGrid('setCell',"",'valor', total);  
+		        $("#total_saldo").val($("#total_saldo").val() - $("#total_a_pagar").val());
+		        $("#total_a_pagar").val("");
+		        alertify.primary('El pago a sido agregado correctamente');	
+        	}
+        }else{
+        	alertify.error('Errorr.. El valor a pagar supera el saldo');	
+        	$("#total_a_pagar").val("");
+        	$("#total_a_pagar").focus();
+        }                                
+    });	
+	$("#btn_guardarCxc").on("click",guardar_cxc);
+	$("#btn_limpiarCxc").on("click",limpiar_form);
+	$("#btn_buscarCxc").on("click",modal);
+	$("#btn_imprimirCxc").on("click",function(){
+		if($("#id_cxc").val() != ""){
+			window.open('../reportes/reporte_cxc.php?id='+$("#id_cxc").val(),'_blank');      					  		
+		}else{
+			alertify.alert("No se puede imprimir");
+		}
+	});
+	/*----------*/
+	/*notas credito*/
+	$('#fecha_factura_n_credito').datepicker({
+        dateFormat: 'yy-mm-dd'
+    }).datepicker('setDate', 'today');
+    mostrar("hora_factura_n_credito");
+    cargar_usuario("nombre_usuario_n_credito");
+    $("#ci_n_credito").keyup(function (){			
+		autocompletarNxc("txt_id_cliente_nC","ci_n_credito","cliente_n_credito","0");		
+	});
+	$("#cliente_n_credito").keyup(function (){	
+		autocompletarNxc("txt_id_cliente_nC","cliente_n_credito","ci_n_credito","1");		
+	});
+	jQuery("#lista_nxc").jqGrid({
+        datatype: "local",
+        colNames: ['id_producto','Detalle', 'Cantidad', 'Precio', 'Total'],
+        colModel: [            
+            {name: 'id_producto', index: 'id_producto', editable: false, search: false, hidden: true, editrules: {edithidden: false}, align: 'center',
+                frozen: true, width: 100},
+            {name: 'nombre_producto', index: 'nombre_producto', editable: false, search: false, hidden: false, editrules: {edithidden: false}, align: 'center',
+                frozen: true, width: 590},
+            {name: 'cantidad', index: 'cantidad', editable: true, frozen: true, editrules: {required: true}, align: 'center', width: 100},
+            {name: 'precio', index: 'precio', editable: false, frozen: true, editrules: {required: true}, align: 'center', width:100},            
+            {name: 'total', index: 'total', editable: true, search: false, frozen: true, editrules: {required: true}, align: 'center', width: 100, editoptions:{maxlength: 10, size:15}},                         
+        ],
+        rowNum: 30, 
+        width: null,              
+        height: 150,
+        rownumbers: true,
+        sortable: true,
+        rowList: [10, 20, 30],
+        pager: jQuery('#pager'),
+        sortname: 'tipo',
+        sortorder: 'asc',
+        viewrecords: true,
+        cellEdit: true,
+        cellsubmit: 'clientArray',
+        shrinkToFit: false,        
+  	});
+	$("#nombre_productoCredito").keyup(function(){
+		autocompletarProductoCredito("nombre_productoCredito",$("#id_facturaCredtio").val());		
+	});	
+	$("#cantidadCredito").on("change keyup",function (e){
+		if(!$.isNumeric($(this).val())){
+			$(this).val("");			
+		}else{
+			var t = $("#cantidadCredito").val() * $("#precio_ventaCredito").val()
+			t = (parseFloat(t)).toFixed(2);
+			$("#precio_totalCredito").val(t)
+		}
+	});
+	$("#precio_totalCredito").keyup(function(e){
+		var key = window.Event ? e.which : e.keyCode
+		if(key == 9){
+			if($("#nombre_productoCredito").val() == ""){
+				alertify.alert("Ingrese un producto antes de continuar");
+				$("#nombre_productoCredito").focus();
+			}else{
+				if($("#cantidadCredito").val() == ""){
+					alertify.alert("Ingrese una cantidad antes de continuar");
+					$("#cantidadCredito").focus();
+				}else{					
+					var filas = jQuery("#lista_nxc").jqGrid("getRowData");									            			            
+			        var rids = $('#lista_nxc').jqGrid('getDataIDs');                        			            
+			        if (filas.length === 0) {                			            	
+		                var datarow = {
+		                    id_producto: $("#id_productoCredito").val(),//referente al id producto		                    
+		                    nombre_producto: $("#nombre_productoCredito").val(), 
+		                    cantidad: $("#cantidadCredito").val(), 
+		                    precio: $("#precio_ventaCredito").val(),                     
+		                    total: (parseFloat($("#cantidadCredito").val() * $("#precio_ventaCredito").val())).toFixed(2),                     
+		                };
+		                su = jQuery("#lista_nxc").jqGrid('addRowData', $("#id_productoCredito").val(), datarow);			                
+			        }else{
+		            	var repe = 0;
+		                var pos1 = 0;			                                                			                
+		                for (var i = 0; i < filas.length; i++) {			                	
+		                    var id = filas[i];                  			                    
+		                    if (id.id_producto == $("#id_productoCredito").val()) {
+		                        pos1 = rids[i];                        
+		                        repe = 1;
+		                    }			                
+		                }       			                
+		                if(repe == 0){
+		                	//console.log(jQuery('#lista_nxc').jqGrid('getRowData'));
+		                   var datarow = {
+			                    id_producto: $("#id_productoCredito").val(),//referente al id producto			                    
+			                    nombre_producto: $("#nombre_productoCredito").val(), 
+			                    cantidad: $("#cantidadCredito").val(), 
+			                    precio: $("#precio_ventaCredito").val(),                     
+			                    total: (parseFloat($("#cantidadCredito").val() * $("#precio_ventaCredito").val())).toFixed(2),                     
+			                };				                
+			                jQuery("#lista_nxc").jqGrid('addRowData', $("#id_productoCredito").val(), datarow);			                				                
+		                }else{                   
+		                   var datarow = {
+		                    id_producto: "idp"+$("#id_productoCredito").val(),//referente al id producto			                    
+			                    nombre_producto: $("#nombre_productoCredito").val(), 
+			                    cantidad: $("#cantidadCredito").val(), 
+			                    precio: $("#precio_ventaCredito").val(),                     
+			                    total: (parseFloat($("#cantidadCredito").val() * $("#precio_ventaCredito").val())).toFixed(2),                     
+			                };				                
+		                    jQuery("#lista_nxc").jqGrid('setRowData', pos1, datarow);								
+		                
+			        	}
+					}
+				}		
+			}
+			$("#id_productoCredito").val("");
+            $("#nombre_productoCredito").val("");
+            $("#nombre_productoCredito").focus();
+            $("#cantidadCredito").val("0");
+            $("#precio_ventaCredito").val("0.00");
+            $("#precio_totalCredito").val("0.00");		
+            total_credito();        	
+		}
+	});
+	$("#btn_guardar_n_credito").on("click",guardar_n_credito);
+	$("#btn_buscar_n_credito").on("click",modal);
+	$("#btn_imprimir_n_credito").on("click",function(){
+		if($("#id_facturaCredtio").val() != ""){
+			window.open('../reportes/reporte_nota_credito.php?id='+$("#id_facturaCredtio").val(),'_blank');      		
+		}else{
+			alertify.alert("No se puede imprimir");
+		}
+	});
+	$("#btn_limpiar_n_credito").on("click",limpiar_form);		
+	/*----------*/
+	/*procesos factura compra*/
+	$('#fecha_factura_compra').datepicker({
+        dateFormat: 'yy-mm-dd'
+    }).datepicker('setDate', 'today');
+    $('#fecha_cancelacion_compra').datepicker({
+        dateFormat: 'yy-mm-dd'
+    }).datepicker('setDate', 'today');
+	mostrar("hora_factura_compra");
+	$("#btn_limpiarCompra").on('click',limpiar_form)	
+	$("#cantidadCompra").on("change keyup",function (e){
+		if(!$.isNumeric($(this).val())){
+			$(this).val("");			
+		}else{
+			var t = $("#cantidadCompra").val() * $("#precio_ventaCompra").val()
+			t = (parseFloat(t)).toFixed(2);
+			$("#precio_totalCompra").val(t)
+		}
+	});
+	$("#precio_ventaCompra").on("keyup",function (e){
+		if(!$.isNumeric($(this).val())){
+			$(this).val("");			
+		}else{
+			var t = $("#cantidadCompra").val() * $("#precio_ventaCompra").val()
+			t = (parseFloat(t)).toFixed(2);
+			$("#precio_totalCompra").val(t)
+		}
+	});
+	$("#precio_totalCompra").keyup(function(e){
+		var key = window.Event ? e.which : e.keyCode
+		if(key == 9){
+			if($("#nombre_productoCompra").val() == ""){
+				alertify.alert("Ingrese un producto antes de continuar");
+				$("#nombre_productoCompra").focus();
+			}else{
+				if($("#cantidadCompra").val() == ""){
+					alertify.alert("Ingrese una cantidad antes de continuar");
+					$("#cantidadCompra").focus();
+				}else{
+					if($("#precio_ventaCompra").val() == ""){
+						alertify.alert("Ingrese precio antes de continuar");
+						$("#precio_ventaCompra").focus();
+					}else{						
+						var filas = jQuery("#lista_factura_compra").jqGrid("getRowData");									            			            
+			            var rids = $('#lista_factura_compra').jqGrid('getDataIDs');                        			            
+			            if (filas.length === 0) {                			            	
+			                var datarow = {
+			                    id_producto: $("#id_productoCompra").val(),//referente al id producto
+			                    tipo: $("#tipoIva").val(), 
+			                    detalle: $("#nombre_productoCompra").val(), 
+			                    cantidad: $("#cantidadCompra").val(), 
+			                    precio_u: $("#precio_ventaCompra").val(),                     
+			                    total: (parseFloat($("#cantidadCompra").val() * $("#precio_ventaCompra").val())).toFixed(2),                     
+			                };
+			                su = jQuery("#lista_factura_compra").jqGrid('addRowData', $("#id_productoCompra").val(), datarow);			                
+			            }else{
+			            	var repe = 0;
+			                var pos1 = 0;			                                                			                
+			                for (var i = 0; i < filas.length; i++) {			                	
+			                    var id = filas[i];                  			                    
+			                    if (id.id_producto == $("#id_productoCompra").val()) {
+			                        pos1 = rids[i];                        
+			                        repe = 1;
+			                    }			                
+			                }       			                
+			                if(repe == 0){
+			                	//console.log(jQuery('#lista_factura_compra').jqGrid('getRowData'));
+			                   var datarow = {
+				                    id_producto: $("#id_productoCompra").val(),//referente al id producto
+				                    tipo: $("#tipoIva").val(), 
+				                    detalle: $("#nombre_productoCompra").val(), 
+				                    cantidad: $("#cantidadCompra").val(), 
+				                    precio_u: $("#precio_ventaCompra").val(),                     
+				                    total: (parseFloat($("#cantidadCompra").val() * $("#precio_ventaCompra").val())).toFixed(2),                     
+				                };				                
+				                jQuery("#lista_factura_compra").jqGrid('addRowData', $("#id_productoCompra").val(), datarow);			                				                
+			                }else{                   
+			                   var datarow = {
+			                    id_producto: $("#id_productoCompra").val(),//referente al id producto
+				                    tipo: $("#tipoIva").val(), 
+				                    detalle: $("#nombre_productoCompra").val(), 
+				                    cantidad: $("#cantidadCompra").val(), 
+				                    precio_u: $("#precio_ventaCompra").val(),                     
+				                    total: (parseFloat($("#cantidadCompra").val() * $("#precio_ventaCompra").val())).toFixed(2),                     
+				                };				                
+			                    jQuery("#lista_factura_compra").jqGrid('setRowData', pos1, datarow);								
+			                }
+			            }			            
+			            $("#id_productoCompra").val("");			            
+			            $("#nombre_productoCompra").val("");			            
+			            $("#nombre_productoCompra").focus();
+			            $("#cantidadCompra").val("0");
+			            $("#precio_ventaCompra").val("0.00");
+			            $("#precio_totalCompra").val("0.00");
+					}
+				}
+			}
+			total_factura_compra();                           
+		}
+	});
+	$("#nombre_productoCompra").keyup(function (){	
+		autocompletarProductoIva("id_productoCompra","nombre_productoCompra","cantidadCompra","precio_ventaCompra","tipoIva","../servidor/factura_compra/buscar_productos.php");	
+	});
+	/*tabla factura*/	
+	jQuery("#lista_factura_compra").jqGrid({
+        datatype: "local",
+        colNames: ['', 'ID', 'tipo', 'Cantidad', 'Detalle', 'PVP', 'Total'],
+        colModel: [
+            {name: 'myac', width: 40, fixed: true, sortable: false, resize: false, formatter: 'actions',
+                formatoptions: {keys: false, delbutton: true, editbutton: false}
+            },
+            {name: 'id_producto', index: 'id_producto', editable: false, search: false, hidden: true, editrules: {edithidden: false}, align: 'left',
+                frozen: true, width: 100},
+            {name: 'tipo', index: 'tipo', editable: false, search: false, hidden: true, editrules: {edithidden: false}, align: 'left',
+                frozen: true, width: 200},
+            {name: 'cantidad', index: 'cantidad', editable: true, frozen: true, editrules: {required: true}, align: 'center', width: 100},
+            {name: 'detalle', index: 'detalle', editable: false, frozen: true, editrules: {required: true}, align: 'left', width:500},            
+            {name: 'precio_u', index: 'precio_u', editable: true, search: false, frozen: true, editrules: {required: true}, align: 'center', width: 120, editoptions:{maxlength: 10, size:15}},             
+            {name: 'total', index: 'total', editable: false, search: false, frozen: true, editrules: {required: true}, align: 'center', width: 120},            
+        ],
+        rowNum: 30, 
+        width: null,              
+        height: 150,
+        rownumbers: true,
+        sortable: true,
+        rowList: [10, 20, 30],
+        pager: jQuery('#pager'),
+        sortname: 'id_producto',
+        sortorder: 'asc',
+        viewrecords: true,
+        cellEdit: true,
+        cellsubmit: 'clientArray',
+        shrinkToFit: false,
+        delOptions: {
+            modal: true,
+            jqModal: true,
+            onclickSubmit: function(rp_ge, rowid) {            	
+                var id = jQuery("#lista_factura_compra").jqGrid('getGridParam', 'selrow');
+                var filas = jQuery("#lista_factura_compra").jqGrid("getRowData");
+                jQuery('#lista_factura_compra').jqGrid('restoreRow', id);
+                var ret = jQuery("#lista_factura_compra").jqGrid('getRowData', id);
+                var rids = $('#lista_factura_compra').jqGrid('getDataIDs');            
+                rp_ge.processing = true;
+                var id_producto = ret.id_producto;
+                var tipo = ret.tipo;
+                var pos1 = 0;
+                var pos2 = 0;                                
+				jQuery("#lista_factura_compra").jqGrid('delRowData', rowid);                                                                     
+                total_factura_compra();                           
+                $(".ui-icon-closethick").trigger('click');                
+                return true;
+            },
+            processing: true,            
+        },
+        afterSaveCell : function(rowid,name,val,iRow,iCol) {           	
+        	//console.log(jQuery('#lista_factura_compra').jqGrid('getRowData'));                    
+            var id = jQuery("#lista_factura_compra").jqGrid('getGridParam', 'selrow');                                                
+            var ret = jQuery("#lista_factura_compra").jqGrid('getRowData', id);                        
+            if(name == 'cantidad') {
+              	var precio = jQuery("#lista_factura_compra").jqGrid('getCell',rowid,iCol+2);              	
+               	var operacion = (parseFloat(val)* parseFloat(precio)).toFixed(2); 
+               	jQuery("#lista_factura_compra").jqGrid('setRowData',rowid,{total: operacion });                                              
+            }else{
+            	if(name == 'precio_u') {
+	              	var cantidad = jQuery("#lista_factura_compra").jqGrid('getCell',rowid,iCol-2);              		              		               	
+	               	var operacion = (parseFloat(cantidad)* parseFloat(val)).toFixed(2); 
+	               	jQuery("#lista_factura_compra").jqGrid('setRowData',rowid,{total: operacion });                                              
+	            }
+            }   
+            total_factura_compra();                     
+        }
+  	});
+	/*----------*/
+	$("#btn_guardarCompra").on("click",guardar_fc);
+	$("#btn_limpiarCompra").on("click",limpiar_form);
+	$("#btn_buscarCompra").on("click",modal);
+	$("#btn_atrasFC").on("click",function(){
+		atras_fc("id_factura_compra","factura_compra","secuencia.php");//campo id la carpeta y el archivo donde esta el proceso
+	});
+	$("#btn_adelanteFC").on("click",function(){
+		adelante_fc("id_factura_compra","factura_compra","secuencia.php");//campo id la carpeta y el archivo donde esta el proceso
+	});
+	$("#btn_imprimirCompra").on("click",function(){
+		if($("#id_factura_compra").val() != ""){
+			window.open('../reportes/reporte_fc.php?id='+$("#id_factura_compra").val(),'_blank');      		
+		}else{
+			alertify.alert("No se puede imprimir");
+		}
+	});		
+	/*---------------*/
+	/*respaldo de la base de datos*/	
+	$("#respalado_base").on("click",function(e){
+		e.preventDefault();		
+		$.ajax({				
+			type: "POST",			
+			url: "../servidor/backup/respaldo.php",			
+		    success: function(data) {	
+		    	if( data == 1 ){
+		    		alertify.primary('Respaldo Exitoso el archivo se encuentra en la carpeta del servidor');											
+		    	}else{
+		    		if( data == 0 ){
+		    			alertify.error('Error... al momento de sacar el resplado de la base. Comuniquese con el administrador');	
+		    			
+		    		}
+		    	}
+
+			}
+		}); 
+	});
+	/*--------*/
+	/*informacion en excel*/	
+	$("#btnGuardarCargar").on("click",guardarCargar)
+	/*---------*/
 }
+///////////funciones del sistema
 function llenarSelect(lt,md,bg,sbg){
 	$("#select_valor").find('option').remove();
 	$('#select_valor').append('<option value='+lt+'>$ '+lt+'</option>');
@@ -370,7 +1085,7 @@ function llenarSelect(lt,md,bg,sbg){
 /* function para poder dar el comportamiento de un grupo de radiobutton a un grupo de checkbox */
 function checkbox(){
 	var ck = $(this).parent().parent().find(':input');	
-	console.log(ck)
+	//console.log(ck)
 	ck.each(function (){
 		$(this).removeAttr("checked");
 	});
@@ -424,7 +1139,7 @@ function datos_serviciosAdministrativos(valores,tipo,p){
 	    			alertify.error('Este servicio ya existe. Ingrese otro');	
 	    			limpiar_form(p);		
 	    		}else{
-	    			
+	    			alertify.error('Error al momento de enviar los datos.');	
 	    		}
 	    	}
 
@@ -459,11 +1174,11 @@ function datos_TasaServicios(valores,tipo,p){
 	    		alertify.primary('Datos Agregados Correctamente');	
 				limpiar_form(p);					
 	    	}else{
-	    		if( data == 1 ){
+	    		if( data == 1 ){ 
 	    			alertify.error('Este servicio ya existe. Ingrese otro');	
 	    			limpiar_form(p);		
 	    		}else{
-	    			
+	    			alertify.error('Error al momento de enviar los datos.');	
 	    		}
 	    	}
 
@@ -750,6 +1465,235 @@ function datos_productos(valores,tipo,p){
 	}); 
 }
 /*----------------------*/
+/*formulario emision*/
+function guardar_emision(){
+	var nro = nro_row();	
+	if($("#id_emisionPropietario").val() != ""){
+		if(nro > 0){
+			$("#form_emisionPermisos").on("submit",function (e){					
+				var valores = $("#form_emisionPermisos").serialize();
+				var texto=($("#btn_guardarEmision").text()).trim();	
+				var serializar = serializarJqTabla("lista_factura");
+				if(texto=="Guardar"){		
+					datos_emision(valores,"g",e,serializar);
+				}else{
+					alertify.alert("No se puede modifcar los datos de una factura ya impresa");
+				}
+				e.preventDefault();
+	    		$(this).unbind("submit")
+			});
+			$("#form_emisionPermisos").submit();	 
+		}else{
+			alertify.alert("Agregue productos para poder continuar");
+			$("#nombre_productoEmision").focus();
+		}
+	}else{
+		alertify.alert("Indique un  propietario antes de continuar");
+		$("#ci_ruc_emision").focus();
+	}
+}
+function datos_emision(valores,tipo,p,serializar){	
+	var productosJSON = JSON.stringify(serializar);
+	$.ajax({				
+		type: "POST",
+		data: valores,
+		url: "../servidor/emision_permisos/emision.php?v="+productosJSON,			
+	    success: function(data) {	
+	    	if( data > 0 ){	    		
+	    		alertify.set({ delay: 1000 });
+	    		alertify.primary('Datos Agregados Correctamente');						    		
+	    		setTimeout(function() {
+				    window.open('../reportes/reporte_emsion.php?id='+data,'_blank');      		
+				}, 1500);
+				setTimeout(function() {
+				    location.reload();
+				}, 1800);
+
+	    	}	
+	    	else{
+	    		alertify.error("Error al momento de guardar los datos la página se recargara");
+	    		location.reload();
+	    	}
+
+		}
+	});
+}
+/*------------------*/
+/*guardar cxc*/
+function guardar_cxc(){
+	var resp=comprobarCamposRequired("form_emisionCxc");		
+	if(resp==true){				
+		$("#form_emisionCxc").on("submit",function (e){	
+			var valores = $("#form_emisionCxc").serialize();
+			var texto=($("#btn_guardarCxc").text()).trim();				
+			var serializar = serializarJqTabla("lista_cxc");
+			if(texto=="Guardar"){		
+				if($("#txt_0").val()!=""){
+					alertify.confirm("<b>Recuerde Llenar todos los campos <br>Deséa Continuar?</b>", function(e){
+						if(e){
+							datos_cxc(valores,"g",e,serializar);
+						}else{
+							alertify.set({ delay: 1000 });
+							alertify.error("Operación cancelada");	   				
+						}
+					});		    			
+	    			
+				}else{
+					alertify.set({ delay: 1000 });
+					alertify.error("Debe seleccionar un cliente antes de continuar");	   	
+				}
+			}else{
+				alertify.error("No se puede modificar");	   
+			}
+			e.preventDefault();
+    		$(this).unbind("submit")
+		});
+	}
+}
+function datos_cxc(valores,tipo,p,serializar){	
+	var productosJSON = JSON.stringify(serializar);
+	$.ajax({				
+		type: "POST",
+		data: valores,
+		url: "../servidor/cxc/cxc.php?v="+productosJSON,			
+	    success: function(data) {		    	
+	    	if( data == 0 ){	    		
+	    		alertify.set({ delay: 1000 });
+	    		alertify.primary('Datos Agregados Correctamente');						    		
+	    		setTimeout(function() {
+				    window.open('../reportes/reporte_cxc.php?id='+$("#id_cxc").val(),'_blank');      		
+				}, 1500);
+				setTimeout(function() {
+				   location.reload();
+				}, 1800);
+	    	}	
+	    	else{
+	    		alertify.error("Error al momento de guardar los datos la página se recargara");	    		
+				setTimeout(function() {
+				   location.reload();
+				}, 1500);	    		
+	    	}
+		}
+	});
+}
+/*---------------*/
+/*guardar notas credito*/
+function guardar_n_credito(){
+	var resp=comprobarCamposRequired("form_notasCredito");		
+	if(resp==true){				
+		$("#form_notasCredito").on("submit",function (e){	
+			var valores = $("#form_notasCredito").serialize();
+			var texto=($("#btn_guardar_n_credito").text()).trim();				
+			var serializar = serializarJqTabla("lista_nxc");
+			if(texto=="Guardar"){		
+				if($("#txt_id_cliente_nC").val()!=""){
+					alertify.confirm("<b>Recuerde Llenar todos los campos <br>Deséa Continuar?</b>", function(e){
+						if(e){
+							datos_c_credito(valores,"g",e,serializar);
+						}else{
+							alertify.set({ delay: 1000 });
+							alertify.error("Operación cancelada");	   				
+						}
+					});		    			
+	    			
+				}else{
+					alertify.set({ delay: 1000 });
+					alertify.error("Debe seleccionar un propietario antes de continuar");	   	
+				}
+			}else{
+				alertify.error("No se puede modificar");	   
+			}
+			e.preventDefault();
+    		$(this).unbind("submit")
+		});
+	}
+}
+function datos_c_credito(valores,tipo,p,serializar){	
+	var productosJSON = JSON.stringify(serializar);
+	$.ajax({				
+		type: "POST",
+		data: valores,
+		url: "../servidor/notas_credito/notas_credito.php?v="+productosJSON,			
+	    success: function(data) {		    	
+	    	if( data > 0 ){	    		
+	    		alertify.set({ delay: 1000 });
+	    		alertify.primary('Datos Agregados Correctamente');						    		
+	    		setTimeout(function() {
+				    window.open('../reportes/reporte_nota_credito.php?id='+data,'_blank');      		
+				}, 1500);
+				setTimeout(function() {
+				   location.reload();
+				}, 1800);
+	    	}	
+	    	else{
+	    		alertify.error("Error al momento de guardar los datos la página se recargara");	    		
+				setTimeout(function() {
+				   location.reload();
+				}, 1500);	    		
+	    	}
+		}
+	});
+}
+/*----------*/
+/*guardar factura compra*/
+function guardar_fc(){	
+	var nro = nro_row_fc();	
+	if($("#nro_factura_preimpresa_compra").val() != ""){
+		if($("#ci_ruc_compra").val() != ""){
+			if(nro > 0){
+				$("#form_factura_compra").on("submit",function (e){					
+					var valores = $("#form_factura_compra").serialize();
+					var texto=($("#btn_guardarCompra").text()).trim();	
+					var serializar = serializarJqTabla("lista_factura_compra");
+					if(texto=="Guardar"){		
+						datos_fc(valores,"g",e,serializar);
+					}else{
+						alertify.alert("No se puede modifcar los datos de una factura ya impresa");
+					}
+					e.preventDefault();
+		    		$(this).unbind("submit")
+				});
+				$("#form_factura_compra").submit();	 
+			}else{
+				alertify.alert("Agregue productos para poder continuar");
+				$("#nombre_productoCompra").focus();
+			}
+		}else{
+			alertify.alert("Indique un  proveedor antes de continuar");
+			$("#ci_ruc_compra").focus();
+		}
+	}else{
+		alertify.alert("Indique un  nro de factura antes de continuar");
+		$("#nro_factura_preimpresa_compra").focus();
+	}
+}
+function datos_fc(valores,tipo,p,serializar){	
+	var productosJSON = JSON.stringify(serializar);
+	$.ajax({				
+		type: "POST",
+		data: valores,
+		url: "../servidor/factura_compra/factura_compra.php?v="+productosJSON,			
+	    success: function(data) {		    	
+	    	if( data > 0 ){	    		
+	    		alertify.set({ delay: 1000 });
+	    		alertify.primary('Datos Agregados Correctamente');						    		
+	    		setTimeout(function() {
+				    window.open('../reportes/reporte_fc.php?id='+data,'_blank');      		
+				}, 1500);
+				setTimeout(function() {
+				   location.reload();
+				}, 1800);
+	    	}	
+	    	else{
+	    		alertify.error("Error al momento de guardar los datos la página se recargara");	    		
+				setTimeout(function() {
+				   location.reload();
+				}, 1500);	    		
+	    	}
+		}
+	});	
+}
+/*-------------*/
 /*function para limpiar el formulario activo y dar focus al primer elemento*/
 function limpiar_form(e){
 	if(e != undefined)
@@ -769,32 +1713,32 @@ function limpiar_form(e){
 				comprobarCamposRequired(e);		
 				form = e;
 			}
-		}
+		}		
 		if(form == "form_serviciosAdministrativos"){
 			$("#btn_guardarServicios").text("");
 	    	$("#btn_guardarServicios").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
-		}else{
+		}else{			
 			if(form == "tasa_servicio"){
 				$("#btn_guardarTasaServicios").text("");
 		    	$("#btn_guardarTasaServicios").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
-			}else{
+			}else{				
 				if(form == "usuarios"){
 					$("#btn_guardarUsuarios").text("");
 			    	$("#btn_guardarUsuarios").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
-				}else{
+				}else{					
 					if(form == "form_propietarios"){
 						$("#btn_guardarPropietarios").text("");
 						$("#btn_guardarPropietarios").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
-					}else{
+					}else{						
 						if(form == "form_empresas"){
 							$("#btn_guardarEmpresas").text("");
 							$("#btn_guardarEmpresas").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
 							$("#capital_giro").val("0.00");
 							$("#grupo_empresas").html(" ");						
-						}else{
+						}else{							
 							if(form == "form_informe"){
 								location.reload();					
-							}else{
+							}else{								
 								if(form == "form_productos"){
 									$("#btn_guardarProductos").text("");
 									$("#btn_guardarProductos").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");     
@@ -803,15 +1747,52 @@ function limpiar_form(e){
 									$("#stock_maximoProducto").val("0");
 									$("#precio_compraProducto").val("0.00");
 									$("#precio_ventaProducto").val("0.00");
-								}else{
+								}else{									
 									if(form == "form_emisionPermisos"){
-										$('#fecha_factura').datepicker({
-									        dateFormat: 'yy-mm-dd'
-									    }).datepicker('setDate', 'today');
-									    $('#fecha_cancelacion').datepicker({
-									        dateFormat: 'yy-mm-dd'
-									    }).datepicker('setDate', 'today');
-									    
+										location.reload();
+									}else{																			
+										if(form == "form_emisionCxc"){																						
+											$("#lista_cxc").jqGrid("clearGridData",true);	    		    		    	
+											$("#btn_guardarCxc").text("");
+											$("#btn_guardarCxc").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");
+											cargar_usuario("nombre_usuario_cxc");
+											$('#fecha_factura_cxc').datepicker({
+										        dateFormat: 'yy-mm-dd'
+										    }).datepicker('setDate', 'today');
+										}else{								
+											if(form == "form_notasCredito"){
+												$("#btn_guardar_n_credito").text("");
+												$("#btn_guardar_n_credito").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");
+												cargar_usuario("nombre_usuario_n_credito");
+												$('#fecha_factura_n_credito').datepicker({
+											        dateFormat: 'yy-mm-dd'
+											    }).datepicker('setDate', 'today');													
+											    $("#lista_nxc").jqGrid("clearGridData",true);	    		    		    	
+											}else{												
+												if(form == "form_factura_compra"){
+													$("#btn_guardarCompra").text("");
+													$("#btn_guardarCompra").append("<span class='glyphicon glyphicon-log-in'></span> Guardar");
+													cargar_usuario("nombre_usuario_compra");
+													$('#fecha_factura_compra').datepicker({
+												        dateFormat: 'yy-mm-dd'
+												    }).datepicker('setDate', 'today');													
+												    $('#fecha_cancelacion_compra').datepicker({
+													        dateFormat: 'yy-mm-dd'
+													    }).datepicker('setDate', 'today');
+												    $("#lista_factura_compra").jqGrid("clearGridData",true);	    		    		    	
+													$("#stock_producto").val("0");
+													$("#cantidadCompra").val("0");
+													$("#precio_ventaCompra").val("0.00");
+													$("#precio_totalCompra").val("0.00");
+													$("#subtotal_compra").val("0.00");
+													$("#iva_0compra").val("0.00");
+													$("#iva_12compra").val("0.00");
+													$("#total_compra").val("0.00");
+													$("#nro_2_compra").val("001");
+													$("#nro_1_compra").val("001");
+												}	
+											}
+										}
 									}
 								}
 							}
@@ -820,7 +1801,8 @@ function limpiar_form(e){
 				}	
 			}	
 		}	
-		$("input:text:visible:first").focus();		
+		$("#fecha_factura").datepicker("hide")
+		$("input:not([readonly='readonly']):text:visible:first").focus();	
 	}
 }
 /*------------*/
@@ -842,7 +1824,7 @@ function comprobarCamposRequired(form){
 }
 /*---------*/
 /*function para crear el jqgrid de cada formulario necesario*/
-function modal(e){
+function modal(e){	
 	$("#busquedasModificar").html("");
 	$("#busquedasModificar").append("<table id='tabla_busquedas'></table><div id='pager'></div>");
 	$("#pager").html("");
@@ -873,7 +1855,19 @@ function modal(e){
 							buscar_productos("600");	
 						}else{
 							if(form == "form_emisionPermisos"){
-								buscar_productos("600");	
+								buscar_emision("600");	
+							}else{
+								if(form == "form_notasCredito"){
+									buscar_notas_credito("600");	
+								}else{
+									if(form == "form_emisionCxc"){
+										buscar_c_x_c("600");	
+									}else{
+										if(form == "form_factura_compra"){
+											buscar_fac_compra("600");	
+										}	
+									}	
+								}
 							}
 						}
 					}	
@@ -902,6 +1896,29 @@ function autocompletar(campo,campoNombre,campoId,direccion,campoCopia,campoCopia
 	        $( "#"+campoCopia1 ).val( ui.item.label2 );   
 	        comprobarCamposRequired(form);		
 	        cargarTabla(ui.item.value);
+	        return false;
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.label1 + "</a>" )
+        .appendTo( ul );
+    };
+}
+function autocompletarPropietario(campo,campoNombre,campoId,direccion){
+	$("#"+campo).autocomplete({
+        source: direccion,
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#"+campoId ).val( ui.item.value );
+	        $( "#"+campo ).val( ui.item.label1 );  
+	        $( "#"+campoNombre ).val( ui.item.label2 );  
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#"+campoId ).val( ui.item.value );
+	        $( "#"+campo ).val( ui.item.label1 );     
+	        $( "#"+campoNombre ).val( ui.item.label2 );   	  
+	        informesGenerales();      
 	        return false;
         }     
         }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
@@ -970,6 +1987,184 @@ function autocompletarTasa(campo,campo1,direccion){
     };
 }
 /*---------------*/
+/*funcion para autocompletar la parte de producto en la emision con el campo a mostar el id oculto y la direccion donde se encuentra*/
+function autocompletarProducto(campo,campo1,campo2,campo3,direccion){//id nombre cantidad precio venta direccion
+	$("#"+campo1).autocomplete({
+        source: direccion,
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#"+campo ).val( ui.item.label );
+	        $( "#"+campo1 ).val( ui.item.label1 );  	        
+	        $( "#"+campo2 ).val( ui.item.label2 );  	        
+	        $( "#"+campo3 ).val( ui.item.label3 );  	        
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#"+campo ).val( ui.item.label );
+	        $( "#"+campo1 ).val( ui.item.label1 );
+	        $( "#"+campo2 ).val( ui.item.label2 );  	        
+	        $( "#"+campo3 ).val( ui.item.label3 );  	        	        
+	        return false;
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.label1 + "</a>" )
+        .appendTo( ul );
+    };
+}
+function autocompletarProductoIva(campo,campo1,campo2,campo3,campo4,direccion){//id nombre cantidad precio venta direccion
+	$("#"+campo1).autocomplete({
+        source: direccion,
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#"+campo ).val( ui.item.label );
+	        $( "#"+campo1 ).val( ui.item.label1 );  	        
+	        $( "#"+campo2 ).val( ui.item.label2 );  	        
+	        $( "#"+campo3 ).val( ui.item.label3 );  	        
+	        $( "#"+campo4 ).val( ui.item.label4 );  	        
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#"+campo ).val( ui.item.label );
+	        $( "#"+campo1 ).val( ui.item.label1 );
+	        $( "#"+campo2 ).val( ui.item.label2 );  	        
+	        $( "#"+campo3 ).val( ui.item.label3 );  	
+	        $( "#"+campo4 ).val( ui.item.label4 );  	                	        
+	        return false;
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.label1 + "</a>" )
+        .appendTo( ul );
+    };
+}
+/*---------------*/
+/*function para buscar las cxc de los clientes*/
+function autocompletarCxc(campo1,campo2,campo3,fn){
+	$("#"+campo2).autocomplete({
+        source: '../servidor/cxc/buscar_cxc.php?fn='+fn,
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#"+campo1 ).val( ui.item.label1 );	                
+	        $( "#"+campo2 ).val( ui.item.label2 );	                
+	        $( "#"+campo3 ).val( ui.item.label3 );	                
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#"+campo1 ).val( ui.item.label1 );	        
+	        $( "#"+campo2 ).val( ui.item.label2 );	        
+	        $( "#"+campo3 ).val( ui.item.label3 );	        	        
+	        carga_cxc(ui.item.label1);
+	        return false;	        
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.label2 + "</a>" )
+        .appendTo( ul );
+    };
+}
+/*------*/
+/*function para buscar las emisiones y facturas  que contengan productos*/
+function autocompletarNxc(campo1,campo2,campo3,fn){
+	$("#"+campo2).autocomplete({
+        source: '../servidor/notas_credito/buscar_emision.php?fn='+fn,
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#"+campo1 ).val( ui.item.label1 );	                
+	        $( "#"+campo2 ).val( ui.item.label2 );	                
+	        $( "#"+campo3 ).val( ui.item.label3 );	                
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#"+campo1 ).val( ui.item.label1 );	        
+	        $( "#"+campo2 ).val( ui.item.label2 );	        
+	        $( "#"+campo3 ).val( ui.item.label3 );	        	        
+	        carga_nxc(ui.item.label1);
+	        return false;	        
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.label2 + "</a>" )
+        .appendTo( ul );
+    };
+}
+/*----*/
+/*function para autocompletar solo los productos que existen en la factura seleccionada */
+function autocompletarProductoCredito(campo,id){
+	$("#nombre_productoCredito").autocomplete({
+        source: '../servidor/notas_credito/cargaProductosCredito.php?id='+id,
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#id_productoCredito").val( ui.item.label1 );	                	        
+	        $( "#nombre_productoCredito").val( ui.item.label2 );	                	        
+	        $( "#cantidadCredito").val( ui.item.label3 );	                	        
+	        $( "#precio_ventaCredito").val( ui.item.label4 );	                	        
+	        $( "#precio_totalCredito").val( ui.item.label5 );	  
+	        $("#cantidadCredito").prop("max",ui.item.label3);	        
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#id_productoCredito").val( ui.item.label1 );	        	        	        
+	        $( "#nombre_productoCredito").val( ui.item.label2 );	                	        
+	        $( "#cantidadCredito").val( ui.item.label3 );	                	        
+	        $( "#precio_ventaCredito").val( ui.item.label4 );	                	        
+	        $( "#precio_totalCredito").val( ui.item.label5 );	                	        
+	        return false;	        
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.label2 + "</a>" )
+        .appendTo( ul );
+    };
+}
+/*--------*/
+/*cargar las cxc de los clientes*/
+function carga_cxc(id){
+	$("#busquedasModificar").html("");
+	$("#busquedasModificar").append("<table id='tabla_busquedas'></table><div id='pager'></div>");
+	$("#pager").html("");
+	$('#modalBusquedas').modal('show');
+	buscar_cxc_cliente("600",id);	
+}
+/**/
+/*cargar los cxc para imprimir de los clientes*/
+function carga_cxc_imprimir(id){
+	var url = '';	
+	url = "../servidor/cxc/cargaCxcImprimir.php?id="+id;	
+	$.ajax({				
+		type: "POST",
+		dataType: 'json',		
+		url: url,			
+	    success: function(data) {		    		    	
+	    	/*-------------------------*/
+	    	/*detalles de los productos*/
+	    	$("#lista_cxc").jqGrid("clearGridData",true);	    		    		    	
+	    	for(var i = 0; i < data.length; i++){
+	    		var datarow = {
+	                tipo: data[i].id_detalle_cxc,//referente al id producto	                
+	                fecha_pago: data[i].fecha_abono, 
+	                forma_pago: data[i].forma_pago, 
+	                detalle: data[i].detalle, 
+	                valor: data[i].valor,	                	        
+	            };				                
+	            jQuery("#lista_cxc").jqGrid('addRowData', data[i].id_producto, datarow);			                				                	    	
+	    	}            
+	    	/*-------------------------*/
+	    	$("#btn_guardarCxc").text("");
+            $("#btn_guardarCxc").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+		}
+	});	
+}
+/**/
+/*cargar las nxc de los clientes*/
+function carga_nxc(id){
+	$("#busquedasModificar").html("");
+	$("#busquedasModificar").append("<table id='tabla_busquedas'></table><div id='pager'></div>");
+	$("#pager").html("");
+	$('#modalBusquedas').modal('show');
+	buscar_nxc_cliente("600",id);	
+}
+/**/
 /*funcion para cargar la tabla de las empresas*/
 function cargarTabla(idPropietario){
 	$("#grupo_empresas").html(" ");
@@ -1047,15 +2242,35 @@ function modificaEmpresa(e){
 }
 /*-------------*/
 /*function que me permite serializar la tabla para poder enviar los datos en el submit*/
-function serializarTabla(tabla){
+function serializarTabla(tabla){	
 	var tabla_serialize = new Object();
-	$("#" +tabla+ " > tr").each(function () {
+	$("#" +tabla+ " > tr").each(function () {				
+
 	  var tablerow = $(this);
 	  $("td input", tablerow).each(function () {
-	    var input = $(this);
-	    tabla_serialize[tablerow.attr("id")][input.attr("name")] = input.val();
+	    var input = $(this);	    
 	  });
 	});
+}
+function serializarJqTabla(tabla){	
+	var tabla_serialize = new Object();
+	var filas = 0;
+	var columnas = 0;
+	var cont = 0;
+	$("#" +tabla+ " tbody > tr").each(function () {						
+		var tablerow = $(this);		
+		if(cont == 1){
+			$("td", tablerow).each(function () {
+			    var input = $(this).text();	    	    
+			    tabla_serialize[filas,columnas] = input;
+			    columnas++;
+		  	});
+		  	filas = 0;
+		  	columnas++;	
+		}
+		cont = 1;	 	
+	});
+	return tabla_serialize;
 }
 /**/
 function cargarInforme(id){
@@ -1087,8 +2302,7 @@ function cargaInforme(id){
 		}
 	});		
 }
-function carga(valores){
-//console.log(valores)		
+function carga(valores){		
 	$("#id_informe_empresa").val(valores[0]);		
 	if(valores[1] == "SI"){
 		$("#check_per1").prop('checked', true);
@@ -1934,4 +3148,495 @@ function mostrar(input) {
     var input = input;
 
     setTimeout("mostrar('"+input+"')", 1000);    
+}
+function zeros(tamaño,input){
+	var zero="";	
+	for(var i = tamaño; i < 9; i++){
+		zero = zero + "0"
+	}
+	zero = zero + $("#"+input).val()
+	$("#"+input).val(zero);
+}
+function informesGenerales(){	
+	$("#busquedasModificar").html("");
+	$("#busquedasModificar").append("<table id='tabla_busquedas'></table><div id='pager'></div>");
+	$("#pager").html("");
+	$('#modalBusquedas').modal('show');
+	buscar_informes_propietarios("600");	
+}
+function total_factura(){
+	var subtotal = 0;
+	var filas = jQuery("#lista_factura").jqGrid("getRowData");
+	for (var i = 0; i < filas.length; i++) {
+    	var id = filas[i];    
+    	subtotal = subtotal + parseFloat(id.total);	
+    }
+
+    $("#subtotal_emision").val(parseFloat(subtotal).toFixed(2));
+    $("#total_emision").val(parseFloat(subtotal).toFixed(2));
+    
+}
+function total_factura_compra(){
+	var subtotal = 0;
+	var iva12 = 0;
+	var iva = 0;
+	var iva0 = 0;
+	var filas = jQuery("#lista_factura_compra").jqGrid("getRowData");
+	for (var i = 0; i < filas.length; i++) {
+    	var id = filas[i];    
+    	subtotal = subtotal + parseFloat(id.total);	
+    	if(id.tipo == "12"){
+    		iva12 = iva12 + parseFloat(id.total);
+    	}
+    	if(id.tipo == "0"){
+    		iva0 = iva0 + parseFloat(id.total);
+    	}
+    }
+    iva = iva12 * 0.12;
+	$("#iva_12compra").val(parseFloat(iva).toFixed(2));
+	$("#iva_0compra").val(parseFloat(iva0).toFixed(2));
+    $("#subtotal_compra").val(parseFloat(iva12).toFixed(2));
+    subtotal = iva12 + iva + iva0;
+    $("#total_compra").val(parseFloat(subtotal).toFixed(2));
+    
+}
+function total_credito(){
+	var subtotal = 0;
+	var filas = jQuery("#lista_nxc").jqGrid("getRowData");
+	for (var i = 0; i < filas.length; i++) {
+    	var id = filas[i];    
+    	subtotal = subtotal + parseFloat(id.total);	
+    }
+
+    $("#subtotal_credito").val(parseFloat(subtotal).toFixed(2));
+    $("#total_credito").val(parseFloat(subtotal).toFixed(2));
+    
+}
+function nro_row(){		
+	var filas = jQuery("#lista_factura").jqGrid("getRowData");
+	return filas.length;	    
+}
+function nro_row_fc(){		
+	var filas = jQuery("#lista_factura_compra").jqGrid("getRowData");
+	return filas.length;	    
+}
+function atras(id,carpeta,archivo){///campo carpeta y el archivo
+	var url = '';
+	if($("#"+id).val()!=""){
+		url = "../servidor/"+carpeta+"/"+archivo+"?id="+$("#"+id).val()+"&fn=0";
+	}else{
+		url = "../servidor/"+carpeta+"/"+archivo+"?id="+$("#"+id).val()+"&fn=0";
+	}	
+	$.ajax({				
+		type: "POST",
+		dataType: 'json',		
+		url: url,			
+	    success: function(data) {		    	
+	    	/*detalles de la factura*/    			        	    		    	
+	    	$("#id_emision").val(data.Cabecera[0][0]);
+	    	$("#fecha_factura").val(data.Cabecera[0][1]);
+	    	$("#hora_factura").val(data.Cabecera[0][2]);
+	    	$("#nombre_usuario").val(data.Cabecera[0][3]);
+	    	$("#nro_1").val(data.Cabecera[0][4]);
+	    	$("#nro_2").val(data.Cabecera[0][5]);
+	    	$("#nro_factura_preimpresa").val(data.Cabecera[0][6]);
+	    	$("#fecha_cancelacion").val(data.Cabecera[0][10]);
+	    	$("#id_emisionPropietario").val(data.Cabecera[0][7]);
+	    	$("#ci_ruc_emision").val(data.Cabecera[0][8]);
+	    	$("#nombres_emision").val(data.Cabecera[0][9]);
+	    	$("#select_emision").val(data.Cabecera[0][11]);
+	    	$("#subtotal_emision").val(data.Cabecera[0][12]);
+	    	$("#iva_0Emision").val(data.Cabecera[0][13]);
+	    	$("#iva_12Emision").val(data.Cabecera[0][14]);
+	    	$("#total_emision").val(data.Cabecera[0][15]);
+	    	/*-------------------------*/
+	    	/*detalles de los productos*/
+
+	    	$("#lista_factura").jqGrid("clearGridData",true);
+	    	for(var i = 0; i < data.Detalles[0].length; i++){
+	    		var datarow = {
+	                id_producto: "idp"+$("#id_productoEmision").val(),//referente al id producto
+	                tipo: data.Detalles[0][i]["tipo"], 
+	                detalle: data.Detalles[0][i]["detalle"], 
+	                cantidad: data.Detalles[0][i]["cantidad"], 
+	                precio_u: data.Detalles[0][i]["precio_unitario"], 
+	                total: data.Detalles[0][i]["precio_total"],
+	            };				                
+	            jQuery("#lista_factura").jqGrid('addRowData', $("#id_productoEmision").val()+"idp", datarow);			                				                	    	
+	    	}            
+	    	/*-------------------------*/
+	    	$("#btn_guardarEmision").text("");
+            $("#btn_guardarEmision").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+		}
+	});		
+}
+function adelante(id,carpeta,archivo){///campo carpeta y el archivo
+	var url = '';
+	if($("#"+id).val()!=""){
+		url = "../servidor/"+carpeta+"/"+archivo+"?id="+$("#"+id).val()+"&fn=1";
+	}else{
+		url = "../servidor/"+carpeta+"/"+archivo+"?id="+$("#"+id).val()+"&fn=1";
+	}	
+	$.ajax({				
+		type: "POST",
+		dataType: 'json',		
+		url: url,			
+	    success: function(data) {		    	
+	    	/*detalles de la factura*/    			        	    		    	
+	    	$("#id_emision").val(data.Cabecera[0][0]);
+	    	$("#fecha_factura").val(data.Cabecera[0][1]);
+	    	$("#hora_factura").val(data.Cabecera[0][2]);
+	    	$("#nombre_usuario").val(data.Cabecera[0][3]);
+	    	$("#nro_1").val(data.Cabecera[0][4]);
+	    	$("#nro_2").val(data.Cabecera[0][5]);
+	    	$("#nro_factura_preimpresa").val(data.Cabecera[0][6]);
+	    	$("#fecha_cancelacion").val(data.Cabecera[0][10]);
+	    	$("#id_emisionPropietario").val(data.Cabecera[0][7]);
+	    	$("#ci_ruc_emision").val(data.Cabecera[0][8]);
+	    	$("#nombres_emision").val(data.Cabecera[0][9]);
+	    	$("#select_emision").val(data.Cabecera[0][11]);
+	    	$("#subtotal_emision").val(data.Cabecera[0][12]);
+	    	$("#iva_0Emision").val(data.Cabecera[0][13]);
+	    	$("#iva_12Emision").val(data.Cabecera[0][14]);
+	    	$("#total_emision").val(data.Cabecera[0][15]);
+	    	/*-------------------------*/
+	    	/*detalles de los productos*/
+
+	    	$("#lista_factura").jqGrid("clearGridData",true);
+	    	for(var i = 0; i < data.Detalles[0].length; i++){
+	    		var datarow = {
+	                id_producto: "idp"+$("#id_productoEmision").val(),//referente al id producto
+	                tipo: data.Detalles[0][i]["tipo"], 
+	                detalle: data.Detalles[0][i]["detalle"], 
+	                cantidad: data.Detalles[0][i]["cantidad"], 
+	                precio_u: data.Detalles[0][i]["precio_unitario"], 
+	                total: data.Detalles[0][i]["precio_total"],
+	            };				                
+	            jQuery("#lista_factura").jqGrid('addRowData', $("#id_productoEmision").val()+"idp", datarow);			                				                	    	
+	    	}            
+	    	/*-------------------------*/
+	    	$("#btn_guardarEmision").text("");
+            $("#btn_guardarEmision").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+		}
+	});		
+}
+function atras_fc(id,carpeta,archivo){///campo carpeta y el archivo
+	var url = '';
+	if($("#"+id).val()!=""){
+		url = "../servidor/"+carpeta+"/"+archivo+"?id="+$("#"+id).val()+"&fn=0";
+	}else{
+		url = "../servidor/"+carpeta+"/"+archivo+"?id="+$("#"+id).val()+"&fn=0";
+	}	
+	$.ajax({				
+		type: "POST",
+		dataType: 'json',		
+		url: url,			
+	    success: function(data) {		    	
+	    	/*detalles de la factura*/    			        	    		    	
+	    	$("#id_factura_compra").val(data.Cabecera[0][0]);
+	    	$("#fecha_factura_compra").val(data.Cabecera[0][1]);
+	    	$("#hora_factura_compra").val(data.Cabecera[0][2]);
+	    	$("#nombre_usuario_compra").val(data.Cabecera[0][3]);
+	    	$("#nro_1_compra").val(data.Cabecera[0][4]);
+	    	$("#nro_2_compra").val(data.Cabecera[0][5]);
+	    	$("#nro_factura_preimpresa_compra").val(data.Cabecera[0][6]);
+	    	$("#fecha_cancelacion_compra").val(data.Cabecera[0][7]);	    	
+	    	$("#ci_ruc_compra").val(data.Cabecera[0][8]);
+	    	$("#nombre_compra").val(data.Cabecera[0][9]);
+	    	$("#empresa_compra").val(data.Cabecera[0][10]);
+	    	$("#forma_pago_compra").val(data.Cabecera[0][11]);	    		    	
+	    	$("#subtotal_compra").val(data.Cabecera[0][12]);
+	    	$("#iva_0compra").val(data.Cabecera[0][13]);
+	    	$("#iva_12compra").val(data.Cabecera[0][14]);
+	    	$("#total_compra").val(data.Cabecera[0][15]);
+	    	/*-------------------------*/
+	    	/*detalles de los productos*/
+
+	    	$("#lista_factura_compra").jqGrid("clearGridData",true);
+	    	for(var i = 0; i < data.Detalles[0].length; i++){
+	    		var datarow = {
+	                id_producto: data.Detalles[0][i]["id_producto"],//referente al id producto
+	                tipo: data.Detalles[0][i]["valor_iva"], 	                
+	                cantidad: data.Detalles[0][i]["cantidad"], 
+	                detalle: data.Detalles[0][i]["nombre_producto"], 
+	                precio_u: data.Detalles[0][i]["precio_u"], 
+	                total: data.Detalles[0][i]["precio_total"],	                        
+	            };				                
+	            jQuery("#lista_factura_compra").jqGrid('addRowData',data.Detalles[0][i]["id_producto"] , datarow);			                				                	    	
+	    	}            
+	    	/*-------------------------*/
+	    	$("#btn_guardarCompra").text("");
+            $("#btn_guardarCompra").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+		}
+	});		
+}
+function adelante_fc(id,carpeta,archivo){///campo carpeta y el archivo
+	var url = '';
+	if($("#"+id).val()!=""){
+		url = "../servidor/"+carpeta+"/"+archivo+"?id="+$("#"+id).val()+"&fn=1";
+	}else{
+		url = "../servidor/"+carpeta+"/"+archivo+"?id="+$("#"+id).val()+"&fn=1";
+	}	
+	$.ajax({				
+		type: "POST",
+		dataType: 'json',		
+		url: url,			
+	    success: function(data) {		    	
+	    	/*detalles de la factura*/    			        	    		    	
+	    	$("#id_factura_compra").val(data.Cabecera[0][0]);
+	    	$("#fecha_factura_compra").val(data.Cabecera[0][1]);
+	    	$("#hora_factura_compra").val(data.Cabecera[0][2]);
+	    	$("#nombre_usuario_compra").val(data.Cabecera[0][3]);
+	    	$("#nro_1_compra").val(data.Cabecera[0][4]);
+	    	$("#nro_2_compra").val(data.Cabecera[0][5]);
+	    	$("#nro_factura_preimpresa_compra").val(data.Cabecera[0][6]);
+	    	$("#fecha_cancelacion_compra").val(data.Cabecera[0][7]);	    	
+	    	$("#ci_ruc_compra").val(data.Cabecera[0][8]);
+	    	$("#nombre_compra").val(data.Cabecera[0][9]);
+	    	$("#empresa_compra").val(data.Cabecera[0][10]);
+	    	$("#forma_pago_compra").val(data.Cabecera[0][11]);	    		    	
+	    	$("#subtotal_compra").val(data.Cabecera[0][12]);
+	    	$("#iva_0compra").val(data.Cabecera[0][13]);
+	    	$("#iva_12compra").val(data.Cabecera[0][14]);
+	    	$("#total_compra").val(data.Cabecera[0][15]);
+	    	/*-------------------------*/
+	    	/*detalles de los productos*/
+
+	    	$("#lista_factura_compra").jqGrid("clearGridData",true);
+	    	for(var i = 0; i < data.Detalles[0].length; i++){
+	    		var datarow = {
+	                id_producto: data.Detalles[0][i]["id_producto"],//referente al id producto
+	                tipo: data.Detalles[0][i]["valor_iva"], 	                
+	                cantidad: data.Detalles[0][i]["cantidad"], 
+	                detalle: data.Detalles[0][i]["nombre_producto"], 
+	                precio_u: data.Detalles[0][i]["precio_u"], 
+	                total: data.Detalles[0][i]["precio_total"],	                        
+	            };				                
+	            jQuery("#lista_factura_compra").jqGrid('addRowData',data.Detalles[0][i]["id_producto"] , datarow);			                				                	    	
+	    	}            
+	    	/*-------------------------*/
+	    	$("#btn_guardarCompra").text("");
+            $("#btn_guardarCompra").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+		}
+	});		
+}
+function cargar_fac_compra(id,carpeta,archivo){
+	var url = '';	
+	url = "../servidor/"+carpeta+"/"+archivo+"?id="+id+"&fn=2";	
+	$.ajax({				
+		type: "POST",
+		dataType: 'json',		
+		url: url,			
+	    success: function(data) {		    	
+	    	/*detalles de la factura*/    			        	    		    	
+	    	$("#id_factura_compra").val(data.Cabecera[0][0]);
+	    	$("#fecha_factura_compra").val(data.Cabecera[0][1]);
+	    	$("#hora_factura_compra").val(data.Cabecera[0][2]);
+	    	$("#nombre_usuario_compra").val(data.Cabecera[0][3]);
+	    	$("#nro_1_compra").val(data.Cabecera[0][4]);
+	    	$("#nro_2_compra").val(data.Cabecera[0][5]);
+	    	$("#nro_factura_preimpresa_compra").val(data.Cabecera[0][6]);
+	    	$("#fecha_cancelacion_compra").val(data.Cabecera[0][7]);	    	
+	    	$("#ci_ruc_compra").val(data.Cabecera[0][8]);
+	    	$("#nombre_compra").val(data.Cabecera[0][9]);
+	    	$("#empresa_compra").val(data.Cabecera[0][10]);
+	    	$("#forma_pago_compra").val(data.Cabecera[0][11]);	    		    	
+	    	$("#subtotal_compra").val(data.Cabecera[0][12]);
+	    	$("#iva_0compra").val(data.Cabecera[0][13]);
+	    	$("#iva_12compra").val(data.Cabecera[0][14]);
+	    	$("#total_compra").val(data.Cabecera[0][15]);
+	    	/*-------------------------*/
+	    	/*detalles de los productos*/	    	
+	    	$("#lista_factura_compra").jqGrid("clearGridData",true);
+	    	for(var i = 0; i < data.Detalles[0].length; i++){
+	    		var datarow = {
+	                id_producto: data.Detalles[0][i]["id_producto"],//referente al id producto
+	                tipo: data.Detalles[0][i]["valor_iva"], 	                
+	                cantidad: data.Detalles[0][i]["cantidad"], 
+	                detalle: data.Detalles[0][i]["nombre_producto"], 
+	                precio_u: data.Detalles[0][i]["precio_u"], 
+	                total: data.Detalles[0][i]["precio_total"],	                        
+	            };				                
+	            jQuery("#lista_factura_compra").jqGrid('addRowData',data.Detalles[0][i]["id_producto"] , datarow);			                				                	    	
+	    	}            
+	    	/*-------------------------*/
+	    	$("#btn_guardarCompra").text("");
+            $("#btn_guardarCompra").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+		}
+	});		
+}
+
+function cargar_emision(id,carpeta,archivo){
+	var url = '';	
+	url = "../servidor/"+carpeta+"/"+archivo+"?id="+id+"&fn=2";	
+	$.ajax({				
+		type: "POST",
+		dataType: 'json',		
+		url: url,			
+	    success: function(data) {		    	
+	    	/*detalles de la factura*/    			        	    		    	
+	    	$("#id_emision").val(data.Cabecera[0][0]);
+	    	$("#fecha_factura").val(data.Cabecera[0][1]);
+	    	$("#hora_factura").val(data.Cabecera[0][2]);
+	    	$("#nombre_usuario").val(data.Cabecera[0][3]);
+	    	$("#nro_1").val(data.Cabecera[0][4]);
+	    	$("#nro_2").val(data.Cabecera[0][5]);
+	    	$("#nro_factura_preimpresa").val(data.Cabecera[0][6]);
+	    	$("#fecha_cancelacion").val(data.Cabecera[0][10]);
+	    	$("#id_emisionPropietario").val(data.Cabecera[0][7]);
+	    	$("#ci_ruc_emision").val(data.Cabecera[0][8]);
+	    	$("#nombres_emision").val(data.Cabecera[0][9]);
+	    	$("#select_emision").val(data.Cabecera[0][11]);
+	    	$("#subtotal_emision").val(data.Cabecera[0][12]);
+	    	$("#iva_0Emision").val(data.Cabecera[0][13]);
+	    	$("#iva_12Emision").val(data.Cabecera[0][14]);
+	    	$("#total_emision").val(data.Cabecera[0][15]);
+	    	/*-------------------------*/
+	    	/*detalles de los productos*/	    	
+	    	$("#lista_factura").jqGrid("clearGridData",true);	    	
+	    	for(var i = 0; i < data.Detalles[0].length; i++){
+	    		var datarow = {
+	                id_producto: "idp"+$("#id_productoEmision").val(),//referente al id producto
+	                tipo: data.Detalles[0][i]["tipo"], 
+	                detalle: data.Detalles[0][i]["detalle"], 
+	                cantidad: data.Detalles[0][i]["cantidad"], 
+	                precio_u: data.Detalles[0][i]["precio_unitario"], 
+	                total: data.Detalles[0][i]["precio_total"],
+	            };				                
+	            jQuery("#lista_factura").jqGrid('addRowData', $("#id_productoEmision").val()+"idp", datarow);			                				                	    	
+	    	}            
+	    	/*-------------------------*/
+	    	$("#btn_guardarEmision").text("");
+            $("#btn_guardarEmision").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+		}
+	});		
+}
+function cargar_nota_credito(id){
+	var url = '';	
+	url = "../servidor/notas_credito/cargaEmision.php?id="+id;	
+	$.ajax({				
+		type: "POST",
+		dataType: 'json',		
+		url: url,			
+	    success: function(data) {		    		    	
+	    	/*-------------------------*/
+	    	/*detalles de los productos*/
+	    	$("#lista_nxc").jqGrid("clearGridData",true);	    		    		    	
+	    	for(var i = 0; i < data.length; i++){
+	    		var datarow = {
+	                id_producto: data[i].cod_productos,//referente al id producto	                
+	                nombre_producto: data[i].nombre_producto, 
+	                cantidad: data[i].cantidad, 
+	                precio: data[i].precio_venta, 
+	                total: data[i].total_venta,	                
+	            };				                
+	            jQuery("#lista_nxc").jqGrid('addRowData', data[i].id_producto, datarow);			                				                	    	
+	    	}            
+	    	/*-------------------------*/
+	    	$("#btn_guardar_n_credito").text("");
+            $("#btn_guardar_n_credito").append("<span class='glyphicon glyphicon-log-in'></span> ---------");     
+		}
+	});		
+}
+
+function cargar_usuario(id){	
+	$.ajax({				
+		type: "POST",				  			
+		url: "../servidor/login/session.php",
+	    success: function(data) {			 
+			$("#"+id).val(data);			
+		}
+	});	
+}
+function guardarCargar(){
+    $("#tabla_excel tbody").empty(); 
+    $("#form_archivosExcel").submit(function(e) {
+        var formObj = $(this);
+        var formURL = formObj.attr("action");
+        if(window.FormData !== undefined) {	
+            var formData = new FormData(this);   
+            formURL=formURL;        	
+            $.ajax({
+                url: "../servidor/excel/guardarExcel.php",
+                type: "POST",
+                data:  formData,
+                mimeType:"multipart/form-data",
+                dataType: 'json',
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(data, textStatus, jqXHR)
+                {
+                    var res=data;
+                    if(res != ""){
+                        alertify.success("Cargando Datos.....");
+                        cargarTablaExcel(data);
+                    }
+                    else{
+                        alertify.alert("Error..... Al cargar los registros");
+                        cargarTablaExcel(data);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) 
+                {
+                } 	        
+            });
+            e.preventDefault();
+            $(this).unbind("submit");
+        } else {
+            var  iframeId = "unique" + (new Date().getTime());
+            var iframe = $('<iframe src="javascript:false;" name="'+iframeId+'" />');
+            iframe.hide();
+            formObj.attr("target",iframeId);
+            iframe.appendTo("body");
+            iframe.load(function(e)
+            {
+                var doc = getDoc(iframe[0]);
+                var docRoot = doc.body ? doc.body : doc.documentElement;
+                var data = docRoot.innerHTML;
+            });
+        }
+    });
+}
+function cargarTablaExcel(data){	
+    for(var i=0;i<data.length;i+=3){    	        
+		vector = new Array();
+	    vector[0]=data[i];
+	    vector[1]=data[i+1];
+	    vector[2]=data[i+2];        
+	    guardar_datos_excel(vector);        	        	                
+    }    
+}
+function guardar_datos_excel(vector){
+    $.ajax({
+        type: "POST",
+        url: "../servidor/excel/guardar_propietario_excel.php",
+        data: "var="+vector[0]+"&var1="+vector[1]+"&var2="+vector[2],
+        success: function(data) {
+            var val = data;
+            if (val == 1) {
+                $("#tabla_excel tbody").append( "<tr>" +
+                    "<td align=center>" + vector[0] + "</td>" +
+                    "<td align=center>" + vector[1] + "</td>" +	            
+                    "<td align=center>" + 'Guardado Correctamente' + "</td>" +            
+                    "<td align=center>" + " <a class='elimina'><img src='../images/valid.png'/>"  + "</td>" + "</tr>" );
+            }
+            
+            if (val == 2) {
+                $("#tabla_excel tbody").append( "<tr>" +
+                    "<td align=center>" + vector[0] + "</td>" +
+                    "<td align=center>" + vector[1] + "</td>" +	            
+                    "<td align=center>" + 'Propietario Repetido' + "</td>" +            
+                    "<td align=center>" + " <a class='elimina'><img src='../images/invalid.png' />"  + "</td>" + "</tr>" );
+            }
+            
+            if (val == 3) {
+                $("#tabla_excel tbody").append( "<tr>" +
+                    "<td align=center>" + vector[0] + "</td>" +
+                    "<td align=center>" + vector[1] + "</td>" +	            
+                    "<td align=center>" + 'Sintaxis incorrecta' + "</td>" +            
+                    "<td align=center>" + " <a class='elimina'><img src='../images/delete.png' />"  + "</td>" + "</tr>" );
+            }
+        }
+    });
 }
