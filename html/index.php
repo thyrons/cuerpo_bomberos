@@ -85,10 +85,7 @@ if (empty($_SESSION['id'])) {
               <div id="collapseOne" class="panel-collapse collapse active " role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
                   <ul class="nav nav-pills nav-stacked ">
-<<<<<<< HEAD
-                    <li class="active"><a href="#tab_i"><span class="glyphicon glyphicon-home"></span> Op1</a></li>
-                    <li><a href="#tab_a"><span class="glyphicon glyphicon-list-alt"></span> Op2</a></li>                    
-=======
+
                     <li class="active"><a href="#tab_i"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
                     <li><a href="#tab_e" ><span class="glyphicon glyphicon-paperclip"></span> Servicios Administrativos </a></li>
                     <li><a href="#tab_f" ><span class="glyphicon glyphicon-wrench"></span> Tasa por Servicio </a></li>                    
@@ -96,7 +93,7 @@ if (empty($_SESSION['id'])) {
                     <li><a href="#tab_c" ><span class="glyphicon glyphicon-share"></span> Empresas </a></li>
                     <li><a href="#tab_a"><span class="glyphicon glyphicon-list-alt"></span> Informe General</a></li>                    
                     <li><a href="#tab_d" ><span class="glyphicon glyphicon-print"></span> Reportes</a></li>                    
->>>>>>> origin/master
+
                   </ul>
                 </div>
               </div>
@@ -104,29 +101,23 @@ if (empty($_SESSION['id'])) {
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="headingTwo">
                 <h4 class="panel-title">
-<<<<<<< HEAD
-                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" >
-                    <span class="glyphicon glyphicon-play"> Opcion 2
-=======
+
                   <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                     <span class="glyphicon glyphicon-tasks"> Facturación
->>>>>>> origin/master
+
                   </a>
                 </h4>
               </div>
               <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                 <div class="panel-body">
-<<<<<<< HEAD
-                  <ul class="nav nav-pills nav-stacked ">
-                    <li class="active"><a href="#tab_i"><span class="glyphicon glyphicon-home"></span> opc21</a></li>
-=======
+
                   <ul class="nav nav-pills nav-stacked ">                    
                     <li><a href="#tab_j" ><span class="glyphicon glyphicon-list"></span> Ingreso Productos</a></li>                    
                     <li><a href="#tab_k"><span class="glyphicon glyphicon-list-alt"></span> Emisión de Permisos</a></li>                                        
                     <li><a href="#tab_l" ><span class="glyphicon glyphicon-list"></span> Notas de Crédito</a></li>                    
                     <li><a href="#tab_s" ><span class="glyphicon glyphicon-list"></span> Cuentas por cobrar</a></li> 
                     <li><a href="#tab_m" ><span class="glyphicon glyphicon-print"></span> Reporte Ventas</a></li>                    
->>>>>>> origin/master
+
                   </ul>
                 </div>
               </div>              
