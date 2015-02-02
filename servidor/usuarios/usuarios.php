@@ -8,7 +8,7 @@
 	$id = id_tabla($conexion,"usuario","id_usuario");
 	$id_clave = id_tabla($conexion,"claves","id_clave");
 	if($_POST['tipo'] == "g"){
-		$sql ="insert into usuario values ('$id','".strtoupper($_POST['nombre_usuario'])."','".strtoupper($_POST['telefono_usuario'])."','".strtoupper($_POST['celular_usuario'])."','".strtoupper($_POST['direccion_usuario'])."','".strtoupper($_POST['mail_usuario'])."','".strtoupper($fecha)."','$_POST[id_tipo_usuario]','1','$_POST[nick_usuario]','$_POST[ci_usuario]')";
+		$sql ="insert into usuario values ('$id','".strtoupper($_POST['nombre_usuario'])."','".strtoupper($_POST['telefono_usuario'])."','".strtoupper($_POST['celular_usuario'])."','".strtoupper($_POST['direccion_usuario'])."','".strtoupper($_POST['mail_usuario'])."','".strtoupper($fecha)."','$_POST[id_tipo_usuario]','1','".strtolower($_POST['nick_usuario'])."','$_POST[ci_usuario]')";
 		$sql_clave = "insert into claves values ('$id_clave','$_POST[nombre_clave]','$id')";
 		$repetidos = repetidos($conexion,"ci_usuario",strtoupper($_POST["ci_usuario"]),"usuario","g","","");	
 		if( $repetidos == 'true'){
