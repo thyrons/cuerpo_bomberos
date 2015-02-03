@@ -2,109 +2,77 @@
  	<div class="panel panel-default">
 	    <div class="panel-heading"><span class="glyphicon glyphicon-filter"></span> <b> PERMISOS </b></div>
 	    <div class="panel-body form-styles">
-	     	<div class="container">
 	       		<div class="row">
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<div class="tree">
 						    <ul>
 						        <li>
 						            <span><input type="checkbox" class="cdcheck"> <i class="glyphicon glyphicon-calendar"></i> Datos generales</span>
 						            <ul>
 						                <li>
-						                	<span class="badge badge-success"><i class="glyphicon glyphicon-minus-sign"></i> Willy 1</span>
-						                    <ul>
-						                        <li>							                        
-							                        <input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
-						                        </li>
-						                        <li>
-						                        	<input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
-						                        </li>
-						                    </ul>
+							                <input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>						                    						                    
 						                </li>
-						                <li>
-						                	<span class="badge badge-success"><i class="glyphicon glyphicon-plus-sign"></i> Facturación</span>
-						                    <ul>
-						                        <li>							                        
-							                        <input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
-						                        </li>
-						                        <li>
-						                        	<input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
-						                        </li>
-						                    </ul>
-						                </li>						                
+					                    <li>
+				                        	<input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
+				                        </li>						                						                
 						            </ul>
 						        </li>						        
 						    </ul>
 						</div>
 					</div>
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<div class="tree">
 						    <ul>
 						        <li>
 						            <span><input type="checkbox" class="cdcheck"> <i class="glyphicon glyphicon-calendar"></i> Datos generales</span>
 						            <ul>
 						                <li>
-						                	<span class="badge badge-success"><i class="glyphicon glyphicon-minus-sign"></i> Willy 1</span>
-						                    <ul>
-						                        <li>							                        
-							                        <input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
-						                        </li>
-						                        <li>
-						                        	<input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
-						                        </li>
-						                    </ul>
+							                <input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>						                    						                    
 						                </li>
-						                <li>
-						                	<span class="badge badge-success"><i class="glyphicon glyphicon-plus-sign"></i> Facturación</span>
-						                    <ul>
-						                        <li>							                        
-							                        <input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
-						                        </li>
-						                        <li>
-						                        	<input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
-						                        </li>
-						                    </ul>
-						                </li>						                
+					                    <li>
+				                        	<input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
+				                        </li>						                						                
 						            </ul>
 						        </li>						        
 						    </ul>
 						</div>
 					</div>	
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<div class="tree">
 						    <ul>
 						        <li>
 						            <span><input type="checkbox" class="cdcheck"> <i class="glyphicon glyphicon-calendar"></i> Datos generales</span>
 						            <ul>
 						                <li>
-						                	<span class="badge badge-success"><i class="glyphicon glyphicon-minus-sign"></i> Willy 1</span>
-						                    <ul>
-						                        <li>							                        
-							                        <input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
-						                        </li>
-						                        <li>
-						                        	<input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
-						                        </li>
-						                    </ul>
+							                <input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>						                    						                    
 						                </li>
+					                    <li>
+				                        	<input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
+				                        </li>						                						                
+						            </ul>
+						        </li>						        
+						    </ul>
+						</div>
+					</div>	
+					<div class="col-sm-3">
+						<div class="tree">
+						    <ul>
+						        <li>
+						            <span><input type="checkbox" class="cdcheck"> <i class="glyphicon glyphicon-calendar"></i> Datos generales</span>
+						            <ul>
 						                <li>
-						                	<span class="badge badge-success"><i class="glyphicon glyphicon-plus-sign"></i> Facturación</span>
-						                    <ul>
-						                        <li>							                        
-							                        <input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
-						                        </li>
-						                        <li>
-						                        	<input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
-						                        </li>
-						                    </ul>
-						                </li>						                
+							                <input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>						                    						                    
+						                </li>
+					                    <li>
+				                        	<input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
+				                        </li>						                						                
 						            </ul>
 						        </li>						        
 						    </ul>
 						</div>
 					</div>				
 				</div>	       		
-	      	</div>
+	      	
 	    </div>
 	    <div class="panel-footer form-footer">
 	     	<div>
@@ -121,15 +89,18 @@
 
 <style type="text/css">
 .tree {
-    background-color:#fbfbfb;
     /*border:1px solid #999;   */
+}
+.tree ul{
+	border:0px;
+	padding: 10px!important;
 }
 .tree li {
     /*list-style-type:none;*/
     /*margin:0;*/
 }
 .tree li::before, .tree li::after {
-    left:-20px;
+    left:-10px;
     position:absolute;
     right:auto;
 }
@@ -141,18 +112,16 @@
 }
 .tree li::after {
     border-top:1px solid #999;
-    height:20px;
-    top:25px;
+    height:10px;
+    top:5px;
     width:25px
 }
-.tree li span {
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
+.tree li span {        
     border:1px solid #999;
     border-radius:3px;
     display:inline-block;
-    padding:3px 8px;
-    text-decoration:none
+    padding:1px;
+    text-decoration:none;
 }
 .tree li.parent_li>span {
     cursor:pointer
