@@ -2,11 +2,21 @@
 	include '../conexion.php';
 	include '../funciones_generales.php';
 	$data;
+	$vector_permisos = array();
+	$vector_permisos_sub = array();
+	$vector_admin =  array(1,1,1,1);
+	$vector_admin_sub =  array(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
+	$vector_tecnico =  array(1,1,1,0);
+	$vector_tecnico_sub =  array(1,1,1,1,1,1,0,1,1,1,1,0,1,0,0,0,0,0,0);
+	$vector_supervisor =  array(1,0,0,0);
+	$vector_supervisor_sub =  array(1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0);
 	$conexion = conectarse();
 	date_default_timezone_set('UTC');
     $fecha=date("Y-m-d");
 	$id = id_tabla($conexion,"usuario","id_usuario");
 	$id_clave = id_tabla($conexion,"claves","id_clave");
+	$id_usuarioPermisos = id_tabla($conexion,"usuarios_permisos",'id_usuario_permiso');
+	$user = trim($_POST['user']);
 	if($_POST['tipo'] == "g"){
 		$sql ="insert into usuario values ('$id','".strtoupper($_POST['nombre_usuario'])."','".strtoupper($_POST['telefono_usuario'])."','".strtoupper($_POST['celular_usuario'])."','".strtoupper($_POST['direccion_usuario'])."','".strtoupper($_POST['mail_usuario'])."','".strtoupper($fecha)."','$_POST[id_tipo_usuario]','1','".strtolower($_POST['nick_usuario'])."','$_POST[ci_usuario]')";
 		$sql_clave = "insert into claves values ('$id_clave','$_POST[nombre_clave]','$id')";
@@ -24,6 +34,24 @@
 					if( $guardar == 'true'){
 						$guardar = guardarSql($conexion,$sql_clave);
 						if( $guardar == 'true'){
+							if($user = '1-Administrador'){
+								$vector_permisos = $vector_admin;
+								$vector_permisos_sub = $vector_admin_sub;
+							}else{
+								if($user = '2-Tecnico(a)'){
+									$vector_permisos = $vector_tecnico;
+									$vector_permisos_sub = $vector_tecnico_sub;
+								}else{
+									$vector_permisos = $vector_supervisor;
+									$vector_permisos_sub = $vector_supervisor_sub;
+								}	
+							}
+							$vector_permisos = "array['".implode("', '", $vector_permisos)."']";
+							$vector_permisos_sub = "array['".implode("', '", $vector_permisos_sub)."']";
+							$sql = "insert into usuarios_permisos values ('$id_usuarioPermisos','$id',".$vector_permisos."::INT[],".$vector_permisos_sub."::INT[])";
+							//echo $sql;
+							guardarSql($conexion,$sql);							
+
 							$data = 0; ////datos guardados
 						}else{
 							$data = 2;

@@ -9,7 +9,10 @@
     $iva0 = $sql[10];
     $iva12 = $sql[11];
     $total = $sql[12];
-    $html = '<html>
+    $html = '<html>    
+    <script type="text/javascript"> 
+        this.print(); 
+    </script>
     <head>
     	<link rel="stylesheet" href="../css/sistema/reportes.css" type="text/css" /> 
     </head>

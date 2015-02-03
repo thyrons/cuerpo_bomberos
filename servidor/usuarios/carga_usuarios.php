@@ -3,6 +3,6 @@
 	include '../funciones_generales.php';
 	$data;
 	$conexion = conectarse();
-	$sql = "select id_tipo_usuario,nombre_tipo from tipo_usuario where estado_tipo='1' order by id_tipo_usuario asc";
+	$sql = "select id_tipo_usuario,nombre_tipo from tipo_usuario order by id_tipo_usuario asc";
 	cargarSelect($conexion,$sql);
 ?>

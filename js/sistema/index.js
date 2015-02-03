@@ -1043,7 +1043,7 @@ function inicio(){
 		adelante_fc("id_factura_compra","factura_compra","secuencia.php");//campo id la carpeta y el archivo donde esta el proceso
 	});
 	$("#btn_imprimirCompra").on("click",function(){
-		if($("#id_factura_compra").val() != ""){
+		if($("#id_factura_compra").val() != ""){			
 			window.open('../reportes/reporte_fc.php?id='+$("#id_factura_compra").val(),'_blank');      		
 		}else{
 			alertify.alert("No se puede imprimir");
@@ -1206,7 +1206,7 @@ function guardar_usuarios(){
 function datos_usuarios(valores,tipo,p){
 	$.ajax({				
 		type: "POST",
-		data: valores+"&tipo="+tipo,
+		data: valores+"&tipo="+tipo+"&user="+$("#id_tipo_usuario option:selected").text(),
 		url: "../servidor/usuarios/usuarios.php",			
 	    success: function(data) {	
 	    	if( data == 0 ){
