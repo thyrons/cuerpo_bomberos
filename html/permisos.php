@@ -1,79 +1,122 @@
-<form class="form-horizontal " action="" rol="form" id="form_empresas" method="post">
+<form class="form-horizontal " action="" rol="form" id="form_permisos" method="post">
  	<div class="panel panel-default">
 	    <div class="panel-heading"><span class="glyphicon glyphicon-filter"></span> <b> PERMISOS </b></div>
 	    <div class="panel-body form-styles">
-	       		<div class="row">
-					<div class="col-sm-3">
-						<div class="tree">
-						    <ul>
-						        <li>
-						            <span><input type="checkbox" class="cdcheck"> <i class="glyphicon glyphicon-calendar"></i> Datos generales</span>
-						            <ul>
-						                <li>
-							                <input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>						                    						                    
-						                </li>
-					                    <li>
-				                        	<input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
-				                        </li>						                						                
-						            </ul>
-						        </li>						        
-						    </ul>
-						</div>
+       		<div class="row">
+       			<div class="container">
+       			<div class="form-group col-md-11">
+		            <label class="col-sm-2 control-label" for='buscar_usuario'> BUSCAR USUARIO:</label>
+		            <div class="col-sm-6">
+		            	<input type="hidden" id="id_usuarioPermisos" >
+		                <input type="text" class="form-control" id='buscar_usuario' name="buscar_usuario" value="" placeholder="Nombre o CI/RUC del Usuario a Modificar" required data-toggle="tooltip" data-original-title="Nombre o CI del usuario" >  
+		            </div>
+		            <button class="btn btn-primary" type="button" id="btn_buscarUsuario">  
+           			<span class="glyphicon glyphicon-log-in"></span> Buscar Usuario</button>
+		        </div>
+		        </div>
+				<div class="col-sm-3">
+					<div class="tree">
+					    <ul>
+					        <li>
+					            <span><input type="checkbox" class="cdcheck" id="check_generales"> <i class="glyphicon glyphicon-calendar"></i> Datos generales</span>
+					            <ul>
+					                <li>
+						                <input type="checkbox"  id="check_inicio" class="cdcheck"> <span>Inicio</span>						                    						                    
+					                </li>
+				                    <li>
+			                        	<input type="checkbox"  id="check_servicios" class="cdcheck"> <span>Servicios Administrativos</span>
+			                        </li>						                						                
+			                        <li>
+			                        	<input type="checkbox"  id="check_tasa" class="cdcheck"> <span>Tasa por Servicio</span>
+			                        </li>						                						                
+			                        <li>
+			                        	<input type="checkbox"  id="check_propietario" class="cdcheck"> <span>Propietario</span>
+			                        </li>						                						                
+			                        <li>
+			                        	<input type="checkbox"  id="check_empresas" class="cdcheck"> <span>Empresas</span>
+			                        </li>						                						                
+			                        <li>
+			                        	<input type="checkbox"  id="check_informe" class="cdcheck"> <span>Informe General</span>
+			                        </li>						                						                
+			                        <li>
+			                        	<input type="checkbox" id="check_reportes" class="cdcheck"> <span>Reportes</span>
+			                        </li>						                						                
+					            </ul>
+					        </li>						        
+					    </ul>
 					</div>
-					<div class="col-sm-3">
-						<div class="tree">
-						    <ul>
-						        <li>
-						            <span><input type="checkbox" class="cdcheck"> <i class="glyphicon glyphicon-calendar"></i> Datos generales</span>
-						            <ul>
-						                <li>
-							                <input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>						                    						                    
-						                </li>
-					                    <li>
-				                        	<input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
-				                        </li>						                						                
-						            </ul>
-						        </li>						        
-						    </ul>
-						</div>
-					</div>	
-					<div class="col-sm-3">
-						<div class="tree">
-						    <ul>
-						        <li>
-						            <span><input type="checkbox" class="cdcheck"> <i class="glyphicon glyphicon-calendar"></i> Datos generales</span>
-						            <ul>
-						                <li>
-							                <input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>						                    						                    
-						                </li>
-					                    <li>
-				                        	<input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
-				                        </li>						                						                
-						            </ul>
-						        </li>						        
-						    </ul>
-						</div>
-					</div>	
-					<div class="col-sm-3">
-						<div class="tree">
-						    <ul>
-						        <li>
-						            <span><input type="checkbox" class="cdcheck"> <i class="glyphicon glyphicon-calendar"></i> Datos generales</span>
-						            <ul>
-						                <li>
-							                <input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>						                    						                    
-						                </li>
-					                    <li>
-				                        	<input type="checkbox" class="cdcheck"> <span>Ejemplo de probabilidad</span>
-				                        </li>						                						                
-						            </ul>
-						        </li>						        
-						    </ul>
-						</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="tree">
+					    <ul>
+					        <li>
+					            <span><input type="checkbox" class="cdcheck" id="check_facturacion"> <i class="glyphicon glyphicon-calendar"></i> Facturación</span>
+					            <ul>
+					                <li>
+						                <input type="checkbox" class="cdcheck"> <span>Ingreso Productos</span>						                    						                    
+					                </li>
+				                    <li>
+			                        	<input type="checkbox" class="cdcheck"> <span>Emisión de Permisos</span>
+			                        </li>						                						                
+			                        <li>
+			                        	<input type="checkbox" class="cdcheck"> <span>Notas de Crédito</span>
+			                        </li>						                						                
+			                        <li>
+			                        	<input type="checkbox" class="cdcheck"> <span>Cuentas por Cobrar</span>
+			                        </li>						                						                
+			                        <li>
+			                        	<input type="checkbox" class="cdcheck"> <span>Reporte Ventas</span>
+			                        </li>						                						                				                        
+					            </ul>
+					        </li>						        
+					    </ul>
 					</div>
-					
-				</div>	       		
-	      	
+				</div>	
+				<div class="col-sm-3">
+					<div class="tree">
+					    <ul>
+					        <li>
+					            <span><input type="checkbox" class="cdcheck" id="check_compras"> <i class="glyphicon glyphicon-calendar"></i> Gastos/Compras</span>
+					            <ul>
+					                <li>
+						                <input type="checkbox" class="cdcheck"> <span>Compras</span>						                    						                    
+					                </li>
+				                    <li>
+			                        	<input type="checkbox" class="cdcheck"> <span>Reporte Compras</span>
+			                        </li>						                						                
+					            </ul>
+					        </li>						        
+					    </ul>
+					</div>
+				</div>	
+				<div class="col-sm-3">
+					<div class="tree">
+					    <ul>
+					        <li>
+					            <span><input type="checkbox" class="cdcheck" id="check_administracion"> <i class="glyphicon glyphicon-calendar"></i> Administración</span>
+					            <ul>
+					                <li>
+						                <input type="checkbox" class="cdcheck"> <span>Ingreso Usuarios</span>						                    						                    
+					                </li>
+				                    <li>
+			                        	<input type="checkbox" class="cdcheck"> <span>Respaldo Base datos</span>
+			                        </li>						                						                
+			                        <li>
+			                        	<input type="checkbox" class="cdcheck"> <span>Reportes Generales</span>
+			                        </li>						                						                
+			                        <li>
+			                        	<input type="checkbox" class="cdcheck"> <span>Subir Información</span>
+			                        </li>						                						                
+			                        <li>
+			                        	<input type="checkbox" class="cdcheck"> <span>Permisos</span>
+			                        </li>						                						                
+
+					            </ul>
+					        </li>						        
+					    </ul>
+					</div>
+				</div>					
+			</div>	       			      	
 	    </div>
 	    <div class="panel-footer form-footer">
 	     	<div>

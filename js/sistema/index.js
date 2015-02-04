@@ -1073,6 +1073,130 @@ function inicio(){
 	/*informacion en excel*/	
 	$("#btnGuardarCargar").on("click",guardarCargar)
 	/*---------*/
+	/*premisos sistema*/
+	$("#check_generales").click(function (){
+		if($(this).is(":checked")){
+			var a = $(this).parent().next().children();
+			var ck = $(a).find(":checkbox");
+			ck.each(function(){
+				$(this).prop("checked",true);
+			});			
+		}else{
+			var a = $(this).parent().next().children();
+			var ck = $(a).find(":checkbox");
+			ck.each(function(){
+				$(this).prop("checked",false);
+			});
+		}
+	});	
+	$("#check_generales").parent().next().children().find(":checkbox").click(function(){		
+		var cont = 0;
+		$("#check_generales").parent().next().children().find(":checkbox").each(function(){
+			if($(this).is(':checked')){
+				cont++;
+			}
+		});	
+		if(cont == 0){
+			$("#check_generales").prop("checked",false);
+		}else{
+			$("#check_generales").prop("checked",true);
+		}		
+	});
+	$("#check_facturacion").click(function (){
+		if($(this).is(":checked")){
+			var a = $(this).parent().next().children();
+			var ck = $(a).find(":checkbox");
+			ck.each(function(){
+				$(this).prop("checked",true);
+			});			
+		}else{
+			var a = $(this).parent().next().children();
+			var ck = $(a).find(":checkbox");
+			ck.each(function(){
+				$(this).prop("checked",false);
+			});
+		}
+	});	
+	$("#check_facturacion").parent().next().children().find(":checkbox").click(function(){		
+		var cont = 0;
+		$("#check_facturacion").parent().next().children().find(":checkbox").each(function(){
+			if($(this).is(':checked')){
+				cont++;
+			}
+		});	
+		if(cont == 0){
+			$("#check_facturacion").prop("checked",false);
+		}else{
+			$("#check_facturacion").prop("checked",true);
+		}		
+	});
+	$("#check_compras").click(function (){
+		if($(this).is(":checked")){
+			var a = $(this).parent().next().children();
+			var ck = $(a).find(":checkbox");
+			ck.each(function(){
+				$(this).prop("checked",true);
+			});			
+		}else{
+			var a = $(this).parent().next().children();
+			var ck = $(a).find(":checkbox");
+			ck.each(function(){
+				$(this).prop("checked",false);
+			});
+		}
+	});	
+	$("#check_compras").parent().next().children().find(":checkbox").click(function(){		
+		var cont = 0;
+		$("#check_compras").parent().next().children().find(":checkbox").each(function(){
+			if($(this).is(':checked')){
+				cont++;
+			}
+		});	
+		if(cont == 0){
+			$("#check_compras").prop("checked",false);
+		}else{
+			$("#check_compras").prop("checked",true);
+		}		
+	});
+	$("#check_administracion").click(function (){
+		if($(this).is(":checked")){
+			var a = $(this).parent().next().children();
+			var ck = $(a).find(":checkbox");
+			ck.each(function(){
+				$(this).prop("checked",true);
+			});			
+		}else{
+			var a = $(this).parent().next().children();
+			var ck = $(a).find(":checkbox");
+			ck.each(function(){
+				$(this).prop("checked",false);
+			});
+		}
+	});	
+	$("#check_administracion").parent().next().children().find(":checkbox").click(function(){		
+		var cont = 0;
+		$("#check_administracion").parent().next().children().find(":checkbox").each(function(){
+			if($(this).is(':checked')){
+				cont++;
+			}
+		});	
+		if(cont == 0){
+			$("#check_administracion").prop("checked",false);
+		}else{
+			$("#check_administracion").prop("checked",true);
+		}		
+	});
+	$("#buscar_usuario").keyup(function (){			
+		autocompletarPermiso("buscar_usuario","id_usuarioPermisos");		
+	});
+	$("#btn_buscarUsuario").on("click",function(){
+		if($("#id_usuarioPermisos").val()!=''){
+			
+		}else{
+			alertify.alert("Seleccione un usuario")
+		}
+	})
+	/*------------*/
 }
 ///////////funciones del sistema
 function llenarSelect(lt,md,bg,sbg){
@@ -2064,6 +2188,29 @@ function autocompletarCxc(campo1,campo2,campo3,fn){
     };
 }
 /*------*/
+/*function para buscar el usuario parapermisos*/
+function autocompletarPermiso(campo1,campo2){
+	$("#"+campo1).autocomplete({
+        source: '../servidor/usuarios/permisos.php',
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#"+campo1 ).val( ui.item.label1 );	                
+	        $( "#"+campo2 ).val( ui.item.label );	                	        
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#"+campo1 ).val( ui.item.label1 );	        
+	        $( "#"+campo2 ).val( ui.item.label );	        	        
+	        //carga_cxc(ui.item.label1);
+	        return false;	        
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.label1 + "</a>" )
+        .appendTo( ul );
+    };
+}
+/*-------*/
 /*function para buscar las emisiones y facturas  que contengan productos*/
 function autocompletarNxc(campo1,campo2,campo3,fn){
 	$("#"+campo2).autocomplete({

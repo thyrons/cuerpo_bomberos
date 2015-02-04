@@ -324,6 +324,19 @@
 			echo $data = json_encode($data);
 		}
 	}
+	function busquedas8( $conexion, $sql){
+		$resp =true;
+		$sql = pg_query( $conexion, $sql );
+		if($sql){
+			while ($row = pg_fetch_row($sql)) {
+			    $data[] = array(
+			        'label' => $row[0],
+			        'label1' => $row[1],			        
+			    );
+			}
+			echo $data = json_encode($data);
+		}
+	}
 	function busquedas5( $conexion, $sql){
 		$resp =true;
 		$sql = pg_query( $conexion, $sql );
