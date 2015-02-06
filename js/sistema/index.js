@@ -1191,7 +1191,7 @@ function inicio(){
 	});
 	$("#btn_buscarUsuario").on("click",function(){
 		if($("#id_usuarioPermisos").val()!=''){
-			
+			cargar_permisos($("#id_usuarioPermisos").val());
 		}else{
 			alertify.alert("Seleccione un usuario")
 		}
@@ -3786,4 +3786,162 @@ function guardar_datos_excel(vector){
             }
         }
     });
+}
+function cargar_permisos(id){	
+	url = "../servidor/usuarios/cargaPermisos.php?id="+id;	
+	$.ajax({				
+		type: "POST",
+		dataType: 'json',		
+		url: url,			
+	    success: function(data) {		    		    		    		    	
+	    	var principales = data.Principales[0];
+	    	var segundarios = data.Segundarios[0];	    	
+			var principales = principales.split(','); //explode
+			var segundarios = segundarios.split(','); //explode
+			for(var i = 0; i < 4; i++){
+				var resp = false;
+				if(principales[0] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_generales").prop("checked",resp);
+				if(principales[1] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_facturacion").prop("checked",principales[1]);				
+				if(principales[2] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_compras").prop("checked",principales[2]);
+				if(principales[3] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_administracion").prop("checked",principales[3]);				
+			}
+			for(var i = 0; i < 19; i++){
+				var resp = false;
+				if(segundarios[0] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_inicio").prop("checked",resp);
+				if(segundarios[1] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_servicios").prop("checked",resp);
+				if(segundarios[2] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_tasa").prop("checked",resp);
+				if(segundarios[3] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_propietario").prop("checked",resp);
+				if(segundarios[4] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_empresas").prop("checked",resp);
+				if(segundarios[5] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_informe").prop("checked",resp);
+				if(segundarios[6] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_reportes").prop("checked",resp);
+				if(segundarios[7] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_ingresosProductos").prop("checked",resp);
+				if(segundarios[8] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_EmisionPermisos").prop("checked",resp);
+				if(segundarios[9] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_NotasCredito").prop("checked",resp);
+				if(segundarios[10] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_Cxc").prop("checked",resp);
+				if(segundarios[11] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_ReportesVentas").prop("checked",resp);
+				if(segundarios[12] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_comprasFactura").prop("checked",resp);
+				if(segundarios[13] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_reporteCompras").prop("checked",resp);
+				if(segundarios[14] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_ingresoUsuarios").prop("checked",resp);
+				if(segundarios[15] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_respaldo").prop("checked",resp);
+				if(segundarios[16] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_reportesGenerales").prop("checked",resp);
+				if(segundarios[17] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_subirInfo").prop("checked",resp);
+				if(segundarios[18] == 1){
+					resp = true;
+				}else{
+					resp = false;
+				}
+				$("#check_permisos").prop("checked",resp);
+			}					    	
+		}
+	});		
 }

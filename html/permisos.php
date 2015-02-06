@@ -53,19 +53,19 @@
 					            <span><input type="checkbox" class="cdcheck" id="check_facturacion"> <i class="glyphicon glyphicon-calendar"></i> Facturación</span>
 					            <ul>
 					                <li>
-						                <input type="checkbox" class="cdcheck"> <span>Ingreso Productos</span>						                    						                    
+						                <input type="checkbox" id="check_ingresosProductos" class="cdcheck"> <span>Ingreso Productos</span>						                    						                    
 					                </li>
 				                    <li>
-			                        	<input type="checkbox" class="cdcheck"> <span>Emisión de Permisos</span>
+			                        	<input type="checkbox" id="check_EmisionPermisos" class="cdcheck"> <span>Emisión de Permisos</span>
 			                        </li>						                						                
 			                        <li>
-			                        	<input type="checkbox" class="cdcheck"> <span>Notas de Crédito</span>
+			                        	<input type="checkbox" id="check_NotasCredito" class="cdcheck"> <span>Notas de Crédito</span>
 			                        </li>						                						                
 			                        <li>
-			                        	<input type="checkbox" class="cdcheck"> <span>Cuentas por Cobrar</span>
+			                        	<input type="checkbox" id="check_Cxc" class="cdcheck"> <span>Cuentas por Cobrar</span>
 			                        </li>						                						                
 			                        <li>
-			                        	<input type="checkbox" class="cdcheck"> <span>Reporte Ventas</span>
+			                        	<input type="checkbox" id="check_ReportesVentas" class="cdcheck"> <span>Reporte Ventas</span>
 			                        </li>						                						                				                        
 					            </ul>
 					        </li>						        
@@ -79,10 +79,10 @@
 					            <span><input type="checkbox" class="cdcheck" id="check_compras"> <i class="glyphicon glyphicon-calendar"></i> Gastos/Compras</span>
 					            <ul>
 					                <li>
-						                <input type="checkbox" class="cdcheck"> <span>Compras</span>						                    						                    
+						                <input type="checkbox" class="cdcheck" id="check_comprasFactura"> <span>Compras</span>						                    						                    
 					                </li>
 				                    <li>
-			                        	<input type="checkbox" class="cdcheck"> <span>Reporte Compras</span>
+			                        	<input type="checkbox" class="cdcheck" id="check_reporteCompras"> <span>Reporte Compras</span>
 			                        </li>						                						                
 					            </ul>
 					        </li>						        
@@ -96,19 +96,19 @@
 					            <span><input type="checkbox" class="cdcheck" id="check_administracion"> <i class="glyphicon glyphicon-calendar"></i> Administración</span>
 					            <ul>
 					                <li>
-						                <input type="checkbox" class="cdcheck"> <span>Ingreso Usuarios</span>						                    						                    
+						                <input type="checkbox" class="cdcheck" id="check_ingresoUsuarios"> <span>Ingreso Usuarios</span>						                    						                    
 					                </li>
 				                    <li>
-			                        	<input type="checkbox" class="cdcheck"> <span>Respaldo Base datos</span>
+			                        	<input type="checkbox" class="cdcheck" id="check_respaldo"> <span>Respaldo Base datos</span>
 			                        </li>						                						                
 			                        <li>
-			                        	<input type="checkbox" class="cdcheck"> <span>Reportes Generales</span>
+			                        	<input type="checkbox" class="cdcheck" id="check_reportesGenerales"> <span>Reportes Generales</span>
 			                        </li>						                						                
 			                        <li>
-			                        	<input type="checkbox" class="cdcheck"> <span>Subir Información</span>
+			                        	<input type="checkbox" class="cdcheck" id="check_subirInfo"> <span>Subir Información</span>
 			                        </li>						                						                
 			                        <li>
-			                        	<input type="checkbox" class="cdcheck"> <span>Permisos</span>
+			                        	<input type="checkbox" class="cdcheck" id="check_permisos"> <span>Permisos</span>
 			                        </li>						                						                
 
 					            </ul>
