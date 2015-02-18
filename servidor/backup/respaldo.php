@@ -1406,9 +1406,151 @@ clf.relkind = 'r')
 " " . $row[2] . ";";
   }     
   ////////////////////
+   $table = 'usuarios_permisos';
+    $str .= "\n--\n";
+    $str .= "-- Estrutura de la tabla '$table'";
+    $str .= "\n--\n";
+    $str .= "\nDROP TABLE $table CASCADE;";
+    $str .= "\nCREATE TABLE $table (";
+    $str .= "\n" . 'id_usuario_permiso' . " " . 'int4' . " " . 'NOT NULL' . ",";    
+    $str .= "\n" . 'id_usuario' . " " . 'int4' . ",";
+    $str .= "\n" . 'estados_principales' . " " . '_int4' . ",";
+    $str .= "\n" . ' estados_segundarios' . " " . '_int4'; 
+
+    $str=rtrim($str, ",");  
+    $str .= "\n);\n";
+    $str .= "\n--\n";
+    $str .= "-- Creating data for '$table'";
+    $str .= "\n--\n\n";
+    $res3 = pg_query("SELECT * FROM $table");
+    while($r = pg_fetch_row($res3))
+    {
+      $sql = "INSERT INTO $table VALUES ('";
+      $sql .= utf8_decode(implode("','",$r));
+      $sql .= "');";
+      $str = str_replace("''","NULL",$str);
+      $str .= $sql;  
+      $str .= "\n";
+    }       
+     $res1 = pg_query("SELECT pg_index.indisprimary,
+            pg_catalog.pg_get_indexdef(pg_index.indexrelid)
+        FROM pg_catalog.pg_class c, pg_catalog.pg_class c2,
+            pg_catalog.pg_index AS pg_index
+        WHERE c.relname = '$table'
+            AND c.oid = pg_index.indrelid
+            AND pg_index.indexrelid = c2.oid
+            AND pg_index.indisprimary");
+    while($r = pg_fetch_row($res1))
+    {
+    $str .= "\n\n--\n";
+    $str .= "-- Creating index for '$table'";
+    $str .= "\n--\n\n";
+    $t = str_replace("CREATE UNIQUE INDEX", "", $r[1]);
+    $t = str_replace("USING btree", "|", $t);
+    // Next Line Can be improved!!!
+    $t = str_replace("ON", "|", $t);
+    $Temparray = explode("|", $t);
+    $str .= "ALTER TABLE ONLY ". $Temparray[1] . " ADD CONSTRAINT " . 
+$Temparray[0] . " PRIMARY KEY " . $Temparray[2] .";\n";
+  } ////////////////// 
+
+  $table = 'detalles_permiso';
+    $str .= "\n--\n";
+    $str .= "-- Estrutura de la tabla '$table'";
+    $str .= "\n--\n";
+    $str .= "\nDROP TABLE $table CASCADE;";
+    $str .= "\nCREATE TABLE $table (";
+    $str .= "\n" . 'id_detalle_permiso' . " " . 'int4' . " " . 'NOT NULL' . ",";    
+    $str .= "\n" . 'id_permiso' . " " . 'int4' . ",";
+    $str .= "\n" . 'nro_detalle' . " " . 'text' . ",";
+    $str .= "\n" . 'nombre_detalle' . " " . 'text' . ",";
+    $str .= "\n" . ' estado_detalle' . " " . 'text'; 
+
+    $str=rtrim($str, ",");  
+    $str .= "\n);\n";
+    $str .= "\n--\n";
+    $str .= "-- Creating data for '$table'";
+    $str .= "\n--\n\n";
+    $res3 = pg_query("SELECT * FROM $table");
+    while($r = pg_fetch_row($res3))
+    {
+      $sql = "INSERT INTO $table VALUES ('";
+      $sql .= utf8_decode(implode("','",$r));
+      $sql .= "');";
+      $str = str_replace("''","NULL",$str);
+      $str .= $sql;  
+      $str .= "\n";
+    }       
+     $res1 = pg_query("SELECT pg_index.indisprimary,
+            pg_catalog.pg_get_indexdef(pg_index.indexrelid)
+        FROM pg_catalog.pg_class c, pg_catalog.pg_class c2,
+            pg_catalog.pg_index AS pg_index
+        WHERE c.relname = '$table'
+            AND c.oid = pg_index.indrelid
+            AND pg_index.indexrelid = c2.oid
+            AND pg_index.indisprimary");
+    while($r = pg_fetch_row($res1))
+    {
+    $str .= "\n\n--\n";
+    $str .= "-- Creating index for '$table'";
+    $str .= "\n--\n\n";
+    $t = str_replace("CREATE UNIQUE INDEX", "", $r[1]);
+    $t = str_replace("USING btree", "|", $t);
+    // Next Line Can be improved!!!
+    $t = str_replace("ON", "|", $t);
+    $Temparray = explode("|", $t);
+    $str .= "ALTER TABLE ONLY ". $Temparray[1] . " ADD CONSTRAINT " . 
+$Temparray[0] . " PRIMARY KEY " . $Temparray[2] .";\n";
+  } ////////////////// 
   
 
-  /////////////////
+  $table = 'permisos';
+    $str .= "\n--\n";
+    $str .= "-- Estrutura de la tabla '$table'";
+    $str .= "\n--\n";
+    $str .= "\nDROP TABLE $table CASCADE;";
+    $str .= "\nCREATE TABLE $table (";
+    $str .= "\n" . 'id_permisos' . " " . 'int4' . " " . 'NOT NULL' . ",";    
+    $str .= "\n" . 'nro_permiso' . " " . 'int4' . ",";
+    $str .= "\n" . 'nombre_permiso' . " " . 'text' . ",";    
+    $str .= "\n" . ' estado_permiso' . " " . 'text'; 
+
+    $str=rtrim($str, ",");  
+    $str .= "\n);\n";
+    $str .= "\n--\n";
+    $str .= "-- Creating data for '$table'";
+    $str .= "\n--\n\n";
+    $res3 = pg_query("SELECT * FROM $table");
+    while($r = pg_fetch_row($res3))
+    {
+      $sql = "INSERT INTO $table VALUES ('";
+      $sql .= utf8_decode(implode("','",$r));
+      $sql .= "');";
+      $str = str_replace("''","NULL",$str);
+      $str .= $sql;  
+      $str .= "\n";
+    }       
+     $res1 = pg_query("SELECT pg_index.indisprimary,
+            pg_catalog.pg_get_indexdef(pg_index.indexrelid)
+        FROM pg_catalog.pg_class c, pg_catalog.pg_class c2,
+            pg_catalog.pg_index AS pg_index
+        WHERE c.relname = '$table'
+            AND c.oid = pg_index.indrelid
+            AND pg_index.indexrelid = c2.oid
+            AND pg_index.indisprimary");
+    while($r = pg_fetch_row($res1))
+    {
+    $str .= "\n\n--\n";
+    $str .= "-- Creating index for '$table'";
+    $str .= "\n--\n\n";
+    $t = str_replace("CREATE UNIQUE INDEX", "", $r[1]);
+    $t = str_replace("USING btree", "|", $t);
+    // Next Line Can be improved!!!
+    $t = str_replace("ON", "|", $t);
+    $Temparray = explode("|", $t);
+    $str .= "ALTER TABLE ONLY ". $Temparray[1] . " ADD CONSTRAINT " . 
+$Temparray[0] . " PRIMARY KEY " . $Temparray[2] .";\n";
+  } ////////////////// 
   $str .= "\nCREATE TRIGGER c_x_cobrar_tg_audit AFTER INSERT OR UPDATE OR DELETE ON c_x_cobrar FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();";
   $str .= "\nCREATE TRIGGER claves_tg_audit AFTER INSERT OR UPDATE OR DELETE ON claves FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();";
   $str .= "\nCREATE TRIGGER detalle_devolucion_venta_tg_audit AFTER INSERT OR UPDATE OR DELETE ON detalle_devolucion_venta FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();";
@@ -1431,6 +1573,10 @@ clf.relkind = 'r')
   $str .= "\nCREATE TRIGGER tipo_pago_tg_audit AFTER INSERT OR UPDATE OR DELETE ON tipo_pago FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();";
   $str .= "\nCREATE TRIGGER tipo_usuario_tg_audit AFTER INSERT OR UPDATE OR DELETE ON tipo_usuario FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();";
   $str .= "\nCREATE TRIGGER usuario_tg_audit AFTER INSERT OR UPDATE OR DELETE ON usuario FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();";
+  $str .= "\nCREATE TRIGGER usuarios_permisos_tg_audit AFTER INSERT OR UPDATE OR DELETE ON usuarios_permisos FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();";
+  $str .= "\nCREATE TRIGGER detalles_permiso_tg_audit AFTER INSERT OR UPDATE OR DELETE ON detalles_permiso FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();";
+  $str .= "\nCREATE TRIGGER permisos_permiso_tg_audit AFTER INSERT OR UPDATE OR DELETE ON permisos FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();";
+
     
   ////////////////  
   

@@ -2,13 +2,13 @@
  	<div class="panel panel-default">
 	    <div class="panel-heading"><span class="glyphicon glyphicon-filter"></span> <b> PERMISOS </b></div>
 	    <div class="panel-body form-styles">
-       		<div class="row">
+       		<div class="row" id="checks_permisos">
        			<div class="container">
        			<div class="form-group col-md-11">
 		            <label class="col-sm-2 control-label" for='buscar_usuario'> BUSCAR USUARIO:</label>
 		            <div class="col-sm-6">
 		            	<input type="hidden" id="id_usuarioPermisos" >
-		                <input type="text" class="form-control" id='buscar_usuario' name="buscar_usuario" value="" placeholder="Nombre o CI/RUC del Usuario a Modificar" required data-toggle="tooltip" data-original-title="Nombre o CI del usuario" >  
+		                <input type="text" class="form-control" id='buscar_usuario' name="buscar_usuario" value="" placeholder="Nombre o CI/RUC del Usuario a Modificar" required data-toggle="tooltip" data-original-title="Nombre o CI del usuario" autocomplete = 'off' >  
 		            </div>
 		            <button class="btn btn-primary" type="button" id="btn_buscarUsuario">  
            			<span class="glyphicon glyphicon-log-in"></span> Buscar Usuario</button>
@@ -115,16 +115,17 @@
 					        </li>						        
 					    </ul>
 					</div>
-				</div>					
+				</div>
+
 			</div>	       			      	
 	    </div>
 	    <div class="panel-footer form-footer">
 	     	<div>
-	        	<button class="btn btn-primary" id="btn_guardarEmpresas" type="submit">  
+	        	<button class="btn btn-primary" id="btn_guardarPermisos" type="button">  
 	        	<span class="glyphicon glyphicon-log-in"></span> Guardar</button>
 	      	</div>      
 	      	<div>
-	        	<button class="btn btn-primary" id="btn_limpiarEmpresas" type="button">  
+	        	<button class="btn btn-primary" id="btn_limpiarPermisos" type="button">  
 	        	<span class="glyphicon glyphicon-edit"></span> Limpiar</button>
 	      	</div>   
 	  	</div>

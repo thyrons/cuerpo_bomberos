@@ -15,7 +15,7 @@
 		if( isset($pass) ){
 			session_start();
 			$_SESSION['id']=$id;
-			$_SESSION['usuario']=$_POST['txt_loginUsuario'];
+			$_SESSION['usuario']=$_POST['txt_loginUsuario'];			
 			$sql = "select id_tipo_usuario from usuario where id_usuario='$id'";
 			
 			$sql = "update usuario set fecha_usuario='$fecha' where id_usuario='$id'";
@@ -24,6 +24,22 @@
 			}else{
 				$data = 4;
 			}
+
+			$sql = "select estados_principales,estados_segundarios  from usuarios_permisos where id_usuario = '$id'";
+			$rs = pg_query($conexion,$sql);
+			while($row = pg_fetch_row($rs)){
+				$principales =$row[0];	
+				$segundarios = $row [1];
+			}	
+			$principales = str_replace("{", "", $principales);
+			$principales = str_replace("}", "", $principales);
+			$array_principales = explode(",", $principales);
+			$segundarios = str_replace("{", "", $segundarios);
+			$segundarios = str_replace("}", "", $segundarios);
+			$array_segundarios = explode(",", $segundarios);				
+			$_SESSION['principales']=$array_principales;
+			$_SESSION['segundarios']=$array_segundarios;		
+
 		}else{
 			$data = 2;
 		}

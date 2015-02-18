@@ -47,7 +47,6 @@ estado int4
 -- Creating data for 'c_x_cobrar'
 --
 
-INSERT INTO c_x_cobrar VALUES ('1','3','1','2015-01-22','2015-01-22','1','Emisión de Permisos / Ventas','11','12.00','0');
 
 
 --
@@ -99,7 +98,6 @@ estado text
 -- Creating data for 'detalle_devolucion_venta'
 --
 
-INSERT INTO detalle_devolucion_venta VALUES ('1','6','1','12','1','12.00','0');
 
 
 --
@@ -127,7 +125,6 @@ id_usuario int4
 -- Creating data for 'detalles_cxc'
 --
 
-INSERT INTO detalles_cxc VALUES ('1','1','2015-01-22','1','Abono Inicial','Efectivo','1');
 
 
 --
@@ -158,7 +155,6 @@ detalle text
 -- Creating data for 'detalles_emision'
 --
 
-INSERT INTO detalles_emision VALUES ('1','PRODUCTO',NULL,NULL,'1','1','12','12.00','3','QWEQWE');
 
 
 --
@@ -185,7 +181,6 @@ id_fc int4
 -- Creating data for 'detalles_fc'
 --
 
-INSERT INTO detalles_fc VALUES ('1','1','22','12','264.00','1');
 
 
 --
@@ -708,7 +703,7 @@ ALTER TABLE ONLY  tasa_servicio  ADD CONSTRAINT  tasa_servicio_pkey  PRIMARY KEY
 
 DROP TABLE tbl_audit CASCADE;
 CREATE SEQUENCE tbl_audit_pk_audit_seq
-    START WITH 8153
+    START WITH 8214
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -803,6 +798,67 @@ INSERT INTO tbl_audit VALUES ('8149','usuario','U','(1,Admin,,,,,2015-02-02,1,0,
 INSERT INTO tbl_audit VALUES ('8150','usuario','U','(1,Admin,,,,,2015-02-03,1,0,admin,999999999)','(1,Admin,,,,,2015-02-03,1,0,admin,999999999)','2015-02-03 09:27:42.679','postgres');
 INSERT INTO tbl_audit VALUES ('8151','usuario','U','(1,Admin,,,,,2015-02-03,1,0,admin,999999999)','(1,Admin,,,,,2015-02-03,1,0,admin,999999999)','2015-02-03 14:45:21.389','postgres');
 INSERT INTO tbl_audit VALUES ('8152','usuario','U','(1,Admin,,,,,2015-02-03,1,0,admin,999999999)','(1,Admin,,,,,2015-02-03,1,0,admin,999999999)','2015-02-03 14:53:46.329','postgres');
+INSERT INTO tbl_audit VALUES ('8153','usuario','U','(1,Admin,,,,,2015-02-03,1,0,admin,999999999)','(1,Admin,,,,,2015-02-04,1,0,admin,999999999)','2015-02-04 09:11:10.001','postgres');
+INSERT INTO tbl_audit VALUES ('8154','usuario','U','(1,Admin,,,,,2015-02-04,1,0,admin,999999999)','(1,Admin,,,,,2015-02-05,1,0,admin,999999999)','2015-02-05 12:52:22.22','postgres');
+INSERT INTO tbl_audit VALUES ('8155','usuario','U','(1,Admin,,,,,2015-02-05,1,0,admin,999999999)','(1,Admin,,,,,2015-02-06,1,0,admin,999999999)','2015-02-06 10:59:54.654','postgres');
+INSERT INTO tbl_audit VALUES ('8156','usuario','U','(1,Admin,,,,,2015-02-06,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 10:48:42.044','postgres');
+INSERT INTO tbl_audit VALUES ('8157','usuario','I',NULL,'(2,QWE,"","",123,"",2015-02-09,1,1,qweqwe,1002910345)','2015-02-09 11:32:48.866','postgres');
+INSERT INTO tbl_audit VALUES ('8158','claves','I',NULL,'(2,123123,2)','2015-02-09 11:32:49.022','postgres');
+INSERT INTO tbl_audit VALUES ('8159','usuario','I',NULL,'(3,QWE,"","",123,"",2015-02-09,1,1,wwwww,9999999999)','2015-02-09 11:33:10.875','postgres');
+INSERT INTO tbl_audit VALUES ('8160','claves','I',NULL,'(3,123123,3)','2015-02-09 11:33:10.882','postgres');
+INSERT INTO tbl_audit VALUES ('8161','usuario','D','(3,QWE,"","",123,"",2015-02-09,1,1,wwwww,9999999999)',NULL,'2015-02-09 11:33:24.452','postgres');
+INSERT INTO tbl_audit VALUES ('8162','claves','D','(3,123123,3)',NULL,'2015-02-09 11:33:24.452','postgres');
+INSERT INTO tbl_audit VALUES ('8163','usuario','D','(2,QWE,"","",123,"",2015-02-09,1,1,qweqwe,1002910345)',NULL,'2015-02-09 11:33:24.546','postgres');
+INSERT INTO tbl_audit VALUES ('8164','claves','D','(2,123123,2)',NULL,'2015-02-09 11:33:24.546','postgres');
+INSERT INTO tbl_audit VALUES ('8165','usuario','I',NULL,'(2,QWE,"","",123,"",2015-02-09,1,1,wwwww,9999999999)','2015-02-09 11:33:31.48','postgres');
+INSERT INTO tbl_audit VALUES ('8166','claves','I',NULL,'(2,123123,2)','2015-02-09 11:33:31.486','postgres');
+INSERT INTO tbl_audit VALUES ('8167','usuario','D','(2,QWE,"","",123,"",2015-02-09,1,1,wwwww,9999999999)',NULL,'2015-02-09 11:33:39.608','postgres');
+INSERT INTO tbl_audit VALUES ('8168','claves','D','(2,123123,2)',NULL,'2015-02-09 11:33:39.608','postgres');
+INSERT INTO tbl_audit VALUES ('8169','usuario','I',NULL,'(2,QWE,"","",123,"",2015-02-09,1,1,wwwww,9999999999)','2015-02-09 11:33:46.912','postgres');
+INSERT INTO tbl_audit VALUES ('8170','claves','I',NULL,'(2,123123,2)','2015-02-09 11:33:46.918','postgres');
+INSERT INTO tbl_audit VALUES ('8171','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:07:13.393','postgres');
+INSERT INTO tbl_audit VALUES ('8172','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:10:34.548','postgres');
+INSERT INTO tbl_audit VALUES ('8173','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:13:45.864','postgres');
+INSERT INTO tbl_audit VALUES ('8174','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:13:46.389','postgres');
+INSERT INTO tbl_audit VALUES ('8175','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:13:49.707','postgres');
+INSERT INTO tbl_audit VALUES ('8176','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:13:57.038','postgres');
+INSERT INTO tbl_audit VALUES ('8177','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:14:19.883','postgres');
+INSERT INTO tbl_audit VALUES ('8178','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:14:23.675','postgres');
+INSERT INTO tbl_audit VALUES ('8179','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:14:28.803','postgres');
+INSERT INTO tbl_audit VALUES ('8180','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:14:38.683','postgres');
+INSERT INTO tbl_audit VALUES ('8181','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:16:50.05','postgres');
+INSERT INTO tbl_audit VALUES ('8182','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:17:40.943','postgres');
+INSERT INTO tbl_audit VALUES ('8183','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:17:43.717','postgres');
+INSERT INTO tbl_audit VALUES ('8184','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:18:07.9','postgres');
+INSERT INTO tbl_audit VALUES ('8185','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:18:13.931','postgres');
+INSERT INTO tbl_audit VALUES ('8186','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:18:22.182','postgres');
+INSERT INTO tbl_audit VALUES ('8187','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:18:44.564','postgres');
+INSERT INTO tbl_audit VALUES ('8188','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:18:47.614','postgres');
+INSERT INTO tbl_audit VALUES ('8189','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:18:48.108','postgres');
+INSERT INTO tbl_audit VALUES ('8190','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:18:54.149','postgres');
+INSERT INTO tbl_audit VALUES ('8191','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:19:21.81','postgres');
+INSERT INTO tbl_audit VALUES ('8192','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:19:46.594','postgres');
+INSERT INTO tbl_audit VALUES ('8193','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:20:04.756','postgres');
+INSERT INTO tbl_audit VALUES ('8194','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:22:29.103','postgres');
+INSERT INTO tbl_audit VALUES ('8195','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:41:39.403','postgres');
+INSERT INTO tbl_audit VALUES ('8196','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:41:59.49','postgres');
+INSERT INTO tbl_audit VALUES ('8197','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:42:16.752','postgres');
+INSERT INTO tbl_audit VALUES ('8198','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:42:30.065','postgres');
+INSERT INTO tbl_audit VALUES ('8199','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:42:44.774','postgres');
+INSERT INTO tbl_audit VALUES ('8200','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:43:13.257','postgres');
+INSERT INTO tbl_audit VALUES ('8201','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:43:30.626','postgres');
+INSERT INTO tbl_audit VALUES ('8202','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 12:44:07.403','postgres');
+INSERT INTO tbl_audit VALUES ('8203','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 13:02:36.994','postgres');
+INSERT INTO tbl_audit VALUES ('8204','usuarios_permisos','U','(1,1,"{1,1,1,1}","{1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0}")','(1,1,"{1,1,1,1}","{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}")','2015-02-09 13:03:05.112','postgres');
+INSERT INTO tbl_audit VALUES ('8205','usuario','U','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','(1,Admin,,,,,2015-02-09,1,0,admin,999999999)','2015-02-09 13:03:10.959','postgres');
+INSERT INTO tbl_audit VALUES ('8206','usuario','D','(2,QWE,"","",123,"",2015-02-09,1,1,wwwww,9999999999)',NULL,'2015-02-09 13:07:28.494','postgres');
+INSERT INTO tbl_audit VALUES ('8207','usuarios_permisos','D','(2,2,"{1,1,1,1}","{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}")',NULL,'2015-02-09 13:07:28.494','postgres');
+INSERT INTO tbl_audit VALUES ('8208','claves','D','(2,123123,2)',NULL,'2015-02-09 13:07:28.494','postgres');
+INSERT INTO tbl_audit VALUES ('8209','c_x_cobrar','D','(1,3,1,2015-01-22,2015-01-22,1,"Emisión de Permisos / Ventas",11,12.00,0)',NULL,'2015-02-09 13:07:36.262','postgres');
+INSERT INTO tbl_audit VALUES ('8210','detalles_cxc','D','(1,1,2015-01-22,1,"Abono Inicial",Efectivo,1)',NULL,'2015-02-09 13:07:36.262','postgres');
+INSERT INTO tbl_audit VALUES ('8211','detalle_devolucion_venta','D','(1,6,1,12,1,12.00,0)',NULL,'2015-02-09 13:07:47.19','postgres');
+INSERT INTO tbl_audit VALUES ('8212','detalles_emision','D','(1,PRODUCTO,"","",1,1,12,12.00,3,QWEQWE)',NULL,'2015-02-09 13:07:54.198','postgres');
+INSERT INTO tbl_audit VALUES ('8213','detalles_fc','D','(1,1,22,12,264.00,1)',NULL,'2015-02-09 13:07:59.278','postgres');
 
 
 --
@@ -886,7 +942,7 @@ nick_usuario text,
 -- Creating data for 'usuario'
 --
 
-INSERT INTO usuario VALUES ('1','Admin','','','','','2015-02-03','1','0','admin','999999999');
+INSERT INTO usuario VALUES ('1','Admin',NULL,NULL,NULL,NULL,'2015-02-09','1','0','admin','999999999');
 
 
 --
@@ -1009,6 +1065,103 @@ ALTER TABLE ONLY usuario ADD CONSTRAINT fk_tipoUsuario_usuario FOREIGN KEY (id_t
 --
 
 ALTER TABLE ONLY usuarios_permisos ADD CONSTRAINT fk_usuarios_permisosUser FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON UPDATE CASCADE ON DELETE CASCADE;
+--
+-- Estrutura de la tabla 'usuarios_permisos'
+--
+
+DROP TABLE usuarios_permisos CASCADE;
+CREATE TABLE usuarios_permisos (
+id_usuario_permiso int4 NOT NULL,
+id_usuario int4,
+estados_principales _int4,
+ estados_segundarios _int4
+);
+
+--
+-- Creating data for 'usuarios_permisos'
+--
+
+INSERT INTO usuarios_permisos VALUES ('1','1','{1,1,1,1}','{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}');
+
+
+--
+-- Creating index for 'usuarios_permisos'
+--
+
+ALTER TABLE ONLY  usuarios_permisos  ADD CONSTRAINT  usuarios_permisos_pkey  PRIMARY KEY  (id_usuario_permiso);
+
+--
+-- Estrutura de la tabla 'detalles_permiso'
+--
+
+DROP TABLE detalles_permiso CASCADE;
+CREATE TABLE detalles_permiso (
+id_detalle_permiso int4 NOT NULL,
+id_permiso int4,
+nro_detalle text,
+nombre_detalle text,
+ estado_detalle text
+);
+
+--
+-- Creating data for 'detalles_permiso'
+--
+
+INSERT INTO detalles_permiso VALUES ('1','1','1.1','Inicio','1');
+INSERT INTO detalles_permiso VALUES ('2','1','1.2','Servicios Administrativos','1');
+INSERT INTO detalles_permiso VALUES ('3','1','1.3','Tasa Servicios','1');
+INSERT INTO detalles_permiso VALUES ('4','1','1.4','Propietario','1');
+INSERT INTO detalles_permiso VALUES ('5','1','1.5','Empresas','1');
+INSERT INTO detalles_permiso VALUES ('6','1','1.6','Informe General','1');
+INSERT INTO detalles_permiso VALUES ('7','1','1.7','Reportes','1');
+INSERT INTO detalles_permiso VALUES ('8','2','2.1','Ingreso Propietarios','1');
+INSERT INTO detalles_permiso VALUES ('9','2','2.2','Emision Permisos','1');
+INSERT INTO detalles_permiso VALUES ('10','2','2.3','Notas de Credito','1');
+INSERT INTO detalles_permiso VALUES ('11','2','2.4','Cuentas por cobrar','1');
+INSERT INTO detalles_permiso VALUES ('12','2','2.5','Reporte Ventas','1');
+INSERT INTO detalles_permiso VALUES ('13','3','3.1','Compras','1');
+INSERT INTO detalles_permiso VALUES ('14','3','3.2','Reporte Compras','1');
+INSERT INTO detalles_permiso VALUES ('15','4','4.1','Ingreso Usuarios','1');
+INSERT INTO detalles_permiso VALUES ('16','4','4.2','Backup','1');
+INSERT INTO detalles_permiso VALUES ('17','4','4.3','Reporte Generales','1');
+INSERT INTO detalles_permiso VALUES ('18','4','4.4','Subir Informacion','1');
+INSERT INTO detalles_permiso VALUES ('19','4','4.5','Permisos','1');
+
+
+--
+-- Creating index for 'detalles_permiso'
+--
+
+ALTER TABLE ONLY  detalles_permiso  ADD CONSTRAINT  detalles_permiso_pkey  PRIMARY KEY  (id_detalle_permiso);
+
+--
+-- Estrutura de la tabla 'permisos'
+--
+
+DROP TABLE permisos CASCADE;
+CREATE TABLE permisos (
+id_permisos int4 NOT NULL,
+nro_permiso int4,
+nombre_permiso text,
+ estado_permiso text
+);
+
+--
+-- Creating data for 'permisos'
+--
+
+INSERT INTO permisos VALUES ('1','1','Datos Generales','1');
+INSERT INTO permisos VALUES ('2','2','Facturacion','1');
+INSERT INTO permisos VALUES ('3','3','Gastos','1');
+INSERT INTO permisos VALUES ('4','4','Administracion','1');
+
+
+--
+-- Creating index for 'permisos'
+--
+
+ALTER TABLE ONLY  permisos  ADD CONSTRAINT  permisos_pkey  PRIMARY KEY  (id_permisos);
+
 CREATE TRIGGER c_x_cobrar_tg_audit AFTER INSERT OR UPDATE OR DELETE ON c_x_cobrar FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
 CREATE TRIGGER claves_tg_audit AFTER INSERT OR UPDATE OR DELETE ON claves FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
 CREATE TRIGGER detalle_devolucion_venta_tg_audit AFTER INSERT OR UPDATE OR DELETE ON detalle_devolucion_venta FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
@@ -1031,3 +1184,6 @@ CREATE TRIGGER tasa_servicio_tg_audit AFTER INSERT OR UPDATE OR DELETE ON tasa_s
 CREATE TRIGGER tipo_pago_tg_audit AFTER INSERT OR UPDATE OR DELETE ON tipo_pago FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
 CREATE TRIGGER tipo_usuario_tg_audit AFTER INSERT OR UPDATE OR DELETE ON tipo_usuario FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
 CREATE TRIGGER usuario_tg_audit AFTER INSERT OR UPDATE OR DELETE ON usuario FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+CREATE TRIGGER usuarios_permisos_tg_audit AFTER INSERT OR UPDATE OR DELETE ON usuarios_permisos FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+CREATE TRIGGER detalles_permiso_tg_audit AFTER INSERT OR UPDATE OR DELETE ON detalles_permiso FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();
+CREATE TRIGGER permisos_permiso_tg_audit AFTER INSERT OR UPDATE OR DELETE ON permisos FOR EACH ROW EXECUTE PROCEDURE fn_log_audit();

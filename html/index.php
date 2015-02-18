@@ -1,5 +1,6 @@
 <?php
 session_start();
+//print_r($_SESSION['principales']);
 if (empty($_SESSION['id'])) {
     header('Location: ../inicio.php');
 }
@@ -76,86 +77,142 @@ if (empty($_SESSION['id'])) {
           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             
             <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                    <span class="glyphicon glyphicon-tasks"> Datos Generales
-                  </a>
-                </h4>
-              </div>
+              <?php
+              if($_SESSION['principales'][0] == 1){
+                echo '<div class="panel-heading" role="tab" id="headingOne">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                      <span class="glyphicon glyphicon-tasks"> Datos Generales
+                    </a>
+                  </h4>
+                </div>';
+              }
+              ?>
               <div id="collapseOne" class="panel-collapse collapse active " role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
                   <ul class="nav nav-pills nav-stacked ">
-
-                    <li class="active"><a href="#tab_i"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>
-                    <li><a href="#tab_e" ><span class="glyphicon glyphicon-paperclip"></span> Servicios Administrativos </a></li>
-                    <li><a href="#tab_f" ><span class="glyphicon glyphicon-wrench"></span> Tasa por Servicio </a></li>                    
-                    <li><a href="#tab_b" ><span class="glyphicon glyphicon-pushpin"></span> Propietarios</a></li>
-                    <li><a href="#tab_c" ><span class="glyphicon glyphicon-share"></span> Empresas </a></li>
-                    <li><a href="#tab_a"><span class="glyphicon glyphicon-list-alt"></span> Informe General</a></li>                    
-                    <li><a href="#tab_d" ><span class="glyphicon glyphicon-print"></span> Reportes</a></li>                    
-
+                    <?php
+                    if($_SESSION['segundarios'][0] == 1){
+                      echo '<li class="active"><a href="#tab_i"><span class="glyphicon glyphicon-home"></span> Inicio</a></li>';
+                    }
+                    if($_SESSION['segundarios'][1] == 1){
+                      echo '<li><a href="#tab_e" ><span class="glyphicon glyphicon-paperclip"></span> Servicios Administrativos </a></li>';
+                    }                      
+                    if($_SESSION['segundarios'][2] == 1){
+                      echo '<li><a href="#tab_f" ><span class="glyphicon glyphicon-wrench"></span> Tasa por Servicio </a></li>';
+                    }
+                    if($_SESSION['segundarios'][3] == 1){
+                      echo '<li><a href="#tab_b" ><span class="glyphicon glyphicon-pushpin"></span> Propietarios</a></li>';
+                    }
+                    if($_SESSION['segundarios'][4] == 1){
+                      echo '<li><a href="#tab_c" ><span class="glyphicon glyphicon-share"></span> Empresas </a></li>';
+                    }
+                    if($_SESSION['segundarios'][5] == 1){
+                      echo '<li><a href="#tab_a"><span class="glyphicon glyphicon-list-alt"></span> Informe General</a></li>';                    
+                    }
+                    if($_SESSION['segundarios'][6] == 1){
+                      echo '<li><a href="#tab_d" ><span class="glyphicon glyphicon-print"></span> Reportes</a></li>';
+                    }                    
+                    ?>
                   </ul>
                 </div>
               </div>
             </div>           
             <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingTwo">
-                <h4 class="panel-title">
-
-                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    <span class="glyphicon glyphicon-tasks"> Facturación
-
-                  </a>
-                </h4>
-              </div>
+              <?php
+              if($_SESSION['principales'][1] == 1){
+                echo '<div class="panel-heading" role="tab" id="headingTwo">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      <span class="glyphicon glyphicon-tasks"> Facturación
+                    </a>
+                  </h4>
+                </div>';
+              }
+              ?>
               <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                 <div class="panel-body">
-
-                  <ul class="nav nav-pills nav-stacked ">                    
-                    <li><a href="#tab_j" ><span class="glyphicon glyphicon-list"></span> Ingreso Productos</a></li>                    
-                    <li><a href="#tab_k"><span class="glyphicon glyphicon-list-alt"></span> Emisión de Permisos</a></li>                                        
-                    <li><a href="#tab_l" ><span class="glyphicon glyphicon-list"></span> Notas de Crédito</a></li>                    
-                    <li><a href="#tab_s" ><span class="glyphicon glyphicon-list"></span> Cuentas por cobrar</a></li> 
-                    <li><a href="#tab_m" ><span class="glyphicon glyphicon-print"></span> Reporte Ventas</a></li>                    
-
+                  <ul class="nav nav-pills nav-stacked ">
+                  <?php                    
+                    if($_SESSION['segundarios'][7] == 1){
+                      echo '<li><a href="#tab_j" ><span class="glyphicon glyphicon-list"></span> Ingreso Productos</a></li>';                    
+                    }
+                    if($_SESSION['segundarios'][8] == 1){
+                      echo '<li><a href="#tab_k"><span class="glyphicon glyphicon-list-alt"></span> Emisión de Permisos</a></li>';                                        
+                    }
+                    if($_SESSION['segundarios'][9] == 1){
+                      echo '<li><a href="#tab_l" ><span class="glyphicon glyphicon-list"></span> Notas de Crédito</a></li>';                    
+                    }
+                    if($_SESSION['segundarios'][10] == 1){
+                      echo '<li><a href="#tab_s" ><span class="glyphicon glyphicon-list"></span> Cuentas por cobrar</a></li>';
+                    }
+                    if($_SESSION['segundarios'][11] == 1){
+                      echo '<li><a href="#tab_m" ><span class="glyphicon glyphicon-print"></span> Reporte Ventas</a></li>';                    
+                    }
+                  ?>
                   </ul>
                 </div>
               </div>              
             </div>            
             <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingTres">
-                <h4 class="panel-title">
-                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTres" aria-expanded="false" aria-controls="collapseTres">
-                    <span class="glyphicon glyphicon-tasks"> Gastos/Compras
-                  </a>
-                </h4>
-              </div>
+             <?php
+              if($_SESSION['principales'][2] == 1){
+                echo '<div class="panel-heading" role="tab" id="headingTres">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTres" aria-expanded="false" aria-controls="collapseTres">
+                      <span class="glyphicon glyphicon-tasks"> Gastos/Compras
+                    </a>
+                  </h4>
+                </div>';
+              }
+              ?>
               <div id="collapseTres" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTres">
                 <div class="panel-body">
-                  <ul class="nav nav-pills nav-stacked ">         
-                    <li><a href="#tab_n" ><span class="glyphicon glyphicon-list-alt"></span> Compras</a></li>                                                   
-                    <li><a href="#tab_p" ><span class="glyphicon glyphicon-print"></span> Reporte Compras</a></li>                    
+                  <ul class="nav nav-pills nav-stacked ">     
+                  <?php
+                    if($_SESSION['segundarios'][12] == 1){
+                      echo '<li><a href="#tab_n" ><span class="glyphicon glyphicon-list-alt"></span> Compras</a></li>';                                                   
+                    }
+                    if($_SESSION['segundarios'][13] == 1){
+                      echo '<li><a href="#tab_p" ><span class="glyphicon glyphicon-print"></span> Reporte Compras</a></li>';                    
+                    }
+                  ?>                    
                   </ul>
                 </div>
               </div>              
-                </div>        
+            </div>        
             <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingCuatro">
-                <h4 class="panel-title">
-                  <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseCuatro" aria-expanded="false" aria-controls="collapseCuatro">
-                    <span class="glyphicon glyphicon-tasks"> Administración
-                  </a>
-                </h4>
-              </div>
+             <?php
+              if($_SESSION['principales'][3] == 1){
+                echo '<div class="panel-heading" role="tab" id="headingCuatro">
+                  <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseCuatro" aria-expanded="false" aria-controls="collapseCuatro">
+                      <span class="glyphicon glyphicon-tasks"> Administración
+                    </a>
+                  </h4>
+                </div>';
+              }
+              ?>
               <div id="collapseCuatro" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCuatro">
                 <div class="panel-body">
                   <ul class="nav nav-pills nav-stacked ">                    
-                    <li><a href="#tab_q"><span class="glyphicon glyphicon-user"></span> Ingreso Usuarios</a></li>                    
-                    <li><a href="#" id="respalado_base"><span class="glyphicon glyphicon-list"></span> Respaldo Base datos</a></li>                    
-                    <li><a href="#tab_r" ><span class="glyphicon glyphicon-print"></span> Reportes Generales</a></li>                
-                    <li><a href="#tab_z"><span class="glyphicon glyphicon-book"></span> Subir Información</a></li>                        
-                    <li><a href="#tab_w"><span class="glyphicon glyphicon-filter"></span> Permisos</a></li>                        
+                  <?php
+                    if($_SESSION['segundarios'][14] == 1){
+                      echo '<li><a href="#tab_q"><span class="glyphicon glyphicon-user"></span> Ingreso Usuarios</a></li>';                    
+                    }
+                    if($_SESSION['segundarios'][15] == 1){
+                      echo '<li><a href="#" id="respalado_base"><span class="glyphicon glyphicon-list"></span> Respaldo Base datos</a></li>';                    
+                    }
+                    if($_SESSION['segundarios'][16] == 1){
+                      echo '<li><a href="#tab_r" ><span class="glyphicon glyphicon-print"></span> Reportes Generales</a></li>';                
+                    }
+                    if($_SESSION['segundarios'][17] == 1){
+                      echo '<li><a href="#tab_z"><span class="glyphicon glyphicon-book"></span> Subir Información</a></li>';                        
+                    }
+                    if($_SESSION['segundarios'][18] == 1){
+                      echo '<li><a href="#tab_w"><span class="glyphicon glyphicon-filter"></span> Permisos</a></li>';                        
+                    }
+                    ?>
                   </ul>
                 </div>
               </div>              
@@ -189,7 +246,9 @@ if (empty($_SESSION['id'])) {
             ?>  
             </div>
             <div class="tab-pane" id="tab_d">
-            
+            <?php
+              include 'reportes_datos.php';
+            ?> 
             </div>
             <div class="tab-pane" id="tab_e">
             <?php

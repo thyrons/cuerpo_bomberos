@@ -94,6 +94,14 @@
 					}
 				}
 			}
+		}else{
+			if($_POST['tipo'] == "p"){
+				$vector_principales = "array[". $_POST['vector_principales']."]";
+				$vector_secundarios = "array[".$_POST['vector_secundarios']."]";
+				$sql = "update usuarios_permisos set estados_principales =$vector_principales,estados_segundarios=$vector_secundarios where id_usuario = '$_POST[id]'";				
+				guardarSql($conexion,$sql);							
+				$data = 0; ////datos guardados
+			}
 		}
 	}
 	echo $data;

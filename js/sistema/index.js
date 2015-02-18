@@ -1071,7 +1071,13 @@ function inicio(){
 	});
 	/*--------*/
 	/*informacion en excel*/	
-	$("#btnGuardarCargar").on("click",guardarCargar)
+	$("#btnGuardarCargar").on("click",guardarCargar);
+	$("#btn_limpiarPermisos").on("click",function(){
+		location.reload();					
+	});
+	$("#btn_guardarPermisos").on("click",function (){
+		guardarPermisos($("#id_usuarioPermisos").val())
+	});
 	/*---------*/
 	/*premisos sistema*/
 	$("#check_generales").click(function (){
@@ -1195,8 +1201,52 @@ function inicio(){
 		}else{
 			alertify.alert("Seleccione un usuario")
 		}
-	})
+	});
 	/*------------*/
+	/*reportes*/
+	$("#bnt_reporte_sevicios").click(function (){		 		 		
+ 		var win = window.open('../reportes/reporte_servicios.php');       
+        win.document.close();
+		win.focus();
+        win.print();       
+	});
+	$("#bnt_reporte_tasa_sevicios").click(function (){		 		 		
+ 		var win = window.open('../reportes/reporte_tasa_servicio.php');       
+        win.document.close();
+		win.focus();
+        win.print();       
+	});
+	$("#bnt_reporte_propietarios").click(function (){		 		 		
+ 		var win = window.open('../reportes/reporte_propietarios.php');       
+        win.document.close();
+		win.focus();
+        win.print();       
+	});
+	$("#bnt_reporte_empresas").click(function (){		 		 		
+ 		var win = window.open('../reportes/reporte_empresa.php');       
+        win.document.close();
+		win.focus();
+        win.print();       
+	});
+	/*---buscador empresa---*/
+	$("#nombre_empresa_reporte").keyup(function (){
+		autocompletarEmpresaReporte("nombre_empresa_reporte","id_empresa_reporte");
+	});
+	$("#btn_reporte_permisos").click(function (){		 		 		
+		if($("#id_empresa_reporte").val() != ""){
+ 			var win = window.open('../reportes/reporte_permisosEmpresas.php?id='+$("#id_empresa_reporte").val());       
+        	win.document.close();
+			win.focus();
+        	win.print();       
+        }else{
+        	alertify.alert("Seleccione una empresa..",function (){
+        		$("#nombre_empresa_reporte").focus();
+        	})
+
+        }
+
+	});
+	/*-----------*/
 }
 ///////////funciones del sistema
 function llenarSelect(lt,md,bg,sbg){
@@ -2202,6 +2252,26 @@ function autocompletarPermiso(campo1,campo2){
 	        $( "#"+campo1 ).val( ui.item.label1 );	        
 	        $( "#"+campo2 ).val( ui.item.label );	        	        
 	        //carga_cxc(ui.item.label1);
+	        return false;	        
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.label1 + "</a>" )
+        .appendTo( ul );
+    };
+}
+function autocompletarEmpresaReporte(campo1,campo2){
+	$("#"+campo1).autocomplete({
+        source: '../servidor/empresas/buscar_empresas_reporte.php',
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#"+campo1 ).val( ui.item.label1 );	                
+	        $( "#"+campo2 ).val( ui.item.label );	                	        
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#"+campo1 ).val( ui.item.label1 );	        
+	        $( "#"+campo2 ).val( ui.item.label );	        	        	        
 	        return false;	        
         }     
         }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
@@ -3744,6 +3814,51 @@ function guardarCargar(){
             });
         }
     });
+}
+function guardarPermisos(usuario){
+	if(usuario != ''){
+		var vector_principales = new Array();
+		var vector_secundarios = new Array();
+		var i = 0;
+		var j = 0;
+		$("#checks_permisos").children().next().each(function (e){
+			var secon = $(this).children().children().children().children().children().children().filter(":checkbox");
+			$(secon).each(function (){
+				if($(this).is(":checked")){
+					vector_secundarios[j] = 1;	
+				}else{
+					vector_secundarios[j] = 0;	
+				}
+				j++;
+			});		
+			if($(this).children().children().children().children().children().is(":checked")){
+				vector_principales[i] = 1;
+			}else{
+				vector_principales[i] = 0;
+			}
+			i++;
+		});
+		//console.log(vector_principales);
+		//console.log(vector_secundarios);	
+		$.ajax({				
+			type: "POST",
+			dataType: 'json',
+			data: "id="+usuario+"&vector_principales="+vector_principales+"&vector_secundarios="+vector_secundarios+"&tipo="+"p"+"&user="+"0",
+			url: "../servidor/usuarios/usuarios.php",			
+		    success: function(data) {		    			        	    	
+		    	alertify.set({ delay: 1000 });
+		    	alertify.primary('Datos Agregados Correctamente');		
+		    	setTimeout(function() {
+					   location.reload();
+				}, 1800);
+			}
+		});				
+	}else{
+		alertify.alert("Indique un usuario antes de continuar",function(){
+			$("#buscar_usuario").focus();
+		});
+
+	}
 }
 function cargarTablaExcel(data){	
     for(var i=0;i<data.length;i+=3){    	        
