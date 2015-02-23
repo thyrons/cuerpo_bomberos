@@ -57,7 +57,7 @@ function inicio(){
 					$("#"+ac1).addClass("collapse in");						
 		    	}
 		    	else{
-		    		if(tab == 'tab_j' || tab == 'tab_k' || tab == 'tab_l' || tab == 'tab_m' || tab == 'tab_s'){
+		    		if(tab == 'tab_j' || tab == 'tab_k' || tab == 'tab_l' || tab == 'tab_m' || tab == 'tab_s' || tab == 'tab_m'){
 		    			
 			    		var acor2 =$("#accordion").children();
 						var acor2 = acor2.next();
@@ -1228,6 +1228,12 @@ function inicio(){
 		win.focus();
         win.print();       
 	});
+	$("#btn_lista_productos").click(function (){		 		 		
+ 		var win = window.open('../reportes/reporte_productos.php');       
+        win.document.close();
+		win.focus();
+        win.print();       
+	});
 	/*---buscador empresa---*/
 	$("#nombre_empresa_reporte").keyup(function (){
 		autocompletarEmpresaReporte("nombre_empresa_reporte","id_empresa_reporte");
@@ -1244,7 +1250,25 @@ function inicio(){
         	})
 
         }
-
+	});
+	/*---buscador propietario---*/
+	$("#ci_cliente_reporte").keyup(function (){				
+		autocompletarPropietarioReporte("ci_cliente_reporte","nombre_cliente_reporte","id_propietario_reporte","../servidor/emision_permisos/buscar_propietario.php?tipo=0");					
+	});
+	$("#nombre_cliente_reporte").keyup(function (){				
+		autocompletarPropietarioReporte("nombre_cliente_reporte","ci_cliente_reporte","id_propietario_reporte","../servidor/emision_permisos/buscar_propietario.php?tipo=1");					
+	});
+	$("#btn_facturas_cliente").click(function (){		 		 		
+ 		if($("#id_propietario_reporte").val() != ""){
+ 			var win = window.open('../reportes/reporte_facturas.php?id='+$("#id_propietario_reporte").val()+"&name="+$("#nombre_cliente_reporte").val());       
+        	win.document.close();
+			win.focus();
+        	win.print();       
+        }else{
+        	alertify.alert("Seleccione un propietario ",function (){
+        		$("#ci_cliente_reporte").focus();
+        	});
+        }       
 	});
 	/*-----------*/
 }
@@ -2093,6 +2117,28 @@ function autocompletarPropietario(campo,campoNombre,campoId,direccion){
 	        $( "#"+campo ).val( ui.item.label1 );     
 	        $( "#"+campoNombre ).val( ui.item.label2 );   	  
 	        informesGenerales();      
+	        return false;
+        }     
+        }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li>" )
+        .append( "<a>"+ item.label1 + "</a>" )
+        .appendTo( ul );
+    };
+}
+function autocompletarPropietarioReporte(campo,campoNombre,campoId,direccion){	
+	$("#"+campo).autocomplete({
+        source: direccion,
+        minLength:1,
+        focus: function( event, ui ) {
+	        $( "#"+campoId ).val( ui.item.value );
+	        $( "#"+campo ).val( ui.item.label1 );  
+	        $( "#"+campoNombre ).val( ui.item.label2 );  
+	        return false;
+        },
+	    select: function( event, ui ) {
+	        $( "#"+campoId ).val( ui.item.value );
+	        $( "#"+campo ).val( ui.item.label1 );     
+	        $( "#"+campoNombre ).val( ui.item.label2 );   	  	        
 	        return false;
         }     
         }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {

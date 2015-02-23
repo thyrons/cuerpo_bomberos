@@ -300,6 +300,11 @@ if (empty($_SESSION['id'])) {
               include 'permisos.php';
             ?>   
             </div>               
+            <div class="tab-pane" id="tab_m">
+            <?php
+              include 'reportes_facturacion.php';
+            ?>   
+            </div>               
           </div><!-- tab content -->
         </div><!-- end of container -->
       </div>        
